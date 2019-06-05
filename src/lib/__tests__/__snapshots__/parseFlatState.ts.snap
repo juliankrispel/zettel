@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseFlatState parses raw doc 1`] = `
+Object {
+  "meta": Object {},
+  "value": Array [
+    Object {
+      "char": "[",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "H",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "e",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "l",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "l",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "o",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": " ",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "t",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "h",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "e",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "r",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "e",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": " ",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "w",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "o",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "r",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "l",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "d",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "]",
+      "metaKeys": Array [],
+    },
+  ],
+}
+`;
+
+exports[`parseFlatState skips invalid bits 1`] = `
+Object {
+  "meta": Object {},
+  "value": Array [
+    Object {
+      "char": "[",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "t",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "h",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "e",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "r",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "e",
+      "metaKeys": Array [],
+    },
+    Object {
+      "char": "]",
+      "metaKeys": Array [],
+    },
+  ],
+}
+`;

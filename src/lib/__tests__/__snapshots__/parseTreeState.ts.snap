@@ -1,0 +1,284 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`parseTreeState nested works 1`] = `
+Object {
+  "meta": Object {},
+  "nodes": Array [
+    Object {
+      "_flatOffset": 0,
+      "key": "key-1",
+      "nodes": Array [
+        Object {
+          "_flatOffset": 2,
+          "key": "key-2",
+          "nodes": Array [
+            Object {
+              "_flatOffset": 4,
+              "key": "key-3",
+              "nodes": Array [],
+              "value": Array [
+                Object {
+                  "char": "3",
+                  "metaKeys": Array [],
+                },
+              ],
+            },
+            Object {
+              "_flatOffset": 7,
+              "key": "key-4",
+              "nodes": Array [],
+              "value": Array [
+                Object {
+                  "char": "4",
+                  "metaKeys": Array [],
+                },
+              ],
+            },
+          ],
+          "value": Array [
+            Object {
+              "char": "2",
+              "metaKeys": Array [],
+            },
+          ],
+        },
+      ],
+      "value": Array [
+        Object {
+          "char": "1",
+          "metaKeys": Array [],
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`parseTreeState parses  1`] = `
+Object {
+  "meta": Object {},
+  "nodes": Array [
+    Object {
+      "_flatOffset": 0,
+      "key": "key-0",
+      "nodes": Array [],
+      "value": Array [
+        Object {
+          "char": "H",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "e",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "o",
+          "metaKeys": Array [],
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`parseTreeState parses nested structure 1`] = `
+Object {
+  "meta": Object {},
+  "nodes": Array [
+    Object {
+      "_flatOffset": 0,
+      "key": "key-1",
+      "nodes": Array [
+        Object {
+          "_flatOffset": 2,
+          "key": "key-2",
+          "nodes": Array [
+            Object {
+              "_flatOffset": 4,
+              "key": "key-3",
+              "nodes": Array [],
+              "value": Array [
+                Object {
+                  "char": "3",
+                  "metaKeys": Array [],
+                },
+              ],
+            },
+            Object {
+              "_flatOffset": 7,
+              "key": "key-4",
+              "nodes": Array [],
+              "value": Array [
+                Object {
+                  "char": "4",
+                  "metaKeys": Array [],
+                },
+              ],
+            },
+          ],
+          "value": Array [
+            Object {
+              "char": "2",
+              "metaKeys": Array [],
+            },
+          ],
+        },
+      ],
+      "value": Array [
+        Object {
+          "char": "1",
+          "metaKeys": Array [],
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`parseTreeState parses simple  1`] = `
+Object {
+  "meta": Object {},
+  "nodes": Array [
+    Object {
+      "_flatOffset": 0,
+      "key": "key-0",
+      "nodes": Array [],
+      "value": Array [
+        Object {
+          "char": "H",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "e",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "o",
+          "metaKeys": Array [],
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`parseTreeState parses simple flat structure 1`] = `
+Object {
+  "meta": Object {},
+  "nodes": Array [
+    Object {
+      "_flatOffset": 0,
+      "key": "key-0",
+      "nodes": Array [],
+      "value": Array [
+        Object {
+          "char": "H",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "e",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "o",
+          "metaKeys": Array [],
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`parseTreeState parses simple flat tree 1`] = `
+Object {
+  "meta": Object {},
+  "nodes": Array [
+    Object {
+      "_flatOffset": 0,
+      "key": "key-0",
+      "nodes": Array [],
+      "value": Array [
+        Object {
+          "char": "H",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "e",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "o",
+          "metaKeys": Array [],
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`parseTreeState works 1`] = `
+Object {
+  "meta": Object {},
+  "nodes": Array [
+    Object {
+      "_flatOffset": 0,
+      "key": "key-0",
+      "nodes": Array [],
+      "value": Array [
+        Object {
+          "char": "H",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "e",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "l",
+          "metaKeys": Array [],
+        },
+        Object {
+          "char": "o",
+          "metaKeys": Array [],
+        },
+      ],
+    },
+  ],
+}
+`;
