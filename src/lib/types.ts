@@ -1,13 +1,35 @@
-export type Dict = {
+/**
+ * General Purpose Data container for Blocks and Entities
+ */
+export type EntityMap = {
   [key: string]: any
 }
 
-export type FlatState = {
+/**
+ * The root state object
+ * 
+ * @param value: Value
+ * @param entityMap: EntityMap
+ */
+export type ListState = {
   value: Value,
-  entityMap: Dict,
+  entityMap: EntityMap,
 }
+/*
+
+  styles: string[],
+  entity?: string,
+  */
 
 
+/**
+* Value represents Text and Blocks
+*/
+export type Value = [TextCharacter | BlockCharacter | BlockEndCharacter]
+
+/*
+* Represents one character
+*/
 export type TextCharacter = {
   char: string,
   styles: string[],
@@ -23,14 +45,16 @@ export type BlockEndCharacter = {
   type: 'block-end'
 }
 
-export type Value = [TextCharacter | BlockCharacter | BlockEndCharacter]
-
-
+/**
+ * Change
+ * 
+ * - Represents all possible changes made to doc
+ */
 export type Change = {
   start: number,
   end: number,
   value: Value
-}
+}[]
 
 export type RawRange = {
   start: number,
@@ -41,21 +65,42 @@ export type RawRange = {
 export type RawDocument = {
   text: string,
   ranges: RawRange[],
-  entityMap: Dict,
+  entityMap: EntityMap,
 }
 
 export type Block = {
-  value: Value,
+  text: Text,
   key: string,
   nodes: Block[],
 }
 
 export type TreeState = {
   nodes: Block[],
-  entityMap: Dict,
+  entityMap: EntityMap,
 }
 
-export type EditorState = {
-  readonly flatState: FlatState,
-  readonly treeState: TreeState,
+export interface EditorState {
+  /**
+   * @method change()
+   * 
+   * `EditorState.change({ start: 9, end: 18, value: [] })`
+   */
+  change: (change: Change) => EditorState;
+
+  /**
+   * @method undo()
+   * 
+   * `EditorState.undo()`
+   */
+  undo: () => EditorState;
+
+  /**
+   * @method redo()
+   * 
+   * `EditorState.redo()`
+   */
+  redo: () => EditorState;
+
+  readonly list: ListState;
+  readonly tree: TreeState;
 }
