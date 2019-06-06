@@ -3,87 +3,22 @@
 Super awesome rich text framework for React.js
 
 1. Small file size, 0 dependencies - over 10x smaller than competing frameworks
-2. Small API surface area
+2. [Minimal API surface area](https://www.youtube.com/watch?v=4anAwXYqLG8)
 3. Suitable for building complex document editing experiences
 
+Let's take a crack again at text editors on the web. I've been playing with this idea. What if instead of manipulating a tree, we always just edit text:
 
+# API
 
+## `EditorState` Model
 
-It was [Minimal API surface area](https://www.youtube.com/watch?v=4anAwXYqLG8)
+### EditorState.fromJSON()
 
+### EditorState.handleChange
 
+### EditorState.change(Change)
 
-So. Let's take a crack again at text editors on the web. I've been playing with this idea. What if instead of manipulating a tree, we always just edit text:
-
-## Raw Model:
-
-```
-[Hello[World]]
-```
-
-- `[` marks the beginning of a block
-- `]` marks the end of a block
-
-
-```tsx
-type Raw = {
-  text:
-`[Hello there how are we today]
-["Pretty good thank you"
-  [What about yourself]
-  [Well - also pretty good thanks]
-  [This is another
-    [Really Cool
-      [Component]
-    ]
-  ]
-]`,
-  ranges: [{
-    offset: 0,
-    length: 1,
-    key: 'e1'
-  }]
-  meta: {
-    'e1': {
-      type: 'whatever',
-    }
-  }
-}
-```
-
-## Editor State
-
-## Usage:
-
-### Rendering Nodes
-
-```tsx
-<Editor
-  renderNode={(props) => {
-    return <div>
-      <Text {...props}>
-      <EditorNode
-        {...props}
-      />
-    </div>
-  }}
-/>
-```
-
-### Rendering Fragments:
-
-```tsx
-<Editor
-  renderStyle={(props) => {
-  }}
-  renderEntity={(props) => {
-  }}
-/>
-```
-
-### Affecting Change
-
-- the selection is simplified, only start and end offset matter
+Examples:
 
 ```tsx
 // Replace range with new block
@@ -166,3 +101,78 @@ EditorState.change([{
   }
 }])
 ```
+
+
+### EditorState.commit()
+
+Push changes to undoStack
+
+```tsx
+EditorState
+  .change({ value: ...Value.fromText('Hello there') })
+  .change({ value: ...Value.fromText('Boing') })
+  .commit()
+```
+
+### EditorState.undo()
+
+### EditorState.redo()
+
+## Raw Model:
+
+```tsx
+type Raw = {
+  text:
+`[Hello there how are we today]
+["Pretty good thank you"
+  [What about yourself]
+  [Well - also pretty good thanks]
+  [This is another
+    [Really Cool
+      [Component]
+    ]
+  ]
+]`,
+  ranges: [{
+    offset: 0,
+    length: 1,
+    key: 'e1'
+  }]
+  meta: {
+    'e1': {
+      type: 'whatever',
+    }
+  }
+}
+```
+
+## `<Editor />` Component
+
+### Rendering Nodes
+
+```tsx
+<Editor
+  renderNode={(props) => {
+    return <div>
+      <Text {...props}>
+      <EditorNode
+        {...props}
+      />
+    </div>
+  }}
+/>
+```
+
+### Rendering Fragments:
+
+```tsx
+<Editor
+  renderStyle={(props) => {
+  }}
+  renderEntity={(props) => {
+  }}
+/>
+```
+
+### Affecting Change
+
