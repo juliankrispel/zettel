@@ -1,4 +1,4 @@
-import parseTreeState from '../parseTreeState'
+import parseTreeState from '../flatToTree'
 
 jest.mock('../id', () => {
   var i = 0

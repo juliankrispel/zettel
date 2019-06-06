@@ -1,27 +1,27 @@
-import { FlatState, TreeState, Block } from './types'
-import id from './id'
+import { ListState, BlockTree, Block } from '../types'
+import id from '../id'
 
-const getNode = (state: TreeState, path: number[]): Block  => {
+const getNode = (state: BlockTree, path: number[]): Block  => {
   return path.reduce((acc: any, val) => {
     return acc.nodes[val]
   }, state)
 }
 
 
-const getNodes = (state: TreeState, path: number[]): Block[]  => {
+const getNodes = (state: BlockTree, path: number[]): Block[]  => {
   if (path.length === 0) {
-    return state.nodes
+    return state.blocks
   } else {
     return path.reduce((acc, val) => {
-      return acc[val].nodes || acc
-    }, state.nodes)
+      return acc[val].blocks || acc
+    }, state.blocks)
   }
 }
 
-const parseTreeState = (flat: FlatState): TreeState => {
-  const state: TreeState = {
-    nodes: [],
-    meta: {},
+const parseBlockTree = (flat: ListState): BlockTree => {
+  const state: BlockTree = {
+    blocks: [],
+    entityMap: {},
   }
 
   let path: number[] = []
@@ -29,17 +29,17 @@ const parseTreeState = (flat: FlatState): TreeState => {
   flat.value.forEach((char, index) => {
     // if we have a start block character,
     // create a new block and add it
-    if (char.char === '[') {
+    if (char.type === 'block-start') {
       const nodes = getNodes(state, path)
 
       nodes.push({
         value: [],
-        nodes: [],
+        blocks: [],
         key: id(),
       })
 
       path.push(nodes.length - 1)
-    } else if (char.char === ']') {
+    } else if (char.type === 'block-end') {
       path.pop()
     } else {
       const node = getNode(state, path) || state
@@ -53,4 +53,4 @@ const parseTreeState = (flat: FlatState): TreeState => {
   return state
 }
 
-export default parseTreeState
+export default parseBlockTree

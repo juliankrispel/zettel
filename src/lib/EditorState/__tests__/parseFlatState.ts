@@ -1,4 +1,4 @@
-import parseFlat from '../parseFlatState'
+import parseFlat from '../rawToFlat'
 
 describe('parseFlatState', () => {
   test('parses raw doc', () => {

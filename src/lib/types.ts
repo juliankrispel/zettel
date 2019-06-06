@@ -1,54 +1,56 @@
 /**
- * General Purpose Data container for Blocks and Entities
+ * Container for Entities
  */
 export type EntityMap = {
   [key: string]: any
 }
 
 /**
- * The root state object
- * 
- * @param value: Value
- * @param entityMap: EntityMap
+ * State of a document.
+ * Used to create derived states such as BlockTree,
+ * RawDocument or any other
  */
 export type ListState = {
   value: Value,
   entityMap: EntityMap,
 }
-/*
-
-  styles: string[],
-  entity?: string,
-  */
-
 
 /**
-* Value represents Text and Blocks
+* Value object. Think of this as your `value` in `<input value={value} />`,
+* except instead of a string you get an array of objects.
 */
-export type Value = [TextCharacter | BlockCharacter | BlockEndCharacter]
+export type Value = (Character | BlockStart | BlockEnd)[]
 
 /*
-* Represents one character
+* Represents one text character.
+* Contains text symbol as well as array of
+* styles and entity
 */
-export type TextCharacter = {
+export type Character = {
+  type?: void,
   char: string,
   styles: string[],
-  entity?: string,
+  entity?: string | null,
 }
 
-export type BlockCharacter = {
+/**
+ * Represents the beginning of a block
+ */
+export type BlockStart = {
   type: 'block-start',
   data?: any
 }
 
-export type BlockEndCharacter = {
+/**
+ * Represents the end of a block, there
+ * has toe be a matching 
+ */
+export type BlockEnd = {
   type: 'block-end'
 }
 
 /**
- * Change
- * 
- * - Represents all possible changes made to doc
+ * Embodies all possible changes made to doc
  */
 export type Change = {
   start: number,
@@ -56,29 +58,50 @@ export type Change = {
   value: Value
 }[]
 
-export type RawRange = {
-  start: number,
-  end: number,
-  key: string,
-}
-
+/**
+ * Represents raw form of a Zettel Document,
+ * serializable and easier on the human eye
+ */
 export type RawDocument = {
   text: string,
   ranges: RawRange[],
   entityMap: EntityMap,
 }
 
-export type Block = {
-  text: Text,
-  key: string,
-  nodes: Block[],
+/**
+ * Ranges in RawDocument
+ * Used to style text and relate to entities
+ */
+export type RawRange = {
+  offset: number,
+  length: number,
+  styles: string[],
+  entity?: string | null,
 }
 
-export type TreeState = {
-  nodes: Block[],
+/**
+* Tree representation of content. Used for
+* rendering only
+*/
+export type BlockTree = {
+  blocks: Block[],
   entityMap: EntityMap,
 }
 
+/**
+* Represents one node in a tree
+* Used for rendering
+*/
+export type Block = {
+  value: Character[],
+  key: string,
+  blocks: Block[],
+}
+
+
+/**
+ * 
+ */
 export interface EditorState {
   /**
    * @method change()
@@ -102,5 +125,5 @@ export interface EditorState {
   redo: () => EditorState;
 
   readonly list: ListState;
-  readonly tree: TreeState;
+  readonly tree: BlockTree;
 }
