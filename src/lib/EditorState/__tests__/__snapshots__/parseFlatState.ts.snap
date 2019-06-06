@@ -2,83 +2,81 @@
 
 exports[`parseFlatState parses raw doc 1`] = `
 Object {
-  "meta": Object {},
+  "entityMap": Object {},
   "value": Array [
     Object {
-      "char": "[",
-      "metaKeys": Array [],
+      "type": "block-start",
     },
     Object {
       "char": "H",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "e",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "l",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "l",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "o",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": " ",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "t",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "h",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "e",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "r",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "e",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": " ",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "w",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "o",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "r",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "l",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "d",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
-      "char": "]",
-      "metaKeys": Array [],
+      "type": "block-end",
     },
   ],
 }
@@ -86,35 +84,33 @@ Object {
 
 exports[`parseFlatState skips invalid bits 1`] = `
 Object {
-  "meta": Object {},
+  "entityMap": Object {},
   "value": Array [
     Object {
-      "char": "[",
-      "metaKeys": Array [],
+      "type": "block-start",
     },
     Object {
       "char": "t",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "h",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "e",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "r",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
       "char": "e",
-      "metaKeys": Array [],
+      "styles": Array [],
     },
     Object {
-      "char": "]",
-      "metaKeys": Array [],
+      "type": "block-end",
     },
   ],
 }

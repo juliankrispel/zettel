@@ -1,4 +1,5 @@
 import parseTreeState from '../flatToTree'
+import { ListState } from '../../types'
 
 jest.mock('../id', () => {
   var i = 0
@@ -7,58 +8,58 @@ jest.mock('../id', () => {
 
 describe('parseTreeState', () => {
   test('parses simple flat structure', () => {
-    const flatState = {
+    const flatState: ListState = {
       value: [
-        { char: '[', metaKeys: [] },
-        { char: 'H', metaKeys: [] },
-        { char: 'e', metaKeys: [] },
-        { char: 'l', metaKeys: [] },
-        { char: 'l', metaKeys: [] },
-        { char: 'o', metaKeys: [] },
-        { char: ']', metaKeys: [] },
+        { type: 'block-start' },
+        { char: 'H', styles: [] },
+        { char: 'e', styles: [] },
+        { char: 'l', styles: [] },
+        { char: 'l', styles: [] },
+        { char: 'o', styles: [] },
+        { type: 'block-end' },
       ],
-      meta: {}
+      entityMap: {}
     }
 
     expect(parseTreeState(flatState)).toMatchSnapshot()
   })
 
   test('parses nested structure', () => {
-    const flatState = {
+    const flatState: ListState = {
       value: [
-        { char: '[', metaKeys: [] },
-        { char: '1', metaKeys: [] },
-        { char: '[', metaKeys: [] },
-        { char: '2', metaKeys: [] },
-        { char: '[', metaKeys: [] },
-        { char: '3', metaKeys: [] },
-        { char: ']', metaKeys: [] },
-        { char: '[', metaKeys: [] },
-        { char: '4', metaKeys: [] },
-        { char: ']', metaKeys: [] },
-        { char: ']', metaKeys: [] },
-        { char: ']', metaKeys: [] },
+        { type: 'block-start' },
+        { char: '1', styles: [] },
+        { type: 'block-start' },
+        { char: '2', styles: [] },
+        { type: 'block-start' },
+        { char: '3', styles: [] },
+        { type: 'block-end' },
+        { type: 'block-start' },
+        { char: '4', styles: [] },
+        { type: 'block-end' },
+        { type: 'block-end' },
+        { type: 'block-end' },
       ],
-      meta: {}
+      entityMap: {}
     }
 
     expect(parseTreeState(flatState)).toMatchSnapshot()
   })
 
   test('parses invalid structure', () => {
-    const flatState = {
+    const flatState: ListState = {
       value: [
-        { char: '[', metaKeys: [] },
-        { char: 'H', metaKeys: [] },
-        { char: '[', metaKeys: [] },
-        { char: 'l', metaKeys: [] },
-        { char: 'l', metaKeys: [] },
-        { char: 'o', metaKeys: [] },
-        { char: ']', metaKeys: [] },
+        { type: 'block-start' },
+        { char: 'H', styles: [] },
+        { type: 'block-start' },
+        { char: 'l', styles: [] },
+        { char: 'l', styles: [] },
+        { char: 'o', styles: [] },
+        { type: 'block-end' },
       ],
-      meta: {}
+      entityMap: {}
     }
 
-    console.log(JSON.stringify(parseTreeState(flatState), null, 2))
+    expect(parseTreeState(flatState)).toMatchSnapshot()
   })
 })

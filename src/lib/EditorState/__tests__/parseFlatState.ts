@@ -5,7 +5,7 @@ describe('parseFlatState', () => {
     const raw = {
       text: '[Hello there world]',
       ranges: [],
-      meta: {}
+      entityMap: {}
     }
 
     expect(parseFlat(raw)).toMatchSnapshot()
@@ -15,17 +15,17 @@ describe('parseFlatState', () => {
     const raw = {
       text: 'Hello there world',
       ranges: [],
-      meta: {}
+      entityMap: {}
     }
 
-    expect(parseFlat(raw)).toEqual({ value: [], meta: {} })
+    expect(parseFlat(raw)).toEqual({ value: [], entityMap: {} })
   })
 
   test('skips invalid bits', () => {
     const raw = {
       text: 'Hello [there] world',
       ranges: [],
-      meta: {}
+      entityMap: {}
     }
 
     expect(parseFlat(raw)).toMatchSnapshot()
@@ -35,19 +35,21 @@ describe('parseFlatState', () => {
     const raw = {
       text: '[1[2[3]hello]]',
       ranges: [],
-      meta: {}
+      entityMap: {}
     }
 
     expect(parseFlat(raw)).toEqual({
-      value: [ { char: '[', metaKeys: [] },
-        { char: '1', metaKeys: [] },
-        { char: '[', metaKeys: [] },
-        { char: '2', metaKeys: [] },
-        { char: '[', metaKeys: [] },
-        { char: '3', metaKeys: [] },
-        { char: ']', metaKeys: [] },
-        { char: ']', metaKeys: [] },
-        { char: ']', metaKeys: [] } ],
-     meta: {} })
+      value: [
+        { type: 'block-start' },
+        { char: '1', styles: [] },
+        { type: 'block-start' },
+        { char: '2', styles: [] },
+        { type: 'block-start' },
+        { char: '3', styles: [] },
+        { type: 'block-end' },
+        { type: 'block-end' },
+        { type: 'block-end' },
+      ],
+     entityMap: {} })
   })
 })

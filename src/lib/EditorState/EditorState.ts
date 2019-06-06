@@ -15,6 +15,7 @@ const emptyTree: BlockTree = {
 export default class EditorState {
   tree: BlockTree = emptyTree
   list: ListState  = emptyList
+
   /**
    * creates a new EditorState from JSON format
    * 
@@ -24,6 +25,4 @@ export default class EditorState {
     this.list = rawToFlat(json)
     this.tree = flatToTree(this.list)
   }
-
-
 }

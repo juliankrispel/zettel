@@ -1,9 +1,9 @@
 import { ListState, BlockTree, Block } from '../types'
-import id from '../id'
+import id from './id'
 
 const getNode = (state: BlockTree, path: number[]): Block  => {
   return path.reduce((acc: any, val) => {
-    return acc.nodes[val]
+    return acc.blocks[val]
   }, state)
 }
 
@@ -30,19 +30,22 @@ const parseBlockTree = (flat: ListState): BlockTree => {
     // if we have a start block character,
     // create a new block and add it
     if (char.type === 'block-start') {
-      const nodes = getNodes(state, path)
+      const blocks = getNodes(state, path)
 
-      nodes.push({
+      blocks.push({
         value: [],
         blocks: [],
         key: id(),
       })
 
-      path.push(nodes.length - 1)
+      path.push(blocks.length - 1)
     } else if (char.type === 'block-end') {
       path.pop()
     } else {
-      const node = getNode(state, path) || state
+      if (path.length === 0) {
+        throw new Error(`Invalid List State`)
+      }
+      const node = getNode(state, path)
       node.value.push({
         char: char.char,
         styles: []

@@ -27,10 +27,10 @@ export type Value = (Character | BlockStart | BlockEnd)[]
 * styles and entity
 */
 export type Character = {
-  type?: void,
   char: string,
   styles: string[],
   entity?: string | null,
+  type?: void,
 }
 
 /**
