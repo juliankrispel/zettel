@@ -102,7 +102,6 @@ EditorState.change([{
 }])
 ```
 
-
 ### EditorState.commit()
 
 Push changes to undoStack

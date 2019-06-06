@@ -56,7 +56,7 @@ export type Change = {
   start: number,
   end: number,
   value: Value
-}[]
+}
 
 /**
  * Represents raw form of a Zettel Document,
@@ -108,7 +108,7 @@ export interface EditorState {
    * 
    * `EditorState.change({ start: 9, end: 18, value: [] })`
    */
-  change: (change: Change) => EditorState;
+  change: (changes: Change[]) => EditorState;
 
   /**
    * @method undo()
