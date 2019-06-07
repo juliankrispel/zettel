@@ -2,7 +2,7 @@ import change, { Update} from '../change'
 import raw from '../rawToFlat'
 
 describe('change' , () => {
-  test('updates text', () => {
+  test('replaces text and undo', () => {
     const update: Update = {
       current: raw({
         text: '[Hello]',
@@ -10,8 +10,8 @@ describe('change' , () => {
         entityMap: {}
       }),
       change: {
-        start: 0,
-        end: 3,
+        start: 1,
+        end: 4,
         value: [],
       }
     }
@@ -26,13 +26,15 @@ describe('change' , () => {
       }),
       change: {
         start: 1,
-        end: 4,
-          value: raw({
+        end: 1,
+        value: raw({
           text: '[Hel]',
-            ranges: [],
-            entityMap: {}
-          }).value.slice(1, 4),
-        }
+          ranges: [],
+          entityMap: {}
+        }).value.slice(1, 4),
+      }
     })
+
+    expect(change(changed)).toEqual(update)
   })
 })

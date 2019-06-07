@@ -123,7 +123,7 @@ EditorState
 type Raw = {
   text:
 `[Hello there how are we today]
-["Pretty good thank you"
+[Pretty good thank you
   [What about yourself]
   [Well - also pretty good thanks]
   [This is another
@@ -173,5 +173,35 @@ type Raw = {
 />
 ```
 
-### Affecting Change
+
+### Implementing the editor component:
+
+What do we actually need from the view model:
+
+- we need rendering
+- we need event handling
+
+Can we abstract this so that almost all logic can be plugged into other frameworks like `vue` or `angular` or `ember`?
+
+Yes we could!
+
+```
+(React/Vue/Angular).(onKeyDown|onSelectionChange): Event =>
+  (Zettel).handleEvent =>
+    (Zettel).command: Change =>
+      (Zettel).change: EditorState =>
+        (React/Vue/Angular).render
+```
+
+### Commands
+
+- backspace
+- backspaceOneWord
+- backspaceToStart
+- delete
+- deleteOneWord
+- cut
+- paste
+- copy
+- insert character
 
