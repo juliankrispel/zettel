@@ -1,5 +1,4 @@
 import { ListState, BlockTree, Block } from '../types'
-import id from './id'
 
 const getNode = (state: BlockTree, path: number[]): Block  => {
   return path.reduce((acc: any, val) => {
@@ -35,7 +34,7 @@ const parseBlockTree = (flat: ListState): BlockTree => {
       blocks.push({
         value: [],
         blocks: [],
-        key: id(),
+        blockKey: char.blockKey
       })
 
       path.push(blocks.length - 1)

@@ -1,4 +1,5 @@
 import { BlockStart, BlockEnd, Character, RawDocument, ListState } from '../types'
+import id from './id'
 
 const parseFlatState = (raw: RawDocument): ListState => {
   const state: ListState = {
@@ -14,6 +15,7 @@ const parseFlatState = (raw: RawDocument): ListState => {
 
       const val: BlockStart = {
         type: 'block-start',
+        blockKey: id()
       }
       state.value.push(val)
     } else if (char === ']') {

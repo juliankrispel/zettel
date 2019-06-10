@@ -37,6 +37,7 @@ export type Character = {
  * Represents the beginning of a block
  */
 export type BlockStart = {
+  blockKey: string,
   type: 'block-start',
   data?: any
 }
@@ -94,7 +95,7 @@ export type BlockTree = {
 */
 export type Block = {
   value: Character[],
-  key: string,
+  blockKey: string,
   blocks: Block[],
 }
 
