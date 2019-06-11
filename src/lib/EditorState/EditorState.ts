@@ -11,18 +11,30 @@ const emptyList: ListState = {
 type ConstructorProps = {
   list: ListState,
   redoStack?: Change[],
-  undoStack?: Change[]
+  undoStack?: Change[],
+  start?: number,
+  end?: number,
 }
 
 export default class EditorState {
   list: ListState
   tree: BlockTree
+  start: number
+  end: number
   redoStack: Change[] = []
   undoStack: Change[] = []
 
-  constructor({ list = emptyList, undoStack = [], redoStack = [] }: ConstructorProps) {
+  constructor({
+    start = 1,
+    end = 1,
+    list = emptyList,
+    undoStack = [],
+    redoStack = []
+  }: ConstructorProps) {
     this.list = list
     this.undoStack = undoStack
+    this.start = start
+    this.end = end
     this.redoStack = redoStack
     this.tree = flatToTree(this.list)
   }
@@ -32,6 +44,8 @@ export default class EditorState {
     const updated = change(update)
 
     return new EditorState({
+      start: updated.change.start,
+      end: updated.change.end,
       list: updated.current,
       redoStack: this.redoStack.concat([_change]),
       undoStack: this.undoStack.concat([updated.change])
@@ -44,6 +58,8 @@ export default class EditorState {
    * @param fromJSON 
    */
   static fromJSON(json: RawDocument) {
-    return new EditorState({ list: rawToFlat(json) })
+    return new EditorState({
+      list: rawToFlat(json)
+    })
   }
 }

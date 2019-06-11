@@ -53,5 +53,5 @@ export default (listState: ListState) => {
   anchorOffset+= (getBlockOffset(listState, anchorKey) || 0) + anchorFragmentOffset + 1 
   focusOffset+= (getBlockOffset(listState, focusKey) || 0) + focusFragmentOffset + 1
 
-  return [anchorOffset, focusOffset].sort()
+  return [anchorOffset, focusOffset].sort((a, b) => a - b)
 }

@@ -37,8 +37,8 @@ export default function change(update: Update): Update {
   }
 
   const newChange: Change = {
-    start,
-    end: end - selectedValue.length + valueUpdate.length,
+    start: start - 1,
+    end: end - selectedValue.length + valueUpdate.length - 1,
     value: selectedValue
   }
 

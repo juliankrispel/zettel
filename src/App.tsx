@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useLayoutEffect } from 'react';
 import './App.css';
 import onKeyDown from './lib/handlers/onKeyDown'
 import EditorState from './lib/EditorState'
 import { Block } from './lib/types'
+import setDomSelection from './lib/selection/setDomSelection'
 
 const Text = (props: Block) => {
-  return <div >
+  return <div>
     <span
       data-block-key={props.blockKey}
       data-fragment-start="0"
+      data-fragment-end={props.value.length - 1}
     >
     {props.value.map(val => val.char).join('')}
     </span>
@@ -43,10 +45,20 @@ const App = () => {
     entityMap: {}
   }))
 
+  const ref = useRef(null)
+
+  useLayoutEffect(() => {
+    const container = ref.current
+    if (container != null) {
+      setDomSelection(editorState, container)
+    }
+  })
+
   return (
     <div
       onKeyDown={(event) => setEditorState(onKeyDown(editorState, event.nativeEvent))}
       suppressContentEditableWarning
+      ref={ref}
       contentEditable={true}
       >
       <Blocks blocks={editorState.tree.blocks} />

@@ -1,6 +1,9 @@
 import getDomSelection from '../selection/getDomSelection'
 import { ListState } from '../types';
 import EditorState from '../EditorState';
+import id from '../EditorState/id';
+import getBlockForIndex from '../getBlockForIndex'
+import { blockStatement } from '@babel/types';
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
 const isCharacterInsert = (e: KeyboardEvent) =>
@@ -32,11 +35,23 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     event.preventDefault()
   } else if (isRedo(event)) {
     event.preventDefault()
-  } else if (event.key === 'Backspace' && event.metaKey === true) {
+  } else if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
     event.preventDefault()
-  } else if (event.key === 'Backspace' && event.altKey === true) {
+  } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
     event.preventDefault()
-  } else if (event.key === 'Backspace') {
+  } else if (event.key === 'Backspace' && isCollapsed) {
+    event.preventDefault()
+    const changed = editorState.change({
+      start: start - 1,
+      end,
+      value: []
+    }).change({
+      start: start - 1,
+      end: start - 1,
+      value: []
+    })
+    newEditorState = changed
+  } else if (event.key === 'Backspace' && !isCollapsed) {
     event.preventDefault()
     const change = {
       start,
@@ -47,16 +62,52 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     newEditorState = changed
   } else if (event.key === 'Enter') {
     event.preventDefault()
-  } else if (event.key === 'Delete') {
+    const { block: currentBlock } = getBlockForIndex(editorState.list.value, start)
+    const changed = editorState.change({
+      start,
+      end,
+      value: [
+        { type: 'block-end' },
+        { ...currentBlock, type: 'block-start', blockKey: id()}
+      ]
+    }).change({
+      start: end + 2,
+      end: end + 2,
+      value: []
+    })
+    newEditorState = changed
+  } else if (event.key === 'Delete' && isCollapsed) {
     event.preventDefault()
-  } else if (isCharacterInsert(event) && isCollapsed) {
+
+    const change = {
+      start,
+      end,
+      value: []
+    }
+    const changed = editorState.change(change)
+    newEditorState = changed
+  } else if (event.key === 'Delete') {
     event.preventDefault()
   } else if (isCharacterInsert(event)) {
     event.preventDefault()
+    newEditorState = editorState.change({
+      start,
+      end,
+      value: [{
+        char: event.key,
+        styles: []
+      }]
+    }).change({
+      start: start + event.key.length,
+      end: start + event.key.length,
+      value: []
+    })
   } else if (isCopy(event)) {
     event.preventDefault()
+    console.log('implement copy')
   } else if (isPaste(event)) {
     event.preventDefault()
+    console.log('implement paste')
   }
 
   return newEditorState
