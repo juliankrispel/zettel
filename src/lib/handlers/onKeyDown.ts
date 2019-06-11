@@ -17,7 +17,6 @@ const isUndo = (e: KeyboardEvent) => !e.shiftKey && e.metaKey && e.key === 'z'
 const isRedo = (e: KeyboardEvent) => e.shiftKey && e.metaKey && e.key === 'z'
 
 export default function handleKeyDown (editorState: EditorState, event: KeyboardEvent) {
-  event.preventDefault()
   let newEditorState = editorState
 
   const position = getDomSelection(editorState.list)
@@ -30,10 +29,15 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   const isCollapsed = start === end
 
   if (isUndo(event)) {
+    event.preventDefault()
   } else if (isRedo(event)) {
+    event.preventDefault()
   } else if (event.key === 'Backspace' && event.metaKey === true) {
+    event.preventDefault()
   } else if (event.key === 'Backspace' && event.altKey === true) {
+    event.preventDefault()
   } else if (event.key === 'Backspace') {
+    event.preventDefault()
     const change = {
       start,
       end,
@@ -42,11 +46,17 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     const changed = editorState.change(change)
     newEditorState = changed
   } else if (event.key === 'Enter') {
+    event.preventDefault()
   } else if (event.key === 'Delete') {
+    event.preventDefault()
   } else if (isCharacterInsert(event) && isCollapsed) {
+    event.preventDefault()
   } else if (isCharacterInsert(event)) {
+    event.preventDefault()
   } else if (isCopy(event)) {
+    event.preventDefault()
   } else if (isPaste(event)) {
+    event.preventDefault()
   }
 
   return newEditorState

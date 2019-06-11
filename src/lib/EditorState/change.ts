@@ -10,16 +10,7 @@ export type Update = {
 }
 
 /**
- * check if there are an equal amount of block-start
- * and block-end characters in a value
- */
-const hasEqualBlockChars = (value: Value): boolean => {
-  const blockStartCount = value.filter(val => val.type === 'block-start').length
-  const blockEndCount = value.filter(val => val.type === 'block-end').length
-  return blockStartCount === blockEndCount 
-}
-
-/**
+ * 
  * takes State and Change object, return a state
  * object that has been updated with the Change, and
  * a Change object to undo the change
@@ -30,21 +21,13 @@ export default function change(update: Update): Update {
   const [start, end] = [
     update.change.start,
     update.change.end,
-  ].sort()
+  ].sort((a, b) => a - b)
 
   const selectedValue = update.current.value.slice(start, end)
-  
-  /*
-  if (!hasEqualBlockChars(selectedValue)) {
-    throw new Error(`selected value doesn't have equal
-    amount of block-start and block-end characters`)
-  } else if(!hasEqualBlockChars(update.change.value)) {
-    throw new Error(`inserted value doesn't have equal
-    amount of block-start and block-end characters`)
-  }
-  */
+  const valueUpdate = update.change.value
+
   const newValue = currentValue.slice(0, start)
-  .concat(update.change.value)
+  .concat(valueUpdate)
   .concat(currentValue.slice(end))
 
   if (newValue[0].type !== 'block-start') {
@@ -55,7 +38,7 @@ export default function change(update: Update): Update {
 
   const newChange: Change = {
     start,
-    end: end - selectedValue.length + update.change.value.length,
+    end: end - selectedValue.length + valueUpdate.length,
     value: selectedValue
   }
 
