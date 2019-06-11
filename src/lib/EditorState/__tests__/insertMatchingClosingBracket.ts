@@ -4,7 +4,7 @@ jest.mock('../id', () => {
 })
 
 import insertsClosingBrackets from '../insertMatchingClosingBracket'
-import raw from '../rawToFlat'
+import raw from '../../rawToFlat'
 
 test('[Hey [there][World] > [Hey [there]][World]', () => {
   const value = raw({

@@ -1,7 +1,13 @@
-import { BlockTree, ListState, RawDocument, Change } from '../types'
-import rawToFlat from './rawToFlat'
+import {
+  BlockTree,
+  ListState,
+  RawDocument, 
+  Change
+} from '../types'
+import rawToFlat from '../rawToFlat'
 import change from './change'
-import flatToTree from './flatToTree'
+import flatToTree from '../flatToTree'
+import { thisTypeAnnotation } from '@babel/types';
 
 const emptyList: ListState = {
   value: [],
@@ -47,8 +53,56 @@ export default class EditorState {
       start: updated.change.start,
       end: updated.change.end,
       list: updated.current,
-      redoStack: this.redoStack.concat([_change]),
-      undoStack: this.undoStack.concat([updated.change])
+      redoStack: this.redoStack,
+      undoStack: [updated.change].concat(this.undoStack)
+    })
+  }
+
+  undo() {
+    if (this.undoStack.length === 0) {
+      return this
+    }
+
+    const lastUndo: any = this.undoStack.shift()
+    const updated = change({
+      current: this.list,
+      change: {
+        ...lastUndo,
+        start: lastUndo.start + 1,
+        end: lastUndo.end + 1,
+      }
+    })
+
+    return new EditorState({
+      start: updated.change.start,
+      end: updated.change.end,
+      list: updated.current,
+      redoStack: [updated.change].concat(this.redoStack),
+      undoStack: this.undoStack
+    })
+  }
+
+  redo() {
+    if (this.redoStack.length === 0) {
+      return this
+    }
+
+    const lastRedo: any = this.redoStack.shift()
+    const updated = change({
+      current: this.list,
+      change: {
+        ...lastRedo,
+        start: lastRedo.start + 1,
+        end: lastRedo.end + 1,
+      }
+    })
+
+    return new EditorState({
+      start: updated.change.start,
+      end: updated.change.end,
+      list: updated.current,
+      redoStack: this.redoStack,
+      undoStack: [updated.change].concat(this.undoStack)
     })
   }
 

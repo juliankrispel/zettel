@@ -1,6 +1,7 @@
 import React, { useRef, useState, useLayoutEffect } from 'react';
 import './App.css';
 import onKeyDown from './lib/handlers/onKeyDown'
+import onPaste from './lib/handlers/onPaste'
 import EditorState from './lib/EditorState'
 import { Block } from './lib/types'
 import setDomSelection from './lib/selection/setDomSelection'
@@ -58,6 +59,7 @@ const App = () => {
     <div
       onKeyDown={(event) => setEditorState(onKeyDown(editorState, event.nativeEvent))}
       suppressContentEditableWarning
+      onPaste={(event) => setEditorState(onPaste(editorState, event.nativeEvent))}
       ref={ref}
       contentEditable={true}
       >

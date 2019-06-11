@@ -4,6 +4,7 @@ import EditorState from '../EditorState';
 import id from '../EditorState/id';
 import getBlockForIndex from '../getBlockForIndex'
 import { blockStatement } from '@babel/types';
+import textToFlat from '../textToFlat'
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
 const isCharacterInsert = (e: KeyboardEvent) =>
@@ -33,8 +34,10 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
 
   if (isUndo(event)) {
     event.preventDefault()
+    newEditorState = editorState.undo()
   } else if (isRedo(event)) {
     event.preventDefault()
+    newEditorState = editorState.redo()
   } else if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
     event.preventDefault()
   } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
@@ -53,13 +56,15 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     newEditorState = changed
   } else if (event.key === 'Backspace' && !isCollapsed) {
     event.preventDefault()
-    const change = {
+    newEditorState = editorState.change({
       start,
       end,
       value: []
-    }
-    const changed = editorState.change(change)
-    newEditorState = changed
+    }).change({
+      start,
+      end: start,
+      value: []
+    })
   } else if (event.key === 'Enter') {
     event.preventDefault()
     const { block: currentBlock } = getBlockForIndex(editorState.list.value, start)
@@ -103,11 +108,14 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
       value: []
     })
   } else if (isCopy(event)) {
-    event.preventDefault()
-    console.log('implement copy')
+    // event.preventDefault()
+    console.log('implement internal copy maybe?')
   } else if (isPaste(event)) {
+    /*
+    let _ev: any = event
     event.preventDefault()
-    console.log('implement paste')
+    console.log(_ev.target.isPaste)
+    */
   }
 
   return newEditorState

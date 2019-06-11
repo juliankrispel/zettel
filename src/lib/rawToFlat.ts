@@ -1,5 +1,5 @@
-import { BlockStart, BlockEnd, Character, RawDocument, ListState } from '../types'
-import id from './id'
+import { BlockStart, BlockEnd, Character, RawDocument, ListState } from './types'
+import id from './EditorState/id'
 
 const parseFlatState = (raw: RawDocument): ListState => {
   const state: ListState = {

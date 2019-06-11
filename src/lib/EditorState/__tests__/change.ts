@@ -1,5 +1,5 @@
 import change, { Update} from '../change'
-import raw from '../rawToFlat'
+import raw from '../../rawToFlat'
 
 jest.mock('../id')
 

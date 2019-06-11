@@ -1,4 +1,4 @@
-import { ListState, BlockTree, Block } from '../types'
+import { ListState, BlockTree, Block } from './types'
 
 const getNode = (state: BlockTree, path: number[]): Block  => {
   return path.reduce((acc: any, val) => {

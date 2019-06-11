@@ -1,6 +1,6 @@
-import parseTreeState from '../flatToTree'
+import parseTreeState from '../../flatToTree'
 import { ListState } from '../../types'
-import raw from '../rawToFlat'
+import raw from '../../rawToFlat'
 
 jest.mock('../id', () => {
   var i = 0

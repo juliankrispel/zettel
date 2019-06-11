@@ -4,7 +4,7 @@ jest.mock('../id', () => {
 })
 
 import insertOpeningBracket from '../insertMatchingOpeningBracket'
-import raw from '../rawToFlat'
+import raw from '../../rawToFlat'
 
 test.skip('[Hey] there][World] > [[Hey] there]][World]', () => {
   const value = raw({
