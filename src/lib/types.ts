@@ -23,16 +23,20 @@ export type Value = Character[]
 
 export type Character = (TextCharacter | BlockStart | BlockEnd)
 
+
+export type CharacterData = {
+  styles: string[],
+  entity?: string | null,
+  type?: void,
+}
+
 /*
 * Represents one text character.
 * Contains text symbol as well as array of
 * styles and entity
 */
-export type TextCharacter = {
+export type TextCharacter = CharacterData & {
   char: string,
-  styles: string[],
-  entity?: string | null,
-  type?: void,
 }
 
 /**
@@ -42,6 +46,11 @@ export type BlockStart = {
   blockKey: string,
   type: 'block-start',
   data?: any
+}
+
+export type TextFragment = CharacterData & {
+  text: string,
+  entity?: any
 }
 
 /**
@@ -81,6 +90,8 @@ export type RawRange = {
   styles: string[],
   entity?: string | null,
 }
+
+export type CharacterRange = RawRange
 
 /**
 * Tree representation of content. Used for
