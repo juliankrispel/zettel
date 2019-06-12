@@ -1,12 +1,8 @@
 import getDomSelection from '../selection/getDomSelection'
-import { ListState } from '../types';
 import EditorState from '../EditorState';
 import id from '../EditorState/id';
 import getBlockForIndex from '../getBlockForIndex'
-import { blockStatement } from '@babel/types';
-import textToFlat from '../textToFlat'
 import getIndexBefore from '../getIndexBefore';
-import change from '../EditorState/change';
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
 const isCharacterInsert = (e: KeyboardEvent) =>

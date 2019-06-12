@@ -23,7 +23,6 @@ export type Value = Character[]
 
 export type Character = (TextCharacter | BlockStart | BlockEnd)
 
-
 export type CharacterData = {
   styles: string[],
   entity?: string | null,

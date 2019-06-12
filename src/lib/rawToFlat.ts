@@ -1,4 +1,4 @@
-import { BlockStart, BlockEnd, Character, RawDocument, ListState } from './types'
+import { BlockStart, BlockEnd, Character, RawDocument, ListState, TextCharacter } from './types'
 import id from './EditorState/id'
 
 const parseFlatState = (raw: RawDocument): ListState => {
@@ -31,6 +31,24 @@ const parseFlatState = (raw: RawDocument): ListState => {
         styles: [],
       }
       state.value.push(val)
+    }
+  })
+
+  raw.ranges.forEach(({ offset, length, entity: entityKey, ...charData }) => {
+    for (var i = offset; i < offset + length; i++) {
+      const value = state.value[i]
+      if (value.type == null) {
+        const entity = entityKey != null && state.entityMap[entityKey]
+        const newValue: TextCharacter = {
+          ...value,
+          ...charData,
+        }
+        if (entity != null) {
+          newValue.entity = entity
+        }
+
+        state.value[i] = newValue
+      }
     }
   })
 

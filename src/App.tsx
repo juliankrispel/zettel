@@ -41,25 +41,16 @@ const Text = (props: TextProps) => {
 
     textFragments = fragments.map(fragment => {
       const fragmentProps = {
-        key: block.blockKey,
+        key: `${block.blockKey}-${offset}`,
         'data-block-key': block.blockKey,
-        'data-fragment-start': 0,
-        'data-fragment-end': block.value.length,
+        'data-fragment-start': offset,
+        'data-fragment-end': offset + fragment.text.length,
+        className: fragment.styles.join(' ')
       }
 
       let textFragment: React.ReactNode = <span
         {...fragmentProps}
       >{fragment.text || <br />}</span>
-
-      /*
-      if (RenderFragment) {
-        textFragment = <RenderFragment
-            data-block-key={key}
-            key={key}
-            fragment={fragment}
-        >{textFragment}</RenderFragment>
-      }
-      */
 
       offset += fragment.text.length
       return textFragment
@@ -101,7 +92,15 @@ const text = `[Hello World
 const App = () => {
   const [editorState, setEditorState] = useState(EditorState.fromJSON({
     text,
-    ranges: [],
+    ranges: [{
+      offset: 3,
+      length: 5,
+      styles: ['bold']
+    }, {
+      offset: 7,
+      length: 10,
+      styles: ['italic']
+    }],
     entityMap: {}
   }))
 

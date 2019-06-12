@@ -45,10 +45,7 @@ const parseBlockTree = (flat: ListState): BlockTree => {
         throw new Error(`Invalid List State`)
       }
       const node = getNode(state, path)
-      node.value.push({
-        char: char.char,
-        styles: []
-      })
+      node.value.push(char)
     }
   })
 
