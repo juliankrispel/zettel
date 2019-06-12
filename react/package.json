@@ -1,0 +1,12 @@
+{
+  "name": "@zettel/react",
+  "version": "0.1.0",
+  "description": "React view library for zettel",
+  "main": "dist/index.js",
+  "author": "Julian Krispel",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@zettel/core": "link:../core"
+  }
+}
