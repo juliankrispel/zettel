@@ -6,7 +6,11 @@
   "author": "Julian Krispel",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "build": "tsc"
+  },
   "dependencies": {
-    "@zettel/core": "link:../core"
-  }
+    "@zettel/core": "latest"
+  },
+  "files": ["dist"]
 }

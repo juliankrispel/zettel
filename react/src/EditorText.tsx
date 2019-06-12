@@ -3,15 +3,21 @@ import {
   EditorState,
   createTextFragments,
   Block,
+  TextFragment,
 } from '@zettel/core'
 
-type TextProps = {
+import { RenderProps } from './types'
+
+type TextProps = RenderProps & {
   block: Block,
   editorState: EditorState,
-  renderFragment: React.FunctionComponent,
 }
 
-const EditorText = (props: TextProps) => {
+type FragmentRenderProps = {
+  fragment: TextFragment
+}
+
+export default function EditorText(props: TextProps) {
   const {
     block,
     editorState,
@@ -37,10 +43,17 @@ const EditorText = (props: TextProps) => {
         className: fragment.styles.join(' ')
       }
 
-      let textFragment: React.ReactNode = <span
+      let textFragment: React.ReactElement = <span
         {...fragmentProps}
       >{fragment.text || <br />}</span>
 
+      if (RenderFragment) {
+        textFragment = <RenderFragment
+            key={`${block.blockKey}-${offset}`}
+            fragment={fragment}
+        >{textFragment}</RenderFragment>
+      }
+ 
       offset += fragment.text.length
       return textFragment
     })
@@ -53,7 +66,5 @@ const EditorText = (props: TextProps) => {
     ><br /></span>
   }
 
-  return textFragments
+  return <>{textFragments}</>
 }
-
-export default EditorText

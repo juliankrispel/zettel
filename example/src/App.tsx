@@ -9,7 +9,6 @@ import {
   Block,
 } from '@zettel/core'
 
-
 const editorStyles: React.CSSProperties = {
   whiteSpace: 'pre-wrap',
   overflowWrap: 'break-word',
