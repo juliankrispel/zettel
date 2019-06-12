@@ -8,7 +8,7 @@ type Props = RenderProps & {
   editorState: EditorState,
   readOnly?: boolean,
   className?: string,
-  style: React.CSSProperties,
+  style?: React.CSSProperties,
 }
 
 const editorStyles: React.CSSProperties = {
@@ -38,7 +38,7 @@ const Editor = (props: Props) => {
   })
 
   const divProps = {
-    style: { editorStyles, ...style },
+    style: { editorStyles, ...(style || {}) },
     contentEditable: readOnly === true ? false : true,
     className,
   }

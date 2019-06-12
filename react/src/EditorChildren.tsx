@@ -1,3 +1,4 @@
+import React from 'react'
 import { Block, EditorState } from '@zettel/core'
 import EditorBlock from './EditorBlock'
 import { RenderProps } from './types';

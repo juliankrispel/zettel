@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { EditorState } from '@zettel/core'
+import Editor from '@zettel/react'
 
 const text = `[Hello World
 [This is evil
@@ -20,8 +22,13 @@ const initialEditorState = EditorState.fromJSON({
 })
 
 const App = () => {
+  const [editorState, setEditorState] = useState(initialEditorState)
+
   return (
-    <div>Hello</div>
+    <Editor
+      onChange={setEditorState}
+      editorState={editorState}
+    />
   );
 }
 

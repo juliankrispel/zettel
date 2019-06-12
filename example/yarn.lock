@@ -2,6 +2,15 @@
 # yarn lockfile v1
 
 
+"@zettel/core@latest":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@zettel/core/-/core-0.0.2.tgz#0dff32e680dcbf3462d6bd6419b638ab39bc5554"
+  integrity sha512-wXNdAnQRN2Wv3bQqoNmc19VAyjSDt1PetRmxa1YBpiZGGFr5S9pxHwJWJwYKTIa2Zw9OnvtcOadYr/cW4mELXQ==
+
 "@zettel/core@link:../core":
+  version "0.0.0"
+  uid ""
+
+"@zettel/react@link:../react":
   version "0.0.0"
   uid ""
