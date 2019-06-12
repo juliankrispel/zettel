@@ -26,6 +26,7 @@ const getFragmentNode = (el: HTMLElement | null): ElementWithDataSet | null => {
 export default (listState: ListState) => {
   const domSelection = window.getSelection()
 
+  console.log('dom selection', domSelection)
   if (domSelection == null || domSelection.anchorNode == null) {
     return null
   }
@@ -40,6 +41,7 @@ export default (listState: ListState) => {
   const anchorNode = getFragmentNode(_anchorNode)
   const focusNode = getFragmentNode(_focusNode)
 
+  console.log({ anchorNode, focusNode })
   if (anchorNode == null || focusNode == null) {
     return null
   }

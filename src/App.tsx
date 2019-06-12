@@ -15,13 +15,15 @@ const editorStyles: React.CSSProperties = {
 
 const Text = (props: Block) => {
   const { value } = props
+  const fragmentProps = {
+    'data-block-key': props.blockKey,
+    'data-fragment-start': 0,
+    'data-fragment-end': props.value.length,
+
+  }
   return <div>
-    <span
-      data-block-key={props.blockKey}
-      data-fragment-start="0"
-      data-fragment-end={props.value.length - 1}
-    >
-    {props.value.map(val => val.char).join('') || <br />}
+    <span {...fragmentProps}>
+    {props.value.map(val => val.char).join('') || <br {...fragmentProps}/>}
     </span>
   </div>
 }
