@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "dist",
+    "sourceMap": true,
+    "strict": true,
+    "removeComments": true
+  },
+  "include": [
+    "src/index.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts",
+    "node_modules",
+    "**/__tests__"
+  ]
+}

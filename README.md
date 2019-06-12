@@ -5,18 +5,7 @@ Super awesome rich text framework for React.js
 1. Small file size, 0 dependencies - over 10x smaller than competing frameworks
 2. [Minimal API surface area](https://www.youtube.com/watch?v=4anAwXYqLG8)
 3. Suitable for building complex document editing experiences
-
-Let's take a crack again at text editors on the web. I've been playing with this idea. What if instead of manipulating a tree, we always just edit text:
-
-# API
-
-## `EditorState` Model
-
-### EditorState.fromJSON()
-
-### EditorState.handleChange
-
-### EditorState.change(Change)
+4. EditorState can totally be reused with other frameworks 
 
 Examples:
 

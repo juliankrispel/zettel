@@ -20,6 +20,6 @@
     "jsx": "preserve"
   },
   "include": [
-    "src", "example/src/react-app-env.d.ts", "lib"
+    "src"
   ]
 }

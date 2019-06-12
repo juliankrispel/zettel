@@ -1,0 +1,12 @@
+{
+  "name": "@zettel/core",
+  "version": "0.1.0",
+  "description": "Core module of zettel",
+  "main": "dist/index.js",
+  "author": "Julian Krispel",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "tsc"
+  }
+}
