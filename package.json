@@ -1,6 +1,7 @@
 {
-  "name": "zettel-new",
-  "version": "0.1.0",
+  "name": "zettel",
+  "version": "0.0.0",
+  "description": "Mono repo for zettel",
   "private": true,
   "dependencies": {
     "@types/jest": "24.0.13",
