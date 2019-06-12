@@ -42,6 +42,28 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     newEditorState = editorState.redo()
   } else if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
     event.preventDefault()
+    const prevChar = editorState.list.value[start - 1]
+
+    if (prevChar.type == null) {
+      const blockBeginning = getIndexBefore(
+        editorState.list.value,
+        start,
+        (ch) => {
+          if (ch.type === 'block-start'){
+            return true
+          }
+          return false
+        }
+      )
+
+      if (blockBeginning != null) {
+        newEditorState = editorState.change({
+          start: blockBeginning + 1,
+          end,
+          value: []
+        })
+      }
+    }
   } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
     event.preventDefault()
     const prevChar = editorState.list.value[start - 1]
