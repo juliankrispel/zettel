@@ -6,7 +6,8 @@
     "start": "../node_modules/.bin/react-scripts start"
   },
   "dependencies": {
-    "@zettel/core": "link:../core"
+    "@zettel/core": "link:../core",
+    "@zettel/react": "link:../react"
   },
   "eslintConfig": {
     "extends": "react-app"
