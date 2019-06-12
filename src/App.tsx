@@ -6,14 +6,22 @@ import EditorState from './lib/EditorState'
 import { Block } from './lib/types'
 import setDomSelection from './lib/selection/setDomSelection'
 
+const editorStyles: React.CSSProperties = {
+  whiteSpace: 'pre-wrap',
+  overflowWrap: 'break-word',
+  userSelect: 'text',
+  outline: 'none'
+}
+
 const Text = (props: Block) => {
+  const { value } = props
   return <div>
     <span
       data-block-key={props.blockKey}
       data-fragment-start="0"
       data-fragment-end={props.value.length - 1}
     >
-    {props.value.map(val => val.char).join('')}
+    {props.value.map(val => val.char).join('') || <br />}
     </span>
   </div>
 }
@@ -59,6 +67,7 @@ const App = () => {
     <div
       onKeyDown={(event) => setEditorState(onKeyDown(editorState, event.nativeEvent))}
       suppressContentEditableWarning
+      style={editorStyles}
       onPaste={(event) => setEditorState(onPaste(editorState, event.nativeEvent))}
       ref={ref}
       contentEditable={true}

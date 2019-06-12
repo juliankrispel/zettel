@@ -19,14 +19,16 @@ export type ListState = {
 * Value object. Think of this as your `value` in `<input value={value} />`,
 * except instead of a string you get an array of objects.
 */
-export type Value = (Character | BlockStart | BlockEnd)[]
+export type Value = Character[]
+
+export type Character = (TextCharacter | BlockStart | BlockEnd)
 
 /*
 * Represents one text character.
 * Contains text symbol as well as array of
 * styles and entity
 */
-export type Character = {
+export type TextCharacter = {
   char: string,
   styles: string[],
   entity?: string | null,
@@ -94,7 +96,7 @@ export type BlockTree = {
 * Used for rendering
 */
 export type Block = {
-  value: Character[],
+  value: TextCharacter[],
   blockKey: string,
   blocks: Block[],
 }

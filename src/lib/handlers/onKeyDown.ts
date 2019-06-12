@@ -5,6 +5,8 @@ import id from '../EditorState/id';
 import getBlockForIndex from '../getBlockForIndex'
 import { blockStatement } from '@babel/types';
 import textToFlat from '../textToFlat'
+import getIndexBefore from '../getIndexBefore';
+import change from '../EditorState/change';
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
 const isCharacterInsert = (e: KeyboardEvent) =>
@@ -42,18 +44,59 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     event.preventDefault()
   } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
     event.preventDefault()
+    const prevChar = editorState.list.value[start - 1]
+
+    if (prevChar.type == null) {
+      let spaceBefore = false
+      let isBlockStart = false
+      const prevWordEnd = getIndexBefore(
+        editorState.list.value,
+        start,
+        (ch) => {
+          if (ch.type == null) {
+            spaceBefore = ch.char === ' '
+          }
+          if (ch.type === 'block-start'){
+            isBlockStart = true
+            return true
+          }
+          if (ch.type == null && spaceBefore) {
+            return true
+          }
+          return false
+        }
+      )
+      if (prevWordEnd != null) {
+        newEditorState = editorState.change({
+          start: isBlockStart ? prevWordEnd + 1 : prevWordEnd,
+          end,
+          value: []
+        })
+      }
+    }
   } else if (event.key === 'Backspace' && isCollapsed) {
     event.preventDefault()
-    const changed = editorState.change({
-      start: start - 1,
-      end,
-      value: []
-    }).change({
-      start: start - 1,
-      end: start - 1,
-      value: []
-    })
-    newEditorState = changed
+    const previousCharIndex = getIndexBefore(editorState.list.value, start, (ch) => ch.type == null || ch.type === 'block-end')
+
+    if (previousCharIndex != null) {
+      const prevChar = editorState.list.value[previousCharIndex]
+      let _start = previousCharIndex
+
+      if (prevChar.type === 'block-start') {
+        _start++
+      }
+
+      newEditorState = editorState.change({
+        start: _start,
+        end,
+        value: []
+      }).change({
+        start: _start,
+        end: _start,
+        value: []
+      })
+    }
+
   } else if (event.key === 'Backspace' && !isCollapsed) {
     event.preventDefault()
     newEditorState = editorState.change({
