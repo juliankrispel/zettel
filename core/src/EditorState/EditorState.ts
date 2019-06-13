@@ -104,7 +104,7 @@ export default class EditorState {
       undoStack: [updated.change].concat(this.undoStack)
     })
   }
-
+  
   /**
    * creates a new EditorState from JSON format
    * 

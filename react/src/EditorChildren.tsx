@@ -11,19 +11,26 @@ type Props = RenderProps & {
 
 export default function EditorBlockChildren(props: Props) {
   const {
-    renderChildren: RenderChildren
+    blocks, block, editorState,
+    ...renderProps
   } = props
+
+  const {
+    renderChildren: RenderChildren
+  } = renderProps
 
   const content = <>{props.blocks.map(block => {
     return <EditorBlock
       editorState={props.editorState}
       key={block.blockKey}
       block={block}
+      {...renderProps}
     />
   })}</>
   if (RenderChildren != null) {
     return <RenderChildren
       block={props.block}
+      {...renderProps}
     >
       {content}
     </RenderChildren>

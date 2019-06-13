@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "@zettel/core": "link:../core",
-    "@zettel/react": "link:../react"
+    "@zettel/react": "link:../react",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "eslintConfig": {
     "extends": "react-app"
