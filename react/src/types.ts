@@ -1,4 +1,5 @@
 import { TextFragment, Block } from '@zettel/core'
+import { CSSProperties } from 'react';
 
 type FragmentRenderProps = {
   fragment: TextFragment
@@ -11,6 +12,7 @@ export type RenderFragment = React.FunctionComponent<{
 
 export type RenderBlock = React.FunctionComponent<{
   block: Block,
+  style: CSSProperties,
   children: React.ReactElement
 }>
 

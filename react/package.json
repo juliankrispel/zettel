@@ -9,7 +9,7 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@zettel/core": "latest"
+    "@zettel/core": "link:../core"
   },
   "peerDependencies": {
     "react": "16.8.6",

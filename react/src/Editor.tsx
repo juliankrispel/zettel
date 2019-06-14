@@ -1,6 +1,6 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import { EditorState, setDomSelection, onKeyDown, onPaste } from '@zettel/core'
-import { RenderProps } from './types'
+import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
 type Props = RenderProps & {
@@ -13,10 +13,15 @@ type Props = RenderProps & {
 
 const editorStyles: React.CSSProperties = {
   whiteSpace: 'pre-wrap',
+  WebkitUserModify: 'read-write-plaintext-only',
+  // @ts-ignore
+  WebkitLineBreak: 'after-white-space',
   overflowWrap: 'break-word',
   userSelect: 'text',
   outline: 'none'
 }
+
+const DefaultRenderBlock: RenderBlock = (props) => <div style={props.style}>{props.children}</div>
 
 const Editor = (props: Props) => {
   const {
@@ -25,7 +30,9 @@ const Editor = (props: Props) => {
     className,
     readOnly,
     style,
-    ...renderProps
+    renderBlock = DefaultRenderBlock,
+    renderChildren,
+    renderFragment
   } = props
 
   const ref = useRef(null)
@@ -46,7 +53,10 @@ const Editor = (props: Props) => {
   return (
     <div
       onKeyDown={(event) => onChange(onKeyDown(editorState, event.nativeEvent))}
+
       suppressContentEditableWarning
+      role="textbox"
+      autoCorrect={'off'}
       onPaste={(event) => onChange(onPaste(editorState, event.nativeEvent))}
       ref={ref}
       {...divProps}
@@ -54,7 +64,9 @@ const Editor = (props: Props) => {
       <EditorChildren
         blocks={editorState.tree.blocks}
         editorState={editorState}
-        {...renderProps}
+        renderBlock={renderBlock}
+        renderChildren={renderChildren}
+        renderFragment={renderFragment}
       />
     </div>
   );

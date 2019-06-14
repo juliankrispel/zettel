@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
 import { Block, EditorState } from '@zettel/core'
 import EditorText from './EditorText'
 import EditorChildren from './EditorChildren'
@@ -9,8 +9,21 @@ type Props = RenderProps & {
   editorState: EditorState
 }
 
+const style: CSSProperties = {
+  WebkitUserModify: 'read-write-plaintext-only',
+  position: 'relative',
+  whiteSpace: 'pre-wrap',
+  overflowWrap: 'break-word',
+  
+}
+
 export default function EditorBlock(props: Props) {
-  const { block, editorState, ...renderProps } = props
+  const {
+    block,
+    editorState,
+    ...renderProps
+  } = props
+
 
   const content = <>
     <EditorText
@@ -23,6 +36,7 @@ export default function EditorBlock(props: Props) {
       <EditorChildren
         blocks={props.block.blocks}
         editorState={props.editorState}
+        {...renderProps}
       />
     )}
   </>
@@ -30,7 +44,7 @@ export default function EditorBlock(props: Props) {
   const RenderBlock = renderProps.renderBlock
 
   if (RenderBlock != null) {
-    return <RenderBlock block={block}>{content}</RenderBlock>
+    return <RenderBlock style={style} block={block}>{content}</RenderBlock>
   }
 
   return content

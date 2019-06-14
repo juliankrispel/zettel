@@ -53,7 +53,7 @@ export default function EditorText(props: TextProps) {
             fragment={fragment}
         >{textFragment}</RenderFragment>
       }
- 
+
       offset += fragment.text.length
       return textFragment
     })
