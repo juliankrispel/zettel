@@ -18,12 +18,15 @@ const isPaste = (e: KeyboardEvent) => e.metaKey && e.key === 'v'
 const isUndo = (e: KeyboardEvent) => !e.shiftKey && e.metaKey && e.key === 'z'
 const isRedo = (e: KeyboardEvent) => e.shiftKey && e.metaKey && e.key === 'z'
 
-export default function handleKeyDown (editorState: EditorState, event: KeyboardEvent) {
-  let newEditorState = editorState
+export default function handleKeyDown (editorState: EditorState, event: KeyboardEvent): EditorState | void {
+  // newEditorState is the value that gets returned by this function
+  // if it is still undefined when being 'returned' no editor change should occur
+  // and the event shouldn't be cancelled (i.e. no event.preventDefault())
+  let newEditorState
 
   const position = getDomSelection(editorState.list)
   if (position === null) {
-    console.warn('cant get start and end selection')
+    console.error('cant get start and end selection')
     return editorState
   }
 
@@ -31,13 +34,10 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   const isCollapsed = start === end
 
   if (isUndo(event)) {
-    event.preventDefault()
     newEditorState = editorState.undo()
   } else if (isRedo(event)) {
-    event.preventDefault()
     newEditorState = editorState.redo()
   } else if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
-    event.preventDefault()
     const prevChar = editorState.list.value[start - 1]
 
     if (prevChar.type == null) {
@@ -61,7 +61,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
       }
     }
   } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
-    event.preventDefault()
     const prevChar = editorState.list.value[start - 1]
 
     if (prevChar.type == null) {
@@ -93,7 +92,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
       }
     }
   } else if (event.key === 'Backspace' && isCollapsed) {
-    event.preventDefault()
     const previousCharIndex = getIndexBefore(editorState.list.value, start, (ch) => ch.type == null || ch.type === 'block-end')
 
     if (previousCharIndex != null) {
@@ -116,7 +114,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     }
 
   } else if (event.key === 'Backspace' && !isCollapsed) {
-    event.preventDefault()
     newEditorState = editorState.change({
       start,
       end,
@@ -127,7 +124,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
       value: []
     })
   } else if (event.key === 'Enter') {
-    event.preventDefault()
     const { block: currentBlock } = getBlockForIndex(editorState.list.value, start)
     const changed = editorState.change({
       start,
@@ -143,7 +139,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     })
     newEditorState = changed
   } else if (event.key === 'Delete' && isCollapsed) {
-    event.preventDefault()
 
     const change = {
       start,
@@ -153,30 +148,35 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     const changed = editorState.change(change)
     newEditorState = changed
   } else if (event.key === 'Delete') {
-    event.preventDefault()
   } else if (isCharacterInsert(event)) {
-    event.preventDefault()
+    const prevValue = editorState.list.value[start - 1]
+    const nextValue = editorState.list.value[end + 1]
+    let entity = null
+
+    // TODO: Write some tests for this
+    // Basically only when we're inside an entity
+    // as in next and prev value are contained within the same entity
+    // shall we include this inserted value in this entity
+    if (
+      nextValue != null && nextValue.type == null
+      && prevValue != null && prevValue.type == null
+      && prevValue.entity === nextValue.entity) {
+      entity = nextValue.entity
+    }
+
     newEditorState = editorState.change({
       start,
       end,
       value: [{
         char: event.key,
-        styles: []
+        styles: editorState.currentStyles,
+        entity,
       }]
     }).change({
       start: start + event.key.length,
       end: start + event.key.length,
       value: []
     })
-  } else if (isCopy(event)) {
-    // event.preventDefault()
-    console.log('implement internal copy maybe?')
-  } else if (isPaste(event)) {
-    /*
-    let _ev: any = event
-    event.preventDefault()
-    console.log(_ev.target.isPaste)
-    */
   }
 
   return newEditorState

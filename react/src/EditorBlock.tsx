@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react'
-import { Block, EditorState } from '@zettel/core'
+import { Block, Value, EditorState } from '@zettel/core'
 import EditorText from './EditorText'
 import EditorChildren from './EditorChildren'
 import { RenderProps } from './types'
@@ -14,23 +14,29 @@ const style: CSSProperties = {
   position: 'relative',
   whiteSpace: 'pre-wrap',
   overflowWrap: 'break-word',
-  
 }
 
 export default function EditorBlock(props: Props) {
   const {
-    block,
+    block: _block,
     editorState,
+    mapBlock,
     ...renderProps
   } = props
 
+  let block = _block
+
+  if (mapBlock != null) {
+    block = mapBlock(_block)
+  }
 
   const content = <>
     <EditorText
       key="block-text"
       editorState={editorState}
+      mapBlock={props.mapBlock}
       block={block}
-      renderFragment={props.renderFragment}
+      {...renderProps}
      />
     {(props.block.blocks.length > 0) && (
       <EditorChildren

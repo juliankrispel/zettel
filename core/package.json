@@ -6,7 +6,13 @@
   "author": "Julian Krispel",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "tsc -w"
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ],
+  "devDependencies": {
+    "@types/dom-inputevent": "^1.0.4"
+  }
 }

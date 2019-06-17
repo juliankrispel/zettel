@@ -16,8 +16,7 @@ export type ListState = {
 }
 
 /**
-* Value object. Think of this as your `value` in `<input value={value} />`,
-* except instead of a string you get an array of objects.
+ * Array of Characters
 */
 export type Value = Character[]
 
@@ -44,7 +43,7 @@ export type TextCharacter = CharacterData & {
 export type BlockStart = {
   blockKey: string,
   type: 'block-start',
-  data?: any
+  entity?: string | null
 }
 
 export type TextFragment = CharacterData & {
@@ -109,6 +108,7 @@ export type Block = {
   value: TextCharacter[],
   blockKey: string,
   blocks: Block[],
+  entity?: any
 }
 
 

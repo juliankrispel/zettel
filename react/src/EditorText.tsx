@@ -6,7 +6,7 @@ import {
   TextFragment,
 } from '@zettel/core'
 
-import { RenderProps } from './types'
+import { RenderProps, RenderStyle } from './types'
 
 type TextProps = RenderProps & {
   block: Block,
@@ -21,11 +21,11 @@ export default function EditorText(props: TextProps) {
   const {
     block,
     editorState,
-    renderFragment: RenderFragment
+    renderStyle: RenderStyle,
+    renderEntity: RenderEntity,
   } = props
 
   let offset = 0
-  const fragments = createTextFragments(block, editorState.list.entityMap)
 
   let textFragments: React.ReactNode = null
 
@@ -39,19 +39,27 @@ export default function EditorText(props: TextProps) {
         key: `${block.blockKey}-${offset}`,
         'data-block-key': block.blockKey,
         'data-fragment-start': offset,
-        'data-fragment-end': offset + fragment.text.length,
-        className: fragment.styles.join(' ')
+        'data-fragment-end': offset + fragment.text.length
       }
 
-      let textFragment: React.ReactElement = <span
-        {...fragmentProps}
-      >{fragment.text || <br />}</span>
+      let textFragment: React.ReactElement = fragment.styles.reduce((children, val) => {
+        if (RenderStyle != null) {
+          return <RenderStyle key={`${fragmentProps.key}-${val}`} style={val}>{children}</RenderStyle>
+        } else {
+          return children
+        }
+      }, <span
+          {...fragmentProps}
+          key={`fragment-${block.blockKey}-${offset}`}
+        >{fragment.text || <br />}
+      </span>)
+      
 
-      if (RenderFragment) {
-        textFragment = <RenderFragment
-            key={`${block.blockKey}-${offset}`}
-            fragment={fragment}
-        >{textFragment}</RenderFragment>
+      if (RenderEntity) {
+        textFragment = <RenderEntity
+          entity={editorState.list.entityMap[fragment.entity]}
+          key={`entity-${block.blockKey}-${offset}`}
+        >{textFragment}</RenderEntity>
       }
 
       offset += fragment.text.length
@@ -59,7 +67,7 @@ export default function EditorText(props: TextProps) {
     })
   } else {
     textFragments = <span
-      key={block.blockKey}
+      key={`text-fragments-${block.blockKey}`}
       data-block-key={block.blockKey}
       data-fragment-start={0}
       data-fragment-end={0}

@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react'
-import { EditorState, setDomSelection, onKeyDown, onPaste } from '@zettel/core'
+import { Value, EditorState, setDomSelection, onKeyDown, onPaste, onInput } from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
@@ -28,11 +28,13 @@ const Editor = (props: Props) => {
     editorState,
     onChange,
     className,
+    mapBlock,
     readOnly,
     style,
+    renderEntity,
+    renderStyle,
     renderBlock = DefaultRenderBlock,
     renderChildren,
-    renderFragment
   } = props
 
   const ref = useRef(null)
@@ -52,8 +54,26 @@ const Editor = (props: Props) => {
 
   return (
     <div
-      onKeyDown={(event) => onChange(onKeyDown(editorState, event.nativeEvent))}
-
+      onKeyDown={(event) => {
+       const result = onKeyDown(editorState, event.nativeEvent)
+       if (result != null) {
+         event.preventDefault()
+         onChange(result)
+       }
+      }}
+      onInput={(event) => {
+        event.preventDefault()
+        event.stopPropagation()
+      }}
+      onBeforeInput={(event) => {
+        /*
+        * TODO: Investigate input events
+        * For now I'm blocking these to avoid content
+        * and selection to get out of place
+        */
+        event.preventDefault()
+        event.stopPropagation()
+      }}
       suppressContentEditableWarning
       role="textbox"
       autoCorrect={'off'}
@@ -62,11 +82,13 @@ const Editor = (props: Props) => {
       {...divProps}
     >
       <EditorChildren
+        mapBlock={mapBlock}
         blocks={editorState.tree.blocks}
         editorState={editorState}
         renderBlock={renderBlock}
+        renderEntity={renderEntity}
+        renderStyle={renderStyle}
         renderChildren={renderChildren}
-        renderFragment={renderFragment}
       />
     </div>
   );

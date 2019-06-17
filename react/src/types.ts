@@ -5,8 +5,13 @@ type FragmentRenderProps = {
   fragment: TextFragment
 }
 
-export type RenderFragment = React.FunctionComponent<{
-  fragment: TextFragment,
+export type RenderStyle = React.FunctionComponent<{
+  style: string,
+  children: React.ReactElement
+}>
+
+export type RenderEntity = React.FunctionComponent<{
+  entity: any,
   children: React.ReactElement
 }>
 
@@ -22,7 +27,9 @@ export type RenderChildren = React.FunctionComponent<{
 }>
 
 export type RenderProps = {
+  mapBlock?: (block: Block) => Block,
   renderBlock?: RenderBlock,
   renderChildren?: RenderChildren,
-  renderFragment?: RenderFragment
+  renderStyle?: RenderStyle,
+  renderEntity?: RenderEntity,
 }  

@@ -1,9 +1,11 @@
 import React from 'react'
 import { Block, EditorState } from '@zettel/core'
 import EditorBlock from './EditorBlock'
-import { RenderProps } from './types';
+import { RenderProps } from './types'
+import { Value } from '@zettel/core'
 
 type Props = RenderProps & {
+  mapBlockValue?: (val: Value) => Value,
   blocks: Block[],
   block?: Block,
   editorState: EditorState

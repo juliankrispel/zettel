@@ -155,10 +155,21 @@ type Raw = {
 
 ```tsx
 <Editor
-  renderStyle={(props) => {
+  renderFragment={({ children, fragment }) => {
+    if (fragment.styles.includes('bold')) {
+      return <strong>{props.children}</strong>
+    }
+
+    return props.children
   }}
-  renderEntity={(props) => {
-  }}
+/>
+```
+
+### Decorating values
+
+```tsx
+<Editor
+decorate={()}
 />
 ```
 

@@ -19,7 +19,7 @@ const getNodes = (state: BlockTree, path: number[]): Block[]  => {
 const parseBlockTree = (flat: ListState): BlockTree => {
   const state: BlockTree = {
     blocks: [],
-    entityMap: {},
+    entityMap: flat.entityMap,
   }
 
   let path: number[] = []
@@ -33,7 +33,8 @@ const parseBlockTree = (flat: ListState): BlockTree => {
       blocks.push({
         value: [],
         blocks: [],
-        blockKey: char.blockKey
+        blockKey: char.blockKey,
+        entity: char.entity != null ? flat.entityMap[char.entity] : null
       })
 
       path.push(blocks.length - 1)

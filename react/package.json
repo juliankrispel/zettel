@@ -6,7 +6,8 @@
   "author": "Julian Krispel",
   "license": "MIT",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "start": "tsc -w"
   },
   "dependencies": {
     "@zettel/core": "link:../core"
@@ -19,6 +20,7 @@
     "dist"
   ],
   "devDependencies": {
+    "@types/dom-inputevent": "^1.0.4",
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4"
   }

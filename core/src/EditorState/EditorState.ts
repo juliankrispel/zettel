@@ -6,6 +6,7 @@ import {
 } from '../types'
 import rawToFlat from '../rawToFlat'
 import change from './change'
+import textToFlat from '../textToFlat'
 import flatToTree from '../flatToTree'
 
 const emptyList: ListState = {
@@ -15,6 +16,7 @@ const emptyList: ListState = {
 
 type ConstructorProps = {
   list: ListState,
+  currentStyles?: string[],
   redoStack?: Change[],
   undoStack?: Change[],
   start?: number,
@@ -25,6 +27,7 @@ export default class EditorState {
   list: ListState
   tree: BlockTree
   start: number
+  currentStyles: string[]
   end: number
   redoStack: Change[] = []
   undoStack: Change[] = []
@@ -33,11 +36,13 @@ export default class EditorState {
     start = 1,
     end = 1,
     list = emptyList,
+    currentStyles = [],
     undoStack = [],
     redoStack = []
   }: ConstructorProps) {
     this.list = list
     this.undoStack = undoStack
+    this.currentStyles = currentStyles
     this.start = start
     this.end = end
     this.redoStack = redoStack
@@ -81,6 +86,11 @@ export default class EditorState {
     })
   }
 
+  setCurrentStyles(styles: string[]) {
+    this.currentStyles = styles
+    return this
+  }
+
   redo() {
     if (this.redoStack.length === 0) {
       return this
@@ -110,9 +120,16 @@ export default class EditorState {
    * 
    * @param fromJSON 
    */
-  static fromJSON(json: RawDocument) {
+  static fromJSON(json: RawDocument): EditorState {
     return new EditorState({
       list: rawToFlat(json)
+    })
+  }
+
+
+  static fromText(text: string): EditorState {
+    return new EditorState({
+      list: textToFlat(text)
     })
   }
 }
