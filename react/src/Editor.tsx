@@ -1,14 +1,14 @@
 import React, { useLayoutEffect, useRef } from 'react'
-import { Value, EditorState, setDomSelection, onKeyDown, onPaste, onInput } from '@zettel/core'
+import { EditorState, setDomSelection, onKeyDown, onPaste, onSelectionChange } from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
 type Props = RenderProps & {
   onChange: (editorState: EditorState) => void,
   editorState: EditorState,
+  htmlAttrs?: Object,
+  onKeyDown?: (event: React.KeyboardEvent) => EditorState | void,
   readOnly?: boolean,
-  className?: string,
-  style?: React.CSSProperties,
 }
 
 const editorStyles: React.CSSProperties = {
@@ -21,17 +21,16 @@ const editorStyles: React.CSSProperties = {
   outline: 'none'
 }
 
-const DefaultRenderBlock: RenderBlock = (props) => <div style={props.style}>{props.children}</div>
+const DefaultRenderBlock: RenderBlock = (props) => <div {...props.htmlAttrs}>{props.children}</div>
 
 const Editor = (props: Props) => {
   const {
     editorState,
     onChange,
-    className,
     mapBlock,
     readOnly,
-    style,
-    renderEntity,
+    htmlAttrs,
+    renderTextFragment: renderEntity,
     renderStyle,
     renderBlock = DefaultRenderBlock,
     renderChildren,
@@ -46,20 +45,41 @@ const Editor = (props: Props) => {
     }
   })
 
+
   const divProps = {
-    style: { editorStyles, ...(style || {}) },
+    ...htmlAttrs,
+    style: { ...editorStyles },
     contentEditable: readOnly === true ? false : true,
-    className,
   }
 
   return (
     <div
       onKeyDown={(event) => {
-       const result = onKeyDown(editorState, event.nativeEvent)
-       if (result != null) {
-         event.preventDefault()
-         onChange(result)
-       }
+        let handled = null
+
+        if (props.onKeyDown != null) {
+          handled = props.onKeyDown(event)
+        }
+
+        if (handled == null) {
+          handled = onKeyDown(editorState, event.nativeEvent)
+        }
+
+        if (handled != null) {
+          event.preventDefault()
+          onChange(handled)
+        }
+      }}
+      onSelect={() => {
+        const newEditorState = onSelectionChange(editorState)
+        const { start: newStart, end: newEnd } = newEditorState
+        const { start, end } = editorState
+
+        if (newEditorState != null &&
+          (start !== newStart || end !== newEnd)
+        ) {
+          onChange(newEditorState)
+        }
       }}
       onInput={(event) => {
         event.preventDefault()
@@ -86,7 +106,7 @@ const Editor = (props: Props) => {
         blocks={editorState.tree.blocks}
         editorState={editorState}
         renderBlock={renderBlock}
-        renderEntity={renderEntity}
+        renderTextFragment={renderEntity}
         renderStyle={renderStyle}
         renderChildren={renderChildren}
       />

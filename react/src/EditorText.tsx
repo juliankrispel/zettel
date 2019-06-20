@@ -22,7 +22,7 @@ export default function EditorText(props: TextProps) {
     block,
     editorState,
     renderStyle: RenderStyle,
-    renderEntity: RenderEntity,
+    renderTextFragment: RenderTextFragment,
   } = props
 
   let offset = 0
@@ -33,6 +33,7 @@ export default function EditorText(props: TextProps) {
     const fragments = createTextFragments(block, editorState.list.entityMap)
 
     let offset = 0
+    console.log( {fragments})
 
     textFragments = fragments.map(fragment => {
       const fragmentProps = {
@@ -55,11 +56,11 @@ export default function EditorText(props: TextProps) {
       </span>)
       
 
-      if (RenderEntity) {
-        textFragment = <RenderEntity
-          entity={editorState.list.entityMap[fragment.entity]}
+      if (RenderTextFragment) {
+        textFragment = <RenderTextFragment
+          entity={fragment.entity}
           key={`entity-${block.blockKey}-${offset}`}
-        >{textFragment}</RenderEntity>
+        >{textFragment}</RenderTextFragment>
       }
 
       offset += fragment.text.length

@@ -2,6 +2,14 @@
  * Container for Entities
  */
 export type EntityMap = {
+  [key: string]: Entity
+}
+
+/**
+ * Entity ftw!
+ */
+export type Entity = {
+  isAtomic?: boolean,
   [key: string]: any
 }
 
@@ -48,7 +56,7 @@ export type BlockStart = {
 
 export type TextFragment = CharacterData & {
   text: string,
-  entity?: any
+  entity?: Entity
 }
 
 /**
@@ -65,7 +73,7 @@ export type BlockEnd = {
 export type Change = {
   start: number,
   end: number,
-  value: Value
+  value: Value | CharacterData
 }
 
 /**
@@ -108,7 +116,7 @@ export type Block = {
   value: TextCharacter[],
   blockKey: string,
   blocks: Block[],
-  entity?: any
+  entity?: Entity | null
 }
 
 

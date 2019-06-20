@@ -16,11 +16,16 @@ import valueFromText from './valueFromText'
 import getBlockNumber from './getBlockNumber'
 import getBlockOffset from './getBlockOffset'
 import onInput from './handlers/onInput'
+import onSelectionChange from './handlers/onSelectionChange'
 import flatToTree from './flatToTree'
+/* what */
 export * from './types'
+import { Entity } from './types'
 
 export {
+  Entity,
   findAfter,
+  onSelectionChange,
   findBefore,
   change,
   getDomSelection,

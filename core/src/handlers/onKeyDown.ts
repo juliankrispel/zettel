@@ -37,6 +37,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     newEditorState = editorState.undo()
   } else if (isRedo(event)) {
     newEditorState = editorState.redo()
+  // backspaceToBlockStart
   } else if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
     const prevChar = editorState.list.value[start - 1]
 
@@ -60,6 +61,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
         })
       }
     }
+  // backspaceToPrevWord
   } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
     const prevChar = editorState.list.value[start - 1]
 
@@ -95,12 +97,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     const previousCharIndex = getIndexBefore(editorState.list.value, start, (ch) => ch.type == null || ch.type === 'block-end')
 
     if (previousCharIndex != null) {
-      const prevChar = editorState.list.value[previousCharIndex]
       let _start = previousCharIndex
-
-      if (prevChar.type === 'block-start') {
-        _start++
-      }
 
       newEditorState = editorState.change({
         start: _start,
@@ -133,8 +130,8 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
         { ...currentBlock, type: 'block-start', blockKey: id()}
       ]
     }).change({
-      start: end + 2,
-      end: end + 2,
+      start: end + 1,
+      end: end + 1,
       value: []
     })
     newEditorState = changed
@@ -173,8 +170,8 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
         entity,
       }]
     }).change({
-      start: start + event.key.length,
-      end: start + event.key.length,
+      start: start,
+      end: start,
       value: []
     })
   }

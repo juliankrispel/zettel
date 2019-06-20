@@ -2,16 +2,29 @@ import {
   BlockTree,
   ListState,
   RawDocument, 
-  Change
+  Change,
+  Value,
 } from '../types'
 import rawToFlat from '../rawToFlat'
-import change from './change'
+import change, { Update } from './change'
 import textToFlat from '../textToFlat'
 import flatToTree from '../flatToTree'
 
 const emptyList: ListState = {
   value: [],
   entityMap: {}
+}
+
+type CharacterUpdate = {
+  styles: string[],
+  entity?: string | null,
+  type?: void,
+}
+
+type EditorChange = {
+  start?: number,
+  end?: number,
+  value: CharacterUpdate | Value
 }
 
 type ConstructorProps = {
@@ -27,8 +40,8 @@ export default class EditorState {
   list: ListState
   tree: BlockTree
   start: number
-  currentStyles: string[]
   end: number
+  currentStyles: string[]
   redoStack: Change[] = []
   undoStack: Change[] = []
 
@@ -49,13 +62,20 @@ export default class EditorState {
     this.tree = flatToTree(this.list)
   }
 
-  change(_change: Change) {
-    const update = { current: this.list, change: _change }
+  change(_change: EditorChange) {
+    const update: Update = {
+      current: this.list,
+      change: {
+        start: _change.start || this.start,
+        end: _change.end || this.end,
+        ..._change
+      }
+    }
     const updated = change(update)
 
     return new EditorState({
-      start: updated.change.start,
-      end: updated.change.end,
+      start: updated.change.start || this.start,
+      end: updated.change.end || this.end,
       list: updated.current,
       redoStack: this.redoStack,
       undoStack: [updated.change].concat(this.undoStack)
@@ -125,7 +145,6 @@ export default class EditorState {
       list: rawToFlat(json)
     })
   }
-
 
   static fromText(text: string): EditorState {
     return new EditorState({

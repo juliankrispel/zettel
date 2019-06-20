@@ -29,6 +29,7 @@ export default function EditorBlockChildren(props: Props) {
       {...renderProps}
     />
   })}</>
+
   if (RenderChildren != null) {
     return <RenderChildren
       block={props.block}
@@ -36,7 +37,6 @@ export default function EditorBlockChildren(props: Props) {
     >
       {content}
     </RenderChildren>
-
   }
 
   return content

@@ -9,7 +9,7 @@ type Props = RenderProps & {
   editorState: EditorState
 }
 
-const style: CSSProperties = {
+const style = {
   WebkitUserModify: 'read-write-plaintext-only',
   position: 'relative',
   whiteSpace: 'pre-wrap',
@@ -24,10 +24,34 @@ export default function EditorBlock(props: Props) {
     ...renderProps
   } = props
 
+  const RenderBlock = renderProps.renderBlock
   let block = _block
 
   if (mapBlock != null) {
     block = mapBlock(_block)
+  }
+
+  let htmlAttrs: any = {
+    style,
+  }
+
+  const { entity } = block
+
+  if (entity != null  && entity.isAtomic && RenderBlock != null) {
+    const offset = 0
+    htmlAttrs = {
+      ...htmlAttrs,
+      'data-block-key': block.blockKey,
+      'data-fragment-start': offset,
+      'data-fragment-end': offset + block.value.length
+    }
+
+    return <RenderBlock 
+      block={block}
+      key={`${block.blockKey}-${offset}`}
+      htmlAttrs={htmlAttrs}
+      children={<>null</>}
+    />
   }
 
   const content = <>
@@ -47,10 +71,11 @@ export default function EditorBlock(props: Props) {
     )}
   </>
 
-  const RenderBlock = renderProps.renderBlock
-
   if (RenderBlock != null) {
-    return <RenderBlock style={style} block={block}>{content}</RenderBlock>
+    return <RenderBlock
+      htmlAttrs={htmlAttrs}
+      block={block}
+    >{content}</RenderBlock>
   }
 
   return content

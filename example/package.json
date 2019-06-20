@@ -6,6 +6,7 @@
     "start": "../node_modules/.bin/react-scripts start"
   },
   "dependencies": {
+    "@types/react-router-dom": "^4.3.4",
     "@zettel/core": "link:../core",
     "@zettel/react": "link:../react",
     "react": "^16.8.6",

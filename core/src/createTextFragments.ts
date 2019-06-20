@@ -14,7 +14,7 @@ function hasEqualCharacterData (
 export default function createTextFragments(block: Block, entityMap: EntityMap = {}): TextFragment[] {
   const start: TextFragment[] = []
   return block.value.reduce(
-    (acc, data, index) => {
+    (acc: any, data, index) => {
       if (acc.length < 1) {
         return [{
           styles: data.styles,
@@ -43,7 +43,7 @@ export default function createTextFragments(block: Block, entityMap: EntityMap =
       }
     },
     start
-  ).map(fragment => ({
+  ).map((fragment: TextFragment) => ({
     ...fragment,
     entity: fragment.entity != null ? entityMap[fragment.entity] : null
   }))
