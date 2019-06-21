@@ -72,11 +72,10 @@ const Editor = (props: Props) => {
       }}
       onSelect={() => {
         const newEditorState = onSelectionChange(editorState)
-        const { start: newStart, end: newEnd } = newEditorState
         const { start, end } = editorState
 
         if (newEditorState != null &&
-          (start !== newStart || end !== newEnd)
+          (start !== newEditorState.start|| end !== newEditorState.end)
         ) {
           onChange(newEditorState)
         }
