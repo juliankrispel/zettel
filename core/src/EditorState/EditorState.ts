@@ -92,14 +92,16 @@ export default class EditorState {
       current: this.list,
       change: {
         ...lastUndo,
-        start: lastUndo.start + 1,
-        end: lastUndo.end + 1,
+        start: lastUndo.start,
+        end: lastUndo.end,
       }
     })
 
+    const diffLength = (lastUndo.end - lastUndo.start) - lastUndo.value.length
+
     return new EditorState({
-      start: updated.change.start,
-      end: updated.change.end,
+      start: updated.change.start - diffLength,
+      end: updated.change.end - diffLength,
       list: updated.current,
       redoStack: [updated.change].concat(this.redoStack),
       undoStack: this.undoStack
@@ -117,18 +119,21 @@ export default class EditorState {
     }
 
     const lastRedo: any = this.redoStack.shift()
+
+    const diffLength = (lastRedo.end - lastRedo.start) - lastRedo.value.length
+
     const updated = change({
       current: this.list,
       change: {
         ...lastRedo,
-        start: lastRedo.start + 1,
-        end: lastRedo.end + 1,
+        start: lastRedo.start,
+        end: lastRedo.end,
       }
     })
 
     return new EditorState({
-      start: updated.change.start,
-      end: updated.change.end,
+      start: updated.change.start + diffLength,
+      end: updated.change.end + diffLength,
       list: updated.current,
       redoStack: this.redoStack,
       undoStack: [updated.change].concat(this.undoStack)

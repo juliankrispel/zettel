@@ -104,8 +104,8 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
         end,
         value: []
       }).change({
-        start: _start,
-        end: _start,
+        start: _start - 1,
+        end: _start - 1,
         value: []
       })
     }
