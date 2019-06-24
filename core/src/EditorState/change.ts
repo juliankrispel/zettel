@@ -43,7 +43,6 @@ export default function change(update: Update): Update {
     .concat(currentValue.slice(end))
   }
 
-
   if (newValue[0].type !== 'block-start') {
     throw new Error('First character always needs to be block-start')
   } else if (newValue[newValue.length - 1].type !== 'block-end') {

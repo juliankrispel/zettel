@@ -77,6 +77,11 @@ export type Change = {
 }
 
 /**
+ * History
+ */
+export type Changes = Change[]
+
+/**
  * Represents raw form of a Zettel Document,
  * serializable and easier on the human eye
  */

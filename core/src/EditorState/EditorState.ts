@@ -66,16 +66,18 @@ export default class EditorState {
     const update: Update = {
       current: this.list,
       change: {
+        ..._change,
         start: _change.start || this.start,
         end: _change.end || this.end,
-        ..._change
       }
     }
+
     const updated = change(update)
 
     return new EditorState({
-      start: updated.change.start || this.start,
-      end: updated.change.end || this.end,
+      start: (updated.change.start || this.start) - 1,
+      end: (updated.change.end || this.end) - 1,
+      currentStyles: this.currentStyles,
       list: updated.current,
       redoStack: this.redoStack,
       undoStack: [updated.change].concat(this.undoStack)
@@ -120,8 +122,6 @@ export default class EditorState {
 
     const lastRedo: any = this.redoStack.shift()
 
-    const diffLength = (lastRedo.end - lastRedo.start) - lastRedo.value.length
-
     const updated = change({
       current: this.list,
       change: {
@@ -131,14 +131,72 @@ export default class EditorState {
       }
     })
 
-    return new EditorState({
-      start: updated.change.start + diffLength,
-      end: updated.change.end + diffLength,
-      list: updated.current,
-      redoStack: this.redoStack,
-      undoStack: [updated.change].concat(this.undoStack)
-    })
+    return this.change(lastRedo)
   }
+
+  setCurrentStyles(styles: string[]) {
+    this.currentStyles = styles
+    return this
+  }
+
+  /**
+   * gets selected value, arguments default
+   * to editorState.start and editorState.end
+   * 
+   * @param start start offset
+   * @param end end offset
+   */
+  getSelectedValue(
+    start: number = this.start,
+    end: number = this.end
+  ): Value {
+    return this.list.value.slice(start, end)
+  }
+
+  toggleStyle(
+    style: string,
+    _start: number = this.start,
+    _end: number = this.end,
+  ): EditorState {
+    const start = _start + 1
+    const end = _end + 1
+    const selectedValue = this.list.value.slice(start, end)
+    const hasStyle = selectedValue.every(char =>
+      char.type != null ||
+      char.styles.includes(style)
+    )
+
+    const updatedValue = selectedValue.map(char => {
+      const newChar = { ...char }
+      if (newChar.type == null) {
+        if (hasStyle) {
+          newChar.styles = newChar.styles.filter(st => st !== style)
+        } else if (!newChar.styles.includes(style)) {
+          newChar.styles = newChar.styles.concat([style])
+        }
+      }
+
+      return newChar
+    })
+
+    let newEditorState = this.change({
+      start,
+      end,
+      value: updatedValue
+    })
+    newEditorState.start = _start
+    newEditorState.end = _end
+
+    if (!hasStyle || !this.currentStyles.includes(style)) {
+      console.log('set current styles')
+      newEditorState.currentStyles = newEditorState.currentStyles.concat([style])
+    } else {
+      newEditorState.currentStyles = newEditorState.currentStyles.filter(st => st !== style)
+    }
+
+    return newEditorState
+  }
+
   
   /**
    * creates a new EditorState from JSON format

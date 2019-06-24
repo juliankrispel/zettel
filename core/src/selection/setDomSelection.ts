@@ -28,11 +28,11 @@ export default function setDomSelection(
   const newSelection = window.getSelection()
   const { list } = editorState
 
-
   const {
     block: startBlock,
     blockOffset: startBlockOffset,
   } = getBlockForIndex(list.value, editorState.start)
+
   const {
     block: endBlock,
     blockOffset: endBlockOffset,

@@ -33,7 +33,6 @@ export default function EditorText(props: TextProps) {
     const fragments = createTextFragments(block, editorState.list.entityMap)
 
     let offset = 0
-    console.log( {fragments})
 
     textFragments = fragments.map(fragment => {
       const fragmentProps = {

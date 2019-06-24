@@ -11,7 +11,7 @@ export default function getBlockForIndex(value: Value, index: number): BlockAndI
 
   for (let i = 0; i <= index; i++) {
     const val = value[i]
-    if (val.type === 'block-start') {
+    if (val != null && val.type === 'block-start') {
       block = val
       blockOffset = i
     }

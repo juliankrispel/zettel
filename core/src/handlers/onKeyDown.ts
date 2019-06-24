@@ -91,6 +91,13 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
           end,
           value: []
         })
+          /*
+        newEditorState = newEditorState.change({
+          start: newEditorState.start - 1,
+          end: newEditorState.end - 1,
+          value: []
+        })
+        */
       }
     }
   } else if (event.key === 'Backspace' && isCollapsed) {
@@ -130,8 +137,8 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
         { ...currentBlock, type: 'block-start', blockKey: id()}
       ]
     }).change({
-      start: end + 1,
-      end: end + 1,
+      start: end + 2,
+      end: end + 2,
       value: []
     })
     newEditorState = changed
@@ -170,8 +177,8 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
         entity,
       }]
     }).change({
-      start: start,
-      end: start,
+      start: end + 1,
+      end: end + 1,
       value: []
     })
   }

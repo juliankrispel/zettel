@@ -21,7 +21,6 @@ const initialEditorState = EditorState.fromJSON({
 const App = () => {
   const [editorState, setEditorState] = useState(initialEditorState)
 
-  console.log(editorState)
   return (
     <Editor
       renderStyle={(props) => {
@@ -38,17 +37,11 @@ const App = () => {
       htmlAttrs={{ className: 'editor'}}
       onKeyDown={(event) => {
         if (event.key === 'b' && event.metaKey) {
-          return editorState.change({
-            value: { styles: ['bold'] }
-          })
+          return editorState.toggleStyle('bold')
         } else if (event.key === 'i' && event.metaKey) {
-          return editorState.change({
-            value: { styles: ['italic'] }
-          })
+          return editorState.toggleStyle('italic')
         } else if (event.key === 'u' && event.metaKey) {
-          return editorState.change({
-            value: { styles: ['underline'] }
-          })
+          return editorState.toggleStyle('underline')
         }
       }}
       onChange={setEditorState}
