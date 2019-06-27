@@ -73,7 +73,7 @@ export type BlockEnd = {
 export type Change = {
   start: number,
   end: number,
-  value: Value | CharacterData
+  value: Value
 }
 
 /**

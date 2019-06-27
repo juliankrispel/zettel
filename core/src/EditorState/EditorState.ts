@@ -3,7 +3,9 @@ import {
   ListState,
   RawDocument, 
   Change,
+  Changes,
   Value,
+  Character,
 } from '../types'
 import rawToFlat from '../rawToFlat'
 import change, { Update } from './change'
@@ -24,14 +26,15 @@ type CharacterUpdate = {
 type EditorChange = {
   start?: number,
   end?: number,
-  value: CharacterUpdate | Value
+  value: Value,
+  isBoundary?: boolean
 }
 
 type ConstructorProps = {
   list: ListState,
   currentStyles?: string[],
-  redoStack?: Change[],
-  undoStack?: Change[],
+  redoStack?: Changes[],
+  undoStack?: Changes[],
   start?: number,
   end?: number,
 }
@@ -42,8 +45,8 @@ export default class EditorState {
   start: number
   end: number
   currentStyles: string[]
-  redoStack: Change[] = []
-  undoStack: Change[] = []
+  redoStack: Changes[] = []
+  undoStack: Changes[] = []
 
   constructor({
     start = 1,
@@ -63,24 +66,38 @@ export default class EditorState {
   }
 
   change(_change: EditorChange) {
+    const defaultChange: Change = {
+      start: this.start,
+      end: this.end,
+      value: []
+    }
+
     const update: Update = {
       current: this.list,
       change: {
+        ...defaultChange,
         ..._change,
-        start: _change.start || this.start,
-        end: _change.end || this.end,
       }
     }
 
+    const isBoundary = _change.isBoundary === true
     const updated = change(update)
+    let undoStack = this.undoStack
+    const [lastUndo, ...undoRest] = this.undoStack
+
+    if (Boolean(_change.isBoundary) === false) {
+      undoStack = [[updated.change].concat(lastUndo || [])].concat(undoRest)
+    } else {
+      undoStack = [[updated.change]].concat([lastUndo || []].concat(undoRest))
+    }
 
     return new EditorState({
       start: (updated.change.start || this.start) - 1,
       end: (updated.change.end || this.end) - 1,
       currentStyles: this.currentStyles,
       list: updated.current,
-      redoStack: this.redoStack,
-      undoStack: [updated.change].concat(this.undoStack)
+      redoStack: [],
+      undoStack
     })
   }
 
@@ -89,30 +106,45 @@ export default class EditorState {
       return this
     }
 
-    const lastUndo: any = this.undoStack.shift()
-    const updated = change({
-      current: this.list,
-      change: {
-        ...lastUndo,
-        start: lastUndo.start,
-        end: lastUndo.end,
-      }
-    })
-
-    const diffLength = (lastUndo.end - lastUndo.start) - lastUndo.value.length
-
-    return new EditorState({
-      start: updated.change.start - diffLength,
-      end: updated.change.end - diffLength,
-      list: updated.current,
-      redoStack: [updated.change].concat(this.redoStack),
+    const [lastChanges, ...rest] = this.undoStack
+    const emptyChange: Changes = []
+    
+    let newEditorState = new EditorState({
+      start: this.start,
+      end: this.end,
+      list: this.list,
+      redoStack: [emptyChange].concat([...this.redoStack]),
       undoStack: this.undoStack
     })
-  }
 
-  setCurrentStyles(styles: string[]) {
-    this.currentStyles = styles
-    return this
+    newEditorState = lastChanges.reduce((editorState: EditorState, lastChange: Change) => {
+      const updated = change({
+        current: editorState.list,
+        change: {
+          ...lastChange,
+          start: lastChange.start,
+          end: lastChange.end,
+        }
+      })
+
+      const [lastRedo, ...redoStack] = editorState.redoStack
+
+      return new EditorState({
+        start: updated.change.start,
+        end: updated.change.end,
+        list: updated.current,
+        redoStack: [[updated.change].concat(lastRedo || [])].concat(redoStack),
+        undoStack: rest
+      })
+    }, newEditorState)
+
+    return new EditorState({
+      start: newEditorState.start - 1,
+      end: newEditorState.end - 1,
+      list: newEditorState.list,
+      redoStack: newEditorState.redoStack,
+      undoStack: newEditorState.undoStack
+    })
   }
 
   redo() {
@@ -120,18 +152,45 @@ export default class EditorState {
       return this
     }
 
-    const lastRedo: any = this.redoStack.shift()
+    const emptyChange: Changes = []
 
-    const updated = change({
-      current: this.list,
-      change: {
-        ...lastRedo,
-        start: lastRedo.start,
-        end: lastRedo.end,
-      }
+    let newEditorState = new EditorState({
+      start: this.start,
+      end: this.end,
+      list: this.list,
+      redoStack: this.redoStack,
+      undoStack: [emptyChange].concat([...this.undoStack])
     })
 
-    return this.change(lastRedo)
+    const [lastChanges, ...rest] = this.redoStack
+    newEditorState = lastChanges.reduce((editorState: EditorState, lastChange: Change) => {
+      const updated = change({
+        current: editorState.list,
+        change: {
+          ...lastChange,
+          start: lastChange.start,
+          end: lastChange.end,
+        }
+      })
+
+      const [lastUndo, ...undoStack] = editorState.undoStack
+
+      return new EditorState({
+        start: updated.change.start,
+        end: updated.change.end,
+        list: updated.current,
+        redoStack: rest,
+        undoStack: [[updated.change].concat(lastUndo || [])].concat(undoStack),
+      })
+    }, newEditorState)
+
+    return new EditorState({
+      start: newEditorState.start - 1,
+      end: newEditorState.end - 1,
+      list: newEditorState.list,
+      redoStack: newEditorState.redoStack,
+      undoStack: newEditorState.undoStack
+    })
   }
 
   setCurrentStyles(styles: string[]) {
@@ -182,13 +241,13 @@ export default class EditorState {
     let newEditorState = this.change({
       start,
       end,
+      isBoundary: true,
       value: updatedValue
     })
     newEditorState.start = _start
     newEditorState.end = _end
 
     if (!hasStyle || !this.currentStyles.includes(style)) {
-      console.log('set current styles')
       newEditorState.currentStyles = newEditorState.currentStyles.concat([style])
     } else {
       newEditorState.currentStyles = newEditorState.currentStyles.filter(st => st !== style)

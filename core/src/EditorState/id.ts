@@ -6,5 +6,4 @@ function id(): string {
   return `${firstPart}${secondPart}`;
 }
 
-
 export default id
