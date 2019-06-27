@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@use-it/event-listener": "^0.1.3",
-    "@zettel/core": "link:../core"
+    "@zettel/core": "0.0.2"
   },
   "peerDependencies": {
     "react": "16.8.6",
