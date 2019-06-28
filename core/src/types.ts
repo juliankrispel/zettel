@@ -33,7 +33,6 @@ export type Character = (TextCharacter | BlockStart | BlockEnd)
 export type CharacterData = {
   styles: string[],
   entity?: string | null,
-  type?: void,
 }
 
 /*
@@ -43,6 +42,7 @@ export type CharacterData = {
 */
 export type TextCharacter = CharacterData & {
   char: string,
+  type?: void
 }
 
 /**
@@ -64,7 +64,8 @@ export type TextFragment = CharacterData & {
  * has toe be a matching 
  */
 export type BlockEnd = {
-  type: 'block-end'
+  type: 'block-end',
+  entity?: void
 }
 
 /**

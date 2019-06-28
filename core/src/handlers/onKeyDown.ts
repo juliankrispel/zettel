@@ -1,8 +1,17 @@
 import getDomSelection from '../selection/getDomSelection'
 import EditorState from '../EditorState';
-import id from '../EditorState/id';
-import getBlockForIndex from '../getBlockForIndex'
-import getIndexBefore from '../getIndexBefore';
+import {
+  deleteForward,
+  insertCharacter,
+  splitBlock,
+  removeRange,
+  undo,
+  redo,
+  backspaceToBlockStart,
+  backspaceToPrevWord,
+  backspace
+} from '../commands'
+
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
 const isCharacterInsert = (e: KeyboardEvent) =>
@@ -34,153 +43,35 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   const isCollapsed = start === end
 
   if (isUndo(event)) {
-    newEditorState = editorState.undo()
+    // undo
+    newEditorState = undo(editorState)
   } else if (isRedo(event)) {
-    newEditorState = editorState.redo()
-  // backspaceToBlockStart
+    // redo
+    newEditorState = redo(editorState)
   } else if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
-    const prevChar = editorState.list.value[start - 1]
-
-    if (prevChar.type == null) {
-      const blockBeginning = getIndexBefore(
-        editorState.list.value,
-        start,
-        (ch) => {
-          if (ch.type === 'block-start'){
-            return true
-          }
-          return false
-        }
-      )
-
-      if (blockBeginning != null) {
-        newEditorState = editorState.change({
-          start: blockBeginning + 1,
-          end,
-          value: []
-        })
-      }
-    }
-  // backspaceToPrevWord
+    // backspaceToBlockStart
+    newEditorState = backspaceToBlockStart(editorState, start, end)
   } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
-    const prevChar = editorState.list.value[start - 1]
-
-    if (prevChar.type == null) {
-      let spaceBefore = false
-      let isBlockStart = false
-      const prevWordEnd = getIndexBefore(
-        editorState.list.value,
-        start,
-        (ch) => {
-          if (ch.type !== 'block-start' && ch.type !== 'block-end') {
-            spaceBefore = ch.char === ' '
-          }
-          if (ch.type === 'block-start'){
-            isBlockStart = true
-            return true
-          }
-          if (ch.type == null && spaceBefore) {
-            return true
-          }
-          return false
-        }
-      )
-      if (prevWordEnd != null) {
-        newEditorState = editorState.change({
-          start: isBlockStart ? prevWordEnd + 1 : prevWordEnd,
-          end,
-          value: []
-        })
-          /*
-        newEditorState = newEditorState.change({
-          start: newEditorState.start - 1,
-          end: newEditorState.end - 1,
-          value: []
-        })
-        */
-      }
-    }
+    // backspaceToPrevWord
+    newEditorState = backspaceToPrevWord(editorState, start, end)
   } else if (event.key === 'Backspace' && isCollapsed) {
-    const previousCharIndex = getIndexBefore(editorState.list.value, start, (ch) => ch.type == null || ch.type === 'block-end')
-
-    if (previousCharIndex != null) {
-      let _start = previousCharIndex
-
-      newEditorState = editorState.change({
-        start: _start,
-        end,
-        value: []
-      }).change({
-        start: _start,
-        end: _start,
-        value: []
-      })
-    }
-
+    // backspace
+    newEditorState = backspace(editorState, start, end)
   } else if (event.key === 'Backspace' && !isCollapsed) {
-    newEditorState = editorState.change({
-      start,
-      end,
-      value: []
-    }).change({
-      start,
-      end: start,
-      value: []
-    })
+    // removeRange
+    newEditorState = removeRange(editorState, start, end)
   } else if (event.key === 'Enter') {
-    const { block: currentBlock } = getBlockForIndex(editorState.list.value, start)
-    const changed = editorState.change({
-      start,
-      end,
-      value: [
-        { type: 'block-end' },
-        { ...currentBlock, type: 'block-start', blockKey: id()}
-      ]
-    }).change({
-      start: end + 2,
-      end: end + 2,
-      value: []
-    })
-    newEditorState = changed
+    // splitBlock
+    newEditorState = splitBlock(editorState, start, end)
   } else if (event.key === 'Delete' && isCollapsed) {
-
-    const change = {
-      start,
-      end,
-      value: []
-    }
-    const changed = editorState.change(change)
-    newEditorState = changed
-  } else if (event.key === 'Delete') {
+    // deleteForward
+    newEditorState = deleteForward(editorState, start, end)
+  } else if (event.key === 'Delete' && !isCollapsed) {
+    // removeRange
+    newEditorState = removeRange(editorState, start, end)
   } else if (isCharacterInsert(event)) {
-    const prevValue = editorState.list.value[start - 1]
-    const nextValue = editorState.list.value[end + 1]
-    let entity = null
-
-    // TODO: Write some tests for this
-    // Basically only when we're inside an entity
-    // as in next and prev value are contained within the same entity
-    // shall we include this inserted value in this entity
-    if (
-      nextValue != null && nextValue.type == null
-      && prevValue != null && prevValue.type == null
-      && prevValue.entity === nextValue.entity) {
-      entity = nextValue.entity
-    }
-
-    newEditorState = editorState.change({
-      start,
-      end,
-      value: [{
-        char: event.key,
-        styles: editorState.currentStyles,
-        entity,
-      }]
-    }).change({
-      start: end + 1,
-      end: end + 1,
-      value: []
-    })
+    // insertCharacter
+    newEditorState = insertCharacter(editorState, start, end, event.key)
   }
 
   return newEditorState
