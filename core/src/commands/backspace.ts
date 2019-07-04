@@ -1,5 +1,6 @@
 import EditorState from '../EditorState'
-import getIndexBefore from '../getIndexBefore';
+import getIndexBefore from '../getIndexBefore'
+import { COMMAND } from '../constants'
 
 export default function backspace(
   editorState: EditorState,
@@ -12,14 +13,18 @@ export default function backspace(
   if (previousCharIndex != null) {
     let _start = previousCharIndex
 
+
     newEditorState = editorState.change({
+      isBoundary: editorState.lastChangeType !== COMMAND.BACKSPACE,
+      type: COMMAND.BACKSPACE,
       start: _start,
       end,
       value: []
     }).change({
+      type: COMMAND.BACKSPACE,
       start: _start,
       end: _start,
-      value: []
+      value: [],
     })
   }
 

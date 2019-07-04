@@ -25,7 +25,6 @@ export default function onInput(editorState: EditorState, _event: any) {
   }
 
   const text = event.data
-  console.log('text', text)
 
   const changed = editorState.change({
     start: start - 2,

@@ -1,4 +1,5 @@
 import EditorState from '../EditorState'
+import { COMMAND } from '../constants'
 
 export default function removeRange(
   editorState: EditorState,
@@ -6,12 +7,15 @@ export default function removeRange(
   end: number
 ) {
   return editorState.change({
+    isBoundary: true,
+    type: COMMAND.REMOVE_RANGE,
     start,
     end,
     value: []
   }).change({
+    type: COMMAND.REMOVE_RANGE,
     start,
     end: start,
-    value: []
+    value: [],
   })
 }

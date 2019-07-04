@@ -1,4 +1,5 @@
 import EditorState from '../EditorState'
+import { COMMAND } from '../constants'
 
 export default function deleteForward(
   editorState: EditorState,
@@ -22,7 +23,9 @@ export default function deleteForward(
     entity = prevValue.entity
   }
 
-  newEditorState = editorState.change({
+  return editorState.change({
+    isBoundary: editorState.lastChangeType !== COMMAND.INSERT_CHARACTER,
+    type: COMMAND.INSERT_CHARACTER,
     start,
     end,
     value: [{
@@ -31,18 +34,9 @@ export default function deleteForward(
       entity,
     }]
   }).change({
+    type: COMMAND.INSERT_CHARACTER,
     start: end + 1,
     end: end + 1,
-    value: []
-  })
-
-  return editorState.change({
-    start,
-    end,
-    value: []
-  }).change({
-    start: end + 1,
-    end: end + 1,
-    value: []
+    value: [],
   })
 }

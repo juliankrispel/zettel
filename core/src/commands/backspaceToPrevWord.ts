@@ -1,5 +1,6 @@
 import EditorState from '../EditorState'
 import getIndexBefore from '../getIndexBefore';
+import { COMMAND } from '../constants'
 
 export default function backspaceToPrevWord(
   editorState: EditorState,
@@ -31,9 +32,11 @@ export default function backspaceToPrevWord(
     )
     if (prevWordEnd != null) {
       newEditorState = editorState.change({
+        type: COMMAND.BACKSPACE_PREV_WORD,
         start: isBlockStart ? prevWordEnd + 1 : prevWordEnd,
         end,
-        value: []
+        value: [],
+        isBoundary: true
       })
     }
   }

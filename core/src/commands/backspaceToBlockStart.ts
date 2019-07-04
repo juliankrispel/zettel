@@ -1,5 +1,6 @@
 import EditorState from '../EditorState'
 import getIndexBefore from '../getIndexBefore';
+import { COMMAND } from '../constants'
 
 export default function backspaceToBlockStart(
   editorState: EditorState,
@@ -23,9 +24,11 @@ export default function backspaceToBlockStart(
 
     if (blockBeginning != null) {
       newEditorState = editorState.change({
+        type: COMMAND.BACKSPACE_BLOCK_START,
         start: blockBeginning + 1,
         end,
-        value: []
+        value: [],
+        isBoundary: true
       })
     }
   }
