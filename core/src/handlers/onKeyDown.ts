@@ -27,7 +27,7 @@ const isPaste = (e: KeyboardEvent) => e.metaKey && e.key === 'v'
 const isUndo = (e: KeyboardEvent) => !e.shiftKey && e.metaKey && e.key === 'z'
 const isRedo = (e: KeyboardEvent) => e.shiftKey && e.metaKey && e.key === 'z'
 
-export default function handleKeyDown (editorState: EditorState, event: KeyboardEvent): EditorState | void {
+export default function handleKeyDown (editorState: EditorState, event: KeyboardEvent): EditorState | void | null {
   // newEditorState is the value that gets returned by this function
   // if it is still undefined when being 'returned' no editor change should occur
   // and the event shouldn't be cancelled (i.e. no event.preventDefault())
