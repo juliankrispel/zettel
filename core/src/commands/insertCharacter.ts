@@ -1,7 +1,7 @@
 import EditorState from '../EditorState'
 import { COMMAND } from '../constants'
 
-export default function deleteForward(
+export default function insertCharacter(
   editorState: EditorState,
   start: number,
   end: number,

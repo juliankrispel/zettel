@@ -4,10 +4,11 @@ import {
   RawDocument, 
   Change,
   Changes,
+  Entity,
   Value,
-  Character,
 } from '../types'
 import rawToFlat from '../rawToFlat'
+import id from './id'
 import change, { Update } from './change'
 import textToFlat from '../textToFlat'
 import flatToTree from '../flatToTree'
@@ -103,6 +104,12 @@ export default class EditorState {
     })
   }
 
+  createEntity(entity: Entity): string {
+    const entityKey = id()
+    this.list.entityMap[entityKey] = entity
+    return entityKey
+  }
+
   undo():EditorState {
     return undo(this) || this
   }
@@ -174,7 +181,6 @@ export default class EditorState {
     return newEditorState
   }
 
-  
   /**
    * creates a new EditorState from JSON format
    * 

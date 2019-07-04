@@ -10,13 +10,10 @@
 .editor {
   height: 100vh;
   padding: 2em;
-  position: fixed;
   top: 0;
   left: 0;
-  padding-top: 4em;
   width: 100%;
 }
-
 
 nav{
   background: #000;
@@ -26,6 +23,7 @@ nav{
 
 nav ul {
   padding: 0;
+  margin: 0;
   display: flex;
 }
 

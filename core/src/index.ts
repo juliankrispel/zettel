@@ -8,6 +8,7 @@ import onKeyDown from './handlers/onKeyDown'
 import onPaste from './handlers/onPaste'
 import createTextFragments from './createTextFragments'
 import rawToFlat from './rawToFlat'
+import getBlocksForRange from './getBlocksForRange'
 import textToFlat from './textToFlat'
 import textToListIndex from './textToListIndex'
 import getDomSelection from './selection/getDomSelection'
@@ -26,6 +27,7 @@ export {
   Entity,
   findAfter,
   onSelectionChange,
+  getBlocksForRange,
   findBefore,
   change,
   getDomSelection,
