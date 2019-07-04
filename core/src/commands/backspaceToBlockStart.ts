@@ -6,9 +6,9 @@ export default function backspaceToBlockStart(
   editorState: EditorState,
   start: number,
   end: number
-) {
+): EditorState {
   const prevChar = editorState.list.value[start - 1]
-  let newEditorState
+  let newEditorState = editorState
 
   if (prevChar.type == null) {
     const blockBeginning = getIndexBefore(

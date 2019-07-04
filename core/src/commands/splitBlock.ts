@@ -20,8 +20,8 @@ export default function splitBlock(
     ]
   }).change({
     type: COMMAND.SPLIT_BLOCK,
-    start: end + 2,
-    end: end + 2,
+    start: start + 2,
+    end: start + 2,
     value: [],
   })
 }

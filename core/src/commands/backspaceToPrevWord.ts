@@ -6,8 +6,8 @@ export default function backspaceToPrevWord(
   editorState: EditorState,
   start: number,
   end: number
-) {
-  let newEditorState
+): EditorState {
+  let newEditorState = editorState
   const prevChar = editorState.list.value[start - 1]
 
   if (prevChar.type == null) {
