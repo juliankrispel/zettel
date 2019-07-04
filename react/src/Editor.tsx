@@ -54,6 +54,7 @@ const Editor = (props: Props) => {
 
   const flatVal = editorState.list.value.map(ch => ch.type == null ? ch.char : '\n').join('')
 
+  /*
   console.log({
     editorState,
     start: editorState.start,
@@ -61,6 +62,7 @@ const Editor = (props: Props) => {
     value: flatVal,
     selectedValue: flatVal.slice(editorState.start, editorState.end) || flatVal[editorState.start]
   })
+  */
 
   return (
     <div
