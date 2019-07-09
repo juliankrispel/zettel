@@ -8,6 +8,7 @@ import {
   undo,
   redo,
   backspaceToBlockStart,
+  updateSelection,
   backspaceToPrevWord,
   backspace
 } from '../commands'
@@ -21,9 +22,7 @@ const isCharacterInsert = (e: KeyboardEvent) =>
   !e.key.includes('Arrow') &&
   !actionKeys.includes(e.key)
 
-const isCopy = (e: KeyboardEvent) => e.metaKey && e.key === 'c'
-const isPaste = (e: KeyboardEvent) => e.metaKey && e.key === 'v'
-
+const isSelectAll = (e: KeyboardEvent) => e.metaKey && e.key.toLowerCase() === 'a'
 const isUndo = (e: KeyboardEvent) => !e.shiftKey && e.metaKey && e.key === 'z'
 const isRedo = (e: KeyboardEvent) => e.shiftKey && e.metaKey && e.key === 'z'
 
@@ -36,7 +35,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   const position = getDomSelection(editorState.list)
   if (position === null) {
     console.error('cant get start and end selection')
-    return editorState
+    return newEditorState
   }
 
   const [start, end] = position
@@ -45,6 +44,8 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   if (isUndo(event)) {
     // undo
     newEditorState = undo(editorState)
+  } else if (isSelectAll(event)) {
+    newEditorState = updateSelection(editorState, 0, editorState.list.value.length - 2)
   } else if (isRedo(event)) {
     // redo
     newEditorState = redo(editorState)

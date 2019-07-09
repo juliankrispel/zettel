@@ -1,17 +1,12 @@
 import getDomSelection from '../selection/getDomSelection'
 import EditorState from '../EditorState'
 import { COMMAND } from '../constants'
+import { updateSelection } from '../commands'
 
 export default function onSelectionChange(editorState: EditorState) {
   const result = getDomSelection(editorState.list)
 
   if (result != null) {
-
-    return new EditorState({
-      lastChangeType: COMMAND.CHANGE_SELECTION,
-      ...editorState,
-      start: result[0] - 1,
-      end: result[1] - 1,
-    })
+    return updateSelection(editorState, result[0] - 1, result[1] - 1)
   }
 }

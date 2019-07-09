@@ -17,6 +17,7 @@ import valueFromText from './valueFromText'
 import getBlockNumber from './getBlockNumber'
 import getBlockOffset from './getBlockOffset'
 import onInput from './handlers/onInput'
+import onCut from './handlers/onCut'
 import onSelectionChange from './handlers/onSelectionChange'
 import flatToTree from './flatToTree'
 /* what */
@@ -28,6 +29,7 @@ export {
   findAfter,
   onSelectionChange,
   getBlocksForRange,
+  onCut,
   findBefore,
   change,
   getDomSelection,

@@ -19,14 +19,15 @@ export default function onPaste(editorState: EditorState, event: ClipboardEvent)
   }
 
   const text = event.clipboardData.getData('text')
+  const value = valueFromText(text)
 
   const changed = editorState.change({
     start,
     end,
-    value: valueFromText(text),
+    value,
   }).change({
-    start,
-    end: start,
+    start: start + value.length,
+    end: start + value.length,
     value: []
   })
 

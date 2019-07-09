@@ -3,7 +3,7 @@ import raw from './rawToFlat'
 
 const valueFromText = (text: string): Value => {
   return raw({
-    text: `[${text.replace('\n', '][')}]`,
+    text: `[${text.replace(/\n/gi, '][')}]`,
     ranges: [],
     entityMap: {}
   }).value.slice(1, -1)
