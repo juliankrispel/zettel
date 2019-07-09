@@ -60,7 +60,7 @@ const Editor = (props: Props) => {
     contentEditable: readOnly === true ? false : true,
   }
 
-  const flatVal = editorState.list.value.map(ch => ch.type == null ? ch.char : '\n').join('')
+  // const flatVal = editorState.list.value.map(ch => ch.type == null ? ch.char : '\n').join('')
 
   /*
   console.log({
