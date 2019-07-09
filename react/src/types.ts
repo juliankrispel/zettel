@@ -1,5 +1,4 @@
 import { TextFragment, Block, Entity } from '@zettel/core'
-import { CSSProperties } from 'react';
 
 type FragmentRenderProps = {
   fragment: TextFragment

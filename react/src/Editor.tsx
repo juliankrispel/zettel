@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useRef } from 'react'
-import { EditorState, setDomSelection, onKeyDown, onPaste, onSelectionChange } from '@zettel/core'
+import React, { useLayoutEffect, useRef, useEffect } from 'react'
+import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange } from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
@@ -45,6 +45,14 @@ const Editor = (props: Props) => {
     }
   })
 
+  useEffect(() => {
+    document.addEventListener('selectionchange', () => {
+      const container = ref.current
+      if (container != null) {
+        setDomSelection(editorState, container)
+      }
+    })
+  }, [])
 
   const divProps = {
     ...htmlAttrs,
@@ -92,10 +100,12 @@ const Editor = (props: Props) => {
           onChange(newEditorState)
         }
       }}
+      
       onInput={(event) => {
         event.preventDefault()
         event.stopPropagation()
       }}
+
       onBeforeInput={(event) => {
         /*
         * TODO: Investigate input events
@@ -109,6 +119,7 @@ const Editor = (props: Props) => {
       role="textbox"
       autoCorrect={'off'}
       onPaste={(event) => onChange(onPaste(editorState, event.nativeEvent))}
+      onCut={(event) => onChange(onCut(editorState, event.nativeEvent))}
       ref={ref}
       {...divProps}
     >
