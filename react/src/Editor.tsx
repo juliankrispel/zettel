@@ -3,6 +3,7 @@ import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionCha
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
+
 type Props = RenderProps & {
   onChange: (editorState: EditorState) => void,
   editorState: EditorState,

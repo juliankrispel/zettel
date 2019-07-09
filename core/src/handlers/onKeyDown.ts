@@ -35,7 +35,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   const position = getDomSelection(editorState.list)
   if (position === null) {
     console.error('cant get start and end selection')
-    return newEditorState
+    return editorState
   }
 
   const [start, end] = position
