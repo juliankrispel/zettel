@@ -1,0 +1,9 @@
+{
+  "name": "zettel-docs",
+  "version": "0.0.0",
+  "description": "Docs for Zettel",
+  "main": "src/index.js",
+  "author": "Julian Krispel-Samsel",
+  "license": "MIT",
+  "private": true
+}
