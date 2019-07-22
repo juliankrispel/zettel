@@ -30,7 +30,7 @@ function generateDocumentation(
     docNodes: [],
   }
 
-  program.getSourceFiles().forEach(sourceFile => {
+  return Array.from(program.getSourceFiles()).map(sourceFile => {
     if (!sourceFile.isDeclarationFile) {
       // First get all nodes with js doc comments
       const jsDocNodes = query(sourceFile, (node: any) => {
@@ -38,26 +38,28 @@ function generateDocumentation(
       })
 
       // Now map over nodes
-      docs.docNodes = docs.docNodes.concat(jsDocNodes.map(val => {
-        let res = {}
-        const varInit = get(val, 'declarationList.declarations[0].initializer')
+      return {
+        file: sourceFile.fileName,
+        nodes: jsDocNodes.map(val => {
+          let res = {}
+          const varInit = get(val, 'declarationList.declarations[0].initializer', {})
 
-        if (hasSignature(val)) {
-          return serializeSignature(val, checker)
-        } else if (ts.SyntaxKind[varInit.kind] === 'ArrowFunction') {
-          return serializeArrowFunction(val, checker)
-        } else if (ts.isTypeAliasDeclaration(val)) {
-          return serializeTypeAlias(val, checker)
-        } else {
-          return {
-            text: val.getText()
+          if (hasSignature(val)) {
+            return serializeSignature(val, checker)
+          } else if (ts.SyntaxKind[varInit.kind] === 'ArrowFunction') {
+            return serializeArrowFunction(val, checker)
+          } else if (ts.isTypeAliasDeclaration(val)) {
+            return serializeTypeAlias(val, checker)
+          } else {
+            return {
+              kind: ts.SyntaxKind[val.kind],
+              text: val.getText()
+            }
           }
-        }
-      }))
+        })
+      }
     }
-  })
-
-  return docs
+  }).filter(val => val != null && val.nodes != null && val.nodes.length > 0)
 }
 
 function serializeDocComment(node) {
@@ -68,6 +70,7 @@ function serializeTypeAlias(node: ts.TypeAliasDeclaration, checker) {
   return {
     // @ts-ignore
     docComment: serializeDocComment(node),
+    kind: ts.SyntaxKind[node.kind],
     name: get(node, 'name.getText'),
     type: serializeType(node.type, checker),
   }
@@ -78,6 +81,7 @@ function serializeArrowFunction(node, checker: ts.TypeChecker) {
 
   return {
     name: get(node, 'name.getText'),
+    kind: ts.SyntaxKind[node.kind],
     docComment: serializeDocComment(node),
     parameters: serializeParameters(varInit.parameters || [], checker),
     type: varInit.type != null ? serializeType(varInit.type, checker) : null,
@@ -88,6 +92,7 @@ function serializeSignature(node, checker) {
   // gots to return paramters and return types
   return {
     name: get(node, 'name.getText'),
+    kind: ts.SyntaxKind[node.kind],
     docComment: serializeDocComment(node),
     type: node.type != null ? serializeType(node.type, checker) : null,
     parameters: serializeParameters(node.parameters || [], checker)
@@ -98,19 +103,39 @@ function serializeParameters(params: ts.ParameterDeclaration[], checker) {
   return params.map((val) => serializeParameter(val, checker))
 }
 
+const builtInTypes = [
+  'UnionType',
+  'BooleanKeyword',
+  'FunctionType',
+  'NumberKeyword',
+  'ArrayType',
+  'ObjectKeyword'
+]
+
 function serializeType(node: any, checker) {
   const typeFromTypeNode = checker.getTypeFromTypeNode(node)
+  console.log(ts.SyntaxKind[node.kind])
 
   if (
     ts.isTypeLiteralNode(node) ||
     ts.isPropertySignature(node)
   ) {
     return Array.from(get(node, 'members.values', [])).reduce((acc, member) => {
+      // @ts-ignore
+      console.log(member.name.getText())
       return {
         ...acc,
-        [get(member, 'name.getText')]: serializeType(get(member, 'type'), checker)
+        // @ts-ignore
+        [member.name.getText()]: serializeType(get(member, 'type'), checker)
       }
     }, {})
+  } else if (ts.SyntaxKind[node.kind] !== 'TypeReference') {
+    return node.getText()
+  } else if (ts.SyntaxKind[node.kind] === 'FunctionType') {
+    return {
+      parameters: serializeParameters(node.parameters, checker),
+      type: serializeType(node.type, checker)
+    }
   } else if (typeFromTypeNode.types != null && typeFromTypeNode.types.length > 0) {
     return typeFromTypeNode.types.map(
       // @ts-ignore
@@ -119,26 +144,10 @@ function serializeType(node: any, checker) {
     .reduce((acc, val) => {
       return {
         ...acc,
-        [get(val, 'name.getText', '')]: serializeType(val.type, checker)
+        [val.name.getText()]: serializeType(val.type, checker)
       }
     }, {})
-   // } else if (ts.SyntaxKind[node.kind] === 'TypeReference') {
-   //   const typeRef =  checker.getTypeFromTypeNode(node.typeName)
-   //   // debugger
-   //   // @ts-ignore
-   //   return Array.from(get(typeRef, 'getProperties', [])).map(tp => tp.valueDeclaration)
-   //     .reduce((acc, val) => {
-   //       return {
-   //         ...acc,
-   //         [get(val, 'name.getText', '')]: val.type.getText()
-   //       }
-   //     }, {})
     // return serializeType()
-  } else if (ts.SyntaxKind[node.kind] === 'FunctionType') {
-    return {
-      parameters: serializeParameters(node.parameters, checker),
-      type: serializeType(node.type, checker)
-    }
   } else {
     // debugger
     return node.getText()
@@ -161,7 +170,7 @@ fs.writeFileSync(
   './types.json',
   JSON.stringify(
     generateDocumentation(
-      ['../react/src/index.tsx'],
+      ['../react/src/index.tsx', '../core/src/index.ts'],
       { jsx: ts.JsxEmit.React }
     ),
     null,

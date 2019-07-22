@@ -4,6 +4,11 @@ type FragmentRenderProps = {
   fragment: TextFragment
 }
 
+/**
+ * RenderStyle
+ * 
+ * 
+ */
 export type RenderStyle = React.FunctionComponent<{
   style: string,
   children: React.ReactElement

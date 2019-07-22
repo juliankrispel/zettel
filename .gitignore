@@ -5,6 +5,7 @@ dist
 .next
 
 npm-debug.log*
+docs/genTypes.js
 yarn-debug.log*
 yarn-error.log*
 

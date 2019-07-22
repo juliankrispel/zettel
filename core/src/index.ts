@@ -20,7 +20,6 @@ import onInput from './handlers/onInput'
 import onCut from './handlers/onCut'
 import onSelectionChange from './handlers/onSelectionChange'
 import flatToTree from './flatToTree'
-/* what */
 export * from './types'
 import { Entity } from './types'
 
