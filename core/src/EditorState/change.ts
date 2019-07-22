@@ -22,7 +22,7 @@ export default function change(update: Update): Update {
     update.change.end,
   ].sort((a, b) => a - b)
 
-  const selectedValue = update.current.value.slice(start, end)
+  const selectedValue = update.current.value.slice(start + 1, end + 1)
   let valueUpdate = update.change.value
   let newValue = update.current.value
 
@@ -34,13 +34,13 @@ export default function change(update: Update): Update {
       ...char,
       ...valueUpdate
     }))
+    newValue = currentValue.slice(0, start + 2)
+    .concat(valueUpdate)
+    .concat(currentValue.slice(end + 2))
+  } else {
     newValue = currentValue.slice(0, start + 1)
     .concat(valueUpdate)
     .concat(currentValue.slice(end + 1))
-  } else {
-    newValue = currentValue.slice(0, start)
-    .concat(valueUpdate)
-    .concat(currentValue.slice(end))
   }
 
   if (newValue[0].type !== 'block-start') {
@@ -50,8 +50,8 @@ export default function change(update: Update): Update {
   }
 
   const newChange: Change = {
-    start: start,
-    end: end - selectedValue.length + valueUpdate.length,
+    start: start + 1,
+    end: end - selectedValue.length + valueUpdate.length + 1,
     value: selectedValue
   }
 

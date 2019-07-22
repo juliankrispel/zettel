@@ -8,7 +8,7 @@ export default function backspaceToPrevWord(
   end: number
 ): EditorState {
   let newEditorState = editorState
-  const prevChar = editorState.list.value[start - 1]
+  const prevChar = editorState.list.value[start]
 
   if (prevChar.type == null) {
     let spaceBefore = false
@@ -30,6 +30,7 @@ export default function backspaceToPrevWord(
         return false
       }
     )
+
     if (prevWordEnd != null) {
       newEditorState = editorState.change({
         type: COMMAND.BACKSPACE_PREV_WORD,

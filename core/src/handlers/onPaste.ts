@@ -12,7 +12,7 @@ export default function onPaste(editorState: EditorState, event: ClipboardEvent)
 
   event.preventDefault()
 
-  const [start, end] = position.sort((a, b) => a - b)
+  const { start, end } = position
 
   if (event.clipboardData == null) {
     return editorState

@@ -72,6 +72,7 @@ const Editor = (props: Props): React.ReactElement => {
           onChange(handled)
         }
       }}
+
       onSelect={() => {
         const newEditorState = onSelectionChange(editorState)
         const { start, end } = editorState

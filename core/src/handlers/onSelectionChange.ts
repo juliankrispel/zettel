@@ -7,6 +7,9 @@ export default function onSelectionChange(editorState: EditorState) {
   const result = getDomSelection(editorState.list)
 
   if (result != null) {
-    return updateSelection(editorState, result[0] - 1, result[1] - 1)
+    return updateSelection(
+      editorState,
+      result
+    )
   }
 }

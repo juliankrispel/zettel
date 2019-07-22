@@ -1,16 +1,14 @@
 import EditorState from '../EditorState'
-import getIndexBefore from '../getIndexBefore'
+import { SelectionState } from '../types'
 import { COMMAND } from '../constants'
 
 export default function updateSelection(
   editorState: EditorState,
-  start: number,
-  end: number
+  selection: SelectionState
 ): EditorState {
   return new EditorState({
     lastChangeType: COMMAND.CHANGE_SELECTION,
     ...editorState,
-    start: start,
-    end: end
+    ...selection
   })
 }

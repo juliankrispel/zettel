@@ -35,14 +35,18 @@ type ConstructorProps = {
   undoStack?: Changes[],
   start?: number,
   end?: number,
+  anchorOffset?: number,
+  focusOffset?: number,
 }
 
 export default class EditorState {
   list: ListState
   tree: BlockTree
   start: number
-  lastChangeType: string | null
   end: number
+  anchorOffset: number
+  focusOffset: number
+  lastChangeType: string | null
   currentStyles: string[]
   redoStack: Changes[] = []
   undoStack: Changes[] = []
@@ -50,6 +54,8 @@ export default class EditorState {
   constructor({
     start = 0,
     end = 0,
+    anchorOffset,
+    focusOffset,
     list = emptyList,
     lastChangeType = null,
     currentStyles = [],
@@ -60,6 +66,8 @@ export default class EditorState {
     this.undoStack = undoStack
     this.currentStyles = currentStyles
     this.start = start
+    this.anchorOffset = typeof anchorOffset === 'number' ? anchorOffset : start
+    this.focusOffset = typeof focusOffset === 'number' ? focusOffset : end
     this.lastChangeType = lastChangeType
     this.end = end
     this.redoStack = redoStack
@@ -121,20 +129,6 @@ export default class EditorState {
   setCurrentStyles(styles: string[]) {
     this.currentStyles = styles
     return this
-  }
-
-  /**
-   * gets selected value, arguments default
-   * to editorState.start and editorState.end
-   * 
-   * @param start start offset
-   * @param end end offset
-   */
-  getSelectedValue(
-    start: number = this.start,
-    end: number = this.end
-  ): Value {
-    return this.list.value.slice(start, end)
   }
 
   toggleStyle(

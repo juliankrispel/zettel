@@ -45,6 +45,13 @@ export type TextCharacter = CharacterData & {
   type?: void
 }
 
+export type SelectionState = {
+  start: number,
+  end: number,
+  anchorOffset: number,
+  focusOffset: number
+}
+
 /**
  * Represents the beginning of a block
  */

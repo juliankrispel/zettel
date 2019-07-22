@@ -23,8 +23,8 @@ export default function redo(editorState: EditorState) {
         current: editorState.list,
         change: {
           ...lastChange,
-          start: lastChange.start,
-          end: lastChange.end,
+          start: lastChange.start - 1,
+          end: lastChange.end - 1,
         }
       })
 

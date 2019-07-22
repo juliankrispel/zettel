@@ -18,7 +18,7 @@ export default function onInput(editorState: EditorState, _event: any) {
 
   event.preventDefault()
 
-  const [start, end] = position.sort((a, b) => a - b)
+  const { start, end } = position
 
   if (event.inputType !== 'insertText' || event.data == null) {
     return editorState

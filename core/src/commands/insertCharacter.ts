@@ -8,7 +8,7 @@ export default function insertCharacter(
   char: string, 
 ) {
   let newEditorState
-  const prevValue = editorState.list.value[start - 1]
+  const prevValue = editorState.list.value[start]
   const nextValue = editorState.list.value[end + 1]
   let entity
 

@@ -38,14 +38,23 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     return editorState
   }
 
-  const [start, end] = position
+  const { start, end } = position
   const isCollapsed = start === end
 
   if (isUndo(event)) {
     // undo
     newEditorState = undo(editorState)
   } else if (isSelectAll(event)) {
-    newEditorState = updateSelection(editorState, 0, editorState.list.value.length - 2)
+
+    newEditorState = updateSelection(
+      editorState,
+      {
+        start: 0,
+        end: editorState.list.value.length - 1,
+        anchorOffset: 0,
+        focusOffset: editorState.list.value.length - 1
+      }
+    )
   } else if (isRedo(event)) {
     // redo
     newEditorState = redo(editorState)

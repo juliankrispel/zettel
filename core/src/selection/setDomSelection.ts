@@ -25,62 +25,56 @@ export default function setDomSelection(
   editorState: EditorState,
   containerNode: HTMLElement,
 ): void {
-  const newSelection = window.getSelection()
   const { list } = editorState
-  const currentDomSelection = getDomSelection(editorState.list)
-
-  if (currentDomSelection != null
-    && currentDomSelection[0] === (editorState.start + 1)
-    && currentDomSelection[1] === (editorState.end + 1)
-  ) {
-    return 
-  }
-    
-  const {
-    block: startBlock,
-    blockOffset: startBlockOffset,
-  } = getBlockForIndex(list.value, editorState.start)
 
   const {
-    block: endBlock,
-    blockOffset: endBlockOffset,
-  } = getBlockForIndex(list.value, editorState.end)
+    block: focusBlock,
+    blockOffset: focusBlockOffset,
+  } = getBlockForIndex(list.value, editorState.focusOffset)
 
-  if (startBlock == null || endBlock == null) {
+  const {
+    block: anchorBlock,
+    blockOffset: anchorBlockOffset,
+  } = getBlockForIndex(list.value, editorState.anchorOffset)
+
+  if (focusBlock == null || anchorBlock == null) {
     throw new Error('cannot select current start and end position')
   }
 
-  const startNodes = containerNode.querySelectorAll(`[data-block-key="${startBlock.blockKey}"]`)
-  const endNodes = containerNode.querySelectorAll(`[data-block-key="${endBlock.blockKey}"]`)
-  const startOffset = editorState.start - startBlockOffset
-  const endOffset = editorState.end - endBlockOffset
+  const anchorNodes = containerNode.querySelectorAll(`[data-block-key="${anchorBlock.blockKey}"]`)
+  const focusNodes = containerNode.querySelectorAll(`[data-block-key="${focusBlock.blockKey}"]`)
+  const anchorOffset = editorState.anchorOffset - anchorBlockOffset
+  const focusOffset = editorState.focusOffset - focusBlockOffset
 
-  const startFragment: any = Array.from(startNodes).find((node: any) => {
-    return parseInt(node.dataset.fragmentStart) <= startOffset &&
-    parseInt(node.dataset.fragmentEnd) >= startOffset
+  const anchorFragment: any = Array.from(anchorNodes).find((node: any) => {
+    return parseInt(node.dataset.fragmentStart) <= anchorOffset &&
+    parseInt(node.dataset.fragmentEnd) >= anchorOffset
   })
 
-  if (startFragment == null) {
+  if (anchorFragment == null) {
     return 
   }
 
-  const startFragmentOffset = parseInt(startFragment.dataset.fragmentStart)
+  const anchorFragmentOffset = parseInt(anchorFragment.dataset.fragmentStart)
 
-  const endFragment: any = Array.from(endNodes).find((node: any) => {
-    return parseInt(node.dataset.fragmentStart) <= endOffset &&
-    parseInt(node.dataset.fragmentEnd) >= endOffset
+  const focusFragment: any = Array.from(focusNodes).find((node: any) => {
+    return parseInt(node.dataset.fragmentStart) <= focusOffset &&
+    parseInt(node.dataset.fragmentEnd) >= focusOffset
   })
 
-  const endFragmentOffset = parseInt(endFragment.dataset.fragmentStart)
-  const startNode = findRangeTarget(startFragment)
-  const endNode = findRangeTarget(endFragment)
+  const focusFragmentOffset = parseInt(focusFragment.dataset.fragmentStart)
 
-  newSelection && newSelection.removeAllRanges()
-  const range = document.createRange()
+  const anchorNode = findRangeTarget(anchorFragment)
+  const focusNode = findRangeTarget(focusFragment)
 
-  if (startNode != null && endNode != null) {
-    range.setStart(startNode, startOffset - startFragmentOffset)
-    range.setEnd(endNode, endOffset - endFragmentOffset)
-    newSelection && newSelection.addRange(range)
+  const newSelection = window.getSelection()
+
+  if (newSelection != null && anchorNode != null && focusNode != null) {
+    newSelection.setBaseAndExtent(
+      anchorNode,
+      anchorOffset - anchorFragmentOffset,
+      focusNode,
+      focusOffset - focusFragmentOffset
+    )
   }
 }

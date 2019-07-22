@@ -24,8 +24,8 @@ export default function undo(editorState: EditorState): EditorState | null {
       current: editorState.list,
       change: {
         ...lastChange,
-        start: lastChange.start,
-        end: lastChange.end,
+        start: lastChange.start - 1,
+        end: lastChange.end - 1,
       }
     })
 
