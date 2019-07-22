@@ -30,7 +30,7 @@ function generateDocumentation(
     docNodes: [],
   }
 
-  return Array.from(program.getSourceFiles()).map(sourceFile => {
+  return Array.from(program.getSourceFiles()).map((sourceFile: any) => {
     if (!sourceFile.isDeclarationFile) {
       // First get all nodes with js doc comments
       const jsDocNodes = query(sourceFile, (node: any) => {

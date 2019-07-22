@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "lodash.result": "^4.5.2",
+    "typescript": "link:../node_modules/typescript",
     "next": "^9.0.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6"

@@ -11,8 +11,7 @@
     "prepublish": "tsc"
   },
   "dependencies": {
-    "@use-it/event-listener": "^0.1.3",
-    "@zettel/core": "0.0.5"
+    "@zettel/core": "0.0.6"
   },
   "peerDependencies": {
     "react": "16.8.6",
