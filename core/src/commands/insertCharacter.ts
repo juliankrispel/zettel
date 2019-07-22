@@ -35,8 +35,8 @@ export default function insertCharacter(
     }]
   }).change({
     type: COMMAND.INSERT_CHARACTER,
-    start: end + 1,
-    end: end + 1,
+    start: start + 1,
+    end: start + 1,
     value: [],
   })
 }

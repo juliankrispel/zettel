@@ -1,0 +1,54 @@
+{
+  "docNodes": [
+    {
+      "name": null,
+      "docComment": "Editor Component",
+      "parameters": [
+        {
+          "isOptional": false,
+          "name": "props",
+          "type": {
+            "mapBlock": {
+              "parameters": [
+                {
+                  "isOptional": false,
+                  "name": "block",
+                  "type": "Block"
+                }
+              ],
+              "type": "Block"
+            },
+            "renderBlock": "RenderBlock",
+            "renderChildren": "RenderChildren",
+            "renderStyle": "RenderStyle",
+            "renderTextFragment": "RenderTextFragment",
+            "onChange": {
+              "parameters": [
+                {
+                  "isOptional": false,
+                  "name": "editorState",
+                  "type": "EditorState"
+                }
+              ],
+              "type": "void"
+            },
+            "editorState": "EditorState",
+            "htmlAttrs": "Object",
+            "onKeyDown": {
+              "parameters": [
+                {
+                  "isOptional": false,
+                  "name": "event",
+                  "type": "React.KeyboardEvent"
+                }
+              ],
+              "type": {}
+            },
+            "readOnly": {}
+          }
+        }
+      ],
+      "type": "React.ReactElement"
+    }
+  ]
+}

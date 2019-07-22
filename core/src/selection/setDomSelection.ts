@@ -1,6 +1,6 @@
 import getBlockForIndex from '../getBlockForIndex'
-import { Value } from '../types';
-import EditorState from '../EditorState';
+import getDomSelection from './getDomSelection'
+import EditorState from '../EditorState'
 
 const findRangeTarget = (el: Node | null): Node | null => {
   if (el == null) {
@@ -27,7 +27,15 @@ export default function setDomSelection(
 ): void {
   const newSelection = window.getSelection()
   const { list } = editorState
+  const currentDomSelection = getDomSelection(editorState.list)
 
+  if (currentDomSelection != null
+    && currentDomSelection[0] === (editorState.start + 1)
+    && currentDomSelection[1] === (editorState.end + 1)
+  ) {
+    return 
+  }
+    
   const {
     block: startBlock,
     blockOffset: startBlockOffset,
@@ -64,7 +72,6 @@ export default function setDomSelection(
   })
 
   const endFragmentOffset = parseInt(endFragment.dataset.fragmentStart)
-
   const startNode = findRangeTarget(startFragment)
   const endNode = findRangeTarget(endFragment)
 

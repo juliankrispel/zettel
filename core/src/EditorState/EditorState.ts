@@ -48,8 +48,8 @@ export default class EditorState {
   undoStack: Changes[] = []
 
   constructor({
-    start = 1,
-    end = 1,
+    start = 0,
+    end = 0,
     list = emptyList,
     lastChangeType = null,
     currentStyles = [],

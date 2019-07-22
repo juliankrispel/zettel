@@ -3,7 +3,6 @@ import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionCha
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
-
 type Props = RenderProps & {
   onChange: (editorState: EditorState) => void,
   editorState: EditorState,
@@ -24,7 +23,10 @@ const editorStyles: React.CSSProperties = {
 
 const DefaultRenderBlock: RenderBlock = (props) => <div {...props.htmlAttrs}>{props.children}</div>
 
-const Editor = (props: Props) => {
+/**
+ * Editor Component
+ */
+const Editor = (props: Props): React.ReactElement => {
   const {
     editorState,
     onChange,
@@ -44,34 +46,13 @@ const Editor = (props: Props) => {
     if (container != null) {
       setDomSelection(editorState, container)
     }
-  })
-
-  useEffect(() => {
-    document.addEventListener('selectionchange', () => {
-      const container = ref.current
-      if (container != null) {
-        setDomSelection(editorState, container)
-      }
-    })
-  }, [])
+  }, [editorState.start, editorState.end])
 
   const divProps = {
     ...htmlAttrs,
     style: { ...editorStyles },
     contentEditable: readOnly === true ? false : true,
   }
-
-  // const flatVal = editorState.list.value.map(ch => ch.type == null ? ch.char : '\n').join('')
-
-  /*
-  console.log({
-    editorState,
-    start: editorState.start,
-    end: editorState.end,
-    value: flatVal,
-    selectedValue: flatVal.slice(editorState.start, editorState.end) || flatVal[editorState.start]
-  })
-  */
 
   return (
     <div
