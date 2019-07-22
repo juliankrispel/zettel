@@ -9,7 +9,7 @@
     "@types/react": "16.8.19",
     "@types/react-dom": "16.8.4",
     "global": "^4.4.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^3.0.1",
     "typescript": "3.5.1"
   },
   "eslintConfig": {
