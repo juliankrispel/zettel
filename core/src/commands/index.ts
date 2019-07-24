@@ -7,6 +7,8 @@ import insertCharacter from './insertCharacter'
 import removeRange from './removeRange'
 import splitBlock from './splitBlock'
 import updateSelection from './updateSelection'
+import moveFocusBack from './moveFocusBack'
+import moveFocusForward from './moveFocusForward'
 import deleteForward from './deleteForward'
 
 export {
@@ -19,5 +21,7 @@ export {
   removeRange,
   backspaceToPrevWord,
   backspace,
-  splitBlock
+  splitBlock,
+  moveFocusBack,
+  moveFocusForward
 }

@@ -17,7 +17,7 @@ const App = () => {
   return (
     <div>
       <Editor
-        htmlAttrs={{ spellcheck: false, autocorrect: false, autofocus: true, className: 'editor'}}
+        htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
         onChange={setEditorState}
         editorState={editorState}
       />

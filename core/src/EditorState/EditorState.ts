@@ -65,11 +65,17 @@ export default class EditorState {
     this.list = list
     this.undoStack = undoStack
     this.currentStyles = currentStyles
-    this.start = start
+
     this.anchorOffset = typeof anchorOffset === 'number' ? anchorOffset : start
     this.focusOffset = typeof focusOffset === 'number' ? focusOffset : end
+
+    // @ts-ignore
+    let [_start, _end]: number[] = [anchorOffset, focusOffset].sort((a, b) => a - b)
+
+    this.start = _start
+    this.end = _end
+
     this.lastChangeType = lastChangeType
-    this.end = end
     this.redoStack = redoStack
     this.tree = flatToTree(this.list)
   }

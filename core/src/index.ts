@@ -3,12 +3,15 @@ import findBefore from './findBefore'
 import getIndexAfter from './getIndexAfter'
 import getIndexBefore from './getIndexBefore'
 import EditorState from './EditorState'
+import getNextCharacterIndex from './getNextCharacterIndex'
+import getPreviousCharacterIndex from './getPreviousCharacterIndex'
 import change from './EditorState/change'
 import onKeyDown from './handlers/onKeyDown'
 import onPaste from './handlers/onPaste'
 import createTextFragments from './createTextFragments'
 import rawToFlat from './rawToFlat'
 import getBlocksForRange from './getBlocksForRange'
+
 import textToFlat from './textToFlat'
 import textToListIndex from './textToListIndex'
 import getDomSelection from './selection/getDomSelection'
@@ -27,6 +30,8 @@ export {
   Entity,
   findAfter,
   onSelectionChange,
+  getNextCharacterIndex,
+  getPreviousCharacterIndex,
   getBlocksForRange,
   onCut,
   findBefore,

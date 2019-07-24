@@ -3,6 +3,8 @@ import EditorState from '../EditorState';
 import {
   deleteForward,
   insertCharacter,
+  moveFocusBack,
+  moveFocusForward,
   splitBlock,
   removeRange,
   undo,
@@ -22,6 +24,7 @@ const isCharacterInsert = (e: KeyboardEvent) =>
   !e.key.includes('Arrow') &&
   !actionKeys.includes(e.key)
 
+const isMoveFocus = (e: KeyboardEvent) => e.shiftKey && ['ArrowLeft', 'ArrowRight'].includes(e.key)
 const isSelectAll = (e: KeyboardEvent) => e.metaKey && e.key.toLowerCase() === 'a'
 const isUndo = (e: KeyboardEvent) => !e.shiftKey && e.metaKey && e.key === 'z'
 const isRedo = (e: KeyboardEvent) => e.shiftKey && e.metaKey && e.key === 'z'
@@ -32,10 +35,15 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   // and the event shouldn't be cancelled (i.e. no event.preventDefault())
   let newEditorState
 
-  const position = getDomSelection(editorState.list)
+  let position = getDomSelection(editorState.list)
   if (position === null) {
-    console.error('cant get start and end selection')
-    return editorState
+    console.warn('cant get start and end selection, resume with current state')
+    position  = {
+      start: editorState.start,
+      end: editorState.end,
+      anchorOffset: editorState.anchorOffset,
+      focusOffset: editorState.focusOffset
+    }
   }
 
   const { start, end } = position
@@ -44,15 +52,30 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   if (isUndo(event)) {
     // undo
     newEditorState = undo(editorState)
-  } else if (isSelectAll(event)) {
+  } else if (isMoveFocus(event)) {
+    if (event.key === 'ArrowLeft' && event.metaKey) {
+      // move focus back to block start
+    } else if (event.key === 'ArrowLeft' && event.altKey) {
+      // move focus back to prev word
+    } else if (event.key === 'ArrowLeft') {
+      // move focus back to prev char
+      newEditorState = moveFocusBack(editorState)
+    } else if (event.key === 'ArrowRight' && event.metaKey) {
+      // move focus forward to block end
+    } else if (event.key === 'ArrowRight' && event.altKey) {
+      // move focus forward to word end
+    } else if (event.key === 'ArrowRight') {
+      newEditorState = moveFocusForward(editorState)
+    }
 
+  } else if (isSelectAll(event)) {
     newEditorState = updateSelection(
       editorState,
       {
         start: 0,
-        end: editorState.list.value.length - 1,
+        end: editorState.list.value.length - 2,
         anchorOffset: 0,
-        focusOffset: editorState.list.value.length - 1
+        focusOffset: editorState.list.value.length - 2
       }
     )
   } else if (isRedo(event)) {

@@ -41,12 +41,15 @@ const Editor = (props: Props): React.ReactElement => {
 
   const ref = useRef(null)
 
+  /*
+  * we need to enforce our selection
+  */
   useLayoutEffect(() => {
     const container = ref.current
     if (container != null) {
       setDomSelection(editorState, container)
     }
-  }, [editorState.start, editorState.end])
+  })
 
   const divProps = {
     ...htmlAttrs,

@@ -44,6 +44,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@zettel/core@0.0.7":
+  version "0.0.0"
+  uid ""
+
 "@zettel/core@link:../core":
   version "0.0.0"
   uid ""
