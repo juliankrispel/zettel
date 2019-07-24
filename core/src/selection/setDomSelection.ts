@@ -38,7 +38,8 @@ export default function setDomSelection(
   } = getBlockForIndex(list.value, editorState.anchorOffset)
 
   if (focusBlock == null || anchorBlock == null) {
-    throw new Error('cannot select current start and end position')
+    return 
+    console.warn('cannot select current start and end position')
   }
 
   const anchorNodes = containerNode.querySelectorAll(`[data-block-key="${anchorBlock.blockKey}"]`)
