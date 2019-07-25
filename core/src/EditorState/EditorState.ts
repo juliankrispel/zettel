@@ -69,8 +69,7 @@ export default class EditorState {
     this.anchorOffset = typeof anchorOffset === 'number' ? anchorOffset : start
     this.focusOffset = typeof focusOffset === 'number' ? focusOffset : end
 
-    // @ts-ignore
-    let [_start, _end]: number[] = [anchorOffset, focusOffset].sort((a, b) => a - b)
+    let [_start, _end]: number[] = [this.anchorOffset, this.focusOffset].sort((a, b) => a - b)
 
     this.start = _start
     this.end = _end
