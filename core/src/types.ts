@@ -131,33 +131,3 @@ export type Block = {
   blocks: Block[],
   entity?: Entity | null
 }
-
-
-/**
- * 
- */
-export interface EditorState {
-  /**
-   * @method change()
-   * 
-   * `EditorState.change({ start: 9, end: 18, value: [] })`
-   */
-  change: (changes: Change[]) => EditorState;
-
-  /**
-   * @method undo()
-   * 
-   * `EditorState.undo()`
-   */
-  undo: () => EditorState;
-
-  /**
-   * @method redo()
-   * 
-   * `EditorState.redo()`
-   */
-  redo: () => EditorState;
-
-  readonly list: ListState;
-  readonly tree: BlockTree;
-}
