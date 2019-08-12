@@ -1,5 +1,5 @@
-import React, { CSSProperties } from 'react'
-import { Block, Value, EditorState } from '@zettel/core'
+import React from 'react'
+import { Block, EditorState } from '@zettel/core'
 import EditorText from './EditorText'
 import EditorChildren from './EditorChildren'
 import { RenderProps } from './types'

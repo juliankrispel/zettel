@@ -10,10 +10,15 @@ type BlockAndIndex = {
  * Gets block indeces for range (start, end)
  */
 export default function getBlocksForRange(value: Value, start: number, end: number): BlockAndIndex[] {
-  const blocks: BlockAndIndex[] = [getBlockForIndex(value, start)]
+  const firstBlock = getBlockForIndex(value, start)
+  const blocks: BlockAndIndex[] = [firstBlock]
+  const firstBlockKey = firstBlock != null && firstBlock.block != null && firstBlock.block.blockKey
 
   return value.slice(start, end).reduce((acc, ch, index) => {
-    if (ch.type === 'block-start') {
+    if (
+      ch.type === 'block-start' &&
+      ch.blockKey !== firstBlockKey
+    ) {
       return acc.concat({
         blockOffset: start + index,
         block: ch

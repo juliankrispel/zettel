@@ -55,10 +55,9 @@ export type SelectionState = {
 /**
  * Represents the beginning of a block
  */
-export type BlockStart = {
+export type BlockStart = CharacterData & {
   blockKey: string,
-  type: 'block-start',
-  entity?: string | null
+  type: 'block-start'
 }
 
 export type TextFragment = CharacterData & {
@@ -93,6 +92,7 @@ export type Changes = Change[]
  * Represents raw form of a Zettel Document,
  * serializable and easier on the human eye
  */
+
 export type RawDocument = {
   text: string,
   ranges: RawRange[],
@@ -129,5 +129,6 @@ export type Block = {
   value: TextCharacter[],
   blockKey: string,
   blocks: Block[],
+  styles: string[],
   entity?: Entity | null
 }

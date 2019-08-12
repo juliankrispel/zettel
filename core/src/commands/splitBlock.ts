@@ -2,6 +2,8 @@ import getBlockForIndex from '../getBlockForIndex'
 import EditorState from '../EditorState'
 import id from '../EditorState/id'
 import { COMMAND } from '../constants'
+import { BlockEnd } from '../types'
+import { BlockStart } from '../types'
 
 export default function splitBlock(
   editorState: EditorState,
@@ -9,14 +11,17 @@ export default function splitBlock(
   end: number
 ) {
   const { block: currentBlock } = getBlockForIndex(editorState.list.value, start)
+  const blockEnd: BlockEnd = { type: 'block-end' }
+  const blockStart: BlockStart = { styles: [], ...currentBlock, type: 'block-start', blockKey: id() }
+
   return editorState.change({
     isBoundary: true,
     type: COMMAND.SPLIT_BLOCK,
     start,
     end,
     value: [
-      { type: 'block-end' },
-      { ...currentBlock, type: 'block-start', blockKey: id()}
+      blockEnd,
+      blockStart 
     ]
   }).change({
     type: COMMAND.SPLIT_BLOCK,

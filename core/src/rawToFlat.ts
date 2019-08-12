@@ -15,6 +15,7 @@ const parseFlatState = (raw: RawDocument): ListState => {
 
       const val: BlockStart = {
         type: 'block-start',
+        styles: [],
         blockKey: id()
       }
       state.value.push(val)

@@ -16,6 +16,7 @@ export type Update = {
  */
 export default function change(update: Update): Update {
   const { value: currentValue, entityMap } = update.current
+  console.log({ update })
 
   const [start, end] = [
     update.change.start,

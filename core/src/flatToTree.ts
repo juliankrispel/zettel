@@ -1,22 +1,8 @@
 import { ListState, BlockTree, Block } from './types'
 
-const getNode = (state: BlockTree, path: number[]): Block  => {
-  return path.reduce((acc: any, val) => {
-    return acc.blocks[val]
-  }, state)
-}
+import { getNode, getNodes } from './getTreeNode'
 
-const getNodes = (state: BlockTree, path: number[]): Block[]  => {
-  if (path.length === 0) {
-    return state.blocks
-  } else {
-    return path.reduce((acc, val) => {
-      return acc[val].blocks || acc
-    }, state.blocks)
-  }
-}
-
-const parseBlockTree = (flat: ListState): BlockTree => {
+function parseBlockTree (flat: ListState): BlockTree {
   const state: BlockTree = {
     blocks: [],
     entityMap: flat.entityMap,
@@ -34,6 +20,7 @@ const parseBlockTree = (flat: ListState): BlockTree => {
         value: [],
         blocks: [],
         blockKey: char.blockKey,
+        styles: char.styles != null ? char.styles : [],
         entity: char.entity != null ? flat.entityMap[char.entity] : null
       })
 

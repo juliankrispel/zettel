@@ -22,7 +22,7 @@ const emptyList: ListState = {
 type EditorChange = {
   start?: number,
   end?: number,
-  value: Value,
+  value?: Value,
   isBoundary?: boolean,
   type?: string
 }
@@ -37,6 +37,7 @@ type ConstructorProps = {
   end?: number,
   anchorOffset?: number,
   focusOffset?: number,
+  tree?: BlockTree
 }
 
 export default class EditorState {
@@ -60,7 +61,8 @@ export default class EditorState {
     lastChangeType = null,
     currentStyles = [],
     undoStack = [],
-    redoStack = []
+    redoStack = [],
+    tree = flatToTree(list)
   }: ConstructorProps) {
     this.list = list
     this.undoStack = undoStack
@@ -76,14 +78,17 @@ export default class EditorState {
 
     this.lastChangeType = lastChangeType
     this.redoStack = redoStack
-    this.tree = flatToTree(this.list)
+    this.tree = tree
   }
 
   change(_change: EditorChange) {
+    const start = (typeof _change.start === 'number' ? _change.start : this.start) + 1
+    const end = (typeof _change.end === 'number' ? _change.end : this.end) + 1
+
     const defaultChange: Change = {
       start: this.start,
       end: this.end,
-      value: []
+      value: this.list.value.slice(start, end)
     }
 
     const update: Update = {
@@ -105,15 +110,16 @@ export default class EditorState {
     } else {
       undoStack = [[updated.change]].concat([lastUndo || []].concat(undoRest))
     }
-
+    
     return new EditorState({
-      start: (updated.change.start || this.start) - 1,
-      end: (updated.change.end || this.end) - 1,
+      start: updated.change.start - 1,
+      end: updated.change.end - 1,
       currentStyles: this.currentStyles,
       lastChangeType,
       list: updated.current,
       redoStack: [],
-      undoStack
+      undoStack,
+      tree: flatToTree(updated.current)
     })
   }
 

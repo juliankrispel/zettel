@@ -34,6 +34,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   // if it is still undefined when being 'returned' no editor change should occur
   // and the event shouldn't be cancelled (i.e. no event.preventDefault())
   let newEditorState
+  console.log(event)
 
   let position = getDomSelection(editorState.list)
   if (position === null) {
@@ -104,8 +105,16 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     newEditorState = removeRange(editorState, start, end)
   } else if (isCharacterInsert(event)) {
     // insertCharacter
-    newEditorState = insertCharacter(editorState, start, end, event.key)
+
+    newEditorState = insertCharacter(
+      editorState,
+      start,
+      end,
+      event
+    )
   }
+
+  console.log('newEditorState', newEditorState)
 
   return newEditorState
 }

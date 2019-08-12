@@ -18,6 +18,7 @@ import getDomSelection from './selection/getDomSelection'
 import setDomSelection from './selection/setDomSelection'
 import valueFromText from './valueFromText'
 import getBlockNumber from './getBlockNumber'
+import getBlockForIndex from './getBlockForIndex'
 import getBlockOffset from './getBlockOffset'
 import onInput from './handlers/onInput'
 import onCut from './handlers/onCut'
@@ -33,6 +34,7 @@ export {
   getNextCharacterIndex,
   getPreviousCharacterIndex,
   getBlocksForRange,
+  getBlockForIndex,
   onCut,
   findBefore,
   change,

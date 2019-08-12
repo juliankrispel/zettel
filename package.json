@@ -9,6 +9,7 @@
     "@types/react": "^16.8.23",
     "@types/react-dom": "^16.8.4",
     "global": "^4.4.0",
+    "lorem-ipsum": "^2.0.3",
     "react-scripts": "^3.0.1",
     "typescript": "3.5.1"
   },

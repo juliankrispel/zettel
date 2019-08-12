@@ -46,6 +46,12 @@ var app = (function () {
     function text(data) {
         return document.createTextNode(data);
     }
+    function attr(node, attribute, value) {
+        if (value == null)
+            node.removeAttribute(attribute);
+        else
+            node.setAttribute(attribute, value);
+    }
     function children(element) {
         return Array.from(element.childNodes);
     }
@@ -273,7 +279,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (7:2) {#each editorState.tree.blocks as block}
+    // (13:2) {#each editorState.tree.blocks as block}
     function create_each_block(ctx) {
     	var div, t_value = ctx.block.value.map(func).join(''), t;
 
@@ -281,7 +287,8 @@ var app = (function () {
     		c: function create() {
     			div = element("div");
     			t = text(t_value);
-    			add_location(div, file, 7, 4, 125);
+    			attr(div, "style", ctx.style);
+    			add_location(div, file, 13, 4, 284);
     		},
 
     		m: function mount(target, anchor) {
@@ -321,7 +328,7 @@ var app = (function () {
     			for (var i = 0; i < each_blocks.length; i += 1) {
     				each_blocks[i].c();
     			}
-    			add_location(div, file, 5, 0, 72);
+    			add_location(div, file, 11, 0, 231);
     		},
 
     		l: function claim(nodes) {
@@ -337,7 +344,7 @@ var app = (function () {
     		},
 
     		p: function update(changed, ctx) {
-    			if (changed.editorState) {
+    			if (changed.style || changed.editorState) {
     				each_value = ctx.editorState.tree.blocks;
 
     				for (var i = 0; i < each_value.length; i += 1) {
@@ -379,6 +386,12 @@ var app = (function () {
     function instance($$self, $$props, $$invalidate) {
     	let { editorState } = $$props;
       console.log(editorState);
+      const style = {
+        WebkitUserModify: 'read-write-plaintext-only',
+        position: 'relative',
+        whiteSpace: 'pre-wrap',
+        overflowWrap: 'break-word',
+      };
 
     	const writable_props = ['editorState'];
     	Object.keys($$props).forEach(key => {
@@ -389,7 +402,7 @@ var app = (function () {
     		if ('editorState' in $$props) $$invalidate('editorState', editorState = $$props.editorState);
     	};
 
-    	return { editorState };
+    	return { editorState, style };
     }
 
     class Editor extends SvelteComponentDev {
