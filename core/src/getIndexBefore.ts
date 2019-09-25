@@ -6,7 +6,7 @@ export default function getIndexBefore(
   find: (ch: Character) => boolean
 ): number | null {
   for (let i = startIndex - 1; i >= -1; i--) {
-    if (find(value[i + 1])) {
+    if (find(value[i])) {
       return i
     }
   }

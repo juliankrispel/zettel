@@ -1,9 +1,9 @@
-import { TextCharacter, ListState, BlockTree } from './types'
-import createTextFragments from './createTextFragments'
+import { TextCharacter, ListState, BlockTree } from '../types'
+import createTextFragments from '../createTextFragments'
 
-import { getNode, getNodes } from './getTreeNode'
+import { getNode, getNodes } from '../getTreeNode'
 
-function parseBlockTree (
+export default function parseBlockTree (
   flat: ListState,
 ): BlockTree {
   const state: BlockTree = {
@@ -38,8 +38,8 @@ function parseBlockTree (
         entity: char.entity != null ? flat.entityMap[char.entity] : null
       })
 
+      state.blockMap[char.blockKey] = path
       path.push(blocks.length - 1)
-      state.blockMap[char.blockKey] = path.slice()
     } else if (char.type === 'block-end') {
       path.pop()
     } else {
@@ -52,5 +52,3 @@ function parseBlockTree (
 
   return state
 }
-
-export default parseBlockTree

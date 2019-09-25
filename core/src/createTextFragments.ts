@@ -1,4 +1,4 @@
-import { TextFragment, Block, EntityMap } from './types'
+import { TextCharacter, TextFragment, Value, EntityMap } from './types'
 import { CharacterData, CharacterRange } from './types'
 
 type CharacterMeta = CharacterData | CharacterRange
@@ -11,23 +11,23 @@ function hasEqualCharacterData (
   Array.from(left.styles || []).sort().join('') === Array.from(right.styles || []).sort().join('')
 }
 
-export default function createTextFragments(block: Block, entityMap: EntityMap = {}): TextFragment[] {
+export default function createTextFragments(value: TextCharacter[], entityMap: EntityMap = {}): TextFragment[] {
   const start: TextFragment[] = []
-  return block.value.reduce(
+  return value.reduce(
     (acc: any, data, index) => {
       if (acc.length < 1) {
         return [{
           styles: data.styles,
           entity: data.entity,
           offset: index,
-          text: block.value[index].char
+          text: value[index].char
         }]
       } else {
         const lastFragment = acc[acc.length - 1]
         if (hasEqualCharacterData(lastFragment, data)) {
           return acc.slice(0, -1).concat([{
             ...lastFragment,
-            text: lastFragment.text + block.value[index].char
+            text: lastFragment.text + value[index].char
           }])
         } else {
           return [
@@ -36,7 +36,7 @@ export default function createTextFragments(block: Block, entityMap: EntityMap =
               styles: data.styles,
               entity: data.entity,
               offset: index,
-              text: block.value[index].char
+              text: value[index].char
             }
           ]
         }

@@ -1,25 +1,23 @@
 import React, { useState } from 'react'
-import { EditorState } from '@zettel/core'
-import Editor from '@zettel/react'
+import { EditorState } from '@editable/core'
+import Editor from '@editable/react'
 
 const text = `[Italic][And Bold]`
 
-const initialEditorState = EditorState.fromJSON({
-  text,
-  ranges: [{
-    offset: 0,
-    length: 5,
-    styles: ['bold'],
-  }, {
-    offset: 3,
-    length: 10,
-    styles: ['italic'],
-  }],
-  entityMap: {}
-})
-
 const App = () => {
-  const [editorState, setEditorState] = useState(initialEditorState)
+  const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
+    text,
+    ranges: [{
+      offset: 0,
+      length: 5,
+      styles: ['bold'],
+    }, {
+      offset: 3,
+      length: 10,
+      styles: ['italic'],
+    }],
+    entityMap: {}
+  }))
 
   return (
     <Editor

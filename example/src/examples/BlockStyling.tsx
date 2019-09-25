@@ -1,23 +1,9 @@
 import React, { useState } from 'react'
-import { EditorState, getBlocksForRange } from '@zettel/core'
-import Editor from '@zettel/react'
+import { EditorState, getBlocksForRange } from '@editable/core'
+import Editor from '@editable/react'
 import { Button } from '../components'
 
 const text = `[Headline 1][Headline 2][A paragraph]`
-
-const initialEditorState = EditorState.fromJSON({
-  text,
-  ranges: [{
-    offset: 0,
-    length: 1,
-    styles: ['H1']
-  }, {
-    offset: 12,
-    length: 1,
-    styles: ['H2']
-  }],
-  entityMap: {}
-})
 
 const setBlock = (editorState: EditorState): EditorState => {
   let newEditorSate = editorState
@@ -26,7 +12,19 @@ const setBlock = (editorState: EditorState): EditorState => {
 }
 
 const App = () => {
-  const [editorState, setEditorState] = useState(initialEditorState)
+  const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
+    text,
+    ranges: [{
+      offset: 0,
+      length: 1,
+      styles: ['H1']
+    }, {
+      offset: 12,
+      length: 1,
+      styles: ['H2']
+    }],
+    entityMap: {}
+  }))
 
   return (
     <div>

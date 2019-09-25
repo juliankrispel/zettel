@@ -16,7 +16,6 @@ export type Update = {
  */
 export default function change(update: Update): Update {
   const { value: currentValue, entityMap } = update.current
-  console.log({ update })
 
   const [start, end] = [
     update.change.start,
@@ -27,22 +26,15 @@ export default function change(update: Update): Update {
   let valueUpdate = update.change.value
   let newValue = update.current.value
 
-  // value can also be character data which is then merged
-  // into the existing value
-  if (!Array.isArray(valueUpdate)) {
-    valueUpdate = currentValue.slice(start + 1, end + 1)
-    .map(char => ({
-      ...char,
-      ...valueUpdate
-    }))
-    newValue = currentValue.slice(0, start + 2)
-    .concat(valueUpdate)
-    .concat(currentValue.slice(end + 2))
-  } else {
-    newValue = currentValue.slice(0, start + 1)
-    .concat(valueUpdate)
-    .concat(currentValue.slice(end + 1))
-  }
+  const t1 = performance.now()
+
+  newValue = currentValue.slice(0, start + 1)
+  .concat(valueUpdate)
+  .concat(currentValue.slice(end + 1))
+  console.log('path 2')
+
+  const t2 = performance.now()
+  console.log("Call to callchange took " + (t2 - t1) + " milliseconds.");
 
   if (newValue[0].type !== 'block-start') {
     throw new Error('First character always needs to be block-start')
@@ -55,6 +47,7 @@ export default function change(update: Update): Update {
     end: end - selectedValue.length + valueUpdate.length + 1,
     value: selectedValue
   }
+
 
   return {
     current: {

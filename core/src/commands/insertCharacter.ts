@@ -16,6 +16,7 @@ export default function insertCharacter(
   const nextValue = editorState.list.value[end + 1]
   let entity
   let char = event.key
+  console.log({ start, end, char })
 
   // TODO: Write some tests for this
   // Basically only when we're inside an entity

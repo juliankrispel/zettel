@@ -30,6 +30,18 @@ export type Value = Character[]
 
 export type Character = (TextCharacter | BlockStart | BlockEnd)
 
+/**
+ * [
+ *  { char: 'A', styles: ['bold', 'italic'] },
+ *  { type: 'block-start' },
+ *  { char: 'B', styles: ['bold', 'italic'] },
+ *  { type: 'block-start' },
+ *  { char: 'C', styles: ['bold', 'italic'] },
+ *  { type: 'block-end' },
+ *  { type: 'block-end' },
+ * ]
+ */
+
 export type CharacterData = {
   styles: string[],
   entity?: string | null,
@@ -112,6 +124,8 @@ export type RawRange = {
 
 export type CharacterRange = RawRange
 
+export type Path = number[]
+
 /**
 * Tree representation of content. Used for
 * rendering only
@@ -119,6 +133,9 @@ export type CharacterRange = RawRange
 export type BlockTree = {
   blocks: Block[],
   entityMap: EntityMap,
+  blockMap: {
+    [blockKey: string]: Path
+  }
 }
 
 /**
@@ -126,6 +143,7 @@ export type BlockTree = {
 * Used for rendering
 */
 export type Block = {
+  fragments: TextFragment[],
   value: TextCharacter[],
   blockKey: string,
   blocks: Block[],

@@ -1,17 +1,17 @@
-# Zettel
+# Editable
 
-Super awesome rich text framework for React.js
+Framework for building text editors
 
-1. Small file size, 0 dependencies - over 10x smaller than competing frameworks
-2. [Minimal API surface area](https://www.youtube.com/watch?v=4anAwXYqLG8)
-3. Suitable for building complex document editing experiences
-4. EditorState can totally be reused with other frameworks 
+- Small file size, 0 dependencies - over 10x smaller than competing frameworks
+- [Minimal API surface area](https://www.youtube.com/watch?v=4anAwXYqLG8)
+- Suitable for building complex document editing experiences
+- State can totally be reused with other frameworks
 
 Examples:
 
 ```tsx
 // Replace range with new block
-EditorState.change({
+State.change({
   start: 3,
   end: 19,
   value: [
@@ -22,7 +22,7 @@ EditorState.change({
 })
 
 // Wrap selection in block (creates child block)
-EditorState.change({
+State.change({
   value: [
     { type: 'block-start', data: { type: 'li', } },
     Editor.getValue(3, 5),
@@ -31,7 +31,7 @@ EditorState.change({
 })
 
 // Split block and insert new block
-EditorState.change({
+State.change({
   value: [
     { type: 'block-end' },
     { type: 'block-start', data: { type: 'quote', } },
@@ -42,7 +42,7 @@ EditorState.change({
 })
 
 // Insert table
-EditorState.change({
+State.change({
   value: [
     { type: 'block-start', data: { type: 'table', } },
     ...values(`[[A1][B1]][[A2][B2]]`),
@@ -51,26 +51,26 @@ EditorState.change({
 })
 
 // Replacing text
-EditorState.change({
+State.change({
   start: 3,
   end: 19,
   text: 'I am free'
 })
 
 // Splitting Block
-EditorState.splitBlock({
+State.splitBlock({
   start: 19,
   end: 19,
 })
 
 // Wrapping Block
-EditorState.wrapBlock({
+State.wrapBlock({
   start: 0,
   end: 29,
 })
 
 // Changing Block
-EditorState.change({
+State.change({
   start: 8,
   end: 8,
   block: {
@@ -80,7 +80,7 @@ EditorState.change({
 })
 
 // Compose changes
-EditorState.change([{
+State.change([{
   start: 3,
   end: 9,
   text: 'Hello',
@@ -91,20 +91,20 @@ EditorState.change([{
 }])
 ```
 
-### EditorState.commit()
+### State.commit()
 
 Push changes to undoStack
 
 ```tsx
-EditorState
+State
   .change({ value: ...Value.fromText('Hello there') })
   .change({ value: ...Value.fromText('Boing') })
   .commit()
 ```
 
-### EditorState.undo()
+### State.undo()
 
-### EditorState.redo()
+### State.redo()
 
 ## Raw Model:
 
@@ -189,7 +189,7 @@ Yes we could!
 (React/Vue/Angular).(onKeyDown|onSelectionChange): Event =>
   (Zettel).handleEvent =>
     (Zettel).command: Change =>
-      (Zettel).change: EditorState =>
+      (Zettel).change: State =>
         (React/Vue/Angular).render
 ```
 

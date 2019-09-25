@@ -1,11 +1,13 @@
 {
-  "name": "@zettel/core",
+  "name": "@editable/core",
   "version": "0.0.10",
   "description": "Core module of zettel",
   "main": "dist/index.js",
   "author": "Julian Krispel",
   "license": "MIT",
   "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
     "build": "tsc",
     "start": "tsc -w",
     "prepublish": "tsc"
@@ -14,6 +16,12 @@
     "dist"
   ],
   "devDependencies": {
-    "@types/dom-inputevent": "^1.0.4"
+    "@types/dom-inputevent": "^1.0.4",
+    "@types/jest": "^24.0.17",
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "@types/ramda": "^0.26.21",
+    "ramda": "^0.26.1"
   }
 }

@@ -1,19 +1,19 @@
 import React from 'react'
-import { Block, EditorState } from '@zettel/core'
+import { Block } from '@editable/core'
 import EditorBlock from './EditorBlock'
 import { RenderProps } from './types'
-import { Value } from '@zettel/core'
+import { Value } from '@editable/core'
 
 type Props = RenderProps & {
   mapBlockValue?: (val: Value) => Value,
   blocks: Block[],
-  block?: Block,
-  editorState: EditorState
+  block?: Block
 }
 
 export default function EditorBlockChildren(props: Props) {
   const {
-    blocks, block, editorState,
+    blocks,
+    block,
     ...renderProps
   } = props
 
@@ -21,14 +21,13 @@ export default function EditorBlockChildren(props: Props) {
     renderChildren: RenderChildren
   } = renderProps
 
-  const content = <>{props.blocks.map(block => {
-    return <EditorBlock
-      editorState={props.editorState}
-      key={block.blockKey}
-      block={block}
-      {...renderProps}
-    />
-  })}</>
+  const content = <>{props.blocks.map(block => 
+    <EditorBlock
+        key={block.blockKey}
+        block={block}
+        {...renderProps}
+      />,
+  )}</>
 
   if (RenderChildren != null) {
     return <RenderChildren

@@ -1,16 +1,13 @@
 import React from 'react'
 import {
-  EditorState,
-  createTextFragments,
   Block,
   TextFragment,
-} from '@zettel/core'
+} from '@editable/core'
 
 import { RenderProps, RenderStyle } from './types'
 
 type TextProps = RenderProps & {
   block: Block,
-  editorState: EditorState,
 }
 
 type FragmentRenderProps = {
@@ -20,7 +17,6 @@ type FragmentRenderProps = {
 export default function EditorText(props: TextProps) {
   const {
     block,
-    editorState,
     renderStyle: RenderStyle,
     renderTextFragment: RenderTextFragment,
   } = props
@@ -29,8 +25,11 @@ export default function EditorText(props: TextProps) {
 
   let textFragments: React.ReactNode = null
 
-  if (block.value.length > 0 && editorState != null) {
-    const fragments = createTextFragments(block, editorState.list.entityMap)
+  if (block.value.length > 0) {
+    /*
+    * If the block has content, split it up into fragments and render the fragments
+    */
+    const { fragments } = block
 
     let offset = 0
 
@@ -65,6 +64,9 @@ export default function EditorText(props: TextProps) {
       offset += fragment.text.length
       return textFragment
     })
+  /*
+   * Render an empty block
+   */
   } else {
     textFragments = <span
       key={`text-fragments-${block.blockKey}`}

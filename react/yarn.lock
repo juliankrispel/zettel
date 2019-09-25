@@ -27,9 +27,9 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@zettel/core@0.0.6":
+"@editable/core@0.0.6":
   version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@zettel/core/-/core-0.0.6.tgz#9eaea036b294c936500bf5110385ffb5978f898f"
+  resolved "https://registry.yarnpkg.com/@editable/core/-/core-0.0.6.tgz#9eaea036b294c936500bf5110385ffb5978f898f"
   integrity sha512-WG1Qg3C5McV2M77lu8mNWOwj16M7F1Rya6SXmqLmV1KbhJx8s0s6T/0SnyytTv1MVkn16iN/DnK9m4kPmr52OQ==
 
 csstype@^2.2.0:

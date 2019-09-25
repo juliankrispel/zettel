@@ -1,38 +1,8 @@
 import React, { useState } from 'react'
-import { EditorState } from '@zettel/core'
-import Editor, { RenderBlock } from '@zettel/react'
+import { EditorState } from '@editable/core'
+import Editor, { RenderBlock } from '@editable/react'
 
 const text = `[One][][Two]`
-
-const initialEditorState = EditorState.fromJSON({
-  text,
-  ranges: [{
-    offset: 5,
-    length: 1,
-    styles: [],
-    entity: '1'
-  }, {
-    offset: 8,
-    length: 3,
-    styles: [],
-    entity: '2'
-  }],
-  entityMap: {
-    '1': {
-      isAtomic: true,
-      type: 'image',
-      src: 'http://placekitten.com/100/100'
-    },
-    '2': {
-      isAtomic: false,
-      type: 'link',
-      htmlAttributes: {
-        target: '_blank',
-        href: 'http://www.google.com'
-      }
-    }
-  }
-})
 
 const Block: RenderBlock = React.memo((props) => {
   const { block, htmlAttrs } = props
@@ -44,7 +14,35 @@ const Block: RenderBlock = React.memo((props) => {
 })
 
 const App = () => {
-  const [editorState, setEditorState] = useState(initialEditorState)
+  const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
+    text,
+    ranges: [{
+      offset: 5,
+      length: 1,
+      styles: [],
+      entity: '1'
+    }, {
+      offset: 8,
+      length: 3,
+      styles: [],
+      entity: '2'
+    }],
+    entityMap: {
+      '1': {
+        isAtomic: true,
+        type: 'image',
+        src: 'http://placekitten.com/100/100'
+      },
+      '2': {
+        isAtomic: false,
+        type: 'link',
+        htmlAttributes: {
+          target: '_blank',
+          href: 'http://www.google.com'
+        }
+      }
+    }
+  }))
 
   console.log(editorState)
   return (

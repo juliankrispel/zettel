@@ -1,12 +1,11 @@
 import React from 'react'
-import { Block, EditorState } from '@zettel/core'
+import { Block, EditorState } from '@editable/core'
 import EditorText from './EditorText'
 import EditorChildren from './EditorChildren'
 import { RenderProps } from './types'
 
 type Props = RenderProps & {
-  block: Block,
-  editorState: EditorState
+  block: Block
 }
 
 const style = {
@@ -19,7 +18,6 @@ const style = {
 export default function EditorBlock(props: Props) {
   const {
     block: _block,
-    editorState,
     mapBlock,
     ...renderProps
   } = props
@@ -37,7 +35,7 @@ export default function EditorBlock(props: Props) {
 
   const { entity } = block
 
-  if (entity != null  && entity.isAtomic && RenderBlock != null) {
+  if (entity != null && entity.isAtomic && RenderBlock != null) {
     const offset = 0
     htmlAttrs = {
       ...htmlAttrs,
@@ -57,7 +55,6 @@ export default function EditorBlock(props: Props) {
   const content = <>
     <EditorText
       key="block-text"
-      editorState={editorState}
       mapBlock={props.mapBlock}
       block={block}
       {...renderProps}
@@ -65,7 +62,6 @@ export default function EditorBlock(props: Props) {
     {(props.block.blocks.length > 0) && (
       <EditorChildren
         blocks={props.block.blocks}
-        editorState={props.editorState}
         {...renderProps}
       />
     )}

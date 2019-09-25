@@ -44,15 +44,15 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@zettel/core@0.0.10":
+"@editable/core@0.0.10":
   version "0.0.0"
   uid ""
 
-"@zettel/core@link:../core":
+"@editable/core@link:../core":
   version "0.0.0"
   uid ""
 
-"@zettel/react@link:../react":
+"@editable/react@link:../react":
   version "0.0.0"
   uid ""
 

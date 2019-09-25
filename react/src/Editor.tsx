@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useEffect } from 'react'
-import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange } from '@zettel/core'
+import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange } from '@editable/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
@@ -51,6 +51,18 @@ const Editor = (props: Props): React.ReactElement => {
     }
   })
 
+  useLayoutEffect(() => {
+    const el = ref != null ? ref.current : null
+    if (el != null) {
+      // @ts-ignore
+      el.addEventListener('beforeinput', (event) => {
+        // debugger
+        event.preventDefault()
+        event.stopPropagation()
+      })
+    }
+  }, [ref.current])
+
   const divProps = {
     ...htmlAttrs,
     style: { ...editorStyles },
@@ -98,6 +110,7 @@ const Editor = (props: Props): React.ReactElement => {
         * For now I'm blocking these to avoid content
         * and selection to get out of place
         */
+        console.log(event)
         event.preventDefault()
         event.stopPropagation()
       }}
@@ -112,7 +125,6 @@ const Editor = (props: Props): React.ReactElement => {
       <EditorChildren
         mapBlock={mapBlock}
         blocks={editorState.tree.blocks}
-        editorState={editorState}
         renderBlock={renderBlock}
         renderTextFragment={renderEntity}
         renderStyle={renderStyle}

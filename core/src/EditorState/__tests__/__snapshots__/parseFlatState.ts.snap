@@ -5,6 +5,8 @@ Object {
   "entityMap": Object {},
   "value": Array [
     Object {
+      "blockKey": "flopij",
+      "styles": Array [],
       "type": "block-start",
     },
     Object {
@@ -87,6 +89,8 @@ Object {
   "entityMap": Object {},
   "value": Array [
     Object {
+      "blockKey": "ogwvqx",
+      "styles": Array [],
       "type": "block-start",
     },
     Object {

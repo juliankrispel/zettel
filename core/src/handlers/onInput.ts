@@ -11,6 +11,7 @@ export default function onInput(editorState: EditorState, _event: any) {
   const event: InputEvent = _event
   const position = getDomSelection(editorState.list)
 
+  console.log('on input')
   if (position === null) {
     console.warn('cant get start and end selection')
     return editorState

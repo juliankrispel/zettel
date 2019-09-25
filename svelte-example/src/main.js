@@ -1,5 +1,5 @@
 import App from './App.svelte';
-import { EditorState } from '@zettel/core'
+import { EditorState } from '@editable/core'
 
 const text = `[One Line][And another line of text][And another line]`
 const initialEditorState = EditorState.fromJSON({

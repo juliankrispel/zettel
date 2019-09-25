@@ -12,7 +12,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
-    "@zettel/core": "^0.0.10",
+    "@editable/core": "^0.0.10",
     "sirv-cli": "^0.4.4"
   },
   "scripts": {

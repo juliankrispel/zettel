@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { EditorState } from '@zettel/core'
-import Editor from '@zettel/react'
+import React, { useState, useEffect } from 'react'
+import { EditorState } from '@editable/core'
+import Editor from '@editable/react'
 const { LoremIpsum } = require("lorem-ipsum")
 
 const lorem = new LoremIpsum({
@@ -16,14 +16,12 @@ const lorem = new LoremIpsum({
 
 const text = `[${lorem.generateParagraphs(3000).split('\n').join('][')}]`
 
-const initialEditorState = EditorState.fromJSON({
-  text,
-  ranges: [],
-  entityMap: {}
-})
-
 const App = () => {
-  const [editorState, setEditorState] = useState(initialEditorState)
+  const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
+    text,
+    ranges: [],
+    entityMap: {}
+  }))
 
   return (
     <div>

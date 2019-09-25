@@ -1,6 +1,6 @@
 import parseFlat from '../../rawToFlat'
 
-describe('parseFlatState', () => {
+describe.skip('parseFlatState', () => {
   test('parses raw doc', () => {
     const raw = {
       text: '[Hello there world]',

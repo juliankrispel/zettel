@@ -10,11 +10,8 @@ export function getNodes (state: BlockTree, path: number[]): Block[] {
   }, state.blocks)
 }
 
-
-
 export function getNode (state: BlockTree, path: number[]): Block {
   return path.reduce((acc: any, val) => {
     return acc.blocks[val]
   }, state)
 }
-

@@ -199,7 +199,7 @@ export default class EditorState {
 
   static fromText(text: string): EditorState {
     return new EditorState({
-      list: textToFlat(text)
+      list: textToFlat(text),
     })
   }
 }

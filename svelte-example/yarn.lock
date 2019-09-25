@@ -40,9 +40,9 @@
   dependencies:
     "@types/node" "*"
 
-"@zettel/core@^0.0.10":
+"@editable/core@^0.0.10":
   version "0.0.10"
-  resolved "https://registry.yarnpkg.com/@zettel/core/-/core-0.0.10.tgz#39329d16a75c53b65469266c37a5b5c99c9c3319"
+  resolved "https://registry.yarnpkg.com/@editable/core/-/core-0.0.10.tgz#39329d16a75c53b65469266c37a5b5c99c9c3319"
   integrity sha512-J5rbEGkaqThcc2vGFRw4pgF0xKAAiaTNLskUNNEKz3ZcyxdA2jcvHJoKLLYi0TbIWO355LY/vT3MnageZD4/5A==
 
 abbrev@1:

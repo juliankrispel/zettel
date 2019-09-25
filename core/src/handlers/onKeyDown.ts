@@ -18,6 +18,7 @@ import {
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
 const isCharacterInsert = (e: KeyboardEvent) =>
+  e.key !== 'Unidentified' &&
   !e.altKey &&
   !e.metaKey &&
   !e.ctrlKey &&
@@ -114,7 +115,9 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     )
   }
 
-  console.log('newEditorState', newEditorState)
+  if (newEditorState !== editorState) {
+    console.log('no change')
+  }
 
   return newEditorState
 }

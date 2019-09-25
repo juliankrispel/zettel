@@ -7,9 +7,7 @@ jest.mock('../id', () => {
   return () => `key-${i++}`
 })
 
-import id from '../id'
-
-describe('parseTreeState', () => {
+describe.skip('parseTreeState', () => {
   test('parses simple flat structure', () => {
     
     const flatState = raw({
