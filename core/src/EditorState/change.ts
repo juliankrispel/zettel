@@ -26,15 +26,9 @@ export default function change(update: Update): Update {
   let valueUpdate = update.change.value
   let newValue = update.current.value
 
-  const t1 = performance.now()
-
   newValue = currentValue.slice(0, start + 1)
   .concat(valueUpdate)
   .concat(currentValue.slice(end + 1))
-  console.log('path 2')
-
-  const t2 = performance.now()
-  console.log("Call to callchange took " + (t2 - t1) + " milliseconds.");
 
   if (newValue[0].type !== 'block-start') {
     throw new Error('First character always needs to be block-start')

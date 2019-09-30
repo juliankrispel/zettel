@@ -1,0 +1,19 @@
+.undo-step, .redo-step {
+  background: #fff;
+  border-radius: 100px;
+  padding: 0;
+  height: 11px;
+  cursor: pointer;
+  width: 11px;
+  border: 1px solid #fff;
+  margin: .4em;
+}
+
+.timeline {
+  padding: 1em;
+  background: #000;
+}
+
+.redo-step {
+  background: #444;
+}

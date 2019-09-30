@@ -6,11 +6,12 @@
     "start": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts start"
   },
   "dependencies": {
-    "@types/react-router-dom": "^4.3.4",
     "@editable/core": "link:../core",
     "@editable/react": "link:../react",
+    "@types/react-router-dom": "^4.3.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-draggable": "^4.0.3",
     "react-router-dom": "^5.0.1"
   },
   "eslintConfig": {
@@ -27,5 +28,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "add": "^2.0.6",
+    "react-movable": "^2.2.0",
+    "yarn": "^1.17.3"
   }
 }

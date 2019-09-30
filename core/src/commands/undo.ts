@@ -3,9 +3,9 @@ import change from '../EditorState/change'
 import { COMMAND } from '../constants'
 import { Changes, Change } from '..';
 
-export default function undo(editorState: EditorState): EditorState | null {
+export default function undo(editorState: EditorState): EditorState {
   if (editorState.undoStack.length === 0) {
-    return null
+    return editorState
   }
 
   const [lastChanges, ...rest] = editorState.undoStack

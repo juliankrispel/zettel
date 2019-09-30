@@ -8,10 +8,16 @@ export default function backspace(
   end: number
 ): EditorState {
   let newEditorState = editorState
-  const previousCharIndex = getIndexBefore(editorState.list.value, start, (ch) => ch.type == null || ch.type === 'block-end')
+  const previousCharIndex = getIndexBefore(editorState.list.value, start + 1, (ch) => {
+    if (ch == null) {
+      return false
+    }
+
+    return ch.type == null || ch.type === 'block-end';
+  });
 
   if (previousCharIndex != null) {
-    let _start = previousCharIndex
+    let _start = previousCharIndex - 1
 
     newEditorState = editorState.change({
       isBoundary: editorState.lastChangeType !== COMMAND.BACKSPACE,

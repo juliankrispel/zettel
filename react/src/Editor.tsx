@@ -57,6 +57,7 @@ const Editor = (props: Props): React.ReactElement => {
       // @ts-ignore
       el.addEventListener('beforeinput', (event) => {
         // debugger
+        console.log(event);
         event.preventDefault()
         event.stopPropagation()
       })

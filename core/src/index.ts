@@ -27,6 +27,8 @@ import flatToTree from './flatToTree'
 export * from './types'
 import { Entity } from './types'
 
+export * from './commands'
+
 export {
   Entity,
   findAfter,

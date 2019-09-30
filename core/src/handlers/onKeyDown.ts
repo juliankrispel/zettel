@@ -35,7 +35,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   // if it is still undefined when being 'returned' no editor change should occur
   // and the event shouldn't be cancelled (i.e. no event.preventDefault())
   let newEditorState
-  console.log(event)
 
   let position = getDomSelection(editorState.list)
   if (position === null) {
@@ -113,10 +112,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
       end,
       event
     )
-  }
-
-  if (newEditorState !== editorState) {
-    console.log('no change')
   }
 
   return newEditorState

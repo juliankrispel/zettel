@@ -1,28 +1,24 @@
 {
   "compilerOptions": {
-    "target": "es2015",
+    "types": ["@editable/core"],
     "module": "commonjs",
+    "target": "es2015",
     "declaration": true,
     "outDir": "dist",
     "sourceMap": true,
     "strict": true,
     "removeComments": true,
     "esModuleInterop": true,
-    "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "strictNullChecks": true,
-    "jsx": "react",
-    "typeRoots": [
-      "index.d.ts",
-      "node_modules/@types"
-    ]
+    "jsx": "react"
   },
   "include": [
     "src/index.tsx"
   ],
   "exclude": [
-    "**/*.spec.ts",
+    "dist",
     "node_modules",
     "**/__tests__"
   ]
-}
+} 

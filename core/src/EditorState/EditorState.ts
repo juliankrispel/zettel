@@ -129,12 +129,12 @@ export default class EditorState {
     return entityKey
   }
 
-  undo():EditorState {
-    return undo(this) || this
+  undo(): EditorState {
+    return undo(this)
   }
 
-  redo():EditorState {
-    return redo(this) || this
+  redo(): EditorState {
+    return redo(this)
   }
 
   setCurrentStyles(styles: string[]) {
@@ -147,7 +147,7 @@ export default class EditorState {
     _start: number = this.start,
     _end: number = this.end,
   ): EditorState {
-    const start = _start + 1
+    const start:number = _start + 1
     const end = _end + 1
     const selectedValue = this.list.value.slice(start, end)
     const hasStyle = selectedValue.every(char =>
@@ -169,11 +169,10 @@ export default class EditorState {
     })
 
     let newEditorState = this.change({
-      start,
-      end,
       isBoundary: true,
       value: updatedValue
     })
+
     newEditorState.start = _start
     newEditorState.end = _end
 

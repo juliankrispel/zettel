@@ -34,7 +34,7 @@ export default function backspaceToPrevWord(
     if (prevWordEnd != null) {
       newEditorState = editorState.change({
         type: COMMAND.BACKSPACE_PREV_WORD,
-        start: isBlockStart ? prevWordEnd + 1 : prevWordEnd,
+        start: isBlockStart ? prevWordEnd : prevWordEnd,
         end,
         value: [],
         isBoundary: true

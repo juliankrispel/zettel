@@ -27,28 +27,30 @@ const App = () => {
   }))
 
   return (
-    <div>
-      <Button onClick={() => {
-        const blocks = getBlocksForRange(editorState.list.value, editorState.start, editorState.end)
-        const { start, end } = editorState
+    <>
+      <div>
+        <Button onClick={() => {
+          const blocks = getBlocksForRange(editorState.list.value, editorState.start, editorState.end)
+          const { start, end } = editorState
 
-        const _editorState = blocks.reduce((newEditorState, block) => {
-          // @ts-ignore
-          const value: BlockStart = newEditorState.list.value[block.blockOffset]
-          return newEditorState.change({
-            start: block.blockOffset - 1,
-            end: block.blockOffset,
-            value: [{
-              ...value,
-              styles: (value.styles || []).includes('H1') ? [] : ['H1'],
-            }]
-          })
-        }, editorState)
-        .change({ start, end, isBoundary: true })
-        setEditorState(_editorState)
-      }}>
-        H1
-      </Button>
+          const _editorState = blocks.reduce((newEditorState, block) => {
+            // @ts-ignore
+            const value: BlockStart = newEditorState.list.value[block.blockOffset]
+            return newEditorState.change({
+              start: block.blockOffset - 1,
+              end: block.blockOffset,
+              value: [{
+                ...value,
+                styles: (value.styles || []).includes('H1') ? [] : ['H1'],
+              }]
+            })
+          }, editorState)
+          .change({ start, end, isBoundary: true })
+          setEditorState(_editorState)
+        }}>
+          H1
+        </Button>
+      </div>
       <Editor
         renderBlock={(props) => {
           const { htmlAttrs, children, block } = props
@@ -65,7 +67,7 @@ const App = () => {
         onChange={setEditorState}
         editorState={editorState}
       />
-    </div>
+    </>
   );
 }
 

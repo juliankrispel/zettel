@@ -11,7 +11,7 @@
     "prepublish": "tsc"
   },
   "dependencies": {
-    "@editable/core": "0.0.10"
+    "@editable/core": "link:../core"
   },
   "peerDependencies": {
     "react": "16.8.6",

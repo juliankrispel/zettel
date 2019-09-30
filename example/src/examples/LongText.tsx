@@ -24,13 +24,11 @@ const App = () => {
   }))
 
   return (
-    <div>
-      <Editor
-        htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
-        onChange={setEditorState}
-        editorState={editorState}
-      />
-    </div>
+    <Editor
+      htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
+      onChange={setEditorState}
+      editorState={editorState}
+    />
   );
 }
 

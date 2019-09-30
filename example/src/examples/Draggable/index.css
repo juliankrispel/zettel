@@ -1,0 +1,7 @@
+.handle {
+  cursor: move;
+  width: 1em;
+  height: 1em;
+  background: #eee;
+  border-radius: 3px;
+}

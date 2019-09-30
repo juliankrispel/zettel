@@ -1,15 +1,23 @@
 .bold { font-weight: bold; }
 .italic { font-style: italic; }
 
+* { box-sizing: border-box; }
+
 .app {
   background: white;
   margin: 0;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-items: stretch;
   padding: 0;
 }
 
 .editor {
-  height: 100vh;
+  height: 100%;
+  max-height: 100%;
   padding: 2em;
+  overflow: auto;
   top: 0;
   left: 0;
   width: 100%;
