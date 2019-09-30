@@ -1,8 +1,8 @@
 import React from 'react'
-import { Block } from '@editable/core'
+import { Block } from '@zettel/core'
 import EditorBlock from './EditorBlock'
 import { RenderProps } from './types'
-import { Value } from '@editable/core'
+import { Value } from '@zettel/core'
 
 type Props = RenderProps & {
   mapBlockValue?: (val: Value) => Value,

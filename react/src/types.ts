@@ -1,4 +1,4 @@
-import { TextFragment, Block, Entity } from '@editable/core'
+import { TextFragment, Block, Entity } from '@zettel/core'
 
 type FragmentRenderProps = {
   fragment: TextFragment

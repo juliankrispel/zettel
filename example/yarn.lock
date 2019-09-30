@@ -9,11 +9,11 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@editable/core@link:../core":
+"@zettel/core@link:../core":
   version "0.0.0"
   uid ""
 
-"@editable/react@link:../react":
+"@zettel/react@link:../react":
   version "0.0.0"
   uid ""
 

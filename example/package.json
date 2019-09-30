@@ -6,8 +6,8 @@
     "start": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts start"
   },
   "dependencies": {
-    "@editable/core": "link:../core",
-    "@editable/react": "link:../react",
+    "@zettel/core": "link:../core",
+    "@zettel/react": "link:../react",
     "@types/react-router-dom": "^4.3.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

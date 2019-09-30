@@ -1,5 +1,5 @@
 {
-  "name": "@editable/core",
+  "name": "@zettel/core",
   "version": "0.0.10",
   "description": "Core module of zettel",
   "main": "dist/index.js",

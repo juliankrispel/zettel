@@ -1,4 +1,4 @@
-# Editable
+# zettel
 
 Framework for building text editors
 

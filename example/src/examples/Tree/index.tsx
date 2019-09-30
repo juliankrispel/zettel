@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { EditorState, getBlockNumber } from '@editable/core'
-import Editor from '@editable/react'
+import { EditorState, getBlockNumber } from '@zettel/core'
+import Editor from '@zettel/react'
 import './index.css'
 import { Button } from '../../components'
 

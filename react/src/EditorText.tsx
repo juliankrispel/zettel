@@ -2,7 +2,7 @@ import React from 'react'
 import {
   Block,
   TextFragment,
-} from '@editable/core'
+} from '@zettel/core'
 
 import { RenderProps, RenderStyle } from './types'
 

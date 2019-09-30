@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { EditorState } from '@editable/core'
-import Editor from '@editable/react'
+import { EditorState } from '@zettel/core'
+import Editor from '@zettel/react'
 
 const text = `[Italic][And Bold]`
 

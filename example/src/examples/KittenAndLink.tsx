@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { EditorState } from '@editable/core'
-import Editor, { RenderBlock } from '@editable/react'
+import { EditorState } from '@zettel/core'
+import Editor, { RenderBlock } from '@zettel/react'
 
 const text = `[One][][Two]`
 

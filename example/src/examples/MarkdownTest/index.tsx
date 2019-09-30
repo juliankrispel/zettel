@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { EditorState, getBlockNumber } from '@editable/core'
-import Editor from '@editable/react'
+import { EditorState, getBlockNumber } from '@zettel/core'
+import Editor from '@zettel/react'
 
 const text = `[Try adding one or more # at the beginning of this line and a space]`
 

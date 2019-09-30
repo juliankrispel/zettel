@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useEffect } from 'react'
-import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange } from '@editable/core'
+import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange } from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 

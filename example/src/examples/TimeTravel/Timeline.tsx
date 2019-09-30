@@ -1,5 +1,5 @@
 import React from 'react'
-import { EditorState, undo, redo } from '@editable/core'
+import { EditorState, undo, redo } from '@zettel/core'
 import './index.css'
 
 type Props = {

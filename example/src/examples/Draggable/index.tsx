@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Draggable from 'react-draggable';
-import { EditorState, getBlockNumber } from '@editable/core'
-import Editor from '@editable/react'
+import { EditorState, getBlockNumber } from '@zettel/core'
+import Editor from '@zettel/react'
 import './index.css'
 
 const text = `[One Line][Another line][And another line]`
@@ -36,7 +36,7 @@ const App = () => {
           scale={1}
         >
           <div>
-            <div contentEditable={false} className="handle"></div>
+            <div contentzettel={false} className="handle"></div>
             <div {...htmlAttrs}>{children}</div>
           </div>
         </Draggable>

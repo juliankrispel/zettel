@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "types": ["@editable/core"],
+    "types": ["@zettel/core"],
     "module": "commonjs",
     "target": "es2015",
     "declaration": true,
