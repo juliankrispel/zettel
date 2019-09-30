@@ -1,0 +1,13 @@
+{
+  "name": "slides-zettel",
+  "version": "0.0.1",
+  "description": "slides for zettel",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "mdx-deck deck.mdx"
+  },
+  "dependencies": {
+    "mdx-deck": "^3.0.13"
+  }
+}

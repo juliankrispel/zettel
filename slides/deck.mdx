@@ -1,0 +1,262 @@
+import { Appear } from 'mdx-deck'
+import { book } from '@mdx-deck/themes'
+
+export const theme = book
+
+# :pencil: Editing the world
+
+---
+
+## I'm Julian
+
+I :heart: building editing experiences
+<ul>
+  <Appear>
+    <li>Freelance builder of editors</li>
+    <li>Member of the draft js core team</li>
+    <li>maintain(ed) draft-js-plugins</li>
+  </Appear>
+</ul>
+
+---
+
+## ContentEditable
+
+<ol>
+  <Appear>
+    <li>Originally developed by Microsoft (ca 1999)</li>
+    <li>Other browsers implement without spec</li>
+    <li>The w3 spec is still a draft</li>
+  </Appear>
+</ol>
+
+---
+
+## Draft js to the rescue
+
+<ul>
+  <Appear>
+    <li>Actively used at facebook</li>
+    <li>Stable release takes care of most contentEditable quirks</li>
+    <li>Community</li>
+  </Appear>
+</ul>
+
+---
+
+## The problem(s) with draft js
+
+<ul>
+  <Appear>
+    <li>It is large (147kb minified)</li>
+    <li>It depends on Immutable.js (for it's history)</li>
+    <li>Complicated, inflexible API</li>
+    <li>Open source repository semi abandoned?</li>
+  </Appear>
+</ul>
+
+---
+
+## Updating tree structures is hard
+
+---
+
+<div contentEditable={true} style={{display: 'flex', justifyContent: 'space-between', paddingRight: '3em', alignItems: 'center' }}>
+<small >
+
+```js
+[{
+  text: 'One',
+}, {
+  text: 'Two',
+  children: [{
+    text: 'Three'
+  }]
+}]
+```
+
+</small>
+
+<div>
+
+  - One
+  - Two
+    - Three
+
+</div>
+</div>
+
+---
+
+## Updating text is easy
+
+---
+
+<div contentEditable={true} style={{display: 'flex', justifyContent: 'space-between', paddingRight: '3em', alignItems: 'center' }}>
+<small >
+
+```js
+[One]
+[Two
+[Three]]
+```
+
+</small>
+
+<div>
+
+  - One
+  - Two
+    - Three
+
+</div>
+</div>
+
+---
+
+### Introducing Zettel
+
+<ul>
+  <Appear>
+    <li>Written in typescript :rocket</li>
+    <li>It's tiny - currently sub 30kb minified</li>
+    <li>0 dependencies :tada:</li>
+    <li>State module can be used with any framework</li>
+    <li>Minimal API surface area</li>
+    <li>Changes are atomic - replayable and serializable</li>
+  </Appear>
+</ul>
+
+---
+
+## Disclaimer
+
+- Zettel is not production ready.
+- I'm the only one working on it.
+- Intentionally very litle test coverage.
+- Android isn't supported yet
+
+---
+
+## The Change Object
+
+```js
+
+type Change = {
+  start: number,
+  end: number,
+  value: Value
+}
+```
+
+---
+
+## Changing selection 
+
+```js
+{
+  start: 3,
+  end: 8
+}
+```
+
+---
+
+## Inserting text 
+
+```js
+{
+  start: 3,
+  end: 3,
+  value: 'Hello Vienna'
+}
+```
+
+---
+
+## Replacing text 
+
+```js
+{
+  start: 3,
+  end: 9,
+  value: 'Goodbye Vienna'
+}
+```
+
+---
+
+## Inserting styled text 
+
+<div style={{ fontSize: 22 }}>
+
+```js
+{
+  start: 3,
+  end: 3,
+  value: [{
+    char: 'H',
+    styles: ['bold']
+  }, {
+    char: 'i',
+    styles: ['bold']
+  }]
+}
+```
+
+</div>
+
+---
+
+## Inserting a new block
+
+<div style={{ fontSize: 26 }}>
+
+```js
+{ start: 3,
+  end: 3,
+  value: [
+    { type: 'block-start' },
+    { char: 'H' },
+    { char: 'i' },
+    { type: 'block-end' }]}
+```
+
+</div>
+
+---
+
+## Inserting a custom block
+
+<div style={{ fontSize: 28 }}>
+
+```js
+{
+  start: 3,
+  end: 3,
+  value: [{
+    type: 'block',
+    type: 'youtube',
+    data: { src: 'http://somelink' }}]}
+```
+
+</div>
+
+---
+
+## Live coding time :fire:
+
+---
+
+### That's it thanks for listening :pray:
+
+*Twitter:* @juliandoesstuff
+Github: juliankrispel
+Web: reactrocket.com
+
+More reading:
+
+- w3 spec: https://w3c.github.io/editing/contentEditable.html
+- Trix Editor: https://github.com/basecamp/trix
+- Prosemirror: http://prosemirror.net
+
