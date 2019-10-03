@@ -1,6 +1,8 @@
-# Zettel **Experimental**
+__DO NOT USE IN PRODUCTION__
 
-Framework for building text editors. Experimental, __DO NOT USE IN PRODUCTION__
+# Zettel
+
+Framework for building text editors in the browser. Experimental, 
 
 [![npm version](https://badge.fury.io/js/%40zettel%2Fcore.svg)](https://badge.fury.io/js/%40zettel%2Fcore)
 [![npm version](https://badge.fury.io/js/%40zettel%2Freact.svg)](https://badge.fury.io/js/%40zettel%2Freact)
