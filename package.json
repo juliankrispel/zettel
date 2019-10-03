@@ -13,6 +13,9 @@
     "react-scripts": "^3.0.1",
     "typescript": "3.5.1"
   },
+  "scripts": {
+    "postinstall": "./scripts/install-all.sh"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },

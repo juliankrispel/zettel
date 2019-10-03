@@ -1,17 +1,17 @@
 import KittenAndLink from  './KittenAndLink'
 import ItalicAndBold from  './ItalicAndBold'
 import BlockStyling from './BlockStyling'
-import LongText from './LongText'
 import PlainText from './PlainText'
 import Tree from './Tree'
+import Columns from './Columns'
 import MarkdownTest from './MarkdownTest'
 import Draggable from './Draggable'
 import TimeTravel from './TimeTravel'
 
 export {
   PlainText,
-  LongText,
   KittenAndLink,
+  Columns,
   ItalicAndBold,
   BlockStyling,
   Tree,

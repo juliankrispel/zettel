@@ -1,5 +1,5 @@
 {
-  "name": "zettel-example",
+  "name": "@zettel/experiments",
   "version": "0.0.0",
   "private": true,
   "scripts": {
