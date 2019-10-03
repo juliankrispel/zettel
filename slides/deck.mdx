@@ -1,20 +1,25 @@
-import { Appear } from 'mdx-deck'
-import { book } from '@mdx-deck/themes'
+import { Appear, Head } from 'mdx-deck'
+import { book, code, dark, future } from '@mdx-deck/themes'
 
-export const theme = book
+export const theme = future
 
-# :pencil: Editing the world
+<Head>
+  <title>Editing the world</title>
+</Head>
+
+## :pencil: Editing the world
 
 ---
 
 ## I'm Julian
 
 I :heart: building editing experiences
+
 <ul>
   <Appear>
-    <li>Freelance builder of editors</li>
-    <li>Member of the draft js core team</li>
-    <li>maintain(ed) draft-js-plugins</li>
+    <li>I'm a freelance frontend engineer</li>
+    <li>I specialize in building editors</li>
+    <li>Maintain(ed) draft-js-plugins (@iamtrysound)</li>
   </Appear>
 </ul>
 
@@ -32,32 +37,55 @@ I :heart: building editing experiences
 
 ---
 
+## Rolling your own
+
+<ol>
+  <Appear>
+    <li>Uncontrolled data flow (2 way)</li>
+    <li>Keeping selection states in sync</li>
+    <li>Write own document model</li>
+  </Appear>
+</ol>
+
+---
+
+## Tools in the wild
+
+- Prosemirror
+- Slate.js
+- Trix Editor
+- Draft.js
+
+---
+
 ## Draft js to the rescue
 
 <ul>
   <Appear>
     <li>Actively used at facebook</li>
-    <li>Stable release takes care of most contentEditable quirks</li>
-    <li>Community</li>
+    <li>Pretty stable</li>
+    <li>Active Community</li>
+    <li>Well written, typed with flow</li>
   </Appear>
 </ul>
 
 ---
 
-## The problem(s) with draft js
+## The problem(s) with draft
 
 <ul>
   <Appear>
     <li>It is large (147kb minified)</li>
-    <li>It depends on Immutable.js (for it's history)</li>
+    <li>Depends on Immutable.js (also huge)</li>
     <li>Complicated, inflexible API</li>
-    <li>Open source repository semi abandoned?</li>
   </Appear>
 </ul>
 
 ---
 
-## Updating tree structures is hard
+## Updating trees is hard
+
+Frameworks are typically based on tree structures
 
 ---
 
@@ -87,6 +115,58 @@ I :heart: building editing experiences
 </div>
 
 ---
+<div>
+<div contentEditable={true} style={{marginTop: '-2em', fontSize: '0.8em', display: 'flex', justifyContent: 'space-between', paddingRight: '3em', alignItems: 'center' }}>
+
+```js
+[{
+  text: 'One',
+}, {
+  text: 'Two',
+  children: [{
+    text: 'Three'
+  }]
+}]
+```
+
+<div style={{display: 'inline-block', padding: 60}}></div>
+
+```js
+[{
+  text: 'One',
+}, {
+  text: 'Tree'
+}]
+```
+</div>
+
+<small style={{ marginTop: '-4em', paddingTop: 0 }}>
+
+```
+{ startIndex: 1, startOffset: 1,
+  endIndex: [1,1], endOffset: 1 }
+```
+
+</small>
+</div>
+
+---
+
+```
+{ startIndex: 1, startOffset: 1,
+  endIndex: [1,1], endOffset: 1 }
+```
+
+<ol>
+  <Appear>
+    <li>Find selected elements in a tree of (n) depth</li>
+    <li>Remove the blocks in between</li>
+    <li>Update blocks to remove text</li>
+    <li>Join the blocks together</li>
+  </Appear>
+</ol>
+
+---
 
 ## Updating text is easy
 
@@ -112,41 +192,83 @@ I :heart: building editing experiences
 </div>
 </div>
 
+```
+text.slice(0, 4) + string.slice(9, 12)
+```
+
 ---
 
 ### Introducing Zettel
 
-<ul>
-  <Appear>
-    <li>Written in typescript :rocket</li>
-    <li>It's tiny - currently sub 30kb minified</li>
-    <li>0 dependencies :tada:</li>
-    <li>State module can be used with any framework</li>
-    <li>Minimal API surface area</li>
-    <li>Changes are atomic - replayable and serializable</li>
-  </Appear>
-</ul>
+- Written in typescript :rocket:
+- It's tiny - currently sub 30kb minified
+- 0 dependencies :tada:
+- State module can be used with any framework
+- Changes are atomic - replayable and serializable
 
 ---
 
 ## Disclaimer
 
-- Zettel is not production ready.
-- I'm the only one working on it.
+- DO :fire: NOT :fire: USE :fire: IN :fire: PRODUCTION 
+- I'm the only one working on it (atm)
 - Intentionally very litle test coverage.
-- Android isn't supported yet
+- Only partial mobile support
+
+---
+
+## Approach
+
+<ul>
+  <Appear>
+    <li>Minimal testing</li>
+    <li>Fast Prototyping</li>
+    <li>Open source -> github.com/juliankrispel/zettel</li>
+  </Appear>
+</ul>
+
+---
+
+## Data model
+
+- Flat data structure for state
+- ^ Generates tree data structure for rendering
+
+---
+
+```
+[One[Two]]
+```
+
+Becomes 
+
+```
+[{ text: 'One', children: [{ text: 'Two'}]}]
+```
 
 ---
 
 ## The Change Object
 
-```js
-
+```typescript
 type Change = {
   start: number,
   end: number,
   value: Value
 }
+```
+
+--- 
+
+Naive implementation of `change(Change)`:
+
+```
+const { start, end, value } = change
+
+const newValue =
+  text.slice(0, start)
+  .concat(value)
+  .concat(text.slice(end, text.length))
 ```
 
 ---
@@ -250,13 +372,5 @@ type Change = {
 
 ### That's it thanks for listening :pray:
 
-*Twitter:* @juliandoesstuff
-Github: juliankrispel
-Web: reactrocket.com
-
-More reading:
-
-- w3 spec: https://w3c.github.io/editing/contentEditable.html
-- Trix Editor: https://github.com/basecamp/trix
-- Prosemirror: http://prosemirror.net
-
+- Twitter: @juliandoesstuff
+- Github: juliankrispel/zettel
