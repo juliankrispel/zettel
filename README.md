@@ -25,9 +25,15 @@ yarn start
 
 ## Roadmap
 
-- [x] 
+- [x] rendering text
 - [x] render blocks
+- [x] keeping selection in sync
+- [x] Deleting characters, insert
+- [x] render non-text media
+- [x] react view layer
 - [x] render text fragments
 - [x] redo/undo
-- [ ]
-- [ ]
+- [ ] Automated browser tests
+- [ ] Android support (via [input events](https://www.w3.org/TR/input-events-2/))
+- [ ] Docs with tutorials
+- [ ] Alternative view layers (Vuejs/svelte/angular)
