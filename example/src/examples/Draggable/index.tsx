@@ -36,7 +36,7 @@ const App = () => {
           scale={1}
         >
           <div>
-            <div contentzettel={false} className="handle"></div>
+            <div contentEditable={false} className="handle"></div>
             <div {...htmlAttrs}>{children}</div>
           </div>
         </Draggable>
