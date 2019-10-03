@@ -27,6 +27,8 @@ yarn start
 
 ## Roadmap
 
+
+- [x] Firefox, Safari, Chrome support
 - [x] rendering text
 - [x] render blocks
 - [x] keeping selection in sync
