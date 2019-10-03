@@ -2,10 +2,6 @@
 # yarn lockfile v1
 
 
-"@zettel/core@link:../core":
-  version "0.0.0"
-  uid ""
-
 "@types/dom-inputevent@^1.0.4":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@types/dom-inputevent/-/dom-inputevent-1.0.5.tgz#c880fa9b4482b49accc107e4a950117a1af7a61b"
@@ -37,6 +33,14 @@
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
+
+"@zettel/core@0.0.12":
+  version "0.0.12"
+  resolved "https://registry.yarnpkg.com/@zettel/core/-/core-0.0.12.tgz#a952b8a578076468074d5bdc9517183e6118e970"
+  integrity sha512-ix35O14T/Bp3OXK2Tnb3UWF+NAuk4NczXebkAgluHk+l1X+Yb+hExa7LkAaPhqkaQ8AzoVNMPzAqVKJLaHLgvg==
+  dependencies:
+    "@types/ramda" "^0.26.21"
+    ramda "^0.26.1"
 
 csstype@^2.2.0:
   version "2.6.6"

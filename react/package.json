@@ -1,6 +1,6 @@
 {
   "name": "@zettel/react",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "React view library for zettel",
   "main": "dist/index.js",
   "author": "Julian Krispel",
@@ -11,7 +11,7 @@
     "prepublish": "tsc"
   },
   "dependencies": {
-    "@zettel/core": "0.0.11"
+    "@zettel/core": "0.0.12"
   },
   "peerDependencies": {
     "react": "16.8.6",
