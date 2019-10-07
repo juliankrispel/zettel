@@ -37,6 +37,8 @@ yarn start
 - [x] react view layer
 - [x] render text fragments
 - [x] redo/undo
+- [ ] IME Event handling
+- [ ] Android support (via Input Events Level 2)
 - [ ] Automated browser tests
 - [ ] Prototype collaborative editing
 - [ ] Android support (via [input events](https://www.w3.org/TR/input-events-2/))
