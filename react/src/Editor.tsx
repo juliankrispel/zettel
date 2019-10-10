@@ -3,27 +3,6 @@ import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionCha
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
-const _cb = (event: InputEvent) => {
-  // debugger
-  const {
-    data,
-    inputType,
-    isComposing,
-  } = event
-
-  console.log({
-    type: event.type,
-    data,
-    inputType,
-    isComposing,
-    // @ts-ignore
-    range: getSelection().getRangeAt(0),
-  });
-  event.preventDefault()
-  event.stopPropagation()
-}
-
-
 type Props = RenderProps & {
   onChange: (editorState: EditorState) => void,
   editorState: EditorState,
@@ -75,9 +54,6 @@ const Editor = (props: Props): React.ReactElement => {
   useLayoutEffect(() => {
     const el: any = ref != null ? ref.current : null
     if (el != null) {
-      console.log('hello')
-      // @ts-ignore
-
       const cb = (event: InputEvent) => {
         onChange(onInput(editorState, event))
       }
@@ -88,7 +64,7 @@ const Editor = (props: Props): React.ReactElement => {
         el.removeEventListener('beforeinput', cb)
       }
     }
- }, [ref.current])
+ }, [ref.current, editorState])
 
   const divProps = {
     ...htmlAttrs,

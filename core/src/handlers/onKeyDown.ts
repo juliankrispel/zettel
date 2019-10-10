@@ -97,21 +97,21 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   } else if (event.key === 'Enter') {
     // splitBlock
     newEditorState = splitBlock(editorState, start, end)
-  } else if (event.key === 'Delete' && isCollapsed) {
-    // deleteForward
-    newEditorState = deleteForward(editorState, start, end)
-  } else if (event.key === 'Delete' && !isCollapsed) {
-    // removeRange
-    newEditorState = removeRange(editorState, start, end)
-  } else if (isCharacterInsert(event)) {
-    // insertCharacter
-
-    newEditorState = insertCharacter(
-      editorState,
-      start,
-      end,
-      event.char
-    )
+//  } else if (event.key === 'Delete' && isCollapsed) {
+//    // deleteForward
+//    newEditorState = deleteForward(editorState, start, end)
+//  } else if (event.key === 'Delete' && !isCollapsed) {
+//    // removeRange
+//    newEditorState = removeRange(editorState, start, end)
+//  } else if (isCharacterInsert(event)) {
+//    // insertCharacter
+//
+//    newEditorState = insertCharacter(
+//      editorState,
+//      start,
+//      end,
+//      event.char
+//    )
   }
 
   return newEditorState

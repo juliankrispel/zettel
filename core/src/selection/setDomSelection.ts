@@ -1,5 +1,4 @@
 import getBlockForIndex from '../getBlockForIndex'
-import getDomSelection from './getDomSelection'
 import EditorState from '../EditorState'
 
 const findRangeTarget = (el: Node | null): Node | null => {

@@ -30,10 +30,15 @@ export default (listState: ListState): SelectionState | null => {
     return null
   }
 
+  const range = domSelection.getRangeAt(0)
+  const {} = range
+
   let {
     anchorOffset,
     focusOffset
   } = domSelection
+
+  console.log({ range, anchorOffset, focusOffset })
 
   const _anchorNode: any = domSelection.anchorNode
   const _focusNode: any = domSelection.focusNode

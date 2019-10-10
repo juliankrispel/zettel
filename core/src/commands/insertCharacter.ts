@@ -34,6 +34,9 @@ export default function insertCharacter(
       styles: editorState.currentStyles,
       entity,
     }]
+  }).change({
+    start: start + 1,
+    end: start + 1
   })
 
   return newEditorState
