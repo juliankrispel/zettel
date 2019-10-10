@@ -36,18 +36,17 @@ export default function change(update: Update): Update {
     throw new Error('Last character always needs to be block-end')
   }
 
-  const newChange: Change = {
+  const reverse: Change = {
     start: start + 1,
     end: end - selectedValue.length + valueUpdate.length + 1,
     value: selectedValue
   }
-
 
   return {
     current: {
       value: newValue,
       entityMap,
     },
-    change: newChange,
+    change: reverse,
   }
 }

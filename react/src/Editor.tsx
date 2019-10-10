@@ -1,7 +1,28 @@
-import React, { useLayoutEffect, useRef, useEffect } from 'react'
-import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange } from '@zettel/core'
+import React, { useLayoutEffect, useRef, useEffect, useMemo } from 'react'
+import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange, onInput } from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
+
+const _cb = (event: InputEvent) => {
+  // debugger
+  const {
+    data,
+    inputType,
+    isComposing,
+  } = event
+
+  console.log({
+    type: event.type,
+    data,
+    inputType,
+    isComposing,
+    // @ts-ignore
+    range: getSelection().getRangeAt(0),
+  });
+  event.preventDefault()
+  event.stopPropagation()
+}
+
 
 type Props = RenderProps & {
   onChange: (editorState: EditorState) => void,
@@ -52,17 +73,22 @@ const Editor = (props: Props): React.ReactElement => {
   })
 
   useLayoutEffect(() => {
-    const el = ref != null ? ref.current : null
+    const el: any = ref != null ? ref.current : null
     if (el != null) {
+      console.log('hello')
       // @ts-ignore
-      el.addEventListener('beforeinput', (event) => {
-        // debugger
-        console.log(event);
-        event.preventDefault()
-        event.stopPropagation()
-      })
+
+      const cb = (event: InputEvent) => {
+        onChange(onInput(editorState, event))
+      }
+
+      el.addEventListener('beforeinput', cb)
+
+      return () => {
+        el.removeEventListener('beforeinput', cb)
+      }
     }
-  }, [ref.current])
+ }, [ref.current])
 
   const divProps = {
     ...htmlAttrs,
@@ -72,23 +98,6 @@ const Editor = (props: Props): React.ReactElement => {
 
   return (
     <div
-      onKeyDown={(event) => {
-        let handled = null
-
-        if (props.onKeyDown != null) {
-          handled = props.onKeyDown(event)
-        }
-
-        if (handled == null) {
-          handled = onKeyDown(editorState, event.nativeEvent)
-        }
-
-        if (handled != null) {
-          event.preventDefault()
-          onChange(handled)
-        }
-      }}
-
       onSelect={() => {
         const newEditorState = onSelectionChange(editorState)
         const { start, end } = editorState
@@ -99,27 +108,9 @@ const Editor = (props: Props): React.ReactElement => {
           onChange(newEditorState)
         }
       }}
-      
-      onInput={(event) => {
-        event.preventDefault()
-        event.stopPropagation()
-      }}
-
-      onBeforeInput={(event) => {
-        /*
-        * TODO: Investigate input events
-        * For now I'm blocking these to avoid content
-        * and selection to get out of place
-        */
-        console.log(event)
-        event.preventDefault()
-        event.stopPropagation()
-      }}
       suppressContentEditableWarning
       role="textbox"
       autoCorrect={'off'}
-      onPaste={(event) => onChange(onPaste(editorState, event.nativeEvent))}
-      onCut={(event) => onChange(onCut(editorState, event.nativeEvent))}
       ref={ref}
       {...divProps}
     >

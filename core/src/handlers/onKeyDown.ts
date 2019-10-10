@@ -110,7 +110,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
       editorState,
       start,
       end,
-      event
+      event.char
     )
   }
 

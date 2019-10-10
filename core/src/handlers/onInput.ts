@@ -1,5 +1,6 @@
 import EditorState from "../EditorState";
 import valueFromText from '../valueFromText'
+import { insertCharacter } from '../commands'
 import getDomSelection from "../selection/getDomSelection";
 
 type InputEvent = Event & {
@@ -9,33 +10,32 @@ type InputEvent = Event & {
 
 export default function onInput(editorState: EditorState, _event: any) {
   const event: InputEvent = _event
-  const position = getDomSelection(editorState.list)
+  let newEditorState = editorState
+  let position = getDomSelection(editorState.list)
 
-  console.log('on input')
+  console.log({ position })
+
   if (position === null) {
-    console.warn('cant get start and end selection')
-    return editorState
+    console.warn('cant get start and end selection, resume with current state')
+    position  = {
+      start: editorState.start,
+      end: editorState.end,
+      anchorOffset: editorState.anchorOffset,
+      focusOffset: editorState.focusOffset
+    }
   }
-
-  event.preventDefault()
 
   const { start, end } = position
+  const isCollapsed = start === end
 
-  if (event.inputType !== 'insertText' || event.data == null) {
-    return editorState
+  if (event.type === 'textInput' && !isCollapsed) {
+    newEditorState = insertCharacter(
+      editorState,
+      start,
+      end,
+      event.data || ''
+    )
   }
 
-  const text = event.data
-
-  const changed = editorState.change({
-    start: start - 2,
-    end: start,
-    value: valueFromText(text),
-  }).change({
-    start: + 1,
-    end: start + 1,
-    value: []
-  })
-
-  return changed
+  return newEditorState
 }

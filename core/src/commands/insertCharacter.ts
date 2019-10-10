@@ -3,20 +3,14 @@ import { COMMAND } from '../constants'
 
 export default function insertCharacter(
   editorState: EditorState,
-  _start: number,
-  _end: number,
-  event: KeyboardEvent, 
+  start: number,
+  end: number,
+  char: string
 ) {
-  // @ts-ignore
-  const start = event.isComposing ? _start - 1 : _start
-  // @ts-ignore
-  const end = event.isComposing ? _end - 1 : _end
 
   const prevValue = editorState.list.value[start]
   const nextValue = editorState.list.value[end + 1]
   let entity
-  let char = event.key
-  console.log({ start, end, char })
 
   // TODO: Write some tests for this
   // Basically only when we're inside an entity
@@ -41,16 +35,6 @@ export default function insertCharacter(
       entity,
     }]
   })
-
-  // @ts-ignore
-  if (!event.isComposing) {
-    return newEditorState.change({
-      type: COMMAND.INSERT_CHARACTER,
-      start: start + 1,
-      end: start + 1,
-      value: [],
-    })
-  }
 
   return newEditorState
 }
