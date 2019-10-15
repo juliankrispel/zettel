@@ -7,10 +7,10 @@ import {
   Changes,
   Entity,
 } from '../types'
-import rawToFlat from '../serialize/rawToFlat'
+import rawToFlat from '../serialize/fromRaw'
 import id from './id'
 import change, { Update } from '../change/change'
-import textToFlat from '../serialize/textToFlat'
+import textToFlat from '../serialize/fromText'
 import flatToTree from '../tree/flatToTree'
 import { undo, redo } from '../change';
 

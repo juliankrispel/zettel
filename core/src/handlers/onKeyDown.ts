@@ -42,6 +42,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
 
   if (isUndo(event)) {
     // undo
+    console.log('undo')
     newEditorState = undo(editorState)
   } else if (isMoveFocus(event)) {
     if (event.key === 'ArrowLeft' && event.metaKey) {

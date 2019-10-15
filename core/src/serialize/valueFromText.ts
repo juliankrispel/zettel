@@ -1,5 +1,5 @@
 import { Value } from '../types'
-import raw from './rawToFlat'
+import raw from './fromRaw'
 
 const valueFromText = (text: string): Value => {
   return raw({
