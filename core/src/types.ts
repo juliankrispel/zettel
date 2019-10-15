@@ -95,6 +95,14 @@ export type Change = {
   value: Value
 }
 
+export type EditorChange = {
+  start?: number,
+  end?: number,
+  value?: Value,
+  isBoundary?: boolean,
+  type?: string
+}
+
 /**
  * History
  */

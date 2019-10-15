@@ -1,0 +1,14 @@
+import EditorState from '../state'
+import updateSelection from './updateSelection'
+import getPreviousCharacterIndex from '../query/getPreviousCharacterIndex'
+
+export default function moveFocusBack(editorState: EditorState): EditorState {
+  const focusOffset = getPreviousCharacterIndex(editorState, editorState.focusOffset)
+  return updateSelection(
+    editorState,
+    {
+      anchorOffset: editorState.anchorOffset,
+      focusOffset: focusOffset
+    }
+  )
+}

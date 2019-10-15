@@ -1,19 +1,12 @@
 import getDomSelection from '../selection/getDomSelection'
-import EditorState from '../EditorState';
+import EditorState from '../state';
 import {
-  deleteForward,
-  insertCharacter,
   moveFocusBack,
   moveFocusForward,
-  splitBlock,
-  removeRange,
-  undo,
+  undo, 
   redo,
-  backspaceToBlockStart,
   updateSelection,
-  backspaceToPrevWord,
-  backspace
-} from '../commands'
+} from '../change'
 
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
@@ -47,9 +40,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     }
   }
 
-  const { start, end } = position
-  const isCollapsed = start === end
-
   if (isUndo(event)) {
     // undo
     newEditorState = undo(editorState)
@@ -82,36 +72,6 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   } else if (isRedo(event)) {
     // redo
     newEditorState = redo(editorState)
-  } else if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
-    // backspaceToBlockStart
-    newEditorState = backspaceToBlockStart(editorState, start, end)
-  } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
-    // backspaceToPrevWord
-    newEditorState = backspaceToPrevWord(editorState, start, end)
-  } else if (event.key === 'Backspace' && isCollapsed) {
-    // backspace
-    newEditorState = backspace(editorState, start, end)
-  } else if (event.key === 'Backspace' && !isCollapsed) {
-    // removeRange
-    newEditorState = removeRange(editorState, start, end)
-  } else if (event.key === 'Enter') {
-    // splitBlock
-    newEditorState = splitBlock(editorState, start, end)
-//  } else if (event.key === 'Delete' && isCollapsed) {
-//    // deleteForward
-//    newEditorState = deleteForward(editorState, start, end)
-//  } else if (event.key === 'Delete' && !isCollapsed) {
-//    // removeRange
-//    newEditorState = removeRange(editorState, start, end)
-//  } else if (isCharacterInsert(event)) {
-//    // insertCharacter
-//
-//    newEditorState = insertCharacter(
-//      editorState,
-//      start,
-//      end,
-//      event.char
-//    )
   }
 
   return newEditorState

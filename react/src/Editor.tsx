@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useRef, useEffect, useMemo } from 'react'
-import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange, onInput } from '@zettel/core'
+import React, { useLayoutEffect, useRef, useState, useMemo } from 'react'
+import { EditorState, setDomSelection, onKeyDown, onBeforeInput, onSelectionChange } from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
@@ -28,9 +28,8 @@ const DefaultRenderBlock: RenderBlock = (props) => <div {...props.htmlAttrs}>{pr
  */
 const Editor = (props: Props): React.ReactElement => {
   const {
-    editorState,
+    editorState: _editorState,
     onChange,
-    mapBlock,
     readOnly,
     htmlAttrs,
     renderTextFragment: renderEntity,
@@ -40,6 +39,8 @@ const Editor = (props: Props): React.ReactElement => {
   } = props
 
   const ref = useRef(null)
+  const [isComposing, setComposing] = useState(false)
+  const editorState = useMemo(() => _editorState, [isComposing || _editorState])
 
   /*
   * we need to enforce our selection
@@ -49,19 +50,20 @@ const Editor = (props: Props): React.ReactElement => {
     if (container != null) {
       setDomSelection(editorState, container)
     }
-  })
+  }, [editorState])
 
   useLayoutEffect(() => {
     const el: any = ref != null ? ref.current : null
     if (el != null) {
-      const cb = (event: InputEvent) => {
-        onChange(onInput(editorState, event))
+      // @ts-ignore
+      const beforeinput = (event: InputEvent) => {
+        onChange(onBeforeInput(editorState, event))
       }
 
-      el.addEventListener('beforeinput', cb)
+      el.addEventListener('beforeinput', beforeinput)
 
       return () => {
-        el.removeEventListener('beforeinput', cb)
+        el.removeEventListener('beforeinput', beforeinput)
       }
     }
  }, [ref.current, editorState])
@@ -84,6 +86,24 @@ const Editor = (props: Props): React.ReactElement => {
           onChange(newEditorState)
         }
       }}
+      onCompositionStart={() => setComposing(true)}
+      onCompositionEnd={() => setComposing(false)}
+      onKeyDown={(event) => {
+        let handled = null
+
+        if (props.onKeyDown != null) {
+          handled = props.onKeyDown(event)
+        }
+
+        if (handled == null) {
+          handled = onKeyDown(editorState, event.nativeEvent)
+        }
+
+        if (handled != null) {
+          event.preventDefault()
+          onChange(handled)
+        }
+      }}
       suppressContentEditableWarning
       role="textbox"
       autoCorrect={'off'}
@@ -91,7 +111,6 @@ const Editor = (props: Props): React.ReactElement => {
       {...divProps}
     >
       <EditorChildren
-        mapBlock={mapBlock}
         blocks={editorState.tree.blocks}
         renderBlock={renderBlock}
         renderTextFragment={renderEntity}

@@ -1,8 +1,9 @@
 import { ListState } from '../types'
 import getFragmentOffset from './getFragmentOffset'
 
-export default function getDomRange(list: ListState): { start: number, end: number } | null {
+export default function getDomRange(list: ListState): { start: number, end: number, collapsed: boolean } | null {
   const domSelection = window.getSelection()
+  // @ts-ignore
   if (domSelection == null || domSelection.anchorNode == null) {
     return null
   }
@@ -15,6 +16,7 @@ export default function getDomRange(list: ListState): { start: number, end: numb
 
   return {
     start: range.startOffset + fragmentOffsetStart,
-    end: range.endOffset + fragmentOffsetEnd
+    end: range.endOffset + fragmentOffsetEnd,
+    collapsed: range.collapsed
   } 
 }

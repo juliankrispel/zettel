@@ -1,6 +1,6 @@
-import EditorState from "../EditorState";
-import valueFromText from '../valueFromText'
-import { insertCharacter } from '../commands'
+import EditorState from "../state";
+import valueFromText from '../serialize/valueFromText'
+import { insertCharacter } from '../change'
 import getDomSelection from "../selection/getDomSelection";
 import getDomRange from "../selection/getDomRange";
 
@@ -21,11 +21,11 @@ export default function onInput(editorState: EditorState, _event: any) {
   event.preventDefault()
   event.stopPropagation()
 
-  console.log(event.inputType)
+  console.log({ inputType: event.inputType, start, end, data: event.data })
   if (event.inputType === 'insertText') {
-    console.log('insert character', { start, end, data: event.data })
-    console.log(event.data)
     newEditorState = insertCharacter(newEditorState, start, end, event.data || '')
+  } else if (event.inputType === 'insertLineBreak') {
+
   }
 
   return newEditorState

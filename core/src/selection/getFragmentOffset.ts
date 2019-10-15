@@ -1,5 +1,5 @@
 import { ListState } from '../types'
-import getBlockOffset from '../getBlockOffset'
+import getBlockOffset from '../query/getBlockOffset'
 
 interface ElementWithDataSet extends HTMLElement {
   readonly dataset: {

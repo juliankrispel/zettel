@@ -1,5 +1,5 @@
-import getBlockForIndex from '../getBlockForIndex'
-import EditorState from '../EditorState'
+import getBlockForIndex from '../query/getBlockForIndex'
+import EditorState from '../state'
 
 const findRangeTarget = (el: Node | null): Node | null => {
   if (el == null) {

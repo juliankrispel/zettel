@@ -1,5 +1,5 @@
 import { ListState, SelectionState } from "../types";
-import getBlockOffset from '../getBlockOffset'
+import getBlockOffset from '../query/getBlockOffset'
 
 interface ElementWithDataSet extends HTMLElement {
   readonly dataset: {
@@ -37,8 +37,6 @@ export default (listState: ListState): SelectionState | null => {
     anchorOffset,
     focusOffset
   } = domSelection
-
-  console.log({ range, anchorOffset, focusOffset })
 
   const _anchorNode: any = domSelection.anchorNode
   const _focusNode: any = domSelection.focusNode
