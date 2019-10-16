@@ -2,7 +2,7 @@ __DO NOT USE IN PRODUCTION__
 
 # Zettel
 
-Framework for building text editors in the browser. Experimental, 
+Framework for building text editors in the browser. __Experimental__
 
 [![npm version](https://badge.fury.io/js/%40zettel%2Fcore.svg)](https://badge.fury.io/js/%40zettel%2Fcore)
 [![npm version](https://badge.fury.io/js/%40zettel%2Freact.svg)](https://badge.fury.io/js/%40zettel%2Freact)
@@ -27,7 +27,6 @@ yarn start
 
 ## Roadmap
 
-
 - [x] Firefox, Safari, Chrome support
 - [x] rendering text
 - [x] render blocks
@@ -37,10 +36,14 @@ yarn start
 - [x] react view layer
 - [x] render text fragments
 - [x] redo/undo
+- [ ] UTF-16 support for editing
 - [ ] IME Event handling
 - [ ] Android support (via Input Events Level 2)
 - [ ] Automated browser tests
 - [ ] Prototype collaborative editing
-- [ ] Android support (via [input events](https://www.w3.org/TR/input-events-2/))
+- [ ] [Input events level 2 support](https://www.w3.org/TR/input-events-2/)
+- [ ] Android support [thanks Trix ❤️](https://github.com/basecamp/trix/blob/master/src/trix/controllers/level_2_input_controller.coffee)
+- [ ] [IME support](https://developer.mozilla.org/en-US/docs/Mozilla/IME_handling_guide)
+- [ ] [rtl support](https://www.w3.org/International/articles/inline-bidi-markup/)
 - [ ] Docs with tutorials
 - [ ] Alternative view layers (Vuejs/svelte/angular)

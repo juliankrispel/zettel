@@ -1,20 +1,22 @@
 import getDomSelection from '../selection/getDomSelection'
 import EditorState from '../EditorState';
 import {
-  deleteForward,
-  insertCharacter,
   moveFocusBack,
   moveFocusForward,
-  splitBlock,
-  removeRange,
-  undo,
+  undo, 
   redo,
-  backspaceToBlockStart,
   updateSelection,
+  backspaceToBlockStart,
   backspaceToPrevWord,
-  backspace
-} from '../commands'
+  backspace,
+  removeRange,
+  splitBlock,
+  deleteForward,
+  insertCharacter,
+} from '../change'
 
+// @ts-ignore
+const inputEventSupported = (new InputEvent('insertText')).getTargetRanges != null
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
 const isCharacterInsert = (e: KeyboardEvent) =>
@@ -82,36 +84,40 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   } else if (isRedo(event)) {
     // redo
     newEditorState = redo(editorState)
-  } else if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
-    // backspaceToBlockStart
-    newEditorState = backspaceToBlockStart(editorState, start, end)
-  } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
-    // backspaceToPrevWord
-    newEditorState = backspaceToPrevWord(editorState, start, end)
-  } else if (event.key === 'Backspace' && isCollapsed) {
-    // backspace
-    newEditorState = backspace(editorState, start, end)
-  } else if (event.key === 'Backspace' && !isCollapsed) {
-    // removeRange
-    newEditorState = removeRange(editorState, start, end)
-  } else if (event.key === 'Enter') {
-    // splitBlock
-    newEditorState = splitBlock(editorState, start, end)
-  } else if (event.key === 'Delete' && isCollapsed) {
-    // deleteForward
-    newEditorState = deleteForward(editorState, start, end)
-  } else if (event.key === 'Delete' && !isCollapsed) {
-    // removeRange
-    newEditorState = removeRange(editorState, start, end)
-  } else if (isCharacterInsert(event)) {
-    // insertCharacter
+  }
+  
+  if (newEditorState == null && !inputEventSupported) {
+    if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
+      // backspaceToBlockStart
+      newEditorState = backspaceToBlockStart(editorState, start, end)
+    } else if (isCollapsed && event.key === 'Backspace' && event.altKey === true) {
+      // backspaceToPrevWord
+      newEditorState = backspaceToPrevWord(editorState, start, end)
+    } else if (event.key === 'Backspace' && isCollapsed) {
+      // backspace
+      newEditorState = backspace(editorState, start, end)
+    } else if (event.key === 'Backspace' && !isCollapsed) {
+      // removeRange
+      newEditorState = removeRange(editorState, start, end)
+    } else if (event.key === 'Enter') {
+      // splitBlock
+      newEditorState = splitBlock(editorState, start, end)
+    } else if (event.key === 'Delete' && isCollapsed) {
+      // deleteForward
+      newEditorState = deleteForward(editorState, start, end)
+    } else if (event.key === 'Delete' && !isCollapsed) {
+      // removeRange
+      newEditorState = removeRange(editorState, start, end)
+    } else if (isCharacterInsert(event)) {
+      // insertCharacter
 
-    newEditorState = insertCharacter(
-      editorState,
-      start,
-      end,
-      event
-    )
+      newEditorState = insertCharacter(
+        editorState,
+        start,
+        end,
+        event.key
+      )
+    }
   }
 
   return newEditorState

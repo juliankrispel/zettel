@@ -1,5 +1,5 @@
 import EditorState from "../EditorState";
-import { removeRange } from '../commands'
+import { removeRange } from '../change'
 
 export default function onCut(editorState: EditorState, event: ClipboardEvent) {
   event.preventDefault()

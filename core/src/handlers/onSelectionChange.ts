@@ -1,7 +1,7 @@
 import getDomSelection from '../selection/getDomSelection'
 import EditorState from '../EditorState'
 import { COMMAND } from '../constants'
-import { updateSelection } from '../commands'
+import { updateSelection } from '../change'
 
 export default function onSelectionChange(editorState: EditorState) {
   const result = getDomSelection(editorState.list)

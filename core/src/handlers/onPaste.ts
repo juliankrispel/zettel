@@ -1,5 +1,5 @@
 import EditorState from "../EditorState";
-import valueFromText from '../valueFromText'
+import valueFromText from '../serialize/valueFromText'
 import getDomSelection from "../selection/getDomSelection";
 
 export default function onPaste(editorState: EditorState, event: ClipboardEvent) {

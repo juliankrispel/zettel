@@ -3,7 +3,7 @@ import ItalicAndBold from  './ItalicAndBold'
 import BlockStyling from './BlockStyling'
 import PlainText from './PlainText'
 import Tree from './Tree'
-import Columns from './Columns'
+import InputTester from './InputTester'
 import MarkdownTest from './MarkdownTest'
 import Draggable from './Draggable'
 import TimeTravel from './TimeTravel'
@@ -11,7 +11,7 @@ import TimeTravel from './TimeTravel'
 export {
   PlainText,
   KittenAndLink,
-  Columns,
+  InputTester,
   ItalicAndBold,
   BlockStyling,
   Tree,

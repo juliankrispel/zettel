@@ -3,28 +3,21 @@ import {
   ListState,
   RawDocument, 
   Change,
+  EditorChange,
   Changes,
   Entity,
-  Value,
 } from '../types'
-import rawToFlat from '../rawToFlat'
+
+import rawToFlat from '../serialize/fromRaw'
 import id from './id'
-import change, { Update } from './change'
-import textToFlat from '../textToFlat'
-import flatToTree from '../flatToTree'
-import { undo, redo } from '../commands';
+import change, { Update } from '../change/change'
+import textToFlat from '../serialize/fromText'
+import flatToTree from '../ViewState/flatToTree'
+import { undo, redo } from '../change';
 
 const emptyList: ListState = {
   value: [],
   entityMap: {}
-}
-
-type EditorChange = {
-  start?: number,
-  end?: number,
-  value?: Value,
-  isBoundary?: boolean,
-  type?: string
 }
 
 type ConstructorProps = {

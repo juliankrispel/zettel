@@ -1,6 +1,7 @@
-import getBlockForIndex from '../getBlockForIndex'
-import getDomSelection from './getDomSelection'
+import getBlockForIndex from '../query/getBlockForIndex'
 import EditorState from '../EditorState'
+import { getUCS2Position } from '../utils'
+import getFragmentNode from './getFragmentNode'
 
 const findRangeTarget = (el: Node | null): Node | null => {
   if (el == null) {
@@ -38,14 +39,14 @@ export default function setDomSelection(
   } = getBlockForIndex(list.value, editorState.anchorOffset)
 
   if (focusBlock == null || anchorBlock == null) {
-    return 
     console.warn('cannot select current start and end position')
+    return 
   }
 
   const anchorNodes = containerNode.querySelectorAll(`[data-block-key="${anchorBlock.blockKey}"]`)
   const focusNodes = containerNode.querySelectorAll(`[data-block-key="${focusBlock.blockKey}"]`)
-  const anchorOffset = editorState.anchorOffset - anchorBlockOffset
-  const focusOffset = editorState.focusOffset - focusBlockOffset
+  let anchorOffset = editorState.anchorOffset - anchorBlockOffset
+  let focusOffset = editorState.focusOffset - focusBlockOffset
 
   const anchorFragment: any = Array.from(anchorNodes).find((node: any) => {
     return parseInt(node.dataset.fragmentStart) <= anchorOffset &&
@@ -65,17 +66,31 @@ export default function setDomSelection(
 
   const focusFragmentOffset = parseInt(focusFragment.dataset.fragmentStart)
 
-  const anchorNode = findRangeTarget(anchorFragment)
-  const focusNode = findRangeTarget(focusFragment)
+  const anchorNode = findRangeTarget(anchorFragment) as HTMLElement
+  const focusNode = findRangeTarget(focusFragment) as HTMLElement
 
   const newSelection = window.getSelection()
+
+  anchorOffset = anchorOffset - anchorFragmentOffset
+  focusOffset = focusOffset - focusFragmentOffset
+
+  const fragmentAnchorNode = getFragmentNode(anchorNode)
+  const fragmentFocusNode = getFragmentNode(focusNode)
+
+  if (fragmentAnchorNode != null && anchorOffset !== 0) {
+    anchorOffset = getUCS2Position(fragmentAnchorNode.innerText, anchorOffset)
+  }
+
+  if (fragmentFocusNode != null && focusOffset !== 0) {
+    focusOffset = getUCS2Position(fragmentFocusNode.innerText, focusOffset)
+  }
 
   if (newSelection != null && anchorNode != null && focusNode != null) {
     newSelection.setBaseAndExtent(
       anchorNode,
-      anchorOffset - anchorFragmentOffset,
+      anchorOffset,
       focusNode,
-      focusOffset - focusFragmentOffset
+      focusOffset
     )
   }
 }

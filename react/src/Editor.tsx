@@ -1,5 +1,12 @@
-import React, { useLayoutEffect, useRef, useEffect } from 'react'
-import { EditorState, setDomSelection, onKeyDown, onPaste, onCut, onSelectionChange } from '@zettel/core'
+import React, { useLayoutEffect, useRef, useState, useMemo } from 'react'
+import {
+  EditorState,
+  setDomSelection,
+  onKeyDown,
+  onBeforeInput,
+  onSelectionChange,
+  toText
+} from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
@@ -28,9 +35,8 @@ const DefaultRenderBlock: RenderBlock = (props) => <div {...props.htmlAttrs}>{pr
  */
 const Editor = (props: Props): React.ReactElement => {
   const {
-    editorState,
+    editorState: _editorState,
     onChange,
-    mapBlock,
     readOnly,
     htmlAttrs,
     renderTextFragment: renderEntity,
@@ -40,6 +46,8 @@ const Editor = (props: Props): React.ReactElement => {
   } = props
 
   const ref = useRef(null)
+  const [isComposing, setComposing] = useState(false)
+  const editorState = useMemo(() => _editorState, [isComposing || _editorState])
 
   /*
   * we need to enforce our selection
@@ -49,20 +57,22 @@ const Editor = (props: Props): React.ReactElement => {
     if (container != null) {
       setDomSelection(editorState, container)
     }
-  })
+  }, [editorState])
 
   useLayoutEffect(() => {
-    const el = ref != null ? ref.current : null
+    const el: any = ref != null ? ref.current : null
     if (el != null) {
       // @ts-ignore
-      el.addEventListener('beforeinput', (event) => {
-        // debugger
-        console.log(event);
-        event.preventDefault()
-        event.stopPropagation()
-      })
+      const beforeinput = (event: InputEvent) => {
+        onChange(onBeforeInput(editorState, event))
+      }
+
+      el.addEventListener('beforeinput', beforeinput)
+      return () => {
+        el.removeEventListener('beforeinput', beforeinput)
+      }
     }
-  }, [ref.current])
+ }, [ref.current, editorState])
 
   const divProps = {
     ...htmlAttrs,
@@ -72,6 +82,18 @@ const Editor = (props: Props): React.ReactElement => {
 
   return (
     <div
+      onSelect={() => {
+        const newEditorState = onSelectionChange(editorState)
+        const { start, end } = editorState
+
+        if (newEditorState != null &&
+          (start !== newEditorState.start|| end !== newEditorState.end)
+        ) {
+          onChange(newEditorState)
+        }
+      }}
+      onCompositionStart={() => setComposing(true)}
+      onCompositionEnd={() => setComposing(false)}
       onKeyDown={(event) => {
         let handled = null
 
@@ -88,43 +110,13 @@ const Editor = (props: Props): React.ReactElement => {
           onChange(handled)
         }
       }}
-
-      onSelect={() => {
-        const newEditorState = onSelectionChange(editorState)
-        const { start, end } = editorState
-
-        if (newEditorState != null &&
-          (start !== newEditorState.start|| end !== newEditorState.end)
-        ) {
-          onChange(newEditorState)
-        }
-      }}
-      
-      onInput={(event) => {
-        event.preventDefault()
-        event.stopPropagation()
-      }}
-
-      onBeforeInput={(event) => {
-        /*
-        * TODO: Investigate input events
-        * For now I'm blocking these to avoid content
-        * and selection to get out of place
-        */
-        console.log(event)
-        event.preventDefault()
-        event.stopPropagation()
-      }}
       suppressContentEditableWarning
       role="textbox"
       autoCorrect={'off'}
-      onPaste={(event) => onChange(onPaste(editorState, event.nativeEvent))}
-      onCut={(event) => onChange(onCut(editorState, event.nativeEvent))}
       ref={ref}
       {...divProps}
     >
       <EditorChildren
-        mapBlock={mapBlock}
         blocks={editorState.tree.blocks}
         renderBlock={renderBlock}
         renderTextFragment={renderEntity}
