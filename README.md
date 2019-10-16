@@ -37,6 +37,8 @@ yarn start
 - [x] render text fragments
 - [x] redo/undo
 - [ ] UTF-16 support for editing
+- [ ] IME Event handling
+- [ ] Android support (via Input Events Level 2)
 - [ ] Automated browser tests
 - [ ] Prototype collaborative editing
 - [ ] [Input events level 2 support](https://www.w3.org/TR/input-events-2/)
