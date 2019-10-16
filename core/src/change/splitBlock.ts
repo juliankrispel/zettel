@@ -1,6 +1,6 @@
 import getBlockForIndex from '../query/getBlockForIndex'
-import EditorState from '../state'
-import id from '../state/id'
+import EditorState from '../EditorState'
+import id from '../EditorState/id'
 import { COMMAND } from '../constants'
 import { BlockEnd } from '../types'
 import { BlockStart } from '../types'

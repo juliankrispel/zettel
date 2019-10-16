@@ -1,4 +1,4 @@
-import EditorState from "../state";
+import EditorState from "../EditorState";
 import valueFromText from '../serialize/valueFromText'
 import getDomSelection from "../selection/getDomSelection";
 

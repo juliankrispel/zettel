@@ -1,4 +1,4 @@
-import EditorState from '../state'
+import EditorState from '../EditorState'
 import { COMMAND } from '../constants'
 
 type SelectionStateUpdate = {

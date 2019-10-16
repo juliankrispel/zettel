@@ -1,5 +1,5 @@
 import getDomSelection from '../selection/getDomSelection'
-import EditorState from '../state'
+import EditorState from '../EditorState'
 import { COMMAND } from '../constants'
 import { updateSelection } from '../change'
 

@@ -1,7 +1,7 @@
 import { BlockStart, BlockEnd, Character, RawDocument, ListState, TextCharacter } from '../types'
-import id from '../state/id'
+import id from '../EditorState/id'
 
-const parseFlatState = (raw: RawDocument): ListState => {
+const fromRaw = (raw: RawDocument): ListState => {
   const state: ListState = {
     value: [],
     entityMap: raw.entityMap
@@ -9,7 +9,9 @@ const parseFlatState = (raw: RawDocument): ListState => {
 
   let ignore = true
 
-  raw.text.split('').forEach(char => {
+  const text = raw.text
+
+  for (let char of text) {
     if (char === '[') {
       ignore = false
 
@@ -33,7 +35,7 @@ const parseFlatState = (raw: RawDocument): ListState => {
       }
       state.value.push(val)
     }
-  })
+  }
 
   raw.ranges.forEach(({ offset, length, entity: entityKey, ...charData }) => {
     for (var i = offset; i < offset + length; i++) {
@@ -57,4 +59,4 @@ const parseFlatState = (raw: RawDocument): ListState => {
   return state
 }
 
-export default parseFlatState
+export default fromRaw

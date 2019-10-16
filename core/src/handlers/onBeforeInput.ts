@@ -1,4 +1,4 @@
-import EditorState from "../state";
+import EditorState from "../EditorState";
 import {
   backspaceToBlockStart,
   backspaceToPrevWord,
@@ -6,7 +6,6 @@ import {
   removeRange,
   deleteForward,
   insertText,
-  insertCharacter,
   splitBlock,
 } from '../change'
 import getDomRange from "../selection/getDomRange";
@@ -28,10 +27,8 @@ export default function onBeforeInput(editorState: EditorState, _event: any) {
   event.preventDefault()
   event.stopPropagation()
 
-  console.log({ domRange, event, inputType: event.inputType, start, end, data: event.data })
-
   if (event.inputType === 'insertText') {
-    newEditorState = insertCharacter(newEditorState, start, end, event.data || '')
+    newEditorState = insertText(newEditorState, start, end, event.data || '')
   } else if (event.inputType === 'insertFromPaste') {
     newEditorState = insertText(newEditorState, start, end, event.data || '')
   } else if (event.inputType === 'insertCompositionText') {

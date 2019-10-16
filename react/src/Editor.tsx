@@ -1,5 +1,12 @@
 import React, { useLayoutEffect, useRef, useState, useMemo } from 'react'
-import { toText, EditorState, setDomSelection, onKeyDown, onBeforeInput, onInput, onSelectionChange } from '@zettel/core'
+import {
+  EditorState,
+  setDomSelection,
+  onKeyDown,
+  onBeforeInput,
+  onSelectionChange,
+  toText
+} from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
@@ -61,7 +68,6 @@ const Editor = (props: Props): React.ReactElement => {
       }
 
       el.addEventListener('beforeinput', beforeinput)
-
       return () => {
         el.removeEventListener('beforeinput', beforeinput)
       }
@@ -73,8 +79,6 @@ const Editor = (props: Props): React.ReactElement => {
     style: { ...editorStyles },
     contentEditable: readOnly === true ? false : true,
   }
-
-  console.log('state', toText(editorState))
 
   return (
     <div

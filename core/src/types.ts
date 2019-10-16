@@ -49,7 +49,8 @@ export type CharacterData = {
 
 /*
 * Represents one text character.
-* Contains text symbol as well as array of
+* Contains ucs2 text symbol (1-2 code points)
+* as well as array of
 * styles and entity
 */
 export type TextCharacter = CharacterData & {

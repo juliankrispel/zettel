@@ -1,4 +1,4 @@
-import EditorState from '../state'
+import EditorState from '../EditorState'
 import updateSelection from './updateSelection'
 import getPreviousCharacterIndex from '../query/getPreviousCharacterIndex'
 

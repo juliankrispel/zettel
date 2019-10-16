@@ -1,27 +1,7 @@
 import { ListState, SelectionState } from "../types";
 import getBlockOffset from '../query/getBlockOffset'
-
-interface ElementWithDataSet extends HTMLElement {
-  readonly dataset: {
-    fragmentStart: string,
-    blockKey: string
-  }
-}
-
-const getFragmentNode = (el: HTMLElement | null): ElementWithDataSet | null => {
-  if (el == null) {
-    return null
-  }
-
-  if (el.dataset && el.dataset.blockKey != null && el.dataset.fragmentStart != null) {
-    const _el: any = el
-    return _el
-  } else if (el.parentElement) {
-    return getFragmentNode(el.parentElement)
-  }
-
-  return null
-}
+import { getUTF16Length } from '../utils'
+import getFragmentNode from './getFragmentNode'
 
 export default (listState: ListState): SelectionState | null => {
   const domSelection = window.getSelection()
@@ -30,19 +10,22 @@ export default (listState: ListState): SelectionState | null => {
     return null
   }
 
-  const range = domSelection.getRangeAt(0)
-  const {} = range
-
   let {
     anchorOffset,
-    focusOffset
+    focusOffset,
   } = domSelection
 
-  const _anchorNode: any = domSelection.anchorNode
-  const _focusNode: any = domSelection.focusNode
+
+  const _anchorNode = domSelection.anchorNode as HTMLElement
+  const _focusNode = domSelection.focusNode as HTMLElement
 
   const anchorNode = getFragmentNode(_anchorNode)
   const focusNode = getFragmentNode(_focusNode)
+
+  if (anchorNode != null && focusNode != null) {
+    anchorOffset = getUTF16Length(anchorNode.innerText.slice(0, anchorOffset))
+    focusOffset = getUTF16Length(focusNode.innerText.slice(0, focusOffset))
+  }
 
   if (anchorNode == null || focusNode == null) {
     return null
@@ -63,6 +46,6 @@ export default (listState: ListState): SelectionState | null => {
     start,
     end,
     anchorOffset,
-    focusOffset,
+    focusOffset
   }
 }

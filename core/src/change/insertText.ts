@@ -1,4 +1,4 @@
-import EditorState from '../state'
+import EditorState from '../EditorState'
 import fromText from '../serialize/valueFromText'
 import { COMMAND } from '../constants'
 

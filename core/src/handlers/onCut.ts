@@ -1,4 +1,4 @@
-import EditorState from "../state";
+import EditorState from "../EditorState";
 import { removeRange } from '../change'
 
 export default function onCut(editorState: EditorState, event: ClipboardEvent) {

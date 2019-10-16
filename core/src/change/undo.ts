@@ -1,4 +1,4 @@
-import EditorState from '../state'
+import EditorState from '../EditorState'
 import change from './change'
 import { COMMAND } from '../constants'
 import { Changes, Change } from '../types';

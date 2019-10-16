@@ -1,4 +1,4 @@
-import EditorState from '../state'
+import EditorState from '../EditorState'
 import getIndexBefore from '../query/getIndexBefore';
 import { Character } from '../types'
 import { COMMAND } from '../constants'

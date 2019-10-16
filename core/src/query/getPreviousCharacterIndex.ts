@@ -1,4 +1,4 @@
-import EditorState from '../state'
+import EditorState from '../EditorState'
 import getIndexBefore from './getIndexBefore'
 
 export default function getNextCharacterIndex(editorState: EditorState, currIndex: number): number {
