@@ -1,4 +1,4 @@
-__NOT USE IN PRODUCTION__
+__DO NOT USE IN PRODUCTION__
 
 # Zettel
 
