@@ -1,4 +1,4 @@
-import { ListState, BlockTree, Block } from '../types'
+import { BlockTree, Block } from '../types'
 
 export function getNodes (state: BlockTree, path: number[]): Block[] {
   if (path.length === 0) {

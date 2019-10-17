@@ -151,10 +151,7 @@ export type Path = number[]
 */
 export type BlockTree = {
   blocks: Block[],
-  entityMap: EntityMap,
-  blockMap: {
-    [blockKey: string]: Path
-  }
+  entityMap: EntityMap
 }
 
 /**

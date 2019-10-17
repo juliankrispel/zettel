@@ -1,5 +1,4 @@
 import {
-  BlockTree,
   ListState,
   RawDocument, 
   Change,
@@ -12,7 +11,6 @@ import rawToFlat from '../serialize/fromRaw'
 import id from './id'
 import change, { Update } from '../change/change'
 import textToFlat from '../serialize/fromText'
-import flatToTree from '../ViewState/flatToTree'
 import { undo, redo } from '../change';
 
 const emptyList: ListState = {
@@ -30,12 +28,10 @@ type ConstructorProps = {
   end?: number,
   anchorOffset?: number,
   focusOffset?: number,
-  tree?: BlockTree
 }
 
 export default class EditorState {
   list: ListState
-  tree: BlockTree
   start: number
   end: number
   anchorOffset: number
@@ -55,7 +51,6 @@ export default class EditorState {
     currentStyles = [],
     undoStack = [],
     redoStack = [],
-    tree = flatToTree(list)
   }: ConstructorProps) {
     this.list = list
     this.undoStack = undoStack
@@ -71,7 +66,6 @@ export default class EditorState {
 
     this.lastChangeType = lastChangeType
     this.redoStack = redoStack
-    this.tree = tree
   }
 
   change(_change: EditorChange) {
@@ -112,7 +106,6 @@ export default class EditorState {
       list: updated.current,
       redoStack: [],
       undoStack,
-      tree: flatToTree(updated.current)
     })
   }
 

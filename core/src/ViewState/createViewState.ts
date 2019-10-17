@@ -1,13 +1,12 @@
-import { TextCharacter, ListState, BlockTree } from '../types'
+import { TextCharacter, ListState, BlockTree as ViewState } from '../types'
 import createTextFragments from './createTextFragments'
 import { getNode, getNodes } from './getTreeNode'
 
 export default function parseBlockTree (
   flat: ListState,
-): BlockTree {
-  const state: BlockTree = {
+): ViewState {
+  const state: ViewState = {
     blocks: [],
-    blockMap: {},
     entityMap: flat.entityMap,
   }
 
@@ -37,7 +36,6 @@ export default function parseBlockTree (
         entity: char.entity != null ? flat.entityMap[char.entity] : null
       })
 
-      state.blockMap[char.blockKey] = path
       path.push(blocks.length - 1)
     } else if (char.type === 'block-end') {
       path.pop()

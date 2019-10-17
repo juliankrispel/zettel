@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef, useState, useMemo } from 'react'
 import {
   EditorState,
   setDomSelection,
+  createViewState,
   onKeyDown,
   onBeforeInput,
   onSelectionChange,
@@ -80,6 +81,8 @@ const Editor = (props: Props): React.ReactElement => {
     contentEditable: readOnly === true ? false : true,
   }
 
+  const viewState = useMemo(() => createViewState(editorState.list), [editorState])
+
   return (
     <div
       onSelect={() => {
@@ -117,7 +120,7 @@ const Editor = (props: Props): React.ReactElement => {
       {...divProps}
     >
       <EditorChildren
-        blocks={editorState.tree.blocks}
+        blocks={viewState.blocks}
         renderBlock={renderBlock}
         renderTextFragment={renderEntity}
         renderStyle={renderStyle}

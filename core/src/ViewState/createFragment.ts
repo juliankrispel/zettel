@@ -1,6 +1,6 @@
 import getIndexBefore from '../query/getIndexBefore'
 import getIndexAfter from '../query/getIndexAfter'
-import createTree from './createBlockTree'
+import createTree from './createViewState'
 import { ListState, BlockTree, Block } from '../types'
 
 export default function getUpdateFragment(

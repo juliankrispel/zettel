@@ -1,14 +1,14 @@
-import createBlockTree from './createBlockTree'
+import createBlockTree from './createViewState'
 import createFragment from './createFragment'
 import createTextFragments from './createTextFragments'
-import flatToTree from './flatToTree'
+import createViewState from './createViewState'
 import { getNode, getNodes } from './getTreeNode'
 
 export {
   createBlockTree,
   createFragment,
+  createViewState,
   createTextFragments,
-  flatToTree,
   getNode,
   getNodes
 }
