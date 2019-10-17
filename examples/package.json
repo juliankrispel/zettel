@@ -8,6 +8,8 @@
     "build": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts build"
   },
   "dependencies": {
+    "@types/react": "^16.9.9",
+    "@types/react-dom": "^16.9.2",
     "@types/react-router-dom": "^4.3.4",
     "@zettel/core": "^0.0.14",
     "@zettel/react": "^0.0.14",
