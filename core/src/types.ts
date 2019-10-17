@@ -6,6 +6,16 @@ export type EntityMap = {
 }
 
 /**
+ * Range
+ */
+export type SelectionRange = {
+  start: number,
+  end: number,
+  collapsed: boolean,
+  direction: 'ltr' | 'rtl'
+}
+
+/**
  * Entity ftw!
  */
 export type Entity = {

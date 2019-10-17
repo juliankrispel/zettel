@@ -45,7 +45,7 @@ This changes a lot. To focus as much as possible I'll keep this small.
 - [x] Android support (via Input Events Level 2)
 - [x] Android support [thanks Trix ❤️](https://github.com/basecamp/trix/blob/master/src/trix/controllers/level_2_input_controller.coffee)
 - [x] [IME support](https://developer.mozilla.org/en-US/docs/Mozilla/IME_handling_guide)
-- [ ] [rtl support](https://www.w3.org/International/articles/inline-bidi-markup/)
+- [ ] [rtl support](https://github.com/juliankrispel/zettel/issues/8)
 - [ ] Prototype collaborative editing
 - [ ] Start writing docs and publishing exampples on codesandbox
 - [ ] Alternative view layers (Vuejs/svelte/angular)

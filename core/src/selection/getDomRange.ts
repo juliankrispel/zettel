@@ -1,9 +1,9 @@
-import { ListState } from '../types'
+import { ListState, SelectionRange } from '../types'
 import getFragmentOffset from './getFragmentOffset'
 import { getUTF16Length } from '../utils'
 import getFragmentNode from './getFragmentNode'
 
-export default function getDomRange(list: ListState): { start: number, end: number, collapsed: boolean } | null {
+export default function getDomRange(list: ListState): SelectionRange | null {
   const domSelection = window.getSelection()
 
   if (domSelection == null || domSelection.anchorNode == null) {
@@ -26,12 +26,15 @@ export default function getDomRange(list: ListState): { start: number, end: numb
     endOffset = getUTF16Length(focusFragmentNode.innerText.slice(0, endOffset))
   }
 
+  const direction = anchorFragmentNode != null && getComputedStyle(anchorFragmentNode).direction === 'rtl' ? 'rtl' : 'ltr'
+
   const start = startOffset + fragmentOffsetStart
   const end = endOffset + fragmentOffsetEnd
 
   return {
     start,
     end,
-    collapsed: range.collapsed
+    collapsed: range.collapsed,
+    direction
   } 
 }

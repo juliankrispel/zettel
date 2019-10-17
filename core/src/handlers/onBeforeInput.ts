@@ -20,6 +20,8 @@ export default function onBeforeInput(editorState: EditorState, _event: any) {
   let newEditorState = editorState
   const domRange = getDomRange(editorState.list)
 
+  console.log(event, domRange)
+
   if (domRange == null) return newEditorState
 
   const { collapsed, start, end } = domRange
