@@ -1,13 +1,13 @@
 import getIndexBefore from '../query/getIndexBefore'
 import getIndexAfter from '../query/getIndexAfter'
 import createTree from './createViewState'
-import { ListState, BlockTree, Block } from '../types'
+import { ListState, ViewState, Block } from '../types'
 
 export default function getUpdateFragment(
   list: ListState,
   _start: number,
   _end: number
-): BlockTree {
+): ViewState {
   const blocks: Block[] = []
   let start = getIndexBefore(
     list.value,

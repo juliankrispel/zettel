@@ -1,6 +1,6 @@
-import { BlockTree, Block } from '../types'
+import { ViewState, Block } from '../types'
 
-export function getNodes (state: BlockTree, path: number[]): Block[] {
+export function getNodes (state: ViewState, path: number[]): Block[] {
   if (path.length === 0) {
     return state.blocks
   }
@@ -10,7 +10,7 @@ export function getNodes (state: BlockTree, path: number[]): Block[] {
   }, state.blocks)
 }
 
-export function getNode (state: BlockTree, path: number[]): Block {
+export function getNode (state: ViewState, path: number[]): Block {
   return path.reduce((acc: any, val) => {
     return acc.blocks[val]
   }, state)

@@ -149,7 +149,7 @@ export type Path = number[]
 * Tree representation of content. Used for
 * rendering only
 */
-export type BlockTree = {
+export type ViewState = {
   blocks: Block[],
   entityMap: EntityMap
 }

@@ -1,4 +1,4 @@
-import { TextCharacter, ListState, BlockTree as ViewState } from '../types'
+import { TextCharacter, ListState, ViewState } from '../types'
 import createTextFragments from './createTextFragments'
 import { getNode, getNodes } from './getTreeNode'
 
