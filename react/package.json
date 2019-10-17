@@ -1,6 +1,6 @@
 {
   "name": "@zettel/react",
-  "version": "0.0.12",
+  "version": "0.0.2",
   "description": "React view library for zettel",
   "main": "dist/index.js",
   "author": "Julian Krispel",
