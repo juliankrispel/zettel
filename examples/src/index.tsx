@@ -37,7 +37,7 @@ const Layout = ({ children, routeComps }: LayoutProps) => {
         ))}
       </ul>
     </nav>
-    <button onClick={toggleFlag} id="menu-button">⇠</button>
+    <button onClick={toggleFlag} id="menu-button">{flag ? '>' : '<'}</button>
     {children}
   </main>
 }
