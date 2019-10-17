@@ -1,14 +1,16 @@
 {
-  "name": "@zettel/experiments",
+  "name": "@zettel/examples",
+  "description": "Examples of using Zettel, works on codesandbox",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts start"
+    "start": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts start",
+    "build": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts build"
   },
   "dependencies": {
-    "@zettel/core": "link:../core",
-    "@zettel/react": "link:../react",
     "@types/react-router-dom": "^4.3.4",
+    "@zettel/core": "^0.0.14",
+    "@zettel/react": "^0.0.14",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-draggable": "^4.0.3",
