@@ -5,12 +5,6 @@ import { Button } from '../components'
 
 const text = `[Headline 1][Headline 2][A paragraph]`
 
-const setBlock = (editorState: EditorState): EditorState => {
-  let newEditorSate = editorState
-  // newEditorState.change
-  return newEditorSate
-}
-
 const App = () => {
   const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
     text,

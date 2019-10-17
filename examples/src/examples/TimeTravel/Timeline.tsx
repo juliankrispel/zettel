@@ -20,7 +20,7 @@ export default function Timeline({ editorState, onChange }: Props) {
   const { undoStack, redoStack } = editorState
   return <div className="timeline">
     {(undoStack.length + redoStack.length) === 0 && <span style={{color: '#fff'}}>Start typing something and you'll see your undo states appear here</span>}
-    {undoStack.map((item, index) => (
+    {undoStack.map((_, index) => (
       <button
         onClick={() => onChange(recurse(undoStack.length - index, editorState, undo))}
         className="undo-step"

@@ -1,22 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react'
 
-const text = `[[One][Two]][[Three][Four]]`
-
-const handler = (event: any) => {
-  // console.log({ ...event })
-  // event.stopPropagation();
-  // event.preventDefault();
-  event.getTargetRanges != null && console.log(event.type, event.getTargetRanges())
-  event.ranges != null && console.log(event.type, event.ranges)
-}
-
 const events = ['compositionstart', 'compositionupdate', 'input', 'beforeinput']
 
 const App = () => {
-  const [isComposing, set] = useState(false)
   const [state, setState] = useState({})
-  const stopComposing = () => set(false)
-  const startComposing = () => set(true)
   const ref = useRef(null)
   let data: {[key: string]: any} = { ...state }
 

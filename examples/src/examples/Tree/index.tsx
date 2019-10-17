@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { EditorState, getBlockNumber } from '@zettel/core'
+import { EditorState } from '@zettel/core'
 import Editor from '@zettel/react'
 import './index.css'
-import { Button } from '../../components'
 
 const text = `[One Line[Another line[And another line]]][And another line of text][And another line]`
 
@@ -18,8 +17,7 @@ const App = () => {
       htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
       onChange={setEditorState}
       renderBlock={(props) => {
-        const { htmlAttrs, children, block } = props
-        const text = block.fragments.map(frag => frag.text).join('')
+        const { htmlAttrs, children } = props
         return <div {...htmlAttrs} className="tree-node">{children}</div>
       }}
       editorState={editorState}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Draggable from 'react-draggable';
-import { EditorState, getBlockNumber } from '@zettel/core'
+import { EditorState } from '@zettel/core'
 import Editor from '@zettel/react'
 import './index.css'
 

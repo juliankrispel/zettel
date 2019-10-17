@@ -5,7 +5,7 @@ import Editor, { RenderBlock } from '@zettel/react'
 const text = `[One][][Two]`
 
 const Block: RenderBlock = React.memo((props) => {
-  const { block, htmlAttrs } = props
+  const { block } = props
   const entity = block.entity
   if (entity != null && entity.type === 'image' && entity.src != null) {
     return <div key={props.block.blockKey} contentEditable={false}><img src={entity.src} /></div>
