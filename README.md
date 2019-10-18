@@ -2,7 +2,6 @@ __NOT USE IN PRODUCTION__
 
 # [Zettel](http://zettel.software/)
 
-
 Framework for building text editors in the browser.
 
 [Join Zettel on Slack](https://join.slack.com/t/zetteljs/shared_invite/enQtNzk4NjM5Njc0Nzg5LTI2ZTljZTMwY2JjMmFkOWM3Yzk5YjdlODgxZWIwMzc5YmE4MGQ1MjViZjUxMmUxZmZjNmY3OTljOWRiMmNmZjg)
