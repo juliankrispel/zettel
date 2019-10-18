@@ -42,10 +42,20 @@ This changes a lot. To focus as much as possible I'll keep this small.
 - [x] redo/undo
 - [x] UTF-16 support for editing
 - [x] IME Event handling
-- [x] Android support (via Input Events Level 2)
-- [x] Android support [thanks Trix ❤️](https://github.com/basecamp/trix/blob/master/src/trix/controllers/level_2_input_controller.coffee)
+- [x] Android support (via Input Events Level 2) [thanks Trix ❤️](https://github.com/basecamp/trix/blob/master/src/trix/controllers/level_2_input_controller.coffee)
 - [x] [IME support](https://developer.mozilla.org/en-US/docs/Mozilla/IME_handling_guide)
 - [ ] [rtl support](https://github.com/juliankrispel/zettel/issues/8)
+- [ ] Support for parser integration
 - [ ] Prototype collaborative editing
 - [ ] Start writing docs and publishing exampples on codesandbox
 - [ ] Alternative view layers (Vuejs/svelte/angular)
+
+## Thanks
+
+This project wouldn't have come this far without the influence of open source projects such as:
+
+- [draft-js](https://github.com/facebook/draft-js)
+- [slatejs](https://github.com/ianstormtaylor/slate)
+- [prosemirror](https://github.com/ProseMirror/prosemirror)
+- [vscode](https://github.com/Microsoft/vscode/issues)
+- [trix](https://github.com/basecamp/trix)
