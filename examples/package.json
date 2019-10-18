@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts start",
-    "build": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts build"
+    "build": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts build",
+    "postbuild": "react-snap"
   },
   "dependencies": {
     "@types/react": "^16.9.9",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "add": "^2.0.6",
     "react-movable": "^2.2.0",
+    "react-snap": "^1.23.0",
     "yarn": "^1.17.3"
   }
 }

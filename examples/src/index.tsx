@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { render, hydrate} from 'react-dom';
 import './index.css';
 import './App.css';
 import { createBrowserHistory } from 'history'
 import * as Examples from './examples'
-import { Router, Route, Link, Redirect } from 'react-router-dom'
+import { Router, Route, Link, Redirect, Switch } from 'react-router-dom'
 
 const exampleModules: { [key: string]: any } = {...Examples}
 
@@ -42,13 +42,20 @@ const Layout = ({ children, routeComps }: LayoutProps) => {
   </main>
 }
 
-ReactDOM.render(
-  <Router history={history}>
-    <Layout routeComps={_routeComps}>
-      <>
-        <Redirect from="/" to="/PlainText" />
-        {_routeComps.map(props => <Route {...props} />)}
-      </>
-    </Layout>
-  </Router>
-, document.getElementById('root'));
+const Root = () => <Router history={history}>
+  <Layout routeComps={_routeComps}>
+    <Switch>
+      {_routeComps.map(props => <Route {...props} />)}
+      <Route render={() => <Redirect to="/PlainText" />} />
+    </Switch>
+  </Layout>
+</Router>
+
+
+const rootElement = document.getElementById("root");
+
+if (rootElement != null && rootElement.hasChildNodes()) {
+  hydrate(<Root />, rootElement);
+} else {
+  render(<Root />, rootElement);
+}
