@@ -1,6 +1,7 @@
 __NOT USE IN PRODUCTION__
 
-# Zettel
+# [Zettel](http://zettel.software/)
+
 
 Framework for building text editors in the browser.
 
