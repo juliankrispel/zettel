@@ -1,7 +1,7 @@
 {
   "name": "zettel",
   "version": "0.0.0",
-  "homepage": "http://juliankrispel.github.co/zettel/",
+  "homepage": "https://zettel.software",
   "description": "Mono repo for zettel",
   "private": true,
   "dependencies": {
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "postinstall": "./scripts/install-all.sh",
-    "deploy": "cd examples && yarn && yarn build && cd .. && yarn gh-pages -d ./examples/build"
+    "deploy": "./scripts/gh-pages.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
