@@ -4,9 +4,9 @@ import {
   setDomSelection,
   createViewState,
   onKeyDown,
+  ViewState,
   onBeforeInput,
-  onSelectionChange,
-  toText
+  onSelectionChange
 } from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
@@ -14,6 +14,7 @@ import EditorChildren from './EditorChildren'
 type Props = RenderProps & {
   onChange: (editorState: EditorState) => void,
   editorState: EditorState,
+  viewState?: ViewState,
   htmlAttrs?: Object,
   onKeyDown?: (event: React.KeyboardEvent) => EditorState | void,
   readOnly?: boolean,
@@ -81,7 +82,7 @@ const Editor = (props: Props): React.ReactElement => {
     contentEditable: readOnly === true ? false : true,
   }
 
-  const viewState = useMemo(() => createViewState(editorState.list), [editorState])
+  const viewState = props.viewState || useMemo(() => createViewState(editorState.list), [editorState])
 
   return (
     <div
