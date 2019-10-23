@@ -86,7 +86,6 @@ export default function setDomSelection(
   }
 
   if (newSelection != null && anchorNode != null && focusNode != null) {
-    console.log('newSelection.setBaseAndExtent')
     newSelection.setBaseAndExtent(
       anchorNode,
       anchorOffset,

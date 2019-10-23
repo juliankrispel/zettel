@@ -16,7 +16,6 @@ export default function EditorBlockChildren(props: Props) {
     block,
     ...renderProps
   } = props
-  console.log('render children')
 
   const {
     renderChildren: RenderChildren
