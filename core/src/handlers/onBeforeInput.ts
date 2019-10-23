@@ -13,6 +13,7 @@ import getDomRange from "../selection/getDomRange";
 type InputEvent = Event & {
   readonly data?: string;
   readonly inputType?: string
+  readonly isComposing: boolean
 }
 
 export default function onBeforeInput(editorState: EditorState, _event: any) {
@@ -32,7 +33,7 @@ export default function onBeforeInput(editorState: EditorState, _event: any) {
   } else if (event.inputType === 'insertFromPaste') {
     newEditorState = insertText(newEditorState, start, end, event.data || '')
   } else if (event.inputType === 'insertCompositionText') {
-    newEditorState = insertText(newEditorState, start, start, event.data || '')
+    newEditorState = insertText(newEditorState, start, end, event.data || '')
   } else if (event.inputType === 'insertLineBreak') {
     newEditorState = splitBlock(newEditorState, start, end)
   } else if (!collapsed && event.inputType === 'deleteContentBackward') {

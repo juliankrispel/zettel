@@ -6,7 +6,8 @@ import {
   onKeyDown,
   ViewState,
   onBeforeInput,
-  onSelectionChange
+  onSelectionChange,
+  toText
 } from '@zettel/core'
 import { RenderProps, RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
@@ -38,25 +39,29 @@ const DefaultRenderBlock: RenderBlock = (props) => <div {...props.htmlAttrs}>{pr
 const Editor = (props: Props): React.ReactElement => {
   const {
     editorState: _editorState,
-    onChange,
+    onChange: _onChange,
     readOnly,
     htmlAttrs,
-    renderTextFragment: renderEntity,
+    renderTextFragment,
     renderStyle,
     renderBlock = DefaultRenderBlock,
     renderChildren,
   } = props
 
+  const onChange = (args: any) => {
+    _onChange(args)
+  }
+
   const ref = useRef(null)
   const [isComposing, setComposing] = useState(false)
-  const editorState = useMemo(() => _editorState, [isComposing || _editorState])
+  const editorState = _editorState
 
   /*
-  * we need to enforce our selection
+  * we need to enforce our election
   */
   useLayoutEffect(() => {
     const container = ref.current
-    if (container != null) {
+    if (container != null && !isComposing) {
       setDomSelection(editorState, container)
     }
   }, [editorState])
@@ -66,7 +71,10 @@ const Editor = (props: Props): React.ReactElement => {
     if (el != null) {
       // @ts-ignore
       const beforeinput = (event: InputEvent) => {
-        onChange(onBeforeInput(editorState, event))
+        const newEditorState = onBeforeInput(editorState, event)
+        if (newEditorState != null) {
+          onChange(newEditorState)
+        }
       }
 
       el.addEventListener('beforeinput', beforeinput)
@@ -82,7 +90,14 @@ const Editor = (props: Props): React.ReactElement => {
     contentEditable: readOnly === true ? false : true,
   }
 
-  const viewState = props.viewState || useMemo(() => createViewState(editorState.list), [editorState])
+  const viewState = props.viewState || useMemo(() => createViewState(editorState.list), [isComposing || editorState])
+  const children = useMemo(() => <EditorChildren
+    blocks={viewState.blocks}
+    renderBlock={renderBlock}
+    renderTextFragment={renderTextFragment}
+    renderStyle={renderStyle}
+    renderChildren={renderChildren}
+  />, [viewState])
 
   return (
     <div
@@ -92,12 +107,16 @@ const Editor = (props: Props): React.ReactElement => {
 
         if (newEditorState != null &&
           (start !== newEditorState.start|| end !== newEditorState.end)
+          && !isComposing
         ) {
           onChange(newEditorState)
         }
       }}
       onCompositionStart={() => setComposing(true)}
-      onCompositionEnd={() => setComposing(false)}
+      onCompositionEnd={() => {
+        onChange(onSelectionChange(editorState))
+        setComposing(false)
+      }}
       onKeyDown={(event) => {
         let handled = null
 
@@ -111,22 +130,20 @@ const Editor = (props: Props): React.ReactElement => {
 
         if (handled != null) {
           event.preventDefault()
+          onChange(onSelectionChange(editorState))
           onChange(handled)
         }
       }}
       suppressContentEditableWarning
+      onKeyUp={() => {
+        // setComposing(false)
+      }}
       role="textbox"
       autoCorrect={'off'}
       ref={ref}
       {...divProps}
     >
-      <EditorChildren
-        blocks={viewState.blocks}
-        renderBlock={renderBlock}
-        renderTextFragment={renderEntity}
-        renderStyle={renderStyle}
-        renderChildren={renderChildren}
-      />
+      {children}
     </div>
   );
 }

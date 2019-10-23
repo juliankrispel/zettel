@@ -20,7 +20,6 @@ export default function getDomRange(list: ListState): SelectionRange | null {
 
   let { startOffset, endOffset } = range
 
-
   if (anchorFragmentNode != null && focusFragmentNode != null) {
     startOffset = getUTF16Length(anchorFragmentNode.innerText.slice(0, startOffset))
     endOffset = getUTF16Length(focusFragmentNode.innerText.slice(0, endOffset))
