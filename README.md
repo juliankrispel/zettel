@@ -6,8 +6,8 @@ Framework for building text editors in the browser.
 
 [Join Zettel on Slack](https://join.slack.com/t/zetteljs/shared_invite/enQtNzk4NjM5Njc0Nzg5LTI2ZTljZTMwY2JjMmFkOWM3Yzk5YjdlODgxZWIwMzc5YmE4MGQ1MjViZjUxMmUxZmZjNmY3OTljOWRiMmNmZjg)
 
-[![npm version](https://badge.fury.io/js/%40zettel%2Fcore.svg)](https://badge.fury.io/js/%40zettel%2Fcore)
-[![npm version](https://badge.fury.io/js/%40zettel%2Freact.svg)](https://badge.fury.io/js/%40zettel%2Freact)
+[![@zettel/core](https://badge.fury.io/js/%40zettel%2Fcore.svg)](https://badge.fury.io/js/%40zettel%2Fcore)
+[![@zettel/react](https://badge.fury.io/js/%40zettel%2Freact.svg)](https://badge.fury.io/js/%40zettel%2Freact)
 
 ## Running locally
 
@@ -42,10 +42,20 @@ This changes a lot. To focus as much as possible I'll keep this small.
 - [x] redo/undo
 - [x] UTF-16 support for editing
 - [x] IME Event handling
-- [x] Android support (via Input Events Level 2)
-- [x] Android support [thanks Trix ❤️](https://github.com/basecamp/trix/blob/master/src/trix/controllers/level_2_input_controller.coffee)
+- [x] Android support (via Input Events Level 2) [thanks Trix ❤️](https://github.com/basecamp/trix/blob/master/src/trix/controllers/level_2_input_controller.coffee)
 - [x] [IME support](https://developer.mozilla.org/en-US/docs/Mozilla/IME_handling_guide)
 - [ ] [rtl support](https://github.com/juliankrispel/zettel/issues/8)
+- [ ] Support for parser integration
 - [ ] Prototype collaborative editing
 - [ ] Start writing docs and publishing exampples on codesandbox
 - [ ] Alternative view layers (Vuejs/svelte/angular)
+
+## Thanks
+
+This project wouldn't have come this far without the influence of open source projects such as:
+
+- [draft-js](https://github.com/facebook/draft-js)
+- [slatejs](https://github.com/ianstormtaylor/slate)
+- [prosemirror](https://github.com/ProseMirror/prosemirror)
+- [vscode](https://github.com/Microsoft/vscode/issues)
+- [trix](https://github.com/basecamp/trix)
