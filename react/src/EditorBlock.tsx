@@ -29,7 +29,10 @@ export default function EditorBlock(props: Props) {
     block = mapBlock(_block)
   }
 
-  let htmlAttrs: any = {
+  const htmlAttrs: any = {
+    'data-block-key': block.blockKey,
+    'data-fragment-start': 0,
+    'data-fragment-end': block.value.length,
     style,
   }
 
@@ -37,12 +40,6 @@ export default function EditorBlock(props: Props) {
 
   if (entity != null && entity.isAtomic && RenderBlock != null) {
     const offset = 0
-    htmlAttrs = {
-      ...htmlAttrs,
-      'data-block-key': block.blockKey,
-      'data-fragment-start': offset,
-      'data-fragment-end': offset + block.value.length
-    }
 
     return <RenderBlock 
       block={block}

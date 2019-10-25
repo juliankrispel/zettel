@@ -23,10 +23,10 @@ export default function EditorBlockChildren(props: Props) {
 
   const content = <>{props.blocks.map(block => 
     <EditorBlock
-        key={block.blockKey}
-        block={block}
-        {...renderProps}
-      />,
+      key={block.blockKey}
+      block={block}
+      {...renderProps}
+    />,
   )}</>
 
   if (RenderChildren != null) {

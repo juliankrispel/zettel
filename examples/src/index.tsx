@@ -1,10 +1,19 @@
-import React, { useState } from 'react';
+// @ts-ignore
+import {importMDX} from 'mdx.macro'
+import React, { useState, lazy, Suspense } from 'react';
 import { render, hydrate} from 'react-dom';
 import './index.css';
 import './App.css';
 import { createBrowserHistory } from 'history'
 import * as Examples from './examples'
-import { Router, Route, Link, Redirect, Switch } from 'react-router-dom'
+import { Router, Route, Link, Switch } from 'react-router-dom'
+
+const Readme = lazy(() => importMDX('../../changelog.md'))
+
+const Content = () =>
+  <Suspense fallback={<div>Loading...</div>}>
+    <Readme />
+  </Suspense>
 
 const exampleModules: { [key: string]: any } = {...Examples}
 
@@ -46,7 +55,7 @@ const Root = () => <Router history={history}>
   <Layout routeComps={_routeComps}>
     <Switch>
       {_routeComps.map(props => <Route {...props} />)}
-      <Route render={() => <Redirect to="/PlainText" />} />
+      <Route render={() => <Content />} />
     </Switch>
   </Layout>
 </Router>

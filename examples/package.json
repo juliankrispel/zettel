@@ -12,8 +12,9 @@
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
     "@types/react-router-dom": "^4.3.4",
-    "@zettel/core": "^0.0.16",
-    "@zettel/react": "^0.0.16",
+    "@zettel/core": "^0.0.17",
+    "@zettel/react": "^0.0.17",
+    "changelog-parser": "^2.8.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-draggable": "^4.0.3",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "add": "^2.0.6",
+    "mdx.macro": "^0.2.9",
     "react-movable": "^2.2.0",
     "react-snap": "^1.23.0",
     "yarn": "^1.17.3"
