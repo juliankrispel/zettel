@@ -914,21 +914,21 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@zettel/core@0.0.16", "@zettel/core@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@zettel/core/-/core-0.0.16.tgz#505a4ec3195b5443b90cf7fbcba4b468c99a0893"
-  integrity sha512-yuCowLlMlR1HafL2ciZIExGvsnvB3S5FYrvdpjL0f67iy9QYFKDjQg1MrDhzgvbDPidQ5vS3jUGHDxRt2Gki7Q==
+"@zettel/core@0.0.17", "@zettel/core@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@zettel/core/-/core-0.0.17.tgz#ca1aa6baf7040b2a02da8c3958ff99a619c05956"
+  integrity sha512-EctdE8ifWB/J38R1fCJUAJGOWQTtZ2FgJUZwgEkgybX2TJML3D9u3kLAdheb+vVE1E51ygT6H5ml91Ya4ORMwQ==
   dependencies:
     "@types/ramda" "^0.26.21"
     ramda "^0.26.1"
     ts-jest "^24.1.0"
 
-"@zettel/react@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@zettel/react/-/react-0.0.16.tgz#2e30226f305b8fe5d98e6392e66f21e0bc7ef21e"
-  integrity sha512-zxkrJSuYRU4NibOzYuRA9MaKYmSO6SP7+il/FD+2nod24yKz0uvpYBX84bJdE6mYTBzBnnbDNyh+78ccY9QgCQ==
+"@zettel/react@^0.0.17":
+  version "0.0.17"
+  resolved "https://registry.yarnpkg.com/@zettel/react/-/react-0.0.17.tgz#d30d59f526e3e13793495d7662ea5e88d6904c04"
+  integrity sha512-nw/buGW3Ny6xixSsCWezsMYGIIPcnoZH1rxRDsvr8OGFMFUFomggC61LDPH0ky4xVz9nP3PlF6xR4UpChOrnFw==
   dependencies:
-    "@zettel/core" "0.0.16"
+    "@zettel/core" "0.0.17"
 
 accepts@~1.3.5:
   version "1.3.7"
