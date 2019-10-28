@@ -43,8 +43,8 @@ export default function setDomSelection(
     return 
   }
 
-  const anchorNodes = containerNode.querySelectorAll(`[data-block-key="${anchorBlock.blockKey}"]`)
-  const focusNodes = containerNode.querySelectorAll(`[data-block-key="${focusBlock.blockKey}"]`)
+  const anchorNodes = containerNode.querySelectorAll(`[data-text-fragment="true"][data-block-key="${anchorBlock.blockKey}"]`)
+  const focusNodes = containerNode.querySelectorAll(`[data-text-fragment="true"][data-block-key="${focusBlock.blockKey}"]`)
   let anchorOffset = editorState.anchorOffset - anchorBlockOffset
   let focusOffset = editorState.focusOffset - focusBlockOffset
 
