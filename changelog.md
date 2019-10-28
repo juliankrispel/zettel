@@ -1,4 +1,10 @@
-# Zettel Changelog
+# Zettel
+
+## [0.0.19] - 2019-10-28
+
+### Fixed
+- Updated `setDomSelection` to look focus and anchor fragment elements with the `data-text-fragment` html attribute and add `data-text-fragment` to text-fragment render prop so we can differentiate text fragments form blocks. Fixes #18
+
 
 ## [0.0.17] - 2019-10-25
 
