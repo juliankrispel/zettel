@@ -1,5 +1,10 @@
 # Zettel
 
+## unreleased
+
+### Fixed
+- Regression - Current styles not applied when inserting character #22
+
 ## [0.0.19] - 2019-10-28
 
 ### Fixed
