@@ -32,6 +32,7 @@ const App = () => {
 
         return <>{props.children}</>
       }}
+
       htmlAttrs={{ className: 'editor'}}
       onKeyDown={(event) => {
         if (event.key === 'b' && event.metaKey) {

@@ -37,6 +37,7 @@ export default function EditorText(props: TextProps) {
       const fragmentProps = {
         key: `${block.blockKey}-${offset}`,
         'data-block-key': block.blockKey,
+        'data-text-fragment': true,
         'data-fragment-start': offset,
         'data-fragment-end': offset + fragment.text.length
       }
@@ -56,6 +57,7 @@ export default function EditorText(props: TextProps) {
 
       if (RenderTextFragment) {
         textFragment = <RenderTextFragment
+          data-text-fragment="true"
           entity={fragment.entity}
           key={`entity-${block.blockKey}-${offset}`}
         >{textFragment}</RenderTextFragment>
@@ -70,6 +72,7 @@ export default function EditorText(props: TextProps) {
   } else {
     textFragments = <span
       key={`text-fragments-${block.blockKey}`}
+      data-text-fragment="true"
       data-block-key={block.blockKey}
       data-fragment-start={0}
       data-fragment-end={0}
