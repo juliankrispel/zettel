@@ -5,6 +5,7 @@ import {
   backspace,
   removeRange,
   deleteForward,
+  insertCharacter,
   insertText,
   splitBlock,
 } from '../change'
@@ -28,7 +29,9 @@ export default function onBeforeInput(editorState: EditorState, _event: any) {
   event.preventDefault()
   event.stopPropagation()
 
-  if (event.inputType === 'insertText') {
+  if (event.inputType === 'insertText' && event.data != null && event.data.length === 1) {
+    newEditorState = insertCharacter(newEditorState, start, end, event.data)
+  } else if (event.inputType === 'insertText') {
     newEditorState = insertText(newEditorState, start, end, event.data || '')
   } else if (event.inputType === 'insertFromPaste') {
     newEditorState = insertText(newEditorState, start, end, event.data || '')
