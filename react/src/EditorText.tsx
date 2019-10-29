@@ -1,17 +1,9 @@
 import React from 'react'
-import {
-  Block,
-  TextFragment,
-} from '@zettel/core'
-
-import { RenderProps, RenderStyle } from './types'
+import { Block } from '@zettel/core'
+import { RenderProps } from './types'
 
 type TextProps = RenderProps & {
   block: Block,
-}
-
-type FragmentRenderProps = {
-  fragment: TextFragment
 }
 
 export default function EditorText(props: TextProps) {
@@ -20,8 +12,6 @@ export default function EditorText(props: TextProps) {
     renderStyle: RenderStyle,
     renderTextFragment: RenderTextFragment,
   } = props
-
-  let offset = 0
 
   let textFragments: React.ReactNode = null
 

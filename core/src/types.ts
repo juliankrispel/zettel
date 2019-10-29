@@ -162,6 +162,7 @@ export type Block = {
   fragments: TextFragment[],
   value: TextCharacter[],
   blockKey: string,
+  blockLevel: number,
   blocks: Block[],
   styles: string[],
   entity?: Entity | null
