@@ -34,10 +34,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@zettel/core@0.0.19":
-  version "0.0.19"
-  resolved "https://registry.yarnpkg.com/@zettel/core/-/core-0.0.19.tgz#87407a67323799362705df5ccfc52e400709a84e"
-  integrity sha512-Vbq0g8Gg3B7NLzeXSvOI39yefikHZJOgsHFkSGzzd5P5aVSYbOROEo/skvaYpxdZIawvjt+PxDUjjxOwpHQNOg==
+"@zettel/core@0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@zettel/core/-/core-0.0.20.tgz#6bd7657702477fc9e6e40235794af1646c1063a9"
+  integrity sha512-nfkldyrmEmPA0AoeOAMxZskUQhSLK7zzujrKME+onHtXLYj+a49BZhhVEYSefI3OCX27yTsH7zJtVbUrMSj3ng==
   dependencies:
     "@types/ramda" "^0.26.21"
     ramda "^0.26.1"

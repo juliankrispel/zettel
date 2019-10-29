@@ -9,7 +9,8 @@ import {
   onSelectionChange,
   toText
 } from '@zettel/core'
-import { RenderProps, RenderBlock } from './types'
+import DefaultRenderBlock from './DefaultRenderBlock'
+import { RenderProps } from './types'
 import EditorChildren from './EditorChildren'
 
 type Props = RenderProps & {
@@ -31,7 +32,7 @@ const editorStyles: React.CSSProperties = {
   outline: 'none'
 }
 
-const DefaultRenderBlock: RenderBlock = (props) => <div {...props.htmlAttrs}>{props.children}</div>
+
 
 /**
  * Editor Component

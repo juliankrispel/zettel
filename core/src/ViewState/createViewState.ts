@@ -31,6 +31,7 @@ export default function parseBlockTree (
         fragments: [],
         value: [],
         blocks: [],
+        blockLevel: path.length,
         blockKey: char.blockKey,
         styles: char.styles != null ? char.styles : [],
         entity: char.entity != null ? flat.entityMap[char.entity] : null

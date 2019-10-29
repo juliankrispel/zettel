@@ -1,6 +1,6 @@
 {
   "name": "@zettel/core",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Core module of zettel",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,11 +19,7 @@
   "devDependencies": {
     "@types/dom-inputevent": "^1.0.4",
     "@types/jest": "^24.0.19",
+    "ts-jest": "^24.1.0",
     "jest": "^24.9.0"
-  },
-  "dependencies": {
-    "@types/ramda": "^0.26.21",
-    "ramda": "^0.26.1",
-    "ts-jest": "^24.1.0"
   }
 }

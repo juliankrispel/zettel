@@ -1,6 +1,13 @@
 # Zettel
 
-## unreleased
+## Unreleased
+- Remove unused dependencies from @zettel/core
+
+## [0.0.20] - 2019-10-29
+
+### Added
+- Added tables example
+- Expose DefaultRenderBlock and EditorChildren from @zettel/react
 
 ### Fixed
 - Regression - Current styles not applied when inserting character #22
