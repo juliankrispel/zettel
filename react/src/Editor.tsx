@@ -32,8 +32,6 @@ const editorStyles: React.CSSProperties = {
   outline: 'none'
 }
 
-
-
 /**
  * Editor Component
  */
@@ -92,13 +90,13 @@ const Editor = (props: Props): React.ReactElement => {
   }
 
   const viewState = props.viewState || useMemo(() => createViewState(editorState.list), [isComposing || editorState])
-  const children = useMemo(() => <EditorChildren
+  const children = <EditorChildren
     blocks={viewState.blocks}
     renderBlock={renderBlock}
     renderTextFragment={renderTextFragment}
     renderStyle={renderStyle}
     renderChildren={renderChildren}
-  />, [viewState])
+  />
 
   return (
     <div

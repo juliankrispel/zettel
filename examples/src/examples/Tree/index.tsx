@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { EditorState } from '@zettel/core'
-import Editor from '@zettel/react'
+import Editor, { EditorChildren } from '@zettel/react'
 import './index.css'
 
 const text = `[One Line[Another line[And another line]]][And another line of text][And another line]`
@@ -18,7 +18,10 @@ const App = () => {
       onChange={setEditorState}
       renderBlock={(props) => {
         const { htmlAttrs, children } = props
-        return <div {...htmlAttrs} className="tree-node">{children}</div>
+        return <div {...htmlAttrs} className="tree-node">
+          {children}
+          <EditorChildren {...props} blocks={props.block.blocks} />
+        </div>
       }}
       editorState={editorState}
     />

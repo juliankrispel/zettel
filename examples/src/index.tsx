@@ -5,7 +5,7 @@ import { render, hydrate} from 'react-dom';
 import './index.css';
 import './App.css';
 import { createBrowserHistory } from 'history'
-import * as Examples from './examples'
+import Examples from './examples'
 import { Router, Route, Link, Switch } from 'react-router-dom'
 
 
@@ -24,7 +24,8 @@ type RouteComps = {
 }[]
 
 const _routeComps: RouteComps = Object.keys(Examples).map((key: string) => ({
-  path: `/${key}`,
+  name: key,
+  path: `/${key.toLowerCase().replace(/\s/gi, '-')}`,
   component: exampleModules[key]
 }))
 
@@ -43,7 +44,7 @@ const Layout = ({ children, routeComps }: LayoutProps) => {
     <nav>
       <ul>
         {routeComps.map((route: any) => (
-          <li onMouseUp={toggleFlag} key={route.path}><Link to={route.path}>{route.path.substr(1)}</Link></li>
+          <li onMouseUp={toggleFlag} key={route.path}><Link to={route.path}>{route.name}</Link></li>
         ))}
       </ul>
     </nav>

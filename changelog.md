@@ -1,7 +1,13 @@
 # Zettel
 
 ## Unreleased
+
+### Changed
+- Tidied up list of examples, better names and better urls, removed examples which are misleading/incomplete
+
+### Fixed
 - Remove unused dependencies from @zettel/core
+- Remove useMemo in @zettel/react which breaks draggable example
 
 ## [0.0.20] - 2019-10-29
 

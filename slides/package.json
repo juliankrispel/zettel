@@ -8,6 +8,9 @@
     "start": "mdx-deck deck.mdx"
   },
   "dependencies": {
-    "mdx-deck": "^3.0.13"
+    "@zettel/core": "^0.0.20",
+    "@zettel/react": "^0.0.20",
+    "mdx-deck": "^3.0.13",
+    "react-draggable": "^4.1.0"
   }
 }
