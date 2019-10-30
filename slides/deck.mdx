@@ -1,46 +1,55 @@
-import { Appear, Head } from 'mdx-deck'
-import { book, code, dark, future } from '@mdx-deck/themes'
+import { Appear, Head, Image } from 'mdx-deck'
+import { highlight, book, code, dark, future } from '@mdx-deck/themes'
+import customTheme from './theme'
+import freelanceLogo from './img/julian-logo.png'
+import './index.css'
 
-export const theme = future
-
-## Editing the world
-## ✏️
-## with Zettel and React
-
----
-
-## I'm Julian :wave:
-
-<ul>
-  <Appear>
-    <li>I freelance</li>
-    <li>I specialize in building editors for the web</li>
-  </Appear>
-</ul>
+export const themes = [highlight, customTheme]
 
 ---
 
-## ContentEditable
+## :wave: I'm Julian
 
-<ol>
-  <Appear>
-    <li>Originally developed by Microsoft (ca 1999)</li>
-    <li>Other browsers implement without spec</li>
-    <li>The w3 spec is still a draft</li>
-  </Appear>
-</ol>
+
+<Appear>
+
+I freelance <img style={{ height: '8vw', verticalAlign: 'middle' }} src={freelanceLogo} />
+
+✎ I specialize in building editors
+
+</Appear>
 
 ---
 
-## Rolling your own
+## What do I mean by editors
 
-<ol>
-  <Appear>
-    <li>Uncontrolled data flow (2 way)</li>
-    <li>Keeping selection states in sync</li>
-    <li>Write own document model</li>
-  </Appear>
-</ol>
+<Appear>
+
+Not `<textarea />`
+
+Not `<input />`
+
+Anything other than plain text
+
+</Appear>
+
+---
+
+## Why should we care?
+
+--- 
+
+## `contentEditable`
+
+<Appear>
+
+Originally developed by Microsoft  (ca 1999)
+
+Other browsers implement without spec
+
+The w3 spec is still a draft
+
+</Appear>
 
 ---
 
@@ -50,6 +59,29 @@ export const theme = future
 - Slate.js
 - Trix Editor
 - Draft.js
+
+---
+
+## Editing the world
+## ✏️
+## with Zettel and React
+
+---
+
+## Why?
+
+<Appear>
+
+I just like doing this stuff
+
+It's good timing
+
+</Appear>
+
+---
+
+## How?
+
 
 ---
 
@@ -285,7 +317,7 @@ const newValue =
 {
   start: 3,
   end: 3,
-  value: 'Hello Vienna'
+  value: 'Hello Kyiv'
 }
 ```
 
@@ -297,7 +329,7 @@ const newValue =
 {
   start: 3,
   end: 9,
-  value: 'Goodbye Vienna'
+  value: 'Goodbye Kyiv'
 }
 ```
 

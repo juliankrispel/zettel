@@ -31,7 +31,7 @@ const App = () => {
           return <h3 {...htmlAttrs}>{children}</h3>
         }
 
-        if (text === '---') {
+        if (text.startsWith('---')) {
           return <hr />
         }
 

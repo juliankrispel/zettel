@@ -28,7 +28,6 @@ const App = () => {
     return positions[key]
   }
 
-  console.log({ positions })
   const renderBlock: RenderBlock = (props) => {
     const { htmlAttrs, children, block } = props
 
