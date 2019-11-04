@@ -1,5 +1,5 @@
 {
-  "name": "@zettel/examples",
+  "name": "@zettel/site",
   "description": "Examples of using Zettel, works on codesandbox",
   "version": "0.0.0",
   "private": true,

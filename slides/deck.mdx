@@ -2,9 +2,23 @@ import { Appear, Head, Image } from 'mdx-deck'
 import { highlight, book, code, dark, future } from '@mdx-deck/themes'
 import customTheme from './theme'
 import freelanceLogo from './img/julian-logo.png'
+import imgRichText from './img/rich-text.png'
+import imgReact from './img/react-icon.png'
+import imgMedium from './img/medium.png'
+import imgNotion from './img/notion.png'
+import imgNoCode from './img/nocode_logos.png'
+import imgGoogleDocs from './img/google-docs.png'
+import imgPaper from './img/paper.png'
+import imgTwitter from './img/twitter-editor.png'
 import './index.css'
 
 export const themes = [highlight, customTheme]
+
+---
+
+## Editing the world
+## ✏️
+## with Zettel and React
 
 ---
 
@@ -13,7 +27,9 @@ export const themes = [highlight, customTheme]
 
 <Appear>
 
-I freelance <img style={{ height: '8vw', verticalAlign: 'middle' }} src={freelanceLogo} />
+I'm a freelance software engineer 
+
+<span className="hire-me">reactrocket.com</span>
 
 ✎ I specialize in building editors
 
@@ -21,7 +37,13 @@ I freelance <img style={{ height: '8vw', verticalAlign: 'middle' }} src={freelan
 
 ---
 
-## What do I mean by editors
+## This talk is about
+## writing editors with React
+<img src={imgReact} />
+
+---
+
+## What do I mean by editors?
 
 <Appear>
 
@@ -29,13 +51,34 @@ Not `<textarea />`
 
 Not `<input />`
 
-Anything other than plain text
+</Appear>
+
+---
+
+## WYSIWIG?
+
+<Appear>
+
+<img src={imgRichText} />
+<span className="badge">Sort of ...</span>
+<div className="stack rotate-1"><img src={imgGoogleDocs} /></div>
+<div className="stack rotate-2"><img src={imgMedium} /></div>
+<div className="stack rotate-3"><img src={imgTwitter} /></div>
+<div className="stack rotate-4"><img src={imgNotion} /></div>
 
 </Appear>
 
 ---
 
 ## Why should we care?
+
+<Appear>
+
+Nocode is a big thing now
+
+<img src={imgNoCode} />
+
+</Appear>
 
 --- 
 
@@ -53,66 +96,37 @@ The w3 spec is still a draft
 
 ---
 
-## Tools in the wild
-
-- Prosemirror
-- Slate.js
-- Trix Editor
-- Draft.js
-
----
-
-## Editing the world
-## ✏️
-## with Zettel and React
-
----
-
-## Why?
+## Draft js to the rescue
 
 <Appear>
 
-I just like doing this stuff
+Actively used at facebook
 
-It's good timing
+Stable
+
+Easy to read source code, typed
 
 </Appear>
 
 ---
 
-## How?
-
-
----
-
-## Draft js to the rescue
-
-<ul>
-  <Appear>
-    <li>Actively used at facebook</li>
-    <li>Pretty stable</li>
-    <li>Active Community</li>
-    <li>Well written, typed with flow</li>
-  </Appear>
-</ul>
-
----
-
 ## The problem(s) with draft
 
-<ul>
-  <Appear>
-    <li>It is large (147kb minified)</li>
-    <li>Depends on Immutable.js (also huge)</li>
-    <li>Complicated, inflexible API</li>
-  </Appear>
-</ul>
+<Appear>
+
+It is large (147kb minified)
+
+Depends on Immutable.js (also a large dependency)
+
+Complicated, inflexible API, not actively developed
+
+</Appear>
 
 ---
 
 ## Updating trees is hard
 
-Frameworks are typically based on tree structures
+Editing frameworks are typically based on tree structures
 
 ---
 
@@ -233,6 +247,19 @@ text.slice(0, 4) + string.slice(9, 12)
 - State module can be used with any framework
 - Changes are atomic - replayable and serializable
 
+
+---
+
+## Why?
+
+<Appear>
+
+I just like doing this stuff
+
+It's good timing, technology wise and industry wise
+
+</Appear>
+
 ---
 
 ## Disclaimer
@@ -240,19 +267,20 @@ text.slice(0, 4) + string.slice(9, 12)
 - DO :fire: NOT :fire: USE :fire: IN :fire: PRODUCTION 
 - I'm the only one working on it (atm)
 - Intentionally very little test coverage.
+- I welcome contributions and sponsorship, please reach out if interested.
 - Only partial mobile support
 
 ---
 
 ## Approach
 
-<ul>
-  <Appear>
-    <li>Minimal testing</li>
-    <li>Fast Prototyping</li>
-    <li>Open source -> github.com/juliankrispel/zettel</li>
-  </Appear>
-</ul>
+<Appear>
+
+Minimal testing
+Fast Prototyping
+Open source -> github.com/juliankrispel/*zettel*
+
+</Appear>
 
 ---
 

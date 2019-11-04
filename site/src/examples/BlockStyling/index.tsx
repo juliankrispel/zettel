@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { EditorState, getBlocksForRange } from '@zettel/core'
 import Editor from '@zettel/react'
-import { Button } from '../components'
+import { Button } from '../../components'
 
 const text = `[Headline 1][Headline 2][A paragraph]`
 

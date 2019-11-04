@@ -3,7 +3,6 @@ import {importMDX} from 'mdx.macro'
 import React, { useState, lazy, Suspense } from 'react';
 import { render, hydrate} from 'react-dom';
 import './index.css';
-import './App.css';
 import { createBrowserHistory } from 'history'
 import Examples from './examples'
 import { Router, Route, Link, Switch } from 'react-router-dom'

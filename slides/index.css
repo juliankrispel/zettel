@@ -1,2 +1,70 @@
 code {
 }
+
+.hire-me {
+  background: rgba(242, 89, 75, .8);
+  color: #fff;
+  z-index: 0;
+  transform: rotate(-10deg);
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  margin-left: -10vw;
+  font-size: 0.8em;
+  margin-top: 5vw;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .1ch;
+  padding: .5em .7em;
+  box-shadow: 0 10px 10px rgba(0,0,0,.3);
+  border-radius: 3px;
+}
+
+.badge {
+  background: rgba(87, 225, 28, 0.8);
+  color: #fff;
+  z-index: 0;
+  transform: rotate(-10deg);
+  display: inline-block;
+  position: absolute;
+  left: 50%;
+  margin-left: -10vw;
+  font-size: 0.8em;
+  margin-top: 5vw;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: .1ch;
+  padding: .5em .7em;
+  box-shadow: 0 10px 10px rgba(0,0,0,.3);
+  border-radius: 3px;
+}
+
+.red {
+  background: rgba(242, 89, 75, .8);
+}
+
+.stack {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100%;
+  display: flex;
+  align-content: center;
+  padding: 2em;
+  height: 100%;
+}
+
+.stack img {
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid #333;
+  box-shadow: 5px 0px 20px rgba(0,0,0,.1);
+  margin: 0;
+}
+
+.rotate-1{ transform: rotate(-2deg) }
+.rotate-2{ transform: rotate(1deg) }
+.rotate-3{ transform: rotate(-3deg) }
+.rotate-4{ transform: rotate(2deg) }
