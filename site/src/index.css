@@ -103,3 +103,10 @@ nav a:hover {
   text-decoration: underline;
   font-style: italic;
 }
+
+.raw-input {
+  background: #f0f0f0;
+  min-height: 30%;
+
+
+}

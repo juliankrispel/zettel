@@ -12,13 +12,15 @@
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
     "@types/react-router-dom": "^4.3.4",
+    "@types/use-persisted-state": "^0.3.0",
     "@zettel/core": "^0.0.20",
     "@zettel/react": "^0.0.20",
     "changelog-parser": "^2.8.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-draggable": "^4.0.3",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "use-persisted-state": "^0.3.0"
   },
   "eslintConfig": {
     "extends": "react-app"

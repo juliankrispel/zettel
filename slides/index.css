@@ -64,6 +64,11 @@ code {
   margin: 0;
 }
 
+h2 img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
 .rotate-1{ transform: rotate(-2deg) }
 .rotate-2{ transform: rotate(1deg) }
 .rotate-3{ transform: rotate(-3deg) }
