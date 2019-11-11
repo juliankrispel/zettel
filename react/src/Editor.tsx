@@ -134,9 +134,6 @@ const Editor = (props: Props): React.ReactElement => {
         }
       }}
       suppressContentEditableWarning
-      onKeyUp={() => {
-        // setComposing(false)
-      }}
       role="textbox"
       autoCorrect={'off'}
       ref={ref}

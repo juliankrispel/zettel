@@ -1,6 +1,12 @@
 code {
 }
 
+input {
+  font-size: inherit;
+  padding: 1em;
+  border: 2px solid #000;
+}
+
 .hire-me {
   background: rgba(242, 89, 75, .8);
   color: #fff;

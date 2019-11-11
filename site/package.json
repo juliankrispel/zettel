@@ -9,17 +9,22 @@
     "postbuild": "react-snap"
   },
   "dependencies": {
+    "@microsoft/fast-tooling-react": "^1.23.0",
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
     "@types/react-router-dom": "^4.3.4",
+    "@types/styled-components": "^4.1.22",
     "@types/use-persisted-state": "^0.3.0",
     "@zettel/core": "^0.0.20",
     "@zettel/react": "^0.0.20",
     "changelog-parser": "^2.8.0",
+    "lodash-es": "^4.17.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-draggable": "^4.0.3",
+    "react-jsonschema-form": "^1.8.0",
     "react-router-dom": "^5.0.1",
+    "styled-components": "^4.4.1",
     "use-persisted-state": "^0.3.0"
   },
   "eslintConfig": {
@@ -40,6 +45,7 @@
   "devDependencies": {
     "add": "^2.0.6",
     "mdx.macro": "^0.2.9",
+    "react-dnd-html5-backend": "^9.4.0",
     "react-movable": "^2.2.0",
     "react-snap": "^1.23.0",
     "yarn": "^1.17.3"

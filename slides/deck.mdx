@@ -7,10 +7,32 @@ import imgReact from './img/react-icon.png'
 import imgMedium from './img/medium.png'
 import imgNotion from './img/notion.png'
 import imgNoCode from './img/nocode_logos.png'
-import imgGoogleDocs from './img/google-docs.png'
 import imgPaper from './img/paper.png'
+import imgDjsp from './img/djsp.png'
 import imgTettra from './img/tettra.png'
 import imgTwitter from './img/twitter-editor.png'
+import imgCkEditor from './img/ck-editor-5.png'
+import imgDraftJs from './img/draft-js.png'
+import imgProductComparison from './img/editor-products-comparison.svg'
+import imgFroala from './img/froala.png'
+import imgTiny from './img/tiny.png'
+import imgGoogleDocs from './img/google-docs.png'
+import imgGutenberg from './img/gutenberg.png'
+import imgGutenbergReviews from './img/gutenberg-reviews.png'
+import imgMxstbrDraft from './img/mxstbr-draft.png'
+import imgMxstbrRegrets from './img/mxstbr-regrets.png'
+import imgSlate2 from './img/slate-2.png'
+import imgSlate from './img/slate.png'
+import imgTrix from './img/trix.png'
+import imgVsCodeModel from './img/vscode-change.png'
+import imgWebFlowInvestment from './img/webflow-investment.png'
+import imgDocModel from './img/document-model.svg'
+import imgTree from './img/tree.svg'
+import imgMinimalApi from './img/minimal-api.png'
+import imgUpdateModel from './img/update-model.svg'
+import imgUpdateModel2 from './img/update-model-2.svg'
+import imgZettelModel from './img/zettel-model.svg'
+
 import './index.css'
 
 export const themes = [highlight, customTheme]
@@ -23,7 +45,7 @@ export const themes = [highlight, customTheme]
 
 ---
 
-## :wave: I'm Julian
+## :wave: Hello Kyiv! I'm Julian
 
 <Appear>
 
@@ -37,47 +59,126 @@ I'm a freelance software engineer
 
 ---
 
+<Image src={imgTettra}>
+  <span className="badge">Like this</span>
+  <Appear>
+    <div className="stack rotate-1"><img src={imgGoogleDocs} /></div>
+    <div className="stack rotate-2"><img src={imgMedium} /></div>
+    <div className="stack rotate-3"><img src={imgTwitter} /></div>
+    <div className="stack rotate-4"><img src={imgNotion} /></div>
+  </Appear>
+</Image>
+
+---
+
+### Why should you care?
+
 <Appear>
-<div className="stack rotate-1"><img src={imgTettra} /></div>
-<img src={imgRichText} />
-<span className="badge">Sort of ...</span>
-<div className="stack rotate-1"><img src={imgGoogleDocs} /></div>
-<div className="stack rotate-2"><img src={imgMedium} /></div>
-<div className="stack rotate-3"><img src={imgTwitter} /></div>
-<div className="stack rotate-4"><img src={imgNotion} /></div>
+
+Editors are everywhere
+
+You already use this right? `<input type="text" />`
+
+Demand is increasing!!
+
 </Appear>
 
 ---
 
-## This talk is about
-## writing editors with <img width="80" src={imgReact} /> React 
+<img src={imgWebFlowInvestment} />
 
 ---
 
-## What do I mean by editors?
-
-<Appear>
-
-Not `<textarea />`
-
-Not `<input />`
-
-</Appear>
+### Who's building editors?
 
 ---
 
+## Document Editing/Collaboration
+* Dropbox Paper
+* Confluence
+* Google Docs
 
-## Why should we care?
+---
 
-<Appear>
+## Email
+* Gmail
+* Mailchimp
+* Campaign Monitor
 
-Nocode is a big thing now
+---
 
-<img src={imgNoCode} />
+### Task Management/Collaboration
+* Notion.so
+* Basecamp
+* Workflowy
 
-</Appear>
+---
 
---- 
+## Communication tools
+* Slack
+* Discord
+
+---
+
+## Social Media
+* Twitter
+* Facebook
+
+---
+
+## Headless CMS
+* Contentful
+* Zesty
+
+---
+
+## Publishing Platforms
+* Wordpress
+* Medium
+
+---
+
+## Website Builders & No Code
+* Squarespace
+* Wix
+* webflow
+
+---
+
+## What features are they building?
+
+---
+
+- Rich Text
+- Tables
+- Embedded Content (i.e. Images ands Video)
+- Syntax Highlighting
+- Collaborative Editing
+- File uploads
+- Drag and Drop functionality
+- Configurable Layouts
+
+---
+
+<img style={{width: '100%'}} src={imgProductComparison} />
+
+---
+
+## What is an editor
+
+---
+
+`<input />`
+
+---
+
+`<textarea></textarea>`
+
+---
+
+`<div contenteditable="true"></div>`
+
+---
 
 ## `contentEditable`
 
@@ -87,152 +188,113 @@ Originally developed by Microsoft  (ca 1999)
 
 Other browsers implement without spec
 
-The w3 spec is still a draft
+The w3 spec is still in draft
 
 </Appear>
 
 ---
 
-## Draft js to the rescue
+## What tools can you use
+
+---
+
+<img src={imgTiny} />
+
+---
+
+<img src={imgFroala} />
+
+---
+
+<img src={imgTrix} />
+
+---
+
+<img src={imgGutenberg} />
+
+---
+
+<img src={imgGutenbergReviews} />
+
+---
+
+<img src={imgSlate} />
+
+---
+
+<img src={imgSlate2} />
+
+---
+
+<img src={imgDraftJs} />
+
+---
+
+<img src={imgDjsp} />
+
+---
+
+<img src={imgMxstbrRegrets} />
+
+---
+
+<img src={imgMxstbrDraft} />
+
+---
+
+## Building editors is hard
+
+---
+
+<img src={imgDocModel} />
+
+---
+
+<img src={imgTree} />
+
+---
+
+<img src={imgUpdateModel} />
+
+---
+
+<img src={imgUpdateModel2} />
+
+---
+
+<img src={imgVsCodeModel} />
+
+---
 
 <Appear>
 
-Actively used at facebook
+## Updating Trees is hard
 
-Stable
-
-Easy to read source code, typed
+## Updating Flat structures is easy
 
 </Appear>
-
----
-
-## The problem(s) with draft
-
-<Appear>
-
-It is large (147kb minified)
-
-Depends on Immutable.js (also a large dependency)
-
-Complicated, inflexible API, not actively developed
-
-</Appear>
-
----
-
-## Updating trees is hard
-
-Editing frameworks are typically based on tree structures
 
 ---
 
 <div contentEditable={true} style={{display: 'flex', justifyContent: 'space-between', paddingRight: '3em', alignItems: 'center' }}>
-<small >
-
-```js
-[{
-  text: 'One',
-}, {
-  text: 'Two',
-  children: [{
-    text: 'Three'
-  }]
-}]
-```
-
-</small>
-
-<div>
-
-  - One
-  - Two
-    - Three
-
-</div>
-</div>
-
----
-<div>
-<div contentEditable={true} style={{marginTop: '-2em', fontSize: '0.8em', display: 'flex', justifyContent: 'space-between', paddingRight: '3em', alignItems: 'center' }}>
-
-```js
-[{
-  text: 'One',
-}, {
-  text: 'Two',
-  children: [{
-    text: 'Three'
-  }]
-}]
-```
-
-<div style={{display: 'inline-block', padding: 60}}></div>
-
-```js
-[{
-  text: 'One',
-}, {
-  text: 'Tree'
-}]
-```
-</div>
-
-<small style={{ marginTop: '-4em', paddingTop: 0 }}>
 
 ```
-{ startIndex: 1, startOffset: 1,
-  endIndex: [1,1], endOffset: 1 }
+One
+Two
+Three
 ```
 
-</small>
-</div>
-
----
-
-```
-{ startIndex: 1, startOffset: 1,
-  endIndex: [1,1], endOffset: 1 }
-```
-
-<ol>
-  <Appear>
-    <li>Find selected elements in a tree of (n) depth</li>
-    <li>Remove the blocks in between</li>
-    <li>Update blocks to remove text</li>
-    <li>Join the blocks together</li>
-  </Appear>
-</ol>
-
----
-
-## Updating text is easy
-
----
-
-<div contentEditable={true} style={{display: 'flex', justifyContent: 'space-between', paddingRight: '3em', alignItems: 'center' }}>
-<small >
-
-```js
-[One]
-[Two
-[Three]]
-```
-
-</small>
-
-<div>
-
-  - One
-  - Two
-    - Three
-
-</div>
 </div>
 
 ```
 text.slice(0, 4) + string.slice(9, 12)
 ```
+
+
+
+---
+
+<img src={imgZettelModel} />
 
 ---
 
@@ -244,59 +306,30 @@ text.slice(0, 4) + string.slice(9, 12)
 - State module can be used with any framework
 - Changes are atomic - replayable and serializable
 
-
 ---
 
-## Why?
-
-<Appear>
-
-I just like doing this stuff
-
-It's good timing, technology wise and industry wise
-
-</Appear>
+## Standing on the shoulders of giants
 
 ---
 
 ## Disclaimer
 
-- DO :fire: NOT :fire: USE :fire: IN :fire: PRODUCTION 
+- DO :fire: NOT :fire: USE :fire: IN :fire: PROD 
 - I'm the only one working on it (atm)
-- Intentionally very little test coverage.
-- I welcome contributions and sponsorship, please reach out if interested.
-- Only partial mobile support
+- Architecture is still in it's early stages.
+- I welcome contributions
 
 ---
 
 ## Approach
 
-<Appear>
+---
 
-Minimal testing
-Fast Prototyping
-Open source -> github.com/juliankrispel/*zettel*
-
-</Appear>
+## Zettel is a library not a framework
 
 ---
 
-## Data model
-
-- Flat data structure for state
-- ^ Generates tree data structure for rendering
-
----
-
-```
-[One[Two]]
-```
-
-Becomes 
-
-```
-[{ text: 'One', children: [{ text: 'Two'}]}]
-```
+<img src={imgMinimalApi} />
 
 ---
 
@@ -426,12 +459,13 @@ const newValue =
 
 - Android support (via level 2 input events)
 - Prototype collaborative editing
-- Automated browser testing
 - Alternative view layers (vuejs/svelte/angular)
+- Docs 😅
+- First stable release
 
 ---
 
-### That's it thanks for listening :pray:
+### That's it thank you so much Kyiv listening :pray:
 
 - Twitter: @juliandoesstuff
 - Github: juliankrispel/zettel

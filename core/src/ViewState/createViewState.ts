@@ -2,7 +2,7 @@ import { TextCharacter, ListState, ViewState } from '../types'
 import createTextFragments from './createTextFragments'
 import { getNode, getNodes } from './getTreeNode'
 
-export default function parseBlockTree (
+export default function createViewState (
   flat: ListState,
 ): ViewState {
   const state: ViewState = {
