@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useRef, useState, useMemo } from 'react'
+import * as React from 'react';
+import { useLayoutEffect, useRef, useState, useMemo } from 'react'
 import {
   EditorState,
   setDomSelection,

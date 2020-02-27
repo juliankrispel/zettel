@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react'
+import * as React from 'react';
+import { Fragment, useState } from 'react'
 import { EditorState, getBlockForIndex } from '@zettel/core'
 import createPersistedState from 'use-persisted-state';
 import Editor from '@zettel/react'

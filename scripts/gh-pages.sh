@@ -1,4 +1,4 @@
-cd examples
+cd site
 yarn
 yarn build
 cp build/index.html build/404.html 

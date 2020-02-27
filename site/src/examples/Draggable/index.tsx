@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import * as React from 'react';
+import { useState } from 'react'
 import Draggable from 'react-draggable';
 import { EditorState } from '@zettel/core'
 import Editor, { RenderBlock } from '@zettel/react'

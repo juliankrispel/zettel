@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Block } from '@zettel/core'
 import EditorText from './EditorText'
 import { RenderProps } from './types'

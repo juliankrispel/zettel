@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { EditorState, getBlockForIndex } from '@zettel/core'
 import Editor from '@zettel/react'
 

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import * as React from 'react';
+import { useState } from 'react'
 import { EditorState } from '@zettel/core'
 import Editor from '@zettel/react'
 import styled from 'styled-components'

@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react'
+import * as React from 'react';
+import { useRef, useState, useEffect } from 'react'
 
 const events = ['compositionstart', 'compositionupdate', 'input', 'beforeinput']
 
