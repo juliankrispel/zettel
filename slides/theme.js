@@ -1,5 +1,5 @@
 // Example theme.js
-import React from 'react'
+import * as React from 'react'
 
 export default {
   fonts: {

@@ -1,6 +1,7 @@
 // @ts-ignore
 import {importMDX} from 'mdx.macro'
-import React, { useState, lazy, Suspense } from 'react';
+import * as React from 'react';
+import { useState, lazy, Suspense } from 'react';
 import { render, hydrate} from 'react-dom';
 import './index.css';
 import { createBrowserHistory } from 'history'

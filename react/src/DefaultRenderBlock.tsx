@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { RenderBlock } from './types'
 import EditorChildren from './EditorChildren'
 
