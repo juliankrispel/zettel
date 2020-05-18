@@ -4,7 +4,7 @@ __DO NOT USE IN PRODUCTION__
 
 Framework for building text editors in the browser.
 
-[Join Zettel on Slack](https://join.slack.com/t/zetteljs/shared_invite/enQtNzk4NjM5Njc0Nzg5LTI2ZTljZTMwY2JjMmFkOWM3Yzk5YjdlODgxZWIwMzc5YmE4MGQ1MjViZjUxMmUxZmZjNmY3OTljOWRiMmNmZjg)
+[Join Zettel on Slack](https://join.slack.com/t/zetteljs/shared_invite/zt-eiih8wis-Hca9bcrvX3V728odwEqiBA)
 
 [![@zettel/core](https://badge.fury.io/js/%40zettel%2Fcore.svg)](https://badge.fury.io/js/%40zettel%2Fcore)
 [![@zettel/react](https://badge.fury.io/js/%40zettel%2Freact.svg)](https://badge.fury.io/js/%40zettel%2Freact)
