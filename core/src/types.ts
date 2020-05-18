@@ -38,7 +38,7 @@ export type ListState = {
 */
 export type Value = Character[]
 
-export type Character = (TextCharacter | BlockStart | BlockEnd)
+export type Character = (TextCharacter | BlockStart | BlockEnd | FragmentStart | FragmentEnd)
 
 /**
  * [
@@ -83,19 +83,34 @@ export type BlockStart = CharacterData & {
   type: 'block-start'
 }
 
-export type TextFragment = CharacterData & {
-  text: string,
-  entity?: Entity
-}
-
 /**
- * Represents the end of a block, there
- * has toe be a matching 
+ * Represents the end of a block
  */
 export type BlockEnd = {
   type: 'block-end',
   entity?: void
 }
+
+/**
+ * Represents the beginning of a fragment
+ */
+export type FragmentStart = {
+  type: 'fragment-start',
+  data?: any
+}
+
+/**
+ * Represents the end of a fragment
+ */
+export type FragmentEnd = {
+  type: 'fragment-end',
+}
+
+export type TextFragment = CharacterData & {
+  text: string,
+  entity?: Entity
+}
+
 
 /**
  * Embodies all possible changes made to doc
@@ -154,12 +169,19 @@ export type ViewState = {
   entityMap: EntityMap
 }
 
+export type ContainerFragment = {
+  fragments: Fragment[],
+  data: any
+}
+
+export type Fragment = ContainerFragment | TextFragment
+
 /**
 * Represents one node in a tree
 * Used for rendering
 */
 export type Block = {
-  fragments: TextFragment[],
+  fragments: Fragment[],
   value: TextCharacter[],
   blockKey: string,
   blockLevel: number,

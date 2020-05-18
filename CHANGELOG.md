@@ -4,6 +4,7 @@
 
 ### Changed
 - Tidied up list of examples, better names and better urls, removed examples which are misleading/incomplete
+- Add FragmentStart and FragmentEnd chars to ListState
 
 ### Fixed
 - Remove unused dependencies from @zettel/core

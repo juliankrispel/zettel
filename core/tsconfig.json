@@ -9,7 +9,6 @@
     "outDir": "dist",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
     "removeComments": true
   },
   "include": [

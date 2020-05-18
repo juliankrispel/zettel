@@ -1,7 +1,7 @@
-import createBlockTree from './createViewState'
+import createBlockTree from './reduceViewState'
 import createFragment from './createFragment'
 import createTextFragments from './createTextFragments'
-import createViewState from './createViewState'
+import createViewState from './reduceViewState'
 import { getNode, getNodes } from './getTreeNode'
 
 export {

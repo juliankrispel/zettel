@@ -1,4 +1,8 @@
 export const COMMAND = {
+  BLOCK_START: 'block-start',
+  BLOCK_END: 'block-end',
+  FRAGMENT_START: 'fragment-start',
+  FRAGMENT_END: 'fragment-end',
   CHANGE_SELECTION: 'CHANGE_SELECTION',
   BACKSPACE: 'BACKSPACE',
   BACKSPACE_BLOCK_START: 'BACKSPACE_BLOCK_START',
