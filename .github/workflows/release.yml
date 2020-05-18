@@ -20,11 +20,16 @@ jobs:
       - name: Get Changelog Entry
         id: changelog_entry
         run: node scripts/release.js
-      - name: Print the entry
-        run: |
-          echo "${{ steps.changelog_entry.outputs.title }}"
-          echo "${{ steps.changelog_entry.outputs.version }}"
-          echo "${{ steps.changelog_entry.outputs.description }}"
+      - name: Assert Package Versions
+        run: node scripts/assert-package-version.js
+        with:
+          version: ${{ steps.changelog_entry.outputs.version }}
+          packages: core, react
+#      - name: Print the entry
+#        run: |
+#          echo "${{ steps.changelog_entry.outputs.title }}"
+#          echo "${{ steps.changelog_entry.outputs.version }}"
+#          echo "${{ steps.changelog_entry.outputs.description }}"
 
 #      - name: Create Release
 #        id: create_release
