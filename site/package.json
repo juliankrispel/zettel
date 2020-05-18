@@ -48,6 +48,6 @@
     "react-dnd-html5-backend": "^9.4.0",
     "react-movable": "^2.2.0",
     "react-snap": "^1.23.0",
-    "yarn": "^1.17.3"
+    "yarn": "^1.22.0"
   }
 }
