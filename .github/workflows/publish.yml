@@ -1,0 +1,19 @@
+name: publish package
+on: [push]
+jobs:
+  release:
+    if: github.event.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+    - name: use node 12
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: npm publish
+      run: |
+        npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+        npm publish
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
