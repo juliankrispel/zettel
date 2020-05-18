@@ -1,0 +1,19 @@
+on: push
+name: Test
+jobs:
+  test:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: test @zettel/core
+        run: |
+          cd core
+          yarn
+          yarn test
+      - name: test @zettel/react
+        run: |
+          cd react
+          yarn
+          yarn test
+
+
