@@ -21,6 +21,14 @@ jobs:
         env:
           PACKAGES: core, react
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Print the entry
+        run: |
+          echo "${{ steps.changelog_entry.outputs.title }}"
+          echo "${{ steps.changelog_entry.outputs.version }}"
+          echo "${{ steps.changelog_entry.outputs.description }}"
+          echo "${{ steps.changelog_entry.outputs.unreleased }}"
+
       - name: Create Release if does not exist
         run: echo "release this"
         if: ${{ steps.changelog_entry.outputs.unreleased == true }} 
@@ -47,9 +55,3 @@ jobs:
 #          npm publish
 #        env:
 #          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-#      - name: Print the entry
-#        run: |
-#          echo "${{ steps.changelog_entry.outputs.title }}"
-#          echo "${{ steps.changelog_entry.outputs.version }}"
-#          echo "${{ steps.changelog_entry.outputs.description }}"
-

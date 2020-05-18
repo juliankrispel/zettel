@@ -24,7 +24,7 @@ async function run() {
   core.setOutput('version', version.version)
   core.setOutput('description', version.body)
   core.setOutput('unreleased', true)
-
+  console.log('setting unreleased to true')
 
   packages.forEach(package => {
     const packageJson = JSON.parse(fs.readFileSync(path.join('./', package, 'package.json')).toString())
@@ -36,6 +36,7 @@ async function run() {
   // check if already released on github, if it does we set the output of unreleased to false
   releases.forEach(release => {
     if(release.tag_name.includes(version.version)) {
+      console.log('setting unreleased to false')
       core.setOutput('unreleased', false)
     }
   })
