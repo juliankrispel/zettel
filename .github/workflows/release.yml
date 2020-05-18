@@ -29,19 +29,6 @@ jobs:
           echo "${{ steps.changelog_entry.outputs.description }}"
           echo "${{ steps.changelog_entry.outputs.unreleased }}"
 
-      - name: Create Release
-        id: create_release
-        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: "v${{ steps.changelog_entry.outputs.version }}"
-          release_name: Release v${{ steps.changelog_entry.outputs.version }}
-          body: "${{ steps.changelog_entry.outputs.description }}"
-          draft: false
-          prerelease: false
-
       - name: set package registry and npm token
         run: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 
@@ -59,3 +46,22 @@ jobs:
           npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create Github Release
+        id: create_release
+        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: "v${{ steps.changelog_entry.outputs.version }}"
+          release_name: Release v${{ steps.changelog_entry.outputs.version }}
+          body: |
+            ${{ steps.changelog_entry.outputs.description }}
+
+            ### Artifacts
+            - [@zettel/core](https://www.npmjs.com/package/@zettel/core/v/${{ steps.changelog_entry.outputs.version }})
+            - [@zettel/react](https://www.npmjs.com/package/@zettel/react/v/${{ steps.changelog_entry.outputs.version }})
+          draft: false
+          prerelease: false
+
