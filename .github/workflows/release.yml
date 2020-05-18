@@ -13,6 +13,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          persist-credentials: false
       - name: Install Dependencies
         run: yarn
       - name: Get Changelog Entry
@@ -66,6 +68,10 @@ jobs:
             - [@zettel/react](https://www.npmjs.com/package/@zettel/react/v/${{ steps.changelog_entry.outputs.version }})
           draft: false
           prerelease: false
+      - name: Install site dependencies
+        run: |
+          cd site
+          yarn
       - name: Deploy to Github Pages
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
