@@ -7,7 +7,7 @@ on:
 name: Create Release
 
 jobs:
-  build:
+  release:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
@@ -28,31 +28,28 @@ jobs:
           echo "${{ steps.changelog_entry.outputs.version }}"
           echo "${{ steps.changelog_entry.outputs.description }}"
           echo "${{ steps.changelog_entry.outputs.unreleased }}"
-          echo "${{ steps.changelog_entry.outputs.unreleased == 'true' }}"
 
-      - name: Create Release if does not exist
-        run: echo "release this"
-        if: ${{ steps.changelog_entry.outputs.unreleased == true }} 
+      - name: Create Release
+        id: create_release
+        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: "v${{ steps.changelog_entry.outputs.version }}"
+          release_name: Release "v${{ steps.changelog_entry.outputs.version }}"
+          body: "${{ steps.changelog_entry.outputs.description }}"
+          draft: false
+          prerelease: false
 
-#      - name: Create Release
-#        id: create_release
-#        uses: actions/create-release@v1
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#        with:
-#          tag_name: ${{ github.ref }}
-#          release_name: Release ${{ github.ref }}
-#          body: ${{ steps.changelog_reader.outputs.log_entry }} # This pulls from the GET CHANGELOG ENTRY step above, referencing it's ID to get its outputs object, which include a `log_entry`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-#          draft: false
-#          prerelease: false
-
-#      - name: npm publish
-#        run: |
-#          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-#          cd core
-#          npm publish
-#          cd ..
-#          cd react
-#          npm publish
-#        env:
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: npm publish
+        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+        run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          cd core
+          npm publish
+          cd ..
+          cd react
+          npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
