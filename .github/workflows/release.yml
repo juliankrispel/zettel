@@ -43,7 +43,7 @@ jobs:
           prerelease: false
 
       - name: npm publish
-#        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           cd core

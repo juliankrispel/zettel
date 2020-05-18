@@ -1,6 +1,6 @@
 # Zettel
 
-## Unreleased
+## [0.0.21] - 2020-05-18
 
 ### Changed
 - Tidied up list of examples, better names and better urls, removed examples which are misleading/incomplete
