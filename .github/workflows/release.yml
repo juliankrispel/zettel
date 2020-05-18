@@ -64,4 +64,10 @@ jobs:
             - [@zettel/react](https://www.npmjs.com/package/@zettel/react/v/${{ steps.changelog_entry.outputs.version }})
           draft: false
           prerelease: false
+      - name: Deploy to Github Pages
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: site/build
 
