@@ -28,7 +28,7 @@ jobs:
           echo "${{ steps.changelog_entry.outputs.version }}"
           echo "${{ steps.changelog_entry.outputs.description }}"
           echo "${{ steps.changelog_entry.outputs.unreleased }}"
-          echo "${{ steps.changelog_entry.outputs.unreleased == true }}"
+          echo "${{ steps.changelog_entry.outputs.unreleased == 'true' }}"
 
       - name: Create Release if does not exist
         run: echo "release this"
