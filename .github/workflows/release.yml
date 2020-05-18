@@ -46,12 +46,13 @@ jobs:
         run: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
 
       - name: publish core package
-#        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
         run: |
           cd core
           yarn
           npm publish
       - name: publish react package
+        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
         run: |
           cd react
           yarn

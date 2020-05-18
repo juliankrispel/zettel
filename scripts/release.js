@@ -31,6 +31,10 @@ async function run() {
     if (packageJson.version !== version.version) {
       core.setFailed(`Release failed because version in changelog: ${version.version} isn't the schangelog parserame as version in ${packageJson.name} which is ${packageJson.version}. Update this package first.`)
     }
+
+    if (packageJson.dependencies["@zettel/core"] != null && packageJson.dependencies["@zettel/core"] !== version.version) {
+      core.setFailed(`Release failed because the internal dependency on @zettel/core is using the wrong version`)
+    }
   })
 
   // check if already released on github, if it does we set the output of unreleased to false

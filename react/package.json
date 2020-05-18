@@ -11,7 +11,7 @@
     "prepare": "tsc"
   },
   "dependencies": {
-    "@zettel/core": "0.0.20"
+    "@zettel/core": "0.0.21"
   },
   "peerDependencies": {
     "react": "16.8.6",
