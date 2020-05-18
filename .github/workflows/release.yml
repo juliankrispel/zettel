@@ -20,6 +20,7 @@ jobs:
         run: node scripts/release.js
         env:
           PACKAGES: core, react
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release if does not exist
         run: echo "release this"
         if: ${{ steps.changelog_reader.outputs.already_released == false }} 
