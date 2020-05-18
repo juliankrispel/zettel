@@ -29,18 +29,19 @@ jobs:
           echo "${{ steps.changelog_entry.outputs.description }}"
           echo "${{ steps.changelog_entry.outputs.unreleased }}"
 
-      - name: set package registry and npm token
-        run: npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
-
       - name: publish core package
         if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+        continue-on-error: true
         run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           cd core
           yarn
           npm publish
       - name: publish react package
         if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+        continue-on-error: true
         run: |
+          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           cd react
           yarn
           npm publish
