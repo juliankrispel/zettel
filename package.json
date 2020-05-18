@@ -15,11 +15,8 @@
     "gh-pages": "^2.1.1",
     "global": "^4.4.0",
     "lorem-ipsum": "^2.0.3",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "^3.4.1",
     "typescript": "3.5.1"
-  },
-  "scripts": {
-    "deploy": "./scripts/gh-pages.sh"
   },
   "eslintConfig": {
     "extends": "react-app"
