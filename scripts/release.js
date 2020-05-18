@@ -29,7 +29,7 @@ async function run() {
   packages.forEach(package => {
     const packageJson = JSON.parse(fs.readFileSync(path.join('./', package, 'package.json')).toString())
     if (packageJson.version !== version.version) {
-      core.setFailed(`Release failed because version in changelog: ${version.version} isn't the same as version in ${packageJson.name} which is ${packageJson.version}`)
+      core.setFailed(`Release failed because version in changelog: ${version.version} isn't the schangelog parserame as version in ${packageJson.name} which is ${packageJson.version}. Update this package first.`)
     }
   })
 

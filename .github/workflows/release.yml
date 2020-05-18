@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Install changelog parser
+      - name: Install Dependencies
         run: yarn
       - name: Get Changelog Entry
         id: changelog_entry
