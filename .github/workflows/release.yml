@@ -47,9 +47,9 @@ jobs:
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           cd core
-          npm publish --tag v${{ steps.changelog_entry.outputs.version }}
+          npm publish
           cd ..
           cd react
-          npm publish --tag v${{ steps.changelog_entry.outputs.version }}
+          npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
