@@ -16,7 +16,7 @@
     "global": "^4.4.0",
     "lorem-ipsum": "^2.0.3",
     "react-scripts": "^3.4.1",
-    "typescript": "3.5.1"
+    "typescript": "^3.9.2"
   },
   "eslintConfig": {
     "extends": "react-app"

@@ -9,7 +9,7 @@ import Examples from './examples'
 import { Router, Route, Link, Switch } from 'react-router-dom'
 
 
-const Readme = lazy(() => importMDX('../../changelog.md'))
+const Readme = lazy(() => importMDX('../../CHANGELOG.md'))
 
 const Content = () =>
   <Suspense fallback={<div>Loading...</div>}>
