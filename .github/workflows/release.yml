@@ -23,7 +23,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Release if does not exist
         run: echo "release this"
-        if: ${{ steps.changelog_entry.outputs.not_released_yet == true }} 
+        if: ${{ steps.changelog_entry.outputs.unreleased == true }} 
 
 #      - name: Create Release
 #        id: create_release
