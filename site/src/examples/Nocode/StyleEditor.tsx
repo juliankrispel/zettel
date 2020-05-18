@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import styled from 'styled-components'
 
 type Props = {
