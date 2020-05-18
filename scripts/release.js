@@ -23,7 +23,7 @@ async function run() {
   core.setOutput('title', version.title)
   core.setOutput('version', version.version)
   core.setOutput('description', version.body)
-  core.setOutput('already_released', false)
+  core.setOutput('unreleased', true)
 
 
   packages.forEach(package => {
@@ -33,11 +33,10 @@ async function run() {
     }
   })
 
-  // check if already released on github
+  // check if already released on github, if it does we set the output of unreleased to false
   releases.forEach(release => {
     if(release.tag_name.includes(version.version)) {
-      core.setFailed(`Release failed because version in changelog: ${version.version} isn't the same as version in ${packageJson.name} which is ${packageJson.version}`)
-      core.setOutput('already_released', true)
+      core.setOutput('unreleased', false)
     }
   })
 }
