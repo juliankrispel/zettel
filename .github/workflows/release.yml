@@ -3,8 +3,6 @@ on:
     # Sequence of patterns matched against refs/tags
     branches:
       - master
-#    tags:
-#    - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 name: Create Release
 
@@ -22,11 +20,9 @@ jobs:
         run: node scripts/release.js
         env:
           PACKAGES: core, react
-#      - name: Print the entry
-#        run: |
-#          echo "${{ steps.changelog_entry.outputs.title }}"
-#          echo "${{ steps.changelog_entry.outputs.version }}"
-#          echo "${{ steps.changelog_entry.outputs.description }}"
+      - name: Create Release if does not exist
+        run: echo "release this"
+        if: ${{ steps.changelog_reader.outputs.already_released == false }} 
 
 #      - name: Create Release
 #        id: create_release
@@ -39,3 +35,20 @@ jobs:
 #          body: ${{ steps.changelog_reader.outputs.log_entry }} # This pulls from the GET CHANGELOG ENTRY step above, referencing it's ID to get its outputs object, which include a `log_entry`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
 #          draft: false
 #          prerelease: false
+
+#      - name: npm publish
+#        run: |
+#          npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
+#          cd core
+#          npm publish
+#          cd ..
+#          cd react
+#          npm publish
+#        env:
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#      - name: Print the entry
+#        run: |
+#          echo "${{ steps.changelog_entry.outputs.title }}"
+#          echo "${{ steps.changelog_entry.outputs.version }}"
+#          echo "${{ steps.changelog_entry.outputs.description }}"
+
