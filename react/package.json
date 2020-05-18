@@ -8,7 +8,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc -w",
-    "prepublish": "tsc"
+    "prepare": "tsc"
   },
   "dependencies": {
     "@zettel/core": "0.0.20"

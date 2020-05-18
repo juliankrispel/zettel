@@ -11,7 +11,7 @@
     "test:watch": "jest --watch",
     "build": "tsc",
     "start": "tsc -w",
-    "prepublish": "tsc"
+    "prepare": "tsc"
   },
   "files": [
     "dist"

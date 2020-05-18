@@ -37,13 +37,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: "v${{ steps.changelog_entry.outputs.version }}"
-          release_name: Release "v${{ steps.changelog_entry.outputs.version }}"
+          release_name: Release v${{ steps.changelog_entry.outputs.version }}
           body: "${{ steps.changelog_entry.outputs.description }}"
           draft: false
           prerelease: false
 
       - name: npm publish
-        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+#        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           cd core
