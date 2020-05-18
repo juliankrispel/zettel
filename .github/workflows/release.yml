@@ -21,7 +21,7 @@ jobs:
         id: changelog_entry
         run: node scripts/release.js
       - name: Assert Package Versions
-        run: node scripts/assert-package-version.js
+        uses: scripts/assert-package-version.js
         with:
           version: ${{ steps.changelog_entry.outputs.version }}
           packages: core, react
