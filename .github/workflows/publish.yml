@@ -11,6 +11,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12.x
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: npm publish
       run: |
         npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN

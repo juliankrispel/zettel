@@ -18,12 +18,13 @@ jobs:
       - name: Install changelog parser
         run: yarn
       - name: Get Changelog Entry
+        id: changelog_entry
         run: node scripts/release.js
       - name: Print the entry
         run: |
-          echo "${{ steps.changelog_reader.outputs.title }}"
-          echo "${{ steps.changelog_reader.outputs.version }}"
-          echo "${{ steps.changelog_reader.outputs.description }}"
+          echo "${{ steps.changelog_entry.outputs.title }}"
+          echo "${{ steps.changelog_entry.outputs.version }}"
+          echo "${{ steps.changelog_entry.outputs.description }}"
 
 #      - name: Create Release
 #        id: create_release
