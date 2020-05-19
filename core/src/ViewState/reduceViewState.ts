@@ -40,15 +40,12 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
   if (type === 'fragment-start') {
     let frag = char as FragmentStart
     if ('fragments' in fragment) {
-      console.log('push fragment on fragment', fragment.fragments.length)
-      console.log({ fragments, block })
       state.fragPath.push(fragment.fragments.length)
       fragment.fragments.push({
         fragments: [],
         data: frag.data
       })
     } else {
-      console.log('push fragment on block', block.fragments.length)
       state.fragPath.push(block.fragments.length)
       block.fragments.push({
         fragments: [],
