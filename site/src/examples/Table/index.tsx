@@ -65,7 +65,6 @@ const App = () => {
     entityMap
   }))
 
-
   return (
     <Editor
       htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}

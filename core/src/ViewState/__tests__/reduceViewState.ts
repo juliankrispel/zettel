@@ -3,6 +3,26 @@ import id from '../../EditorState/id'
 import reduceViewState from '../reduceViewState'
 
 describe('reduceViewState', () => {
+  it.only('maintains block entities', () => {
+    const testState: Value = [{
+      blockKey: 'block-1',
+      type: 'block-start',
+      styles: []
+    }, {
+      char: '1'
+    }, {
+      type: 'block-end',
+    }, {
+      blockKey: 'block-2',
+      type: 'block-start',
+      styles: []
+    }, {
+      char: '2'
+    }, {
+      type: 'block-end',
+    }]
+  })
+
   it('creates view state with fragments in between block boundaries', () => {
     const testState: Value = [{
       blockKey: 'block-1',
