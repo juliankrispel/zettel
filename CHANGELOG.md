@@ -1,10 +1,14 @@
 # Zettel
 
+## [Unreleased]
+
+### Changed
+- Add FragmentStart and FragmentEnd chars to ListState
+
 ## [0.0.21] - 2020-05-18
 
 ### Changed
 - Tidied up list of examples, better names and better urls, removed examples which are misleading/incomplete
-- Add FragmentStart and FragmentEnd chars to ListState
 
 ### Fixed
 - Remove unused dependencies from @zettel/core
