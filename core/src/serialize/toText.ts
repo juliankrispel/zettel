@@ -5,11 +5,10 @@ export default function toText(editorState: EditorState) {
   return editorState
   .list
   .value
-  .filter(ch => ch.type !== 'block-end')
+  .filter(ch => 'char' in ch || ch.type !== 'block-end')
   .map(ch => {
-    if (ch.type == null) {
-      const text = ch as TextCharacter
-      return text.char
+    if ('char' in ch) {
+      return ch.char
     } else {
       return '\n'
     }

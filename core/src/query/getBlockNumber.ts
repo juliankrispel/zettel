@@ -11,7 +11,7 @@ export default function getBlockNumber(value: Value, blockKey: string): number |
   for (let i = 0; i <= value.length; i++) {
     const val = value[i]
 
-    if (val.type === 'block-start' && val.blockKey === blockKey) {
+    if ('type' in val && val.type === 'block-start' && val.blockKey === blockKey) {
       return i
     }
     i++

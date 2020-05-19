@@ -11,7 +11,7 @@ export default function getBlockForIndex(value: Value, index: number): BlockAndI
 
   const curVal = value[index]
 
-  if (curVal != null && curVal.type === 'block-start') {
+  if (curVal != null && 'type' in curVal && curVal.type === 'block-start') {
     return {
       blockOffset: index,
       block: curVal
@@ -20,7 +20,7 @@ export default function getBlockForIndex(value: Value, index: number): BlockAndI
 
   for (let i = 0; i <= index; i++) {
     const val = value[i]
-    if (val != null && val.type === 'block-start') {
+    if (val != null && 'type' in val && val.type === 'block-start') {
       block = val
       blockOffset = i
     }

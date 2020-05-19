@@ -18,8 +18,9 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
   const block = getBlockByPath(state.viewState, state.blockPath)
   const fragment = getFragmentByPath(block, state.fragPath)
   const fragments = getFragmentsByPath(block, state.fragPath)
+  const type = 'type' in char ? char.type : null
 
-  switch (char.type) {
+  switch (type) {
     case null:
       state.currentText.push(char as TextCharacter)
       return state
@@ -36,8 +37,8 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
       }
       if (state.currentText.length > 0) {
         fragmentContainer.fragments = createTextFragments(state.currentText, {})
-        console.log(fragmentContainer)
         state.currentText = []
+        block.value = state.currentText
         return state
       }
     case 'block-start':

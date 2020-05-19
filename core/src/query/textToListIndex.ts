@@ -8,9 +8,9 @@ export default function textToListIndex(value: Value, textIndex: number): number
 
   for (let i = 0; i < value.length; i++) {
     const ch = value[i]
-    if (textIndex === offset && ch.type == null) {
+    if (textIndex === offset && 'char' in ch) {
       return i
-    } else if (ch.type == null) {
+    } else if ('char' in ch) {
       offset++
     }
   }

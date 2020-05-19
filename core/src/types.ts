@@ -40,6 +40,8 @@ export type Value = Character[]
 
 export type Character = (TextCharacter | BlockStart | BlockEnd | FragmentStart | FragmentEnd)
 
+export type NonTextCharacter = (BlockStart | BlockEnd | FragmentStart | FragmentEnd)
+
 /**
  * [
  *  { char: 'A', styles: ['bold', 'italic'] },
@@ -64,8 +66,7 @@ export type CharacterData = {
 * styles and entity
 */
 export type TextCharacter = CharacterData & {
-  char: string,
-  type?: void
+  char: string
 }
 
 export type SelectionState = {
@@ -88,7 +89,6 @@ export type BlockStart = CharacterData & {
  */
 export type BlockEnd = {
   type: 'block-end',
-  entity?: void
 }
 
 /**

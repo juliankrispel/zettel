@@ -14,7 +14,7 @@ export default function getBlockValue(list: ListState, blockKey: string): TextCh
   const blockEnd = getIndexAfter(
     list.value,
     blockOffset,
-    ch => ch.type === 'block-end' || ch.type === 'block-start'
+    ch => 'type' in ch && (ch.type === 'block-end' || ch.type === 'block-start')
   )
   // @ts-ignore
   return list.value.slice(blockOffset + 1, blockEnd - 1)

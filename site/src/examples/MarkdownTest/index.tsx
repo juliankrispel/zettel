@@ -1,9 +1,19 @@
 import * as React from 'react';
 import { useState } from 'react'
-import { EditorState } from '@zettel/core'
+import { EditorState, Fragment } from '@zettel/core'
 import Editor from '@zettel/react'
 
 const text = `[Try adding one or more # at the beginning of this line and a space]`
+
+const reduceToText = (fragments: Fragment[]): string => {
+  return fragments.reduce((currentText, fragment) => {
+    if ('fragments' in fragment) {
+      return currentText + reduceToText(fragment.fragments)
+    } else {
+      return currentText + fragment.text
+    }
+  }, '')
+}
 
 const App = () => {
   const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
@@ -18,7 +28,7 @@ const App = () => {
       onChange={setEditorState}
       renderBlock={(props) => {
         const { htmlAttrs, children, block } = props
-        const text = block.fragments.map(frag => frag.text).join('')
+        const text = reduceToText(block.fragments)
 
         if (text.startsWith('# ')) {
           return <h1 {...htmlAttrs}>{children}</h1>

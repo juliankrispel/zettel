@@ -17,9 +17,15 @@ export default function insertCharacter(
   // as in next and prev value are contained within the same entity
   // shall we include this inserted value in this entity
   if (
-    nextValue != null && nextValue.type == null
-    && prevValue != null && prevValue.type == null
-    && prevValue.entity === nextValue.entity
+    nextValue != null &&
+    'type' in nextValue &&
+    nextValue.type == null &&
+    'type' in prevValue &&
+    'entity' in prevValue &&
+    'entity' in nextValue &&
+    prevValue != null &&
+    prevValue.type == null &&
+    prevValue.entity === nextValue.entity
   ) {
     entity = prevValue.entity
   }
