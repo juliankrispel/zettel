@@ -104,11 +104,11 @@ export type FragmentEnd = {
   type: 'fragment-end',
 }
 
-export type TextFragment = CharacterData & {
+export type TextFragment = {
   text: string,
+  styles?: string[],
   entity?: Entity
 }
-
 
 /**
  * Embodies all possible changes made to doc

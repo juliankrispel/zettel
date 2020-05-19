@@ -14,7 +14,7 @@ export default function splitBlock(
   const blockEnd: BlockEnd = { type: 'block-end' }
   const blockStart: BlockStart = { styles: [], ...currentBlock, type: 'block-start', blockKey: id() }
 
-  return editorState.change({
+  const newEditorState = editorState.change({
     isBoundary: true,
     type: COMMAND.SPLIT_BLOCK,
     start,
@@ -29,4 +29,6 @@ export default function splitBlock(
     end: start + 2,
     value: [],
   })
+
+  return newEditorState
 }

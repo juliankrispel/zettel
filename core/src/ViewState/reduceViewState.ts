@@ -33,40 +33,44 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
 //      if ('fragments' in fragment) {
 //        fragmentContainer = block
 //      }
-      if (type === 'block-end') {
-        state.blockPath.pop()
-      }
 
-      if (type === 'fragment-end') {
-        state.fragPath.pop()
+
+      if (type === 'block-start') {
+        let _char = char as BlockStart
+        blocks.push({
+          fragments: [],
+          value: [],
+          blocks: [],
+          blockLevel: state.blockPath.length,
+          blockKey: _char.blockKey,
+          styles: _char.styles != null ? _char.styles : [],
+        })
+
+        state.blockPath.push(blocks.length - 1)
       }
 
       if (state.currentText.length > 0) {
         block.fragments = block.fragments.concat(createTextFragments(state.currentText, {}))
         block.value = block.value.concat(state.currentText)
         state.currentText = []
-        return state
       }
-    case 'block-start':
-      let _char = char as BlockStart
 
-      blocks.push({
-        fragments: [],
-        value: [],
-        blocks: [],
-        blockLevel: state.blockPath.length,
-        blockKey: _char.blockKey,
-        styles: _char.styles != null ? _char.styles : [],
-      })
+      if (type == 'block-end') {
+        state.blockPath.pop()
+      }
 
-      state.blockPath.push(blocks.length - 1)
       return state
+
     case 'fragment-start':
       let frag = char as FragmentStart
       fragments.push({
         fragments: [],
         data: frag.data
       })
+      return state
+    case 'fragment-end':
+      state.fragPath.pop()
+      return state
   }
   return state
 }
