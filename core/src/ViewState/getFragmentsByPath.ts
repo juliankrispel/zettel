@@ -6,7 +6,7 @@ export default function getFragmentsByPath (block: Block, path: number[]): Fragm
   }
 
   return path.reduce((acc, val) => {
-    const fragment = acc[val] as ContainerFragment
-    return fragment.fragments || acc
+    const fragment = (acc || [])[val] as ContainerFragment
+    return (fragment || { fragments: [] }).fragments || acc
   }, block.fragments)
 }

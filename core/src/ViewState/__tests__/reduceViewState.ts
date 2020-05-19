@@ -3,7 +3,7 @@ import id from '../../EditorState/id'
 import reduceViewState from '../reduceViewState'
 
 describe('reduceViewState', () => {
-  it('should create view state with nested fragments', () => {
+  it('creates view state with fragments in between block boundaries', () => {
     const testState: Value = [{
       blockKey: 'block-1',
       type: 'block-start',
@@ -44,7 +44,7 @@ describe('reduceViewState', () => {
     expect(res).toMatchSnapshot()
   })
 
-  it('empty block in between', () => {
+  it('creates view state for empty block in between', () => {
     const testState: Value = [{
       blockKey: 'block-1',
       type: 'block-start',
@@ -85,7 +85,7 @@ describe('reduceViewState', () => {
     expect(res).toMatchSnapshot()
   })
 
-  it('nested blocks', () => {
+  it('creates view state for nested blocks', () => {
     const testState: Value = [{
       blockKey: 'block-1',
       type: 'block-start',
@@ -146,6 +146,46 @@ describe('reduceViewState', () => {
       entityMap: {}
     })
 
+    expect(res).toMatchSnapshot()
+  })
+
+  it('creates view state with nested fragments', () => {
+    const testState: Value = [{
+      blockKey: 'block-1',
+      type: 'block-start',
+    }, {
+      char: 'O'
+    }, {
+      type: 'fragment-start'
+    }, {
+      char: 'n'
+    }, {
+      type: 'fragment-start',
+      data: { some: 'a' }
+    }, {
+      char: 'e'
+    }, {
+      char: ' '
+    }, {
+      type: 'fragment-end'
+    }, {
+      char: 'T'
+    }, {
+      char: 'W'
+    }, {
+      char: 'o'
+    }, {
+      type: 'fragment-end'
+    }, {
+      type: 'block-end',
+    }  ]
+
+    const res = reduceViewState({
+      value: testState,
+      entityMap: {}
+    })
+
+    // console.log(JSON.stringify(res, null, 2))
     expect(res).toMatchSnapshot()
   })
 })
