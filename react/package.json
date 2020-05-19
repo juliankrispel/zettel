@@ -8,7 +8,9 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc -w",
-    "prepare": "tsc"
+    "prepare": "tsc",
+    "test": "../node_modules/.bin/jest .",
+    "test:watch": "../node_modules/.bin/jest . --watch"
   },
   "dependencies": {
     "@zettel/core": "0.0.21"
