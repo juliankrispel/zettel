@@ -2,8 +2,8 @@
 
 ## [Unreleased]
 
-### Changed
-- Add FragmentStart and FragmentEnd chars to ListState
+### Added
+In this release we add fragments to the EditorState. Fragments are similar to Blocks, they can either contain text or other fragments. They can also contain metadata which makes them useful for things such as mentions.
 
 ## [0.0.21] - 2020-05-18
 
