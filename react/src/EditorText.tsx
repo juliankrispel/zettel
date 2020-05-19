@@ -30,7 +30,7 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: TextFragmen
   }, <span
       {...fragmentProps}
       key={`fragment-${block.blockKey}-${offset}`}
-    >{fragment.text || <br />}
+    >{fragment.text}<br />
   </span>)
   
 

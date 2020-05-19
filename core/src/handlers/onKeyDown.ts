@@ -12,6 +12,7 @@ import {
   removeRange,
   splitBlock,
   deleteForward,
+  insertText,
   insertCharacter,
 } from '../change'
 
@@ -86,6 +87,16 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     newEditorState = redo(editorState)
   }
   
+  if (event.key === 'Enter' && event.shiftKey) {
+    // splitBlock
+    newEditorState = insertCharacter(
+      editorState,
+      start,
+      end,
+      '\n'
+    )
+  }
+
   if (newEditorState == null && !inputEventSupported) {
     if (isCollapsed && event.key === 'Backspace' && event.metaKey === true) {
       // backspaceToBlockStart
@@ -99,15 +110,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     } else if (event.key === 'Backspace' && !isCollapsed) {
       // removeRange
       newEditorState = removeRange(editorState, start, end)
-    } else if (event.key === 'Enter' && event.shiftKey) {
-      // splitBlock
-      newEditorState = insertCharacter(
-        editorState,
-        start,
-        end,
-        '\n'
-      )
-    } else if (event.key === 'Enter') {
+    }  else if (event.key === 'Enter') {
       // splitBlock
       newEditorState = splitBlock(editorState, start, end)
     } else if (event.key === 'Delete' && isCollapsed) {
