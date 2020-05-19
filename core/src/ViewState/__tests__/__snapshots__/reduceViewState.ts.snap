@@ -355,6 +355,63 @@ Object {
 }
 `;
 
+exports[`reduceViewState maintains block entities 1`] = `
+Object {
+  "blocks": Array [
+    Object {
+      "blockKey": "block-1",
+      "blockLevel": 0,
+      "blocks": Array [],
+      "entity": Object {
+        "b": 1,
+        "c": 2,
+      },
+      "fragments": Array [
+        Object {
+          "text": "1",
+        },
+      ],
+      "styles": Array [],
+      "value": Array [
+        Object {
+          "char": "1",
+        },
+      ],
+    },
+    Object {
+      "blockKey": "block-2",
+      "blockLevel": 0,
+      "blocks": Array [],
+      "entity": Object {
+        "c": 3,
+        "d": 4,
+      },
+      "fragments": Array [
+        Object {
+          "text": "2",
+        },
+      ],
+      "styles": Array [],
+      "value": Array [
+        Object {
+          "char": "2",
+        },
+      ],
+    },
+  ],
+  "entityMap": Object {
+    "a": Object {
+      "b": 1,
+      "c": 2,
+    },
+    "b": Object {
+      "c": 3,
+      "d": 4,
+    },
+  },
+}
+`;
+
 exports[`reduceViewState nested blocks 1`] = `
 Object {
   "blocks": Array [

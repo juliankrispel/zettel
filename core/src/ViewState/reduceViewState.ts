@@ -19,6 +19,7 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
   const fragment = getFragmentByPath(block, state.fragPath)
   const fragments = getFragmentsByPath(block, state.fragPath)
   const type = 'type' in char ? char.type : null
+  const { entityMap } = state.viewState
 
   if (type == null) {
     state.currentText.push(char as TextCharacter)
@@ -58,20 +59,25 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
     state.fragPath.pop()
   } else if (type === 'block-start') {
     let _char = char as BlockStart
-    blocks.push({
+    const _block: Block = {
       fragments: [],
       value: [],
       blocks: [],
       blockLevel: state.blockPath.length,
       blockKey: _char.blockKey,
       styles: _char.styles != null ? _char.styles : [],
-    })
+    }
+
+    if (_char.entity != null) {
+      _block.entity = entityMap[_char.entity]
+
+    }
+    blocks.push(_block)
 
     state.blockPath.push(blocks.length - 1)
   } else if (type == 'block-end') {
     state.blockPath.pop()
   }
-
 
   return state
 }
@@ -87,7 +93,7 @@ export default function reduceViewState (
   const initialState: ReducerState = {
     viewState: {
       blocks: [],
-      entityMap: {}
+      entityMap: flat.entityMap
     },
     i: 0,
     blockPath: [],

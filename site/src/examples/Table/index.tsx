@@ -47,11 +47,13 @@ const TableBlock: RenderBlock = (props) => {
 
   if (entity != null && entity.type === 'table') {
     return <table {...htmlAttrs}>
-      <EditorChildren
-        {...props}
-        renderBlock={RowBlock}
-        blocks={block.blocks}
-      />
+      <tbody>
+        <EditorChildren
+          {...props}
+          renderBlock={RowBlock}
+          blocks={block.blocks}
+        />
+      </tbody>
     </table>
   }
 

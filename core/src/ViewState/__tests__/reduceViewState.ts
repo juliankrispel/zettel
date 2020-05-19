@@ -3,11 +3,12 @@ import id from '../../EditorState/id'
 import reduceViewState from '../reduceViewState'
 
 describe('reduceViewState', () => {
-  it.only('maintains block entities', () => {
+  it('maintains block entities', () => {
     const testState: Value = [{
       blockKey: 'block-1',
       type: 'block-start',
-      styles: []
+      styles: [],
+      entity: 'a'
     }, {
       char: '1'
     }, {
@@ -15,12 +16,20 @@ describe('reduceViewState', () => {
     }, {
       blockKey: 'block-2',
       type: 'block-start',
-      styles: []
+      styles: [],
+      entity: 'b'
     }, {
       char: '2'
     }, {
       type: 'block-end',
     }]
+
+    const res = reduceViewState({
+      value: testState,
+      entityMap: { a: { b: 1, c: 2 }, b: { c: 3, d: 4}}
+    })
+
+    expect(res).toMatchSnapshot()
   })
 
   it('creates view state with fragments in between block boundaries', () => {
