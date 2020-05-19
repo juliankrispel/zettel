@@ -65,10 +65,8 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
       styles: _char.styles != null ? _char.styles : [],
     }
 
-    if (_char.entity != null) {
-      _block.entity = entityMap[_char.entity]
+    if (_char.entity != null) _block.entity = entityMap[_char.entity]
 
-    }
     blocks.push(_block)
 
     state.blockPath.push(blocks.length - 1)
