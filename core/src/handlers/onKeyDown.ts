@@ -99,6 +99,14 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     } else if (event.key === 'Backspace' && !isCollapsed) {
       // removeRange
       newEditorState = removeRange(editorState, start, end)
+    } else if (event.key === 'Enter' && event.shiftKey) {
+      // splitBlock
+      newEditorState = insertCharacter(
+        editorState,
+        start,
+        end,
+        '\n'
+      )
     } else if (event.key === 'Enter') {
       // splitBlock
       newEditorState = splitBlock(editorState, start, end)

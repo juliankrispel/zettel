@@ -29,6 +29,8 @@ export default function onBeforeInput(editorState: EditorState, _event: any) {
   event.preventDefault()
   event.stopPropagation()
 
+  // console.log(event)
+
   if (event.inputType === 'insertText' && event.data != null && event.data.length === 1) {
     newEditorState = insertCharacter(newEditorState, start, end, event.data)
   } else if (event.inputType === 'insertText') {
@@ -37,6 +39,9 @@ export default function onBeforeInput(editorState: EditorState, _event: any) {
     newEditorState = insertText(newEditorState, start, end, event.data || '')
   } else if (event.inputType === 'insertCompositionText') {
     newEditorState = insertText(newEditorState, start, end, event.data || '')
+  // } else if (event.inputType === 'insertLineBreak' && event.shiftKey) {
+  //   // soft line break
+  //   newEditorState = insertText(editorState, start, end, '\n')
   } else if (event.inputType === 'insertLineBreak') {
     newEditorState = splitBlock(newEditorState, start, end)
   } else if (!collapsed && event.inputType === 'deleteContentBackward') {

@@ -42,6 +42,11 @@ const App = () => {
           return <h3 {...htmlAttrs}>{children}</h3>
         }
 
+
+        if (text.startsWith('``` ')) {
+          return <pre {...htmlAttrs}>{children}</pre>
+        }
+
         if (text.startsWith('---')) {
           return <hr />
         }
