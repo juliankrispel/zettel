@@ -25,10 +25,12 @@ jobs:
         run: |
           cd core
           yarn
+          yarn link
           yarn test
       - name: test @zettel/react
         run: |
           cd react
+          yarn link @zettel/core
           yarn
           yarn test
 
