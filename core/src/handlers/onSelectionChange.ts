@@ -9,6 +9,7 @@ export default function onSelectionChange(editorState: EditorState) {
 
   if (result != null) {
     const { start, end } = result
+    console.log('on selectionChange', editorState.list)
     return updateSelection(
       editorState,
       {

@@ -7,18 +7,14 @@ const testState: Value = [{
   type: 'block-start',
   styles: []
 }, {
-  type: null,
   char: 'H'
 }, {
-  type: null,
   char: 'i'
 }, {
   type: 'fragment-start'
 }, {
-  type: null,
   char: 'Y'
 }, {
-  type: null,
   char: 'o'
 }, {
   type: 'block-end',
@@ -27,15 +23,12 @@ const testState: Value = [{
   type: 'block-start',
   styles: []
 }, {
-  type: null,
   char: 'W'
 }, {
-  type: null,
   char: 'h'
 }, {
   type: 'fragment-end'
 }, {
-  type: null,
   char: 'o'
 }, {
   type: 'block-end',
@@ -48,6 +41,44 @@ describe('reduceViewState', () => {
       value: testState,
       entityMap: {}
     })
+
+    const expected = {
+      "blocks": [
+        {
+          "fragments": [{
+              "entity": null,
+              "offset": 0,
+              "text": "Hi"
+            },
+            {
+              "entity": null,
+              "offset": 0,
+              "text": "Yo"
+            }
+          ],
+          "value": [{ "char": "W" }, { "char": "h" }],
+        },
+        {
+          "fragments": [{
+              "entity": null,
+              "offset": 0,
+              "text": "Wh"
+            },
+            {
+              "entity": null,
+              "offset": 0,
+              "text": "o"
+            }
+          ],
+          "value": [],
+          "blocks": [],
+          "blockLevel": 0,
+          "blockKey": "vrcged",
+          "styles": []
+        }
+    ]
+  }
+  // expect(res).toContainEqual(expected)
     console.log(JSON.stringify(res, null, 2))
   })
 })

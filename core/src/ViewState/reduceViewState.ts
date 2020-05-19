@@ -29,16 +29,22 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
     case 'fragment-end':
     case 'block-start':
     case 'block-end':
-      let fragmentContainer = fragment as ContainerFragment
-      // @ts-ignore
-      if (fragment.fragments != null) {
-        // @ts-ignore
-        fragmentContainer = block
+//      let fragmentContainer = fragment
+//      if ('fragments' in fragment) {
+//        fragmentContainer = block
+//      }
+      if (type === 'block-end') {
+        state.blockPath.pop()
       }
+
+      if (type === 'fragment-end') {
+        state.fragPath.pop()
+      }
+
       if (state.currentText.length > 0) {
-        fragmentContainer.fragments = createTextFragments(state.currentText, {})
+        block.fragments = block.fragments.concat(createTextFragments(state.currentText, {}))
+        block.value = block.value.concat(state.currentText)
         state.currentText = []
-        block.value = state.currentText
         return state
       }
     case 'block-start':
@@ -55,32 +61,16 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
 
       state.blockPath.push(blocks.length - 1)
       return state
-    case 'block-end':
-      state.blockPath.pop()
-      return state
     case 'fragment-start':
       let frag = char as FragmentStart
       fragments.push({
         fragments: [],
         data: frag.data
       })
-    case 'fragment-end':
-      state.fragPath.pop()
-      return state
   }
   return state
 }
 
-const initialState: ReducerState = {
-  viewState: {
-    blocks: [],
-    entityMap: {}
-  },
-  i: 0,
-  blockPath: [],
-  fragPath: [],
-  currentText: []
-}
 
 export default function reduceViewState (
   flat: ListState,
@@ -89,5 +79,16 @@ export default function reduceViewState (
    * Given a document contains the following tokens:
    * `TextCharacter | BlockStart | BlockEnd | FragmentStart | FragmentEnd`
    */
+  const initialState: ReducerState = {
+    viewState: {
+      blocks: [],
+      entityMap: {}
+    },
+    i: 0,
+    blockPath: [],
+    fragPath: [],
+    currentText: []
+  }
+
   return flat.value.reduce(reducer, initialState).viewState
 }

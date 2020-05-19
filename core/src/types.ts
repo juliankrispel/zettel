@@ -40,8 +40,6 @@ export type Value = Character[]
 
 export type Character = (TextCharacter | BlockStart | BlockEnd | FragmentStart | FragmentEnd)
 
-export type NonTextCharacter = (BlockStart | BlockEnd | FragmentStart | FragmentEnd)
-
 /**
  * [
  *  { char: 'A', styles: ['bold', 'italic'] },
@@ -55,7 +53,7 @@ export type NonTextCharacter = (BlockStart | BlockEnd | FragmentStart | Fragment
  */
 
 export type CharacterData = {
-  styles: string[],
+  styles?: string[],
   entity?: string | null,
 }
 

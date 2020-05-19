@@ -91,7 +91,6 @@ const Editor = (props: Props): React.ReactElement => {
   }
 
   const viewState = props.viewState || useMemo(() => createViewState(editorState.list), [isComposing || editorState])
-  console.log(viewState)
   const children = <EditorChildren
     blocks={viewState.blocks}
     renderBlock={renderBlock}
