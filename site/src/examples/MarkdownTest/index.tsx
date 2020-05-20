@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react'
-import { EditorState, Fragment, Block, valueToText, TextCharacter, createTextFragments } from '@zettel/core'
+import { EditorState, Fragment, valueToText, TextCharacter, createTextFragments } from '@zettel/core'
 import Editor, { EditorText } from '@zettel/react'
 import prism from 'prismjs'
 import './prism.css'
@@ -33,7 +33,7 @@ const processToken = (token: any, value: TextCharacter[]) => {
 }
 
 const Code = (props: any) => {
-  const { block, children, htmlAttrs } = props
+  const { block, children } = props
   const text = valueToText(block.value.slice(3))
   const matches = text.match(/^([a-z]+)\s/)
   if (matches != null) {
