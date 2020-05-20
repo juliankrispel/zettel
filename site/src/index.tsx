@@ -5,15 +5,21 @@ import { useState, lazy, Suspense } from 'react';
 import { render, hydrate} from 'react-dom';
 import './index.css';
 import { createBrowserHistory } from 'history'
+import styled from 'styled-components'
 import Examples from './examples'
 import { Router, Route, Link, Switch } from 'react-router-dom'
+import './typography'
 
-
-const Readme = lazy(() => importMDX('../../CHANGELOG.md'))
+const Readme = lazy(() => importMDX('../../README.md'))
+const Container = styled.article`
+  padding: 1em;
+`
 
 const Content = () =>
   <Suspense fallback={<div>Loading...</div>}>
-    <Readme />
+    <Container>
+      <Readme />
+    </Container>
   </Suspense>
 
 const exampleModules: { [key: string]: any } = {...Examples}

@@ -1,6 +1,8 @@
-__DO NOT USE IN PRODUCTION__
+![Zettel](logo_small.png)
 
-# [Zettel](http://zettel.software/)
+## [Zettel](https://zettel.software)
+
+(API still subject to change - don't use this in production just yet)
 
 Framework for building text editors in the browser.
 
@@ -9,23 +11,45 @@ Framework for building text editors in the browser.
 [![@zettel/core](https://badge.fury.io/js/%40zettel%2Fcore.svg)](https://badge.fury.io/js/%40zettel%2Fcore)
 [![@zettel/react](https://badge.fury.io/js/%40zettel%2Freact.svg)](https://badge.fury.io/js/%40zettel%2Freact)
 
-## Running locally
+## Getting started with @zettel/core and @zettel/react
 
-```bash
-# Clone repository
-git clone git@github.com:juliankrispel/zettel.git
+Right now we only have the packages `core` and `react`, you'll need those to get started.
 
-# Run yarn - there's a postinstall hook that automatically runs
-# yarn for all other packages in this repo
-yarn
-
-# cd into package and run yarn start
-
-# All current example apps are in the /experiments folder
-cd experiments
-# This will start create-react-app, experiments will appear at localhost:3000
-yarn start
 ```
+yarn add @zettel/core @zettel/react
+```
+
+Now that you have them installed, here's a basic example of a plaintext editor:
+
+```jsx
+import * as React from 'react';
+import { useState } from 'react'
+import { EditorState } from '@zettel/core'
+import Editor from '@zettel/react'
+
+const text = `[One 😅Line][And another line of text][And another line]`
+
+const App = () => {
+  const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
+    text,
+    ranges: [],
+    entityMap: {}
+  }))
+
+  return (
+    <Editor
+      htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
+      onChange={setEditorState}
+      editorState={editorState}
+    />
+  );
+}
+
+export default App;
+```
+
+For more examples [have a look here](https://github.com/juliankrispel/zettel/tree/master/site/src/examples)
+
 
 ## Current Roadmap
 
