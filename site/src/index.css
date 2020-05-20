@@ -6,15 +6,28 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+a { color: red;}
+
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-  background: none !important;
   color: white;
+  background: #000;
+  padding: 0.3em .5em;
 }
 
 pre {
   background: #000;
   padding: 1em;
+  overflow-x: auto;
+}
+
+*::-moz-selection { background: red}
+*::selection { background: red; }
+
+pre code {
+  background: none !important;
+  padding: 0;
 }
 
 .flex { display: flex; }
