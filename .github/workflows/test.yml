@@ -29,6 +29,7 @@ jobs:
           yarn test
       - name: test @zettel/react
         run: |
+          cd core && yarn link && cd ..
           cd react
           yarn
           yarn link @zettel/core
