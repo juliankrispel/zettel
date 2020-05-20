@@ -40,6 +40,8 @@ export default function createViewState (
       path.push(blocks.length - 1)
     } else if (char.type === 'block-end') {
       path.pop()
+    } else if (char.type === 'fragment-start') {
+    } else if (char.type === 'fragment-end') {
     } else {
       if (path.length === 0) {
         throw new Error(`Invalid List State`)

@@ -30,9 +30,12 @@ export default function change(update: Update): Update {
   .concat(valueUpdate)
   .concat(currentValue.slice(end + 1))
 
-  if (newValue[0].type !== 'block-start') {
+  const firstChar = newValue[0]
+  const lastChar = newValue[newValue.length - 1]
+
+  if ('type' in firstChar && firstChar.type !== 'block-start') {
     throw new Error('First character always needs to be block-start')
-  } else if (newValue[newValue.length - 1].type !== 'block-end') {
+  } else if ('type' in lastChar && lastChar.type !== 'block-end') {
     throw new Error('Last character always needs to be block-end')
   }
 

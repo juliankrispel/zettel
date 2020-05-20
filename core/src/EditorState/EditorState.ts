@@ -137,17 +137,17 @@ export default class EditorState {
     const end = _end + 1
     const selectedValue = this.list.value.slice(start, end)
     const hasStyle = selectedValue.every(char =>
-      char.type != null ||
-      char.styles.includes(style)
+      'type' in char ||
+      (char.styles || []).includes(style)
     )
 
     const updatedValue = selectedValue.map(char => {
       const newChar = { ...char }
-      if (newChar.type == null) {
+      if ('char' in newChar) {
         if (hasStyle) {
-          newChar.styles = newChar.styles.filter(st => st !== style)
-        } else if (!newChar.styles.includes(style)) {
-          newChar.styles = newChar.styles.concat([style])
+          newChar.styles = (newChar.styles || []).filter(st => st !== style)
+        } else if (!(newChar.styles || []).includes(style)) {
+          newChar.styles = (newChar.styles || []).concat([style])
         }
       }
 

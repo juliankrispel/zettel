@@ -16,6 +16,7 @@ export default function getBlocksForRange(value: Value, start: number, end: numb
 
   return value.slice(start, end).reduce((acc, ch, index) => {
     if (
+      'type' in ch &&
       ch.type === 'block-start' &&
       ch.blockKey !== firstBlockKey
     ) {

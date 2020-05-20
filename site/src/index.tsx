@@ -43,8 +43,8 @@ const Layout = ({ children, routeComps }: LayoutProps) => {
   return <main className={`app ${flag ? 'menu-toggled': ''}`}>
     <nav>
       <ul>
-        {routeComps.map((route: any) => (
-          <li onMouseUp={toggleFlag} key={route.path}><Link to={route.path}>{route.name}</Link></li>
+        {routeComps.map((route: any, i) => (
+          <li onMouseUp={toggleFlag} key={`${route.path}-${i}`}><Link to={route.path}>{route.name}</Link></li>
         ))}
       </ul>
     </nav>
@@ -56,7 +56,7 @@ const Layout = ({ children, routeComps }: LayoutProps) => {
 const Root = () => <Router history={history}>
   <Layout routeComps={_routeComps}>
     <Switch>
-      {_routeComps.map(props => <Route {...props} />)}
+      {_routeComps.map((props) => <Route key={props.path} {...props} />)}
       <Route render={() => <Content />} />
     </Switch>
   </Layout>

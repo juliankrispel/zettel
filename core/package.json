@@ -7,8 +7,8 @@
   "author": "Julian Krispel",
   "license": "MIT",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
+    "test": "../node_modules/.bin/jest .",
+    "test:watch": "../node_modules/.bin/jest . --watch",
     "build": "tsc",
     "start": "tsc -w",
     "prepare": "tsc"
@@ -17,9 +17,6 @@
     "dist"
   ],
   "devDependencies": {
-    "@types/dom-inputevent": "^1.0.4",
-    "@types/jest": "^24.0.19",
-    "ts-jest": "^24.1.0",
-    "jest": "^24.9.0"
+    "@types/dom-inputevent": "^1.0.4"
   }
 }

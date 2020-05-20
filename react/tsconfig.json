@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "types": ["@zettel/core"],
+    "types": ["@zettel/core", "jest"],
+    "lib": ["es2017", "es7", "es6", "dom"],
     "module": "commonjs",
     "target": "es2015",
     "declaration": true,

@@ -1,6 +1,4 @@
-import getDomSelection from '../selection/getDomSelection'
 import EditorState from '../EditorState'
-import { COMMAND } from '../constants'
 import { updateSelection } from '../change'
 import { getDomRange } from '../selection'
 

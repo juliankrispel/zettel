@@ -31,8 +31,8 @@ jobs:
         run: |
           cd core && yarn link && cd ..
           cd react
-          yarn
           yarn link @zettel/core
+          yarn
           yarn test
 
 

@@ -1,7 +1,7 @@
 import EditorState from '../EditorState'
 import getIndexBefore from '../query/getIndexBefore';
-import { Character } from '../types'
 import { COMMAND } from '../constants'
+import { TextCharacter, Character } from '../types';
 
 export default function backspaceToPrevWord(
   editorState: EditorState,
@@ -11,21 +11,21 @@ export default function backspaceToPrevWord(
   let newEditorState = editorState
   const prevChar = editorState.list.value[start]
 
-  if (prevChar.type == null) {
-    let spaceBefore = false
+  if ('char' in prevChar) {
+    let hasSpaceBefore = false
     let isBlockStart = false
     const prevWordEnd = getIndexBefore(
       editorState.list.value,
       start,
       (ch) => {
-        if (ch.type !== 'block-start' && ch.type !== 'block-end') {
-          spaceBefore = ch.char === ' '
+        if ('char' in ch) {
+          hasSpaceBefore = [' ', '\n'].includes(ch.char)
         }
-        if (ch.type === 'block-start'){
+        if ('type' in ch && ch.type === 'block-start'){
           isBlockStart = true
           return true
         }
-        if (ch.type == null && spaceBefore) {
+        if ('char' in ch && hasSpaceBefore) {
           return true
         }
         return false

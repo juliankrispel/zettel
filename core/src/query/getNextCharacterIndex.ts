@@ -3,7 +3,7 @@ import getIndexAfter from './getIndexAfter'
 
 export default function getNextCharacterIndex(editorState: EditorState, currIndex: number): number {
   const index = getIndexAfter(editorState.list.value, currIndex, ch => {
-    return ch.type == null
+    return 'char' in ch
   })
 
   if (index != null) {

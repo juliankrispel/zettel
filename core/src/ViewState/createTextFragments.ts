@@ -21,12 +21,13 @@ export default function createTextFragments(value: TextCharacter[], entityMap: E
   return value.reduce(
     (acc: any, data, index) => {
       if (acc.length < 1) {
-        return [{
-          styles: data.styles,
-          entity: data.entity,
-          offset: index,
+        const el: TextFragment= {
           text: value[index].char
-        }]
+        }
+        if (data.styles) el.styles = data.styles
+        if (data.entity) el.entity = entityMap[data.entity]
+
+        return [el]
       } else {
         const lastFragment = acc[acc.length - 1]
         if (hasEqualCharacterData(lastFragment, data)) {
@@ -35,21 +36,19 @@ export default function createTextFragments(value: TextCharacter[], entityMap: E
             text: lastFragment.text + value[index].char
           }])
         } else {
+          const el: TextFragment = {
+            text: value[index].char
+          }
+          if (data.styles) el.styles = data.styles
+          if (data.entity) el.entity = entityMap[data.entity]
+
           return [
             ...acc,
-            {
-              styles: data.styles,
-              entity: data.entity,
-              offset: index,
-              text: value[index].char
-            }
+            el
           ]
         }
       }
     },
     start
-  ).map((fragment: TextFragment) => ({
-    ...fragment,
-    entity: fragment.entity != null ? entityMap[fragment.entity] : null
-  }))
+  )
 }

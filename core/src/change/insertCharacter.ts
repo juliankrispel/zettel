@@ -17,11 +17,31 @@ export default function insertCharacter(
   // as in next and prev value are contained within the same entity
   // shall we include this inserted value in this entity
   if (
-    nextValue != null && nextValue.type == null
-    && prevValue != null && prevValue.type == null
-    && prevValue.entity === nextValue.entity
+    nextValue != null &&
+    'type' in nextValue &&
+    nextValue.type == null &&
+    'type' in prevValue &&
+    'entity' in prevValue &&
+    'entity' in nextValue &&
+    prevValue != null &&
+    prevValue.type == null &&
+    prevValue.entity === nextValue.entity
   ) {
     entity = prevValue.entity
+  }
+
+  const value = [{
+    char,
+    styles: editorState.currentStyles,
+    entity,
+  }]
+
+  if (char === '\n') {
+    value.push({
+      char: ' ',
+      styles: [],
+      entity: null,
+    })
   }
 
   let newEditorState = editorState.change({
@@ -29,11 +49,7 @@ export default function insertCharacter(
     type: COMMAND.INSERT_CHARACTER,
     start,
     end,
-    value: [{
-      char: char,
-      styles: editorState.currentStyles,
-      entity,
-    }]
+    value
   }).change({
     type: COMMAND.INSERT_CHARACTER,
     start: start + 1,

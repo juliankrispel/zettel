@@ -1,5 +1,11 @@
 # Zettel
 
+## [Unreleased]
+
+### Added
+- Added Fragment Model. Fragments are similar to Blocks, they can either contain text or other fragments. They can also contain metadata which makes them useful for things such as mentions. Fragments can cross block boundaries. If `[ ]` is a block boundary and `< >` a fragment boundary we can do things like: `[First <Block][Second> Block]`.
+- Soft newlines are now supported and working correctly (tested in markdown example with codeblocks)
+
 ## [0.0.21] - 2020-05-18
 
 ### Changed

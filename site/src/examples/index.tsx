@@ -8,6 +8,7 @@ import Nocode from './Nocode'
 import Changes from './Changes'
 import Draggable from './Draggable'
 import TimeTravel from './TimeTravel'
+import Fragments from './Fragments'
 
 const Examples = {
   'Plain Text': PlainText,
@@ -20,6 +21,7 @@ const Examples = {
   'Draggable Blocks': Draggable,
   'Table': Table,
   'Time Travel': TimeTravel,
+  'Text Fragments': Fragments
 }
 
 export default Examples
