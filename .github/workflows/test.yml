@@ -30,8 +30,8 @@ jobs:
       - name: test @zettel/react
         run: |
           cd react
-          yarn
           yarn link @zettel/core
+          yarn
           yarn test
 
 
