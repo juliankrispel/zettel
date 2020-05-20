@@ -2,7 +2,7 @@ on: push
 name: Test
 jobs:
   test:
-    name: Create Release
+    name: Test packages
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -29,7 +29,6 @@ jobs:
           yarn test
       - name: test @zettel/react
         run: |
-          cd core && yarn link && cd ..
           cd react
           yarn link @zettel/core
           yarn

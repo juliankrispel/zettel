@@ -36,23 +36,19 @@ jobs:
           PACKAGES: core, react
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Print the entry
-        run: |
-          echo "${{ steps.changelog_entry.outputs.title }}"
-          echo "${{ steps.changelog_entry.outputs.version }}"
-          echo "${{ steps.changelog_entry.outputs.description }}"
-          echo "${{ steps.changelog_entry.outputs.unreleased }}"
-
       - name: publish core package
-        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+#        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
         continue-on-error: true
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
           cd core
           yarn
           npm publish
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
       - name: publish react package
-        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
+#        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
         continue-on-error: true
         run: |
           npm config set //registry.npmjs.org/:_authToken=$NPM_TOKEN
