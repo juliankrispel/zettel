@@ -21,6 +21,11 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: TextFragmen
     'data-fragment-end': offset + fragment.text.length
   }
 
+  let fragmentText: any = fragment.text
+//   if (fragment.text.endsWith('\n')) {
+//     fragmentText = <>{fragmentText}<br/></>
+//   }
+
   let textFragment: React.ReactElement = (fragment.styles || []).reduce((children, val) => {
     if (RenderStyle != null) {
       return <RenderStyle key={`${fragmentProps.key}-${val}`} style={val}>{children}</RenderStyle>
@@ -30,7 +35,7 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: TextFragmen
   }, <span
       {...fragmentProps}
       key={`fragment-${block.blockKey}-${offset}`}
-    >{fragment.text}<br />
+    >{fragmentText}
   </span>)
   
 

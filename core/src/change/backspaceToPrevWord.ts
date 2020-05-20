@@ -12,20 +12,20 @@ export default function backspaceToPrevWord(
   const prevChar = editorState.list.value[start]
 
   if ('char' in prevChar) {
-    let spaceBefore = false
+    let hasSpaceBefore = false
     let isBlockStart = false
     const prevWordEnd = getIndexBefore(
       editorState.list.value,
       start,
       (ch) => {
         if ('char' in ch) {
-          spaceBefore = ch.char === ' '
+          hasSpaceBefore = [' ', '\n'].includes(ch.char)
         }
         if ('type' in ch && ch.type === 'block-start'){
           isBlockStart = true
           return true
         }
-        if ('char' in ch && spaceBefore) {
+        if ('char' in ch && hasSpaceBefore) {
           return true
         }
         return false

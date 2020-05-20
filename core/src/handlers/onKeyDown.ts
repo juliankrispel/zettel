@@ -15,6 +15,7 @@ import {
   insertText,
   insertCharacter,
 } from '../change'
+import change from '../change/change';
 
 // @ts-ignore
 const inputEventSupported = (new InputEvent('insertText')).getTargetRanges != null
@@ -87,14 +88,9 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
     newEditorState = redo(editorState)
   }
   
+  // soft linebreaks
   if (event.key === 'Enter' && event.shiftKey) {
-    // splitBlock
-    newEditorState = insertCharacter(
-      editorState,
-      start,
-      end,
-      '\n'
-    )
+    newEditorState = insertCharacter(editorState, start, end, '\n')
   }
 
   if (newEditorState == null && !inputEventSupported) {

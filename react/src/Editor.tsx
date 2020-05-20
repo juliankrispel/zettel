@@ -7,8 +7,7 @@ import {
   onKeyDown,
   ViewState,
   onBeforeInput,
-  onSelectionChange,
-  toText
+  onSelectionChange
 } from '@zettel/core'
 import DefaultRenderBlock from './DefaultRenderBlock'
 import { RenderProps } from './types'
@@ -48,16 +47,13 @@ const Editor = (props: Props): React.ReactElement => {
     renderChildren,
   } = props
 
-  const onChange = (args: any) => {
-    _onChange(args)
-  }
-
+  const onChange = (args: any) => _onChange(args)
   const ref = useRef(null)
   const [isComposing, setComposing] = useState(false)
   const editorState = _editorState
 
   /*
-  * we need to enforce our election
+  * we need to enforce our selection
   */
   useLayoutEffect(() => {
     const container = ref.current

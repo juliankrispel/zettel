@@ -30,16 +30,26 @@ export default function insertCharacter(
     entity = prevValue.entity
   }
 
+  const value = [{
+    char,
+    styles: editorState.currentStyles,
+    entity,
+  }]
+
+  if (char === '\n') {
+    value.push({
+      char: ' ',
+      styles: [],
+      entity: null,
+    })
+  }
+
   let newEditorState = editorState.change({
     isBoundary: editorState.lastChangeType !== COMMAND.INSERT_CHARACTER,
     type: COMMAND.INSERT_CHARACTER,
     start,
     end,
-    value: [{
-      char: char,
-      styles: editorState.currentStyles,
-      entity,
-    }]
+    value
   }).change({
     type: COMMAND.INSERT_CHARACTER,
     start: start + 1,
