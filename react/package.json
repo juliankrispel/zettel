@@ -1,6 +1,6 @@
 {
   "name": "@zettel/react",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "React view library for zettel",
   "main": "dist/index.js",
   "author": "Julian Krispel",
@@ -13,7 +13,7 @@
     "test:watch": "../node_modules/.bin/jest . --watch"
   },
   "dependencies": {
-    "@zettel/core": "0.0.21"
+    "@zettel/core": "0.0.22"
   },
   "peerDependencies": {
     "react": "16.8.6",

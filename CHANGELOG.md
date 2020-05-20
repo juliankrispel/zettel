@@ -1,6 +1,6 @@
 # Zettel
 
-## [Unreleased]
+## [0.0.22] - 2020-05-20
 
 ### Added
 - Added Fragment Model. Fragments are similar to Blocks, they can either contain text or other fragments. They can also contain metadata which makes them useful for things such as mentions. Fragments can cross block boundaries. If `[ ]` is a block boundary and `< >` a fragment boundary we can do things like: `[First <Block][Second> Block]`.
