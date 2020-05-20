@@ -1,5 +1,5 @@
 on: push
-name: Test
+name: Unit Tests
 jobs:
   test:
     name: Test packages
