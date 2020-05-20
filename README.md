@@ -4,7 +4,7 @@
 
 (API still subject to change - don't use this in production just yet)
 
-Framework for building text editors in the browser.
+A radically different (much simpler and lower level) approach to building text editors in the browser.
 
 [Join Zettel on Slack](https://join.slack.com/t/zetteljs/shared_invite/zt-eiih8wis-Hca9bcrvX3V728odwEqiBA)
 
@@ -73,6 +73,7 @@ This changes a lot. To focus as much as possible I'll keep this small.
 - [ ] Prototype collaborative editing
 - [ ] Start writing docs and publishing exampples on codesandbox
 - [ ] Alternative view layers (Vuejs/svelte/angular)
+
 
 ## Thanks
 
