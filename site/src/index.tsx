@@ -11,14 +11,15 @@ import { Router, Route, Link, Switch } from 'react-router-dom'
 import './typography'
 
 const Readme = lazy(() => importMDX('../../README.md'))
+const Changelog = lazy(() => importMDX('../../CHANGELOG.md'))
 const Container = styled.article`
   padding: 1em;
 `
 
-const Content = () =>
+const Content = ({ children }: { children: any}) =>
   <Suspense fallback={<div>Loading...</div>}>
     <Container>
-      <Readme />
+      {children}
     </Container>
   </Suspense>
 
@@ -35,6 +36,11 @@ const _routeComps: RouteComps = Object.keys(Examples).map((key: string) => ({
   component: exampleModules[key]
 }))
 
+_routeComps.push({
+  path: `/changelog`,
+  component: () => (<Content><Changelog /></Content>)
+})
+
 const history = createBrowserHistory()
 
 type LayoutProps = {
@@ -47,14 +53,22 @@ const Layout = ({ children, routeComps }: LayoutProps) => {
   const toggleFlag = () => setFlag(!flag)
 
   return <main className={`app ${flag ? 'menu-toggled': ''}`}>
+    <button onClick={toggleFlag} id="menu-button">&#x2630;</button>
     <nav>
       <ul>
-        {routeComps.map((route: any, i) => (
-          <li onMouseUp={toggleFlag} key={`${route.path}-${i}`}><Link to={route.path}>{route.name}</Link></li>
-        ))}
+
+        <li><Link onMouseUp={toggleFlag} to={'/'}>Home</Link></li>
+        <li><Link onMouseUp={toggleFlag} to={'/changelog'}>Changelog</Link></li>
+        <li>
+          <h3>Examples:</h3>
+          <ul>
+            {routeComps.map((route: any, i) => (
+              <li onMouseUp={toggleFlag} key={`${route.path}-${i}`}><Link to={route.path}>{route.name}</Link></li>
+            ))}
+          </ul>
+        </li>
       </ul>
     </nav>
-    <button onClick={toggleFlag} id="menu-button">{flag ? '>' : '<'}</button>
     {children}
   </main>
 }
@@ -63,7 +77,7 @@ const Root = () => <Router history={history}>
   <Layout routeComps={_routeComps}>
     <Switch>
       {_routeComps.map((props) => <Route key={props.path} {...props} />)}
-      <Route render={() => <Content />} />
+      <Route render={() => <Content><Readme /></Content>} />
     </Switch>
   </Layout>
 </Router>

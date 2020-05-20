@@ -36,7 +36,7 @@ const Code = (props: any) => {
   const { block, children } = props
   const text = valueToText(block.value.slice(3))
   const matches = text.match(/^([a-z]+)\s/)
-  if (matches != null) {
+  if (matches != null && prism.languages[matches[1]] != null) {
     const value: TextCharacter[] = block.value.slice(0, 3 + matches[0].length)
     const actualText = text.substr(matches[0].length)
     const tokens = prism.tokenize(actualText, prism.languages[matches[1]])
