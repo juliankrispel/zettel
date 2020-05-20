@@ -68,7 +68,7 @@ jobs:
         run: node scripts/check-npm-release.js
         env:
           PACKAGE_VERSION: ${{ steps.changelog_entry.outputs.version }}
-          PACKAGE_NAME: core
+          PACKAGE_NAME: react
 
       - name: Create Github Release
         id: create_release
