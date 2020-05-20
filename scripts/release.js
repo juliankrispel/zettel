@@ -8,7 +8,6 @@ const token = process.env.GITHUB_TOKEN
 
 const octokit = new github.GitHub(token);
 
-
 async function run() {
   const log = await parse('./CHANGELOG.md')
 

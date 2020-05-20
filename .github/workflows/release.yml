@@ -47,6 +47,12 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
+      - name: check core package is published
+        run: node scripts/check-npm-release.js
+        env:
+          PACKAGE_VERSION: ${{ steps.changelog_entry.outputs.version }}
+          PACKAGE_NAME: core
+
       - name: publish react package
 #        if: ${{ steps.changelog_entry.outputs.unreleased == 'true' }} 
         continue-on-error: true
@@ -57,6 +63,12 @@ jobs:
           npm publish
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: check react package is published
+        run: node scripts/check-npm-release.js
+        env:
+          PACKAGE_VERSION: ${{ steps.changelog_entry.outputs.version }}
+          PACKAGE_NAME: core
 
       - name: Create Github Release
         id: create_release
