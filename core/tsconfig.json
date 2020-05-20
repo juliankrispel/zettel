@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "types": ["jest"],
-    "lib": ["dom", "es7"],
+    "lib": ["es2017", "es7", "es6", "dom"],
     "module": "commonjs",
     "target": "es2015",
     "declaration": true,
@@ -17,6 +17,7 @@
   "exclude": [
     "**/*.spec.ts",
     "node_modules",
+    "dist",
     "**/__tests__"
   ]
 }
