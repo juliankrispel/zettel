@@ -13,18 +13,17 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: TextFragmen
     renderTextFragment: RenderTextFragment,
   } = props
 
-  const fragmentProps = {
-    key: `${block.blockKey}-${offset}`,
+  const key = `${block.blockKey}-${offset}`
+
+  const fragmentProps = props.readOnly ? {} : {
+    key,
     'data-block-key': block.blockKey,
     'data-text-fragment': true,
     'data-fragment-start': offset,
     'data-fragment-end': offset + fragment.text.length
   }
 
-  let fragmentText: any = fragment.text
-//   if (fragment.text.endsWith('\n')) {
-//     fragmentText = <>{fragmentText}<br/></>
-//   }
+  const fragmentText: any = fragment.text
 
   let textFragment: React.ReactElement = (fragment.styles || []).reduce((children, val) => {
     if (RenderStyle != null) {

@@ -1,5 +1,10 @@
 # Zettel
 
+## [Unreleased]
+
+### Fixed
+- `readOnly` prop now actually makes the editor read only and removes any editor specific css from the editor and block components.
+
 ## [0.0.22] - 2020-05-20
 
 ### Added

@@ -52,52 +52,16 @@ const Editor = (props: Props): React.ReactElement => {
   const [isComposing, setComposing] = useState(false)
   const editorState = _editorState
 
-  /*
-  * we need to enforce our selection
-  */
-  useLayoutEffect(() => {
-    const container = ref.current
-    if (container != null && !isComposing) {
-      setDomSelection(editorState, container)
-    }
-  }, [editorState])
+  let handlerProps = { }
 
-  useLayoutEffect(() => {
-    const el: any = ref != null ? ref.current : null
-    if (el != null) {
-      // @ts-ignore
-      const beforeinput = (event: InputEvent) => {
-        const newEditorState = onBeforeInput(editorState, event)
-        if (newEditorState != null) {
-          onChange(newEditorState)
-        }
-      }
-
-      el.addEventListener('beforeinput', beforeinput)
-      return () => {
-        el.removeEventListener('beforeinput', beforeinput)
-      }
-    }
- }, [ref.current, editorState])
-
-  const divProps = {
-    ...htmlAttrs,
-    style: { ...editorStyles },
-    contentEditable: readOnly === true ? false : true,
-  }
-
-  const viewState = props.viewState || useMemo(() => createViewState(editorState.list), [isComposing || editorState])
-  const children = <EditorChildren
-    blocks={viewState.blocks}
-    renderBlock={renderBlock}
-    renderTextFragment={renderTextFragment}
-    renderStyle={renderStyle}
-    renderChildren={renderChildren}
-  />
-
-  return (
-    <div
-      onSelect={() => {
+  if (!readOnly) {
+    handlerProps = {
+      onCompositionStart: () => setComposing(true),
+      onCompositionEnd: () => {
+        onChange(onSelectionChange(editorState));
+        setComposing(false);
+      },
+      onSelect: () => {
         const newEditorState = onSelectionChange(editorState)
         const { start, end } = editorState
 
@@ -107,13 +71,8 @@ const Editor = (props: Props): React.ReactElement => {
         ) {
           onChange(newEditorState)
         }
-      }}
-      onCompositionStart={() => setComposing(true)}
-      onCompositionEnd={() => {
-        onChange(onSelectionChange(editorState))
-        setComposing(false)
-      }}
-      onKeyDown={(event) => {
+      },
+      onKeyDown: (event: React.KeyboardEvent) => {
         let handled = null
 
         if (props.onKeyDown != null) {
@@ -129,11 +88,62 @@ const Editor = (props: Props): React.ReactElement => {
           onChange(onSelectionChange(editorState))
           onChange(handled)
         }
-      }}
+      }
+    }
+  }
+
+  /*
+  * we need to enforce our selection
+  */
+  useLayoutEffect(() => {
+    const container = ref.current
+    if (container != null && !isComposing && !readOnly) {
+      setDomSelection(editorState, container)
+    }
+  }, [editorState, readOnly])
+
+  useLayoutEffect(() => {
+    const el: any = ref != null ? ref.current : null
+    if (el != null && !readOnly) {
+      // @ts-ignore
+      const beforeinput = (event: InputEvent) => {
+        const newEditorState = onBeforeInput(editorState, event)
+        if (newEditorState != null) {
+          onChange(newEditorState)
+        }
+      }
+
+      el.addEventListener('beforeinput', beforeinput)
+      return () => {
+        el.removeEventListener('beforeinput', beforeinput)
+      }
+    }
+  }, [ref.current, editorState, readOnly])
+
+  const divProps = {
+    ...htmlAttrs,
+    style: readOnly ? {} : { ...editorStyles },
+    contentEditable: readOnly ? false : true,
+  }
+
+  const viewState = props.viewState || useMemo(() => createViewState(editorState.list), [isComposing || editorState])
+  const children = <EditorChildren
+    readOnly={readOnly}
+    blocks={viewState.blocks}
+    renderBlock={renderBlock}
+    renderTextFragment={renderTextFragment}
+    renderStyle={renderStyle}
+    renderChildren={renderChildren}
+  />
+
+
+  return (
+    <div
       suppressContentEditableWarning
       role="textbox"
       autoCorrect={'off'}
       ref={ref}
+      {...handlerProps}
       {...divProps}
     >
       {children}
