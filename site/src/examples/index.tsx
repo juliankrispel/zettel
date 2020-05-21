@@ -1,6 +1,7 @@
 import ItalicAndBold from  './ItalicAndBold'
 import BlockStyling from './BlockStyling'
 import PlainText from './PlainText'
+import ReadOnly from './ReadOnly'
 import Tree from './Tree'
 import Table from './Table'
 import MarkdownTest from './MarkdownTest'
@@ -12,6 +13,7 @@ import TimeTravel from './TimeTravel'
 const Examples = {
   'Plain Text': PlainText,
   'Changes': Changes,
+  'ReadOnly': ReadOnly,
   'Nocode': Nocode,
   'Basic Text styling': ItalicAndBold,
   'Block Styling': BlockStyling,

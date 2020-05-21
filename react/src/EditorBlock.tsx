@@ -23,11 +23,15 @@ export default function EditorBlock(props: Props) {
   const RenderBlock = renderProps.renderBlock
   let block = _block
 
-  const htmlAttrs: any = {
-    'data-block-key': block.blockKey,
-    'data-fragment-start': 0,
-    'data-fragment-end': block.value.length,
-    style,
+  let htmlAttrs: any = {}
+
+  if (!props.readOnly) {
+    htmlAttrs = {
+      'data-block-key': block.blockKey,
+      'data-fragment-start': 0,
+      'data-fragment-end': block.value.length,
+      style,
+    }
   }
 
   const { entity } = block
@@ -37,6 +41,7 @@ export default function EditorBlock(props: Props) {
 
     return <RenderBlock 
       block={block}
+      readOnly={props.readOnly}
       key={`${block.blockKey}-${offset}`}
       htmlAttrs={htmlAttrs}
       children={<>{null}</>}

@@ -14,6 +14,7 @@ export default function EditorBlockChildren(props: Props) {
   const {
     blocks,
     block,
+    readOnly,
     ...renderProps
   } = props
 
@@ -25,6 +26,7 @@ export default function EditorBlockChildren(props: Props) {
     <EditorBlock
       key={block.blockKey}
       block={block}
+      readOnly={readOnly}
       {...renderProps}
     />,
   )}</>

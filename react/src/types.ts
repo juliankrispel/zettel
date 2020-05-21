@@ -22,6 +22,7 @@ export type RenderTextFragment = React.FunctionComponent<{
 export type RenderBlock = React.FunctionComponent<{
   block: Block,
   htmlAttrs: Object,
+  readOnly?: boolean,
   children: React.ReactElement
 }>
 
@@ -36,6 +37,7 @@ export type RenderAtom = React.FunctionComponent<{
 }>
 
 export type RenderProps = {
+  readOnly?: boolean,
   mapBlock?: (block: Block) => Block,
   renderBlock?: RenderBlock,
   renderChildren?: RenderChildren,
