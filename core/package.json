@@ -1,6 +1,6 @@
 {
   "name": "@zettel/core",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Core module of zettel",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
