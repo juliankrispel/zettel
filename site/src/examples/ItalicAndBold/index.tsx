@@ -17,7 +17,6 @@ const App = () => {
       length: 10,
       styles: ['italic'],
     }],
-    entityMap: {}
   }))
 
   return (

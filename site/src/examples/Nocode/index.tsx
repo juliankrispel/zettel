@@ -27,9 +27,7 @@ const App = () => {
   const [editorState, setEditorState] = useEditorState(() => EditorState.fromJSON({
     text,
     ranges: [],
-    entityMap: {}
   }))
-    console.log(editorState)
 
   const onSelectStyle = (style: string) => {
     const { start, end, list } = editorState

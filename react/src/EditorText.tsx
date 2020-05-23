@@ -41,8 +41,7 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: TextFragmen
   if (RenderTextFragment) {
     textFragment = <RenderTextFragment
       data-text-fragment="true"
-      entity={fragment.entity}
-      key={`entity-${block.blockKey}-${offset}`}
+      key={`block-${block.blockKey}-${offset}`}
     >{textFragment}</RenderTextFragment>
   }
 
@@ -53,11 +52,11 @@ const reduceFragments = (props: TextProps, _offset: number = 0, fragments: Fragm
   return fragments.reduce(
     ({ offset, rendered }, fragment) => {
       if ('fragments' in fragment) {
-        const reducedFragments = reduceFragments(props, offset, fragment.fragments)
+        const reducedFragments = reduceFragments(props, offset + 1, fragment.fragments)
 
         return {
           rendered: rendered.concat([reducedFragments.rendered]),
-          offset: offset + reducedFragments.offset
+          offset: reducedFragments.offset + 1
         }
       } else {
         const renderedFragment = mapTextFramgent(props, offset, fragment)
@@ -85,6 +84,7 @@ export default function EditorText(props: TextProps) {
     * If the block has content, split it up into fragments and render the fragments
     */
     textFragments = reduceFragments(props, 0, block.fragments).rendered
+    console.log({ textFragments })
   /*
    * Render an empty block
    */

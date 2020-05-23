@@ -10,37 +10,16 @@ export default function insertCharacter(
 
   const prevValue = editorState.list.value[start]
   const nextValue = editorState.list.value[end + 1]
-  let entity
-
-  // TODO: Write some tests for this
-  // Basically only when we're inside an entity
-  // as in next and prev value are contained within the same entity
-  // shall we include this inserted value in this entity
-  if (
-    nextValue != null &&
-    'type' in nextValue &&
-    nextValue.type == null &&
-    'type' in prevValue &&
-    'entity' in prevValue &&
-    'entity' in nextValue &&
-    prevValue != null &&
-    prevValue.type == null &&
-    prevValue.entity === nextValue.entity
-  ) {
-    entity = prevValue.entity
-  }
 
   const value = [{
     char,
-    styles: editorState.currentStyles,
-    entity,
+    styles: editorState.currentStyles
   }]
 
   if (char === '\n') {
     value.push({
       char: ' ',
       styles: [],
-      entity: null,
     })
   }
 

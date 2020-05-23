@@ -15,7 +15,7 @@ export type Update = {
  * a Change object to undo the change
  */
 export default function change(update: Update): Update {
-  const { value: currentValue, entityMap } = update.current
+  const { value: currentValue } = update.current
 
   const [start, end] = [
     update.change.start,
@@ -47,8 +47,7 @@ export default function change(update: Update): Update {
 
   return {
     current: {
-      value: newValue,
-      entityMap,
+      value: newValue
     },
     change: reverse,
   }

@@ -17,8 +17,7 @@ const App = () => {
       offset: 12,
       length: 1,
       styles: ['H2']
-    }],
-    entityMap: {}
+    }]
   }))
 
   return (

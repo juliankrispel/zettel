@@ -100,7 +100,7 @@ const Editor = (props: Props): React.ReactElement => {
     if (container != null && !isComposing && !readOnly) {
       setDomSelection(editorState, container)
     }
-  }, [editorState, readOnly])
+  })
 
   useLayoutEffect(() => {
     const el: any = ref != null ? ref.current : null

@@ -17,5 +17,5 @@ export default function getBlockValue(list: ListState, blockKey: string): TextCh
     ch => 'type' in ch && (ch.type === 'block-end' || ch.type === 'block-start')
   )
   // @ts-ignore
-  return list.value.slice(blockOffset + 1, blockEnd - 1)
+  return list.value.slice(blockOffset + 1, blockEnd)
 }

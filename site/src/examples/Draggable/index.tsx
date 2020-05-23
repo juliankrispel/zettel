@@ -12,8 +12,7 @@ const emptyPositions: { [key: string]: {x: number, y: number} } = {}
 const App = () => {
   const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
     text,
-    ranges: [],
-    entityMap: {}
+    ranges: []
   }))
 
   const [positions, setPosition] = useState(emptyPositions);

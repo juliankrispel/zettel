@@ -8,7 +8,6 @@ describe('reduceViewState', () => {
       blockKey: 'block-1',
       type: 'block-start',
       styles: [],
-      entity: 'a'
     }, {
       char: '1'
     }, {
@@ -17,7 +16,6 @@ describe('reduceViewState', () => {
       blockKey: 'block-2',
       type: 'block-start',
       styles: [],
-      entity: 'b'
     }, {
       char: '2'
     }, {
@@ -25,8 +23,7 @@ describe('reduceViewState', () => {
     }]
 
     const res = reduceViewState({
-      value: testState,
-      entityMap: { a: { b: 1, c: 2 }, b: { c: 3, d: 4}}
+      value: testState
     })
 
     expect(res).toMatchSnapshot()
@@ -67,7 +64,6 @@ describe('reduceViewState', () => {
 
     const res = reduceViewState({
       value: testState,
-      entityMap: {}
     })
 
     expect(res).toMatchSnapshot()
@@ -108,7 +104,6 @@ describe('reduceViewState', () => {
 
     const res = reduceViewState({
       value: testState,
-      entityMap: {}
     })
 
     expect(res).toMatchSnapshot()
@@ -172,7 +167,6 @@ describe('reduceViewState', () => {
 
     const res = reduceViewState({
       value: testState,
-      entityMap: {}
     })
 
     expect(res).toMatchSnapshot()
@@ -211,7 +205,6 @@ describe('reduceViewState', () => {
 
     const res = reduceViewState({
       value: testState,
-      entityMap: {}
     })
 
     // console.log(JSON.stringify(res, null, 2))

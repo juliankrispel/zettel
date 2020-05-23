@@ -3,8 +3,7 @@ import id from '../EditorState/id'
 
 const fromRaw = (raw: RawDocument): ListState => {
   const state: ListState = {
-    value: [],
-    entityMap: raw.entityMap
+    value: []
   }
 
   let ignore = true
@@ -37,18 +36,13 @@ const fromRaw = (raw: RawDocument): ListState => {
     }
   }
 
-  raw.ranges.forEach(({ offset, length, entity: entityKey, ...charData }) => {
+  raw.ranges.forEach(({ offset, length, ...charData }) => {
     for (var i = offset; i < offset + length; i++) {
       const value = state.value[i]
       if ('char' in value || value.type === 'block-start') {
-        const entity: string | null = (entityKey != null && state.entityMap[entityKey]) ? entityKey : null
         const newValue = {
           ...value,
           ...charData,
-        }
-
-        if (entity != null) {
-          newValue.entity = entity
         }
 
         // @ts-ignore

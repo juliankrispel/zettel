@@ -64,6 +64,10 @@ export default function setDomSelection(
     parseInt(node.dataset.fragmentEnd) >= focusOffset
   })
 
+  if (focusFragment == null) {
+    return 
+  }
+
   const focusFragmentOffset = parseInt(focusFragment.dataset.fragmentStart)
 
   const anchorNode = findRangeTarget(anchorFragment) as HTMLElement
