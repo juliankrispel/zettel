@@ -8,6 +8,15 @@
     "build": "SKIP_PREFLIGHT_CHECK=true ../node_modules/.bin/react-scripts build",
     "postbuild": "react-snap"
   },
+  "reactSnap": {
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ],
+    "concurrency": 1,
+    "inlineCss": false,
+    "skipThirdPartyRequests": false
+  },
   "dependencies": {
     "@microsoft/fast-tooling-react": "^1.23.0",
     "@types/prismjs": "^1.16.1",
@@ -50,9 +59,10 @@
   "devDependencies": {
     "add": "^2.0.6",
     "mdx.macro": "^0.2.9",
+    "puppeteer": "^3.1.0",
     "react-dnd-html5-backend": "^9.4.0",
     "react-movable": "^2.2.0",
-    "react-snap": "^1.23.0",
+    "react-snap": "1.10.0",
     "yarn": "^1.17.3"
   }
 }
