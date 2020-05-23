@@ -56,7 +56,6 @@ Object {
       ],
     },
   ],
-  "entityMap": Object {},
 }
 `;
 
@@ -162,7 +161,6 @@ Object {
       ],
     },
   ],
-  "entityMap": Object {},
 }
 `;
 
@@ -228,7 +226,6 @@ Object {
       ],
     },
   ],
-  "entityMap": Object {},
 }
 `;
 
@@ -291,7 +288,6 @@ Object {
       ],
     },
   ],
-  "entityMap": Object {},
 }
 `;
 
@@ -302,10 +298,6 @@ Object {
       "blockKey": "block-1",
       "blockLevel": 0,
       "blocks": Array [],
-      "entity": Object {
-        "b": 1,
-        "c": 2,
-      },
       "fragments": Array [
         Object {
           "text": "1",
@@ -322,10 +314,6 @@ Object {
       "blockKey": "block-2",
       "blockLevel": 0,
       "blocks": Array [],
-      "entity": Object {
-        "c": 3,
-        "d": 4,
-      },
       "fragments": Array [
         Object {
           "text": "2",
@@ -339,15 +327,5 @@ Object {
       ],
     },
   ],
-  "entityMap": Object {
-    "a": Object {
-      "b": 1,
-      "c": 2,
-    },
-    "b": Object {
-      "c": 3,
-      "d": 4,
-    },
-  },
 }
 `;
