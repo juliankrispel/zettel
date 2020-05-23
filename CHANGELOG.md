@@ -5,6 +5,9 @@
 ### Fixed
 - `readOnly` prop now actually makes the editor read only and removes any editor specific css from the editor and block components.
 
+### Removed
+- Removed concept of entities. Not needed anymore now we have fragments. To attach any kind of data to a fragment or block just add arbitrary data to the `data` property of a `block-start` or `fragment-start` character.
+
 ## [0.0.22] - 2020-05-20
 
 ### Added

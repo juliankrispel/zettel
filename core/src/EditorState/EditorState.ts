@@ -4,7 +4,6 @@ import {
   Change,
   EditorChange,
   Changes,
-  Entity,
 } from '../types'
 
 import rawToFlat from '../serialize/fromRaw'
@@ -15,7 +14,6 @@ import { undo, redo } from '../change';
 
 const emptyList: ListState = {
   value: [],
-  entityMap: {}
 }
 
 type ConstructorProps = {
@@ -107,12 +105,6 @@ export default class EditorState {
       redoStack: [],
       undoStack,
     })
-  }
-
-  createEntity(entity: Entity): string {
-    const entityKey = id()
-    this.list.entityMap[entityKey] = entity
-    return entityKey
   }
 
   undo(): EditorState {

@@ -34,20 +34,6 @@ export default function EditorBlock(props: Props) {
     }
   }
 
-  const { entity } = block
-
-  if (entity != null && entity.isAtomic && RenderBlock != null) {
-    const offset = 0
-
-    return <RenderBlock 
-      block={block}
-      readOnly={props.readOnly}
-      key={`${block.blockKey}-${offset}`}
-      htmlAttrs={htmlAttrs}
-      children={<>{null}</>}
-    />
-  }
-
   const content = <>
     <EditorText
       key="block-text"

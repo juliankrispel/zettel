@@ -15,7 +15,6 @@ const App = () => {
   const [editorState, setEditorState] = useState(() => EditorState.fromJSON({
     text,
     ranges: [],
-    entityMap: {}
   }))
 
   return (

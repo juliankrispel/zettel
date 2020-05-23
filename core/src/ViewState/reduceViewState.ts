@@ -17,9 +17,7 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
   const blocks = getChildrenByPath(state.viewState, state.blockPath)
   const block = getBlockByPath(state.viewState, state.blockPath)
   const fragment = getFragmentByPath(block, state.fragPath)
-  const fragments = getFragmentsByPath(block, state.fragPath)
   const type = 'type' in char ? char.type : null
-  const { entityMap } = state.viewState
 
   if (type == null) {
     state.currentText.push(char as TextCharacter)
@@ -28,9 +26,9 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
 
   if (state.currentText.length > 0) {
     if (fragment != null && 'fragments' in fragment) {
-      fragment.fragments = fragment.fragments.concat(createTextFragments(state.currentText, {}))
+      fragment.fragments = fragment.fragments.concat(createTextFragments(state.currentText))
     } else {
-      block.fragments = block.fragments.concat(createTextFragments(state.currentText, {}))
+      block.fragments = block.fragments.concat(createTextFragments(state.currentText))
     }
       
     block.value = block.value.concat(state.currentText)
@@ -65,8 +63,6 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
       styles: _char.styles != null ? _char.styles : [],
     }
 
-    if (_char.entity != null) _block.entity = entityMap[_char.entity]
-
     blocks.push(_block)
 
     state.blockPath.push(blocks.length - 1)
@@ -88,7 +84,6 @@ export default function reduceViewState (
   const initialState: ReducerState = {
     viewState: {
       blocks: [],
-      entityMap: flat.entityMap
     },
     i: 0,
     blockPath: [],

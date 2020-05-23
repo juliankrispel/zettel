@@ -1,11 +1,4 @@
 /**
- * Container for Entities
- */
-export type EntityMap = {
-  [key: string]: Entity
-}
-
-/**
  * Range
  */
 export type SelectionRange = {
@@ -16,21 +9,12 @@ export type SelectionRange = {
 }
 
 /**
- * Entity ftw!
- */
-export type Entity = {
-  isAtomic?: boolean,
-  [key: string]: any
-}
-
-/**
  * State of a document.
  * Used to create derived states such as BlockTree,
  * RawDocument or any other
  */
 export type ListState = {
   value: Value,
-  entityMap: EntityMap,
 }
 
 /**
@@ -53,8 +37,7 @@ export type Character = (TextCharacter | BlockStart | BlockEnd | FragmentStart |
  */
 
 export type CharacterData = {
-  styles?: string[],
-  entity?: string | null,
+  styles?: string[]
 }
 
 /*
@@ -107,7 +90,6 @@ export type FragmentEnd = {
 export type TextFragment = {
   text: string,
   styles?: string[],
-  entity?: Entity
 }
 
 /**
@@ -139,8 +121,7 @@ export type Changes = Change[]
 
 export type RawDocument = {
   text: string,
-  ranges: RawRange[],
-  entityMap: EntityMap,
+  ranges: RawRange[]
 }
 
 /**
@@ -150,8 +131,7 @@ export type RawDocument = {
 export type RawRange = {
   offset: number,
   length: number,
-  styles: string[],
-  entity?: string | null,
+  styles: string[]
 }
 
 export type CharacterRange = RawRange
@@ -163,8 +143,7 @@ export type Path = number[]
 * rendering only
 */
 export type ViewState = {
-  blocks: Block[],
-  entityMap: EntityMap
+  blocks: Block[]
 }
 
 export type ContainerFragment = {
@@ -184,6 +163,5 @@ export type Block = {
   blockKey: string,
   blockLevel: number,
   blocks: Block[],
-  styles: string[],
-  entity?: Entity | null
+  styles: string[]
 }

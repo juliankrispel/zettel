@@ -4,8 +4,7 @@ import raw from './fromRaw'
 const valueFromText = (text: string): Value => {
   return raw({
     text: `[${text.replace(/\n/gi, '][')}]`,
-    ranges: [],
-    entityMap: {}
+    ranges: []
   }).value.slice(1, -1)
 }
 
