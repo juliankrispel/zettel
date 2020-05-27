@@ -22,12 +22,17 @@ const MentionsPopover = styled.ul`
     cursor: pointer;
     &:hover {
       background: #f0f0f0;
-
     }
   }
 `
 
 const text = `[One 😅Line][And another line of text][And another line]`
+
+const Mention = styled.span`
+  background: #ccc;
+  border-radius: 3px;
+  padding: 0.1em 0.35em;
+`
 
 const App = () => {
   const mentions = [
@@ -49,14 +54,20 @@ const App = () => {
   const insertMention = (mention: string) => {
     const value: Value = [
       { type: 'fragment-start', data: { mention }},
-      ...valueFromText(mention),
-      { type: 'fragment-end'}
+      { type: 'fragment-end'},
+      { char: ' ' }
     ]
-    setEditorState(editorState.change({
-      start,
+    let newEditorState = editorState.change({
+      start: (start != null ? start - 1: start),
       end,
       value
-    }))
+    })
+    newEditorState = newEditorState.change({
+      start: end + 2,
+      end: end + 2
+    })
+
+    setEditorState(newEditorState)
   }
 
   useLayoutEffect(() => {
@@ -77,14 +88,18 @@ const App = () => {
       setFilter(null)
     }
   }, [isCollapsed, editorState, end, start])
-// console.log(getBlock)
 
   return (
     <div>
       <Editor
         htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
         onChange={setEditorState}
-        renderTextFragment={({ children, ...htmlAttrs }) => {
+        renderTextFragment={(props) => {
+          const { children, ...htmlAttrs } = props
+          console.log(props)
+          if ('mention' in props.fragment.data) {
+            return <Mention>{props.fragment.data.mention}</Mention>
+          }
           return <span {...htmlAttrs}>{children}</span>
         }}
         editorState={editorState}

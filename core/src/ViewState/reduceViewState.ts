@@ -42,15 +42,11 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
         fragments: [],
         data: frag.data
       })
-    } else {
-      state.fragPath.push(block.fragments.length)
-      block.fragments.push({
-        fragments: [],
-        data: frag.data
-      })
-    }
+    } 
+
   } else if (type === 'fragment-end') {
     state.fragPath.pop()
+
   } else if (type === 'block-start') {
     let _char = char as BlockStart
     const _block: Block = {
@@ -63,8 +59,8 @@ const reducer = (state: ReducerState, char: Character, i: number) => {
     }
 
     blocks.push(_block)
-
     state.blockPath.push(blocks.length - 1)
+
   } else if (type == 'block-end') {
     state.blockPath.pop()
   }

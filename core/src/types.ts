@@ -89,6 +89,7 @@ export type FragmentEnd = {
 
 export type TextFragment = {
   text: string,
+  data: any,
   styles?: string[],
 }
 

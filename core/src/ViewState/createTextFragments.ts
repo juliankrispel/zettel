@@ -21,7 +21,8 @@ export default function createTextFragments(value: TextCharacter[]): TextFragmen
     (acc: any, data, index) => {
       if (acc.length < 1) {
         const el: TextFragment= {
-          text: value[index].char
+          text: value[index].char,
+          data
         }
         if (data.styles) el.styles = data.styles
 
@@ -35,7 +36,8 @@ export default function createTextFragments(value: TextCharacter[]): TextFragmen
           }])
         } else {
           const el: TextFragment = {
-            text: value[index].char
+            text: value[index].char,
+            data
           }
           if (data.styles) el.styles = data.styles
 

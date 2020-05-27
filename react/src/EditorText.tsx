@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Block, Fragment, TextFragment } from '@zettel/core'
+import { Block, Fragment, TextFragment, ContainerFragment } from '@zettel/core'
 import { RenderProps } from './types'
 
 type TextProps = RenderProps & {
@@ -15,17 +15,19 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: TextFragmen
 
   const key = `${block.blockKey}-${offset}`
 
+  const { styles = [], text } = fragment
+
   const fragmentProps = props.readOnly ? {} : {
     key,
     'data-block-key': block.blockKey,
     'data-text-fragment': true,
     'data-fragment-start': offset,
-    'data-fragment-end': offset + fragment.text.length
+    'data-fragment-end': offset + text.length
   }
 
-  const fragmentText: any = fragment.text
+  const fragmentText: any = text
 
-  let textFragment: React.ReactElement = (fragment.styles || []).reduce((children, val) => {
+  let textFragment: React.ReactElement = styles.reduce((children, val) => {
     if (RenderStyle != null) {
       return <RenderStyle key={`${fragmentProps.key}-${val}`} style={val}>{children}</RenderStyle>
     } else {
@@ -36,10 +38,10 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: TextFragmen
       key={`fragment-${block.blockKey}-${offset}`}
     >{fragmentText}
   </span>)
-  
 
   if (RenderTextFragment) {
     textFragment = <RenderTextFragment
+      fragment={fragment}
       data-text-fragment="true"
       key={`block-${block.blockKey}-${offset}`}
     >{textFragment}</RenderTextFragment>
@@ -49,19 +51,27 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: TextFragmen
 }
 
 const reduceFragments = (props: TextProps, _offset: number = 0, fragments: Fragment[]): { rendered: any[], offset: number } => {
+  const { block, renderTextFragment: RenderTextFragment } = props
   return fragments.reduce(
     ({ offset, rendered }, fragment) => {
-      if ('fragments' in fragment) {
-        const reducedFragments = reduceFragments(props, offset + 1, fragment.fragments)
-
-        return {
-          rendered: rendered.concat([reducedFragments.rendered]),
-          offset: reducedFragments.offset + 1
-        }
+      if ('fragments' in fragment && RenderTextFragment) {
+          const reducedFragments = reduceFragments(props, offset + 1, fragment.fragments)
+          const containerFragment = <RenderTextFragment
+            fragment={fragment}
+            data-text-fragment="true"
+            key={`block-${block.blockKey}-${offset}-container-fragment`}
+          >
+            <>{reducedFragments.rendered}</>
+          </RenderTextFragment>
+          return {
+            rendered: rendered.concat([containerFragment]),
+            offset: reducedFragments.offset + 1
+          }
       } else {
-        const renderedFragment = mapTextFramgent(props, offset, fragment)
+        const _fragment = fragment as TextFragment
+        const renderedFragment = mapTextFramgent(props, offset, _fragment)
         return {
-          offset: offset + fragment.text.length,
+          offset: offset + _fragment.text.length,
           rendered: rendered.concat([renderedFragment])
         }
       }
