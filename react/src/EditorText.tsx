@@ -56,8 +56,15 @@ const reduceFragments = (props: TextProps, _offset: number = 0, fragments: Fragm
     ({ offset, rendered }, fragment) => {
       if ('fragments' in fragment && RenderTextFragment) {
           const reducedFragments = reduceFragments(props, offset + 1, fragment.fragments)
+          
           const containerFragment = <RenderTextFragment
             fragment={fragment}
+            fragmentProps={{
+              'data-block-key': block.blockKey,
+              'data-text-fragment': true,
+              'data-fragment-start': offset,
+              'data-fragment-end': reducedFragments.offset
+            }}
             data-text-fragment="true"
             key={`block-${block.blockKey}-${offset}-container-fragment`}
           >

@@ -32,11 +32,17 @@ const App = () => {
     <Editor
       htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
       renderTextFragment={(props) => {
-        const { children, fragment } = props
+        const { children, fragment, fragmentProps } = props
+        console.log(props)
 
         if ('img' in fragment.data) {
           return <InlineImg src={fragment.data.img} />
         }
+
+        if ('text' in fragment.data) {
+          return <span {...fragmentProps}>{fragment.data.text}</span>
+        }
+
 
         if ('bg' in fragment.data) {
           return <span style={{padding: '.3em', background: fragment.data.bg }}>

@@ -16,6 +16,7 @@ export type RenderStyle = React.FunctionComponent<{
 
 export type RenderTextFragment = React.FunctionComponent<{
   fragment: Fragment,
+  fragmentProps?: any,
   children: React.ReactElement
 }>
 

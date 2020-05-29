@@ -96,7 +96,6 @@ const App = () => {
         onChange={setEditorState}
         renderTextFragment={(props) => {
           const { children, ...htmlAttrs } = props
-          console.log(props)
           if ('mention' in props.fragment.data) {
             return <Mention>{props.fragment.data.mention}</Mention>
           }
