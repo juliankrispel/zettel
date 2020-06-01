@@ -11,8 +11,31 @@ const InlineImg = styled.img`
   vertical-align: middle;
 `
 
-const list: Value = [
-  ...valueFromText('[One'),
+// @ts-ignore
+const RenderTextFragment = (props) => {
+  const { children, fragment, fragmentProps } = props
+  console.log(props)
+
+  if ('img' in fragment.data) {
+    return <InlineImg src={fragment.data.img} />
+  }
+
+  if ('text' in fragment.data) {
+    return <span {...fragmentProps}>{fragment.data.text}</span>
+  }
+
+
+  if ('bg' in fragment.data) {
+    return <span style={{padding: '.3em', background: fragment.data.bg }}>
+      {children}
+    </span>
+  }
+
+  return <span>{children}</span>
+}
+
+const value: Value = [
+    ...valueFromText('[One'),
 //    { type: 'fragment-start', data: { mention: 'something' } },
 //    ...valueFromText('Two'),
 //    { type: 'fragment-end' },
@@ -31,27 +54,7 @@ const App = () => {
   return (
     <Editor
       htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
-      renderTextFragment={(props) => {
-        const { children, fragment, fragmentProps } = props
-        console.log(props)
-
-        if ('img' in fragment.data) {
-          return <InlineImg src={fragment.data.img} />
-        }
-
-        if ('text' in fragment.data) {
-          return <span {...fragmentProps}>{fragment.data.text}</span>
-        }
-
-
-        if ('bg' in fragment.data) {
-          return <span style={{padding: '.3em', background: fragment.data.bg }}>
-            {children}
-          </span>
-        }
-
-        return <span>{children}</span>
-      }}
+      renderTextFragment={RenderTextFragment}
       onChange={setEditorState}
       editorState={editorState}
     />

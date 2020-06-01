@@ -137,7 +137,6 @@ const Editor = (props: Props): React.ReactElement => {
     renderChildren={renderChildren}
   />
 
-
   return (
     <div
       suppressContentEditableWarning
