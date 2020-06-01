@@ -1,6 +1,7 @@
 interface ElementWithDataSet extends HTMLElement {
   readonly dataset: {
     fragmentStart: string,
+    fragmentEnd: string,
     blockKey: string
   }
 }
