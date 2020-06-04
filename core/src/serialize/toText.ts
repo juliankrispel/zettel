@@ -6,11 +6,13 @@ export default function toText(editorState: EditorState) {
   
   .value
   .filter(ch => 'char' in ch || ch.type !== 'block-end')
-  .map(ch => {
+  .map((ch, index) => {
     if ('char' in ch) {
       return ch.char
-    } else {
+    } else if (ch.type == 'block-start' && index !== 0){
       return '\n'
+    } else {
+      return ''
     }
   }).join('')
 }

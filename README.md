@@ -50,7 +50,6 @@ export default App;
 
 For more examples [have a look here](https://github.com/juliankrispel/zettel/tree/master/site/src/examples)
 
-
 ## Current Roadmap
 
 This changes a lot. To focus as much as possible I'll keep this small.

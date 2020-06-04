@@ -12,9 +12,9 @@ const InlineImg = styled.img`
 `
 
 // @ts-ignore
-const RenderTextFragment = (props) => {
+const RenderTextFragment = React.memo((props) => {
+  // @ts-ignore
   const { children, fragment, fragmentProps } = props
-  console.log(props)
 
   if ('img' in fragment.data) {
     return <InlineImg src={fragment.data.img} />
@@ -24,7 +24,6 @@ const RenderTextFragment = (props) => {
     return <span {...fragmentProps}>{fragment.data.text}</span>
   }
 
-
   if ('bg' in fragment.data) {
     return <span style={{padding: '.3em', background: fragment.data.bg }}>
       {children}
@@ -32,7 +31,7 @@ const RenderTextFragment = (props) => {
   }
 
   return <span>{children}</span>
-}
+})
 
 const value: Value = [
     ...valueFromText('[One'),
