@@ -12,10 +12,8 @@ import {
   removeRange,
   splitBlock,
   deleteForward,
-  insertText,
   insertCharacter,
 } from '../change'
-import change from '../change/change';
 
 // @ts-ignore
 const inputEventSupported = window.InputEvent != null && (new InputEvent('insertText')).getTargetRanges != null

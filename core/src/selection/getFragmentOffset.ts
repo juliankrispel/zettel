@@ -5,6 +5,7 @@ import getFragmentNode from './getFragmentNode'
 export default function getFragmentOffset (value: Value, node: HTMLElement) {
   const fragment = getFragmentNode(node)
   if (fragment == null) return null
+  if (fragment.dataset == null) return null
 
   const {
     fragmentStart,

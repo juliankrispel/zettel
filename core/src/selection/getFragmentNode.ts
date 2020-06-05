@@ -11,7 +11,7 @@ export default function getFragmentNode (el: HTMLElement | null): ElementWithDat
     return null
   }
 
-  if (el.dataset && el.dataset.blockKey != null && el.dataset.fragmentStart != null) {
+  if (el.dataset && el.dataset.blockKey != null && el.dataset.textFragment === 'true') {
     const _el: any = el
     return _el
   } else if (el.parentElement) {

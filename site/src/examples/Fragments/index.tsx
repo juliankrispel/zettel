@@ -14,10 +14,10 @@ const InlineImg = styled.img`
 // @ts-ignore
 const RenderTextFragment = React.memo((props) => {
   // @ts-ignore
-  const { children, fragment, fragmentProps } = props
+  const { children, fragment, ...fragmentProps } = props
 
   if ('img' in fragment.data) {
-    return <InlineImg src={fragment.data.img} />
+    return <InlineImg {...fragmentProps} src={fragment.data.img} />
   }
 
   if ('text' in fragment.data) {
@@ -25,12 +25,12 @@ const RenderTextFragment = React.memo((props) => {
   }
 
   if ('bg' in fragment.data) {
-    return <span style={{padding: '.3em', background: fragment.data.bg }}>
+    return <span {...fragmentProps} style={{padding: '.3em', background: fragment.data.bg }}>
       {children}
     </span>
   }
 
-  return <span>{children}</span>
+  return <span {...fragmentProps}>{children}</span>
 })
 
 const value: Value = [
@@ -40,11 +40,21 @@ const value: Value = [
 //    { type: 'fragment-end' },
   { type: 'fragment-start', data: { img: 'http://placekitten.com/50/50' } },
   { type: 'fragment-end' },
-
+  { type: 'fragment-start', data: { text: 'Something' } },
+  { type: 'fragment-end' },
+  ...valueFromText('hello'),
   { type: 'fragment-start', data: { bg: 'blue' } },
   ...valueFromText('hello'),
   { type: 'fragment-end' },
   ...valueFromText('Three]'),
+  ...valueFromText('[A'),
+  { type: 'fragment-start', data: { img: 'http://placekitten.com/30/30' } },
+  { type: 'fragment-end' },
+  { type: 'fragment-start', data: { img: 'http://placekitten.com/30/30' } },
+  { type: 'fragment-end' },
+  { type: 'fragment-start', data: { img: 'http://placekitten.com/30/30' } },
+  { type: 'fragment-end' },
+  ...valueFromText(']'),
 ]
 
 const App = () => {
