@@ -1,5 +1,8 @@
 # Zettel
 
+## [Unreleased]
+- Replace `ListState` with `Value` type for representing content.
+
 ## [0.0.23]
 
 ### Fixed
