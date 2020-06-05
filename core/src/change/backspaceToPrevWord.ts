@@ -9,13 +9,13 @@ export default function backspaceToPrevWord(
   end: number
 ): EditorState {
   let newEditorState = editorState
-  const prevChar = editorState.list.value[start]
+  const prevChar = editorState.value[start]
 
   if ('char' in prevChar) {
     let hasSpaceBefore = false
     let isBlockStart = false
     const prevWordEnd = getIndexBefore(
-      editorState.list.value,
+      editorState.value,
       start,
       (ch) => {
         if ('char' in ch) {

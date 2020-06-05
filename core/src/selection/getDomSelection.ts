@@ -1,9 +1,9 @@
-import { ListState, SelectionState } from "../types";
+import { Value, SelectionState } from "../types";
 import getBlockOffset from '../query/getBlockOffset'
 import { getUTF16Length } from '../utils'
 import getFragmentNode from './getFragmentNode'
 
-export default (listState: ListState): SelectionState | null => {
+export default (value: Value): SelectionState | null => {
   const domSelection = window.getSelection()
 
   if (domSelection == null || domSelection.anchorNode == null) {
@@ -37,8 +37,8 @@ export default (listState: ListState): SelectionState | null => {
   const anchorFragmentOffset = parseInt(anchorNode.dataset.fragmentStart)
   const focusFragmentOffset = parseInt(focusNode.dataset.fragmentStart)
 
-  anchorOffset+= (getBlockOffset(listState, anchorKey) || 0) + anchorFragmentOffset
-  focusOffset+= (getBlockOffset(listState, focusKey) || 0) + focusFragmentOffset
+  anchorOffset+= (getBlockOffset(value, anchorKey) || 0) + anchorFragmentOffset
+  focusOffset+= (getBlockOffset(value, focusKey) || 0) + focusFragmentOffset
 
   const [start, end] = [anchorOffset, focusOffset].sort((a, b) => a - b)
 

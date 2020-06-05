@@ -30,14 +30,14 @@ const App = () => {
   }))
 
   const onSelectStyle = (style: string) => {
-    const { start, end, list } = editorState
+    const { start, end } = editorState
     const isCollapsed = start === end
     const styleList = style ? [style] : []
 
     if (isCollapsed) {
-      const { blockOffset } = getBlockForIndex(list.value, start)
+      const { blockOffset } = getBlockForIndex(editorState.value, start)
       const value = [{
-        ...list.value[blockOffset],
+        ...editorState.value[blockOffset],
         styles: styleList
       }]
       setEditorState(
@@ -46,7 +46,7 @@ const App = () => {
           .change({ start, end })
       )
     } else {
-      const currentSelectedValue = list.value.slice(start + 1, end + 1)
+      const currentSelectedValue = editorState.value.slice(start + 1, end + 1)
       const value = currentSelectedValue.map(val => ({
         ...val,
         styles: styleList

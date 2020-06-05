@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Fragment, useState } from 'react'
 import { EditorState, getBlockForIndex } from '@zettel/core'
 import createPersistedState from 'use-persisted-state';
 import Editor from '@zettel/react'
@@ -24,14 +23,15 @@ const App = () => {
   }))
 
   const onSelectStyle = (style: string) => {
-    const { start, end, list } = editorState
+    const { start, end } = editorState
     const isCollapsed = start === end
     const styleList = style ? [style] : []
 
+
     if (isCollapsed) {
-      const { blockOffset } = getBlockForIndex(list.value, start)
+      const { blockOffset } = getBlockForIndex(editorState.value, start)
       const value = [{
-        ...list.value[blockOffset],
+        ...editorState.value[blockOffset],
         styles: styleList
       }]
       setEditorState(
@@ -40,7 +40,7 @@ const App = () => {
           .change({ start, end })
       )
     } else {
-      const currentSelectedValue = list.value.slice(start + 1, end + 1)
+      const currentSelectedValue = editorState.value.slice(start + 1, end + 1)
       const value = currentSelectedValue.map(val => ({
         ...val,
         styles: styleList
@@ -61,7 +61,6 @@ const App = () => {
         }}
         renderBlock={({ block, children, htmlAttrs}) => {
           const [style] = block.styles
-          console.log(block.styles)
           const Block = styled.div`
             ${styles[style]}
           `

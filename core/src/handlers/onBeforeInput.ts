@@ -20,7 +20,7 @@ type InputEvent = Event & {
 export default function onBeforeInput(editorState: EditorState, _event: any) {
   const event: InputEvent = _event
   let newEditorState = editorState
-  const domRange = getDomRange(editorState.list)
+  const domRange = getDomRange(editorState.value)
 
   if (domRange == null) return newEditorState
 

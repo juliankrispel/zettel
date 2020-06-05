@@ -3,7 +3,7 @@ import valueFromText from '../serialize/valueFromText'
 import getDomSelection from "../selection/getDomSelection";
 
 export default function onPaste(editorState: EditorState, event: ClipboardEvent) {
-  const position = getDomSelection(editorState.list)
+  const position = getDomSelection(editorState.value)
 
   if (position === null) {
     console.warn('cant get start and end selection')

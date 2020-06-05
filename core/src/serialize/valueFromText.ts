@@ -5,7 +5,7 @@ const valueFromText = (text: string): Value => {
   return raw({
     text: `[${text.replace(/\n/gi, '][')}]`,
     ranges: []
-  }).value.slice(1, -1)
+  }).slice(1, -1)
 }
 
 export default valueFromText

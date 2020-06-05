@@ -6,9 +6,9 @@ export default function selectAll(editorState: EditorState): EditorState {
     editorState,
     {
       start: 0,
-      end: editorState.list.value.length - 2,
+      end: editorState.value.length - 2,
       anchorOffset: 0,
-      focusOffset: editorState.list.value.length - 2
+      focusOffset: editorState.value.length - 2
     }
   )
 }

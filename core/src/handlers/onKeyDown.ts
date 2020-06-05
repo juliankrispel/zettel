@@ -40,7 +40,7 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
   // and the event shouldn't be cancelled (i.e. no event.preventDefault())
   let newEditorState
 
-  let position = getDomSelection(editorState.list)
+  let position = getDomSelection(editorState.value)
   if (position === null) {
     console.warn('cant get start and end selection, resume with current state')
     position  = {
@@ -78,9 +78,9 @@ export default function handleKeyDown (editorState: EditorState, event: Keyboard
       editorState,
       {
         start: 0,
-        end: editorState.list.value.length - 2,
+        end: editorState.value.length - 2,
         anchorOffset: 0,
-        focusOffset: editorState.list.value.length - 2
+        focusOffset: editorState.value.length - 2
       }
     )
   } else if (isRedo(event)) {

@@ -1,9 +1,9 @@
-import { ListState, SelectionRange } from '../types'
+import { Value, SelectionRange } from '../types'
 import getFragmentOffset from './getFragmentOffset'
 import { getUTF16Length } from '../utils'
 import getFragmentNode from './getFragmentNode'
 
-export default function getDomRange(list: ListState): SelectionRange | null {
+export default function getDomRange(value: Value): SelectionRange | null {
   const domSelection = window.getSelection()
 
   if (domSelection == null || domSelection.anchorNode == null) {
@@ -13,8 +13,8 @@ export default function getDomRange(list: ListState): SelectionRange | null {
   const range = domSelection.getRangeAt(0)
   const endContainer: any = range.endContainer
   const startContainer: any = range.startContainer
-  const fragmentOffsetEnd = getFragmentOffset(list, endContainer) || 0
-  const fragmentOffsetStart = getFragmentOffset(list, startContainer) || 0
+  const fragmentOffsetEnd = getFragmentOffset(value, endContainer) || 0
+  const fragmentOffsetStart = getFragmentOffset(value, startContainer) || 0
   const anchorFragmentNode = getFragmentNode(startContainer)
   const focusFragmentNode = getFragmentNode(endContainer)
 

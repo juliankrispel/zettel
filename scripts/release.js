@@ -12,7 +12,7 @@ async function run() {
   const log = await parse('./CHANGELOG.md')
 
 
-  const { data: releases } = await octokit.repos.listReleases({
+  const { data: releases } = await octokit.reposReleases({
     owner: 'juliankrispel',
     repo: 'zettel'
   })

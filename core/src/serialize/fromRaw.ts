@@ -1,10 +1,8 @@
-import { BlockStart, BlockEnd, Character, RawDocument, ListState, TextCharacter } from '../types'
+import { BlockStart, Value, BlockEnd, Character, RawDocument, ListState, TextCharacter } from '../types'
 import id from '../EditorState/id'
 
-const fromRaw = (raw: RawDocument): ListState => {
-  const state: ListState = {
-    value: []
-  }
+const fromRaw = (raw: RawDocument): Value => {
+  const value: Value = []
 
   let ignore = true
 
@@ -19,39 +17,38 @@ const fromRaw = (raw: RawDocument): ListState => {
         styles: [],
         blockKey: id()
       }
-      state.value.push(val)
+      value.push(val)
     } else if (char === ']') {
       ignore = true
 
       const val: BlockEnd = {
         type: 'block-end'
       }
-      state.value.push(val)
+      value.push(val)
     } else if (ignore === false) {
       const val: Character = {
         char,
         styles: [],
       }
-      state.value.push(val)
+      value.push(val)
     }
   }
 
   raw.ranges.forEach(({ offset, length, ...charData }) => {
     for (var i = offset; i < offset + length; i++) {
-      const value = state.value[i]
-      if ('char' in value || value.type === 'block-start') {
+      const item = value[i]
+      if ('char' in item || item.type === 'block-start') {
         const newValue = {
-          ...value,
+          ...item,
           ...charData,
         }
 
-        // @ts-ignore
-        state.value[i] = newValue
+        value[i] = newValue
       }
     }
   })
 
-  return state
+  return value
 }
 
 export default fromRaw
