@@ -9,7 +9,7 @@ export default function updateBlockEntiies (
   entity: string | null
 ): EditorState {
   return getBlocksForRange(
-    editorState.list.value,
+    editorState.value,
     start,
     end
   ).reduce((newEditorState, { block, blockOffset }) => {

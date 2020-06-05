@@ -2,9 +2,9 @@
 
 ## [Zettel](https://zettel.software)
 
-(API still subject to change - don't use this in production just yet)
+Disclaimer: Project still in early stages - API subject to frequent change, use at your own risk.
 
-A radically different (much simpler and lower level) approach to building text editors in the browser.
+### A radically different approach to building text editors in the browser.
 
 [Join Zettel on Slack](https://join.slack.com/t/zetteljs/shared_invite/zt-eiih8wis-Hca9bcrvX3V728odwEqiBA)
 

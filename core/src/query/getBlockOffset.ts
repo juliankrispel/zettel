@@ -1,8 +1,8 @@
-import { ListState } from "../types";
+import { Value } from "../types";
 
-export default function getBlockOffset(list: ListState, key: string): number | null {
-  for (let i = 0; i < list.value.length; i++) {
-    const val = list.value[i]
+export default function getBlockOffset(value: Value, key: string): number | null {
+  for (let i = 0; i < value.length; i++) {
+    const val = value[i]
     if ('type' in val && val.type === 'block-start' && val.blockKey === key) {
       return i
     }

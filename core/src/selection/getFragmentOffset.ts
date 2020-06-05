@@ -1,4 +1,4 @@
-import { ListState } from '../types'
+import { Value } from '../types'
 import getBlockOffset from '../query/getBlockOffset'
 
 interface ElementWithDataSet extends HTMLElement {
@@ -23,7 +23,7 @@ const getFragmentNode = (el: HTMLElement | null): ElementWithDataSet | null => {
   return null
 }
 
-export default function getFragmentOffset (list: ListState, node: HTMLElement) {
+export default function getFragmentOffset (value: Value, node: HTMLElement) {
   const fragment = getFragmentNode(node)
   if (fragment == null) return null
 
@@ -31,7 +31,7 @@ export default function getFragmentOffset (list: ListState, node: HTMLElement) {
     fragmentStart,
     blockKey
   } = fragment.dataset
-  const blockOffset = getBlockOffset(list, blockKey)
+  const blockOffset = getBlockOffset(value, blockKey)
 
   if (blockOffset == null) return null
   return blockOffset + parseInt(fragmentStart)

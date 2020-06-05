@@ -2,7 +2,6 @@ import { Block, Fragment, Character, ListState, ViewState, TextCharacter, BlockS
 import getBlockByPath from './getBlockByPath'
 import getChildrenByPath from './getChildrenByPath'
 import getFragmentByPath from './getFragmentByPath'
-import getFragmentsByPath from './getFragmentsByPath'
 import createTextFragments from './createTextFragments'
 
 type ReducerState = {

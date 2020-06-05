@@ -61,10 +61,10 @@ const App = () => {
 
   useLayoutEffect(() => {
     if (isCollapsed) {
-      const block = getBlockForIndex(editorState.list.value, start)
+      const block = getBlockForIndex(editorState.value, start)
       const blockKey = block.block?.blockKey
       const blockEnd = end - block.blockOffset
-      const blockTextChars = blockKey ? getBlockText(editorState.list, blockKey) || [] : []
+      const blockTextChars = blockKey ? getBlockText(editorState.value, blockKey) || [] : []
       const blockText = blockTextChars.map(ch => ch.char).slice(0, blockEnd).join('')
       const searchText = blockText.match(/@([^\s\t\n]*)$/i)
 

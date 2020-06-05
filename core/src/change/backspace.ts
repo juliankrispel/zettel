@@ -9,7 +9,7 @@ export default function backspace(
 ): EditorState {
   let newEditorState = editorState
 
-  const previousCharIndex = getIndexBefore(editorState.list.value, start + 1, (ch) => {
+  const previousCharIndex = getIndexBefore(editorState.value, start + 1, (ch) => {
     if (ch == null) {
       return false
     }

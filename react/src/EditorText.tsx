@@ -84,7 +84,6 @@ export default function EditorText(props: TextProps) {
     * If the block has content, split it up into fragments and render the fragments
     */
     textFragments = reduceFragments(props, 0, block.fragments).rendered
-    console.log({ textFragments })
   /*
    * Render an empty block
    */

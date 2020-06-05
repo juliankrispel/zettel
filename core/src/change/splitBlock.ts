@@ -10,7 +10,7 @@ export default function splitBlock(
   start: number, 
   end: number
 ) {
-  const { block: currentBlock } = getBlockForIndex(editorState.list.value, start)
+  const { block: currentBlock } = getBlockForIndex(editorState.value, start)
   const blockEnd: BlockEnd = { type: 'block-end' }
   const blockStart: BlockStart = { styles: [], ...currentBlock, type: 'block-start', blockKey: id() }
 

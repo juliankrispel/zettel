@@ -1,20 +1,18 @@
 import * as React from 'react';
 import { useState } from 'react'
-import { EditorState, valueFromText, ListState } from '@zettel/core'
+import { EditorState, valueFromText, Value } from '@zettel/core'
 import Editor from '@zettel/react'
 
-const list: ListState = {
-  value: [
-    ...valueFromText('[One '),
-    { type: 'fragment-start', data: { mention: 'something' } },
-    ...valueFromText('Two'),
-    { type: 'fragment-end' },
-    ...valueFromText(' Three]'),
-  ]
-}
+const value: Value = [
+  ...valueFromText('[One '),
+  { type: 'fragment-start', data: { mention: 'something' } },
+  ...valueFromText('Two'),
+  { type: 'fragment-end' },
+  ...valueFromText(' Three]'),
+]
 
 const App = () => {
-  const [editorState, setEditorState] = useState(() => new EditorState({ list }))
+  const [editorState, setEditorState] = useState(() => new EditorState({ value }))
 
   return (
     <Editor

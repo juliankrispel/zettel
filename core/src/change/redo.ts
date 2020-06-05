@@ -13,15 +13,16 @@ export default function redo(editorState: EditorState): EditorState {
   let newEditorState = new EditorState({
     start: editorState.start,
     end: editorState.end,
-    list: editorState.list,
+    value: editorState.value,
     redoStack: editorState.redoStack,
     undoStack: [emptyChange].concat([...editorState.undoStack])
   })
 
   const [lastChanges, ...rest] = editorState.redoStack
+  // @ts-ignore
   newEditorState = lastChanges.reduce((editorState: EditorState, lastChange: Change) => {
     const updated = change({
-      current: editorState.list,
+      value: editorState.value,
       change: {
         ...lastChange,
         start: lastChange.start - 1,
@@ -34,7 +35,7 @@ export default function redo(editorState: EditorState): EditorState {
     return new EditorState({
       start: updated.change.start,
       end: updated.change.end,
-      list: updated.current,
+      value: updated.value,
       redoStack: rest,
       undoStack: [[updated.change].concat(lastUndo || [])].concat(undoStack),
     })
@@ -44,7 +45,7 @@ export default function redo(editorState: EditorState): EditorState {
     start: newEditorState.start - 1,
     lastChangeType: COMMAND.REDO,
     end: newEditorState.end - 1,
-    list: newEditorState.list,
+    value: newEditorState.value,
     redoStack: newEditorState.redoStack,
     undoStack: newEditorState.undoStack
   })

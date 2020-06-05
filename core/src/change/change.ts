@@ -1,10 +1,10 @@
-import { ListState, Change } from '../types' 
+import { Value, Change } from '../types' 
 
 /**
  * Represents the input and output for updates
  */
 export type Update = {
-  current: ListState,
+  value: Value,
   change: Change
 }
 
@@ -15,20 +15,21 @@ export type Update = {
  * a Change object to undo the change
  */
 export default function change(update: Update): Update {
-  const { value: currentValue } = update.current
+  const { value: currentValue } = update
 
   const [start, end] = [
     update.change.start,
     update.change.end,
   ].sort((a, b) => a - b)
 
-  const selectedValue = update.current.value.slice(start + 1, end + 1)
+  const selectedValue = update.value.slice(start + 1, end + 1)
   let valueUpdate = update.change.value
-  let newValue = update.current.value
+  let newValue = update.value
 
   newValue = currentValue.slice(0, start + 1)
   .concat(valueUpdate)
   .concat(currentValue.slice(end + 1))
+
 
   const firstChar = newValue[0]
   const lastChar = newValue[newValue.length - 1]
@@ -46,9 +47,7 @@ export default function change(update: Update): Update {
   }
 
   return {
-    current: {
-      value: newValue
-    },
+    value: newValue,
     change: reverse,
   }
 }

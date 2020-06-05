@@ -1,23 +1,20 @@
 import {
-  ListState,
   RawDocument, 
   Change,
+  Value,
   EditorChange,
   Changes,
 } from '../types'
 
 import rawToFlat from '../serialize/fromRaw'
-import id from './id'
 import change, { Update } from '../change/change'
 import textToFlat from '../serialize/fromText'
 import { undo, redo } from '../change';
 
-const emptyList: ListState = {
-  value: [],
-}
+const emptyValue = []
 
 type ConstructorProps = {
-  list: ListState,
+  value: Value,
   currentStyles?: string[],
   lastChangeType?: string | null,
   redoStack?: Changes[],
@@ -29,7 +26,7 @@ type ConstructorProps = {
 }
 
 export default class EditorState {
-  list: ListState
+  value: Value
   start: number
   end: number
   anchorOffset: number
@@ -44,13 +41,13 @@ export default class EditorState {
     end = 0,
     anchorOffset,
     focusOffset,
-    list = emptyList,
+    value = emptyValue,
     lastChangeType = null,
     currentStyles = [],
     undoStack = [],
     redoStack = [],
   }: ConstructorProps) {
-    this.list = list
+    this.value = value
     this.undoStack = undoStack
     this.currentStyles = currentStyles
 
@@ -73,11 +70,11 @@ export default class EditorState {
     const defaultChange: Change = {
       start: this.start,
       end: this.end,
-      value: this.list.value.slice(start, end)
+      value: this.value.slice(start, end)
     }
 
     const update: Update = {
-      current: this.list,
+      value: this.value,
       change: {
         ...defaultChange,
         ..._change,
@@ -101,7 +98,7 @@ export default class EditorState {
       end: updated.change.end - 1,
       currentStyles: this.currentStyles,
       lastChangeType,
-      list: updated.current,
+      value: updated.value,
       redoStack: [],
       undoStack,
     })
@@ -127,7 +124,7 @@ export default class EditorState {
   ): EditorState {
     const start:number = _start + 1
     const end = _end + 1
-    const selectedValue = this.list.value.slice(start, end)
+    const selectedValue = this.value.slice(start, end)
     const hasStyle = selectedValue.every(char =>
       'type' in char ||
       (char.styles || []).includes(style)
@@ -170,13 +167,13 @@ export default class EditorState {
    */
   static fromJSON(json: RawDocument): EditorState {
     return new EditorState({
-      list: rawToFlat(json)
+      value: rawToFlat(json)
     })
   }
 
   static fromText(text: string): EditorState {
     return new EditorState({
-      list: textToFlat(text),
+      value: textToFlat(text),
     })
   }
 }

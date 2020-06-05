@@ -7,12 +7,12 @@ export default function backspaceToBlockStart(
   start: number,
   end: number
 ): EditorState {
-  const prevChar = editorState.list.value[start - 1]
+  const prevChar = editorState.value[start - 1]
   let newEditorState = editorState
 
   if ('char' in prevChar) {
     const blockBeginning = getIndexBefore(
-      editorState.list.value,
+      editorState.value,
       start,
       (ch) => {
         if ('type' in ch && ch.type === 'block-start'){

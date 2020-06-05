@@ -26,17 +26,17 @@ export default function setDomSelection(
   editorState: EditorState,
   containerNode: HTMLElement,
 ): void {
-  const { list } = editorState
+  const { value } = editorState
 
   const {
     block: focusBlock,
     blockOffset: focusBlockOffset,
-  } = getBlockForIndex(list.value, editorState.focusOffset)
+  } = getBlockForIndex(value, editorState.focusOffset)
 
   const {
     block: anchorBlock,
     blockOffset: anchorBlockOffset,
-  } = getBlockForIndex(list.value, editorState.anchorOffset)
+  } = getBlockForIndex(value, editorState.anchorOffset)
 
   if (focusBlock == null || anchorBlock == null) {
     console.warn('cannot select current start and end position')

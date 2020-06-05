@@ -24,12 +24,12 @@ const App = () => {
     <>
       <div>
         <Button onClick={() => {
-          const blocks = getBlocksForRange(editorState.list.value, editorState.start, editorState.end)
+          const blocks = getBlocksForRange(editorState.value, editorState.start, editorState.end)
           const { start, end } = editorState
 
           const _editorState = blocks.reduce((newEditorState, block) => {
             // @ts-ignore
-            const value: BlockStart = newEditorState.list.value[block.blockOffset]
+            const value: BlockStart = newEditorState.value[block.blockOffset]
             return newEditorState.change({
               start: block.blockOffset - 1,
               end: block.blockOffset,

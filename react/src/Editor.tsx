@@ -126,7 +126,8 @@ const Editor = (props: Props): React.ReactElement => {
     contentEditable: readOnly ? false : true,
   }
 
-  const viewState = props.viewState || useMemo(() => createViewState(editorState.list), [isComposing || editorState])
+  console.log({ editorState })
+  const viewState = props.viewState || useMemo(() => createViewState(editorState), [isComposing || editorState])
   const children = <EditorChildren
     readOnly={readOnly}
     blocks={viewState.blocks}

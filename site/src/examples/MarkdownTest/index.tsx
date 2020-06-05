@@ -11,7 +11,6 @@ const text = `[# Some markdown]
 `
 
 const processToken = (token: any, value: TextCharacter[]) => {
-  console.log({ token })
   if (typeof token === 'string') {
     token.split('').forEach(_char => {
       const char: TextCharacter  = {
