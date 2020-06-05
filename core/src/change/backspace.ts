@@ -9,7 +9,7 @@ export default function backspace(
 ): EditorState {
   let newEditorState = editorState
 
-  const previousCharIndex = getIndexBefore(editorState.value, start, (ch) => {
+  const previousCharIndex = getIndexBefore(editorState.value, start, (ch, index) => {
     if (ch == null) {
       return false
     }
@@ -19,6 +19,10 @@ export default function backspace(
     }
 
     if ('fragment-end' === ch.type) {
+      return true
+    }
+
+    if (index === 0) {
       return true
     }
   });

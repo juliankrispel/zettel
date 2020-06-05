@@ -15,6 +15,20 @@ describe('pressing backspace', () => {
     })
   })
 
+  describe('when the cursor is behind the first character', () => {
+    const editorState = new EditorState({ list: { value: valueFromText('[One]') } })
+    const newEditorState = backspace(editorState, 1, 1)
+
+    it('deletes the first character', () => {
+      expect(toText(newEditorState)).toEqual('ne')
+    })
+
+    it('sets the cursor back by one', () => {
+      expect(newEditorState.start).toBe(0)
+      expect(newEditorState.end).toBe(0)
+    })
+  })
+
   describe('when the cursor is at the beginning of the content [|--', () => {
     const editorState = new EditorState({ list: { value: valueFromText('[One]') } })
     const newEditorState = backspace(editorState, 0, 0)
@@ -47,6 +61,6 @@ describe('pressing backspace', () => {
     })
   })
 
-  describe('when the cursor deletes the last character ', () => {
-  })
+//  describe('when the cursor deletes the last character ', () => {
+//  })
 })
