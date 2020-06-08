@@ -22,6 +22,10 @@ export default function backspace(
       return true
     }
 
+    if ('block-start' === ch.type) {
+      return true
+    }
+
     if (index === 0) {
       return true
     }
