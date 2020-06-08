@@ -12,7 +12,7 @@ Don't define render prop components inline.
 ```jsx
 function MyComponent() {
   <Editor
-    renderTextFragment={() => {
+    renderText={() => {
       return <div>{...}</div>
     }}
   />
@@ -28,7 +28,7 @@ function MyComponent() {
   }
 
   return <Editor
-    renderTextFragment={() => {...}}
+    renderText={() => {...}}
   />
 }
 ```
@@ -42,7 +42,7 @@ const RenderTextFraggment = () => {
 
 function MyComponent() {
   return <Editor
-    renderTextFragment={() => {...}}
+    renderText={() => {...}}
   />
 }
 ```

@@ -12,7 +12,7 @@ const InlineImg = styled.img`
 `
 
 // @ts-ignore
-const RenderTextFragment = React.memo((props) => {
+const RenderFragment = React.memo((props) => {
   // @ts-ignore
   const { children, fragment, ...fragmentProps } = props
 
@@ -63,7 +63,7 @@ const App = () => {
   return (
     <Editor
       htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
-      renderTextFragment={RenderTextFragment}
+      renderFragment={RenderFragment}
       onChange={setEditorState}
       editorState={editorState}
     />

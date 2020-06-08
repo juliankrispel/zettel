@@ -94,7 +94,7 @@ const App = () => {
       <Editor
         htmlAttrs={{ spellCheck: false, autoFocus: true, className: 'editor'}}
         onChange={setEditorState}
-        renderTextFragment={(props) => {
+        renderText={(props) => {
           const { children, ...htmlAttrs } = props
           if ('mention' in props.fragment.data) {
             return <Mention>{props.fragment.data.mention}</Mention>

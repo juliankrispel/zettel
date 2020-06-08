@@ -1,4 +1,4 @@
-import { Block, Fragment, Character, ListState, ViewState, TextCharacter, BlockStart, FragmentStart, ContainerFragment } from '../types'
+import { Block, TextOrFragment, Character, ListState, ViewState, TextCharacter, BlockStart, FragmentStart, Fragment } from '../types'
 import getBlockByPath from './getBlockByPath'
 import getChildrenByPath from './getChildrenByPath'
 import getFragmentByPath from './getFragmentByPath'
