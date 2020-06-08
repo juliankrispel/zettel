@@ -43,32 +43,33 @@ export default function setDomSelection(
     return 
   }
 
-  const anchorNodes = containerNode.querySelectorAll(`[data-text-fragment="true"][data-block-key="${anchorBlock.blockKey}"]`)
-  const focusNodes = containerNode.querySelectorAll(`[data-text-fragment="true"][data-block-key="${focusBlock.blockKey}"]`)
+  const anchorNodes = containerNode.querySelectorAll(`[data-text="true"][data-block-key="${anchorBlock.blockKey}"]`)
+  const focusNodes = containerNode.querySelectorAll(`[data-text="true"][data-block-key="${focusBlock.blockKey}"]`)
   let anchorOffset = editorState.anchorOffset - anchorBlockOffset
   let focusOffset = editorState.focusOffset - focusBlockOffset
 
   const anchorFragment: any = Array.from(anchorNodes).find((node: any) => {
-    return parseInt(node.dataset.fragmentStart) <= anchorOffset &&
-    parseInt(node.dataset.fragmentEnd) >= anchorOffset
+    return parseInt(node.dataset.start) <= anchorOffset &&
+    parseInt(node.dataset.end) >= anchorOffset
   })
 
   if (anchorFragment == null) {
+    console.log('no anchor frag')
     return 
   }
 
-  const anchorFragmentOffset = parseInt(anchorFragment.dataset.fragmentStart)
+  const anchorFragmentOffset = parseInt(anchorFragment.dataset.start)
 
   const focusFragment: any = Array.from(focusNodes).find((node: any) => {
-    return parseInt(node.dataset.fragmentStart) <= focusOffset &&
-    parseInt(node.dataset.fragmentEnd) >= focusOffset
+    return parseInt(node.dataset.start) <= focusOffset &&
+    parseInt(node.dataset.end) >= focusOffset
   })
 
   if (focusFragment == null) {
     return 
   }
 
-  const focusFragmentOffset = parseInt(focusFragment.dataset.fragmentStart)
+  const focusFragmentOffset = parseInt(focusFragment.dataset.start)
 
   const anchorNode = findRangeTarget(anchorFragment) as HTMLElement
   const focusNode = findRangeTarget(focusFragment) as HTMLElement

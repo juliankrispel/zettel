@@ -15,17 +15,20 @@ export default function getDomRange(value: Value): SelectionRange | null {
   const startContainer: any = range.startContainer
   const fragmentOffsetEnd = getFragmentOffset(value, endContainer) || 0
   const fragmentOffsetStart = getFragmentOffset(value, startContainer) || 0
-  const anchorFragmentNode = getFragmentNode(startContainer)
-  const focusFragmentNode = getFragmentNode(endContainer)
+  const anchorNode = getFragmentNode(startContainer)
+  const focusNode = getFragmentNode(endContainer)
 
   let { startOffset, endOffset } = range
 
-  if (anchorFragmentNode != null && focusFragmentNode != null) {
-    startOffset = getUTF16Length(anchorFragmentNode.innerText.slice(0, startOffset))
-    endOffset = getUTF16Length(focusFragmentNode.innerText.slice(0, endOffset))
+  if (anchorNode != null && focusNode != null && anchorNode.dataset.fragment === 'true' && focusNode.dataset.fragment === 'true') {
+    startOffset = 1
+    endOffset = 1
+  } else if (anchorNode != null && focusNode != null) {
+    startOffset = getUTF16Length(anchorNode.innerText.slice(0, startOffset))
+    endOffset = getUTF16Length(focusNode.innerText.slice(0, endOffset))
   }
 
-  const direction = anchorFragmentNode != null && getComputedStyle(anchorFragmentNode).direction === 'rtl' ? 'rtl' : 'ltr'
+  const direction = anchorNode != null && getComputedStyle(anchorNode).direction === 'rtl' ? 'rtl' : 'ltr'
 
   const start = startOffset + fragmentOffsetStart
   const end = endOffset + fragmentOffsetEnd

@@ -28,14 +28,15 @@ export default (value: Value): SelectionState | null => {
   }
 
   if (anchorNode == null || focusNode == null) {
+    console.log('no anchor node')
     return null
   }
 
   const anchorKey = anchorNode.dataset.blockKey
   const focusKey = focusNode.dataset.blockKey
 
-  const anchorFragmentOffset = parseInt(anchorNode.dataset.fragmentStart)
-  const focusFragmentOffset = parseInt(focusNode.dataset.fragmentStart)
+  const anchorFragmentOffset = parseInt(anchorNode.dataset.start)
+  const focusFragmentOffset = parseInt(focusNode.dataset.start)
 
   anchorOffset+= (getBlockOffset(value, anchorKey) || 0) + anchorFragmentOffset
   focusOffset+= (getBlockOffset(value, focusKey) || 0) + focusFragmentOffset

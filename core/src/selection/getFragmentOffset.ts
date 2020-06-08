@@ -8,11 +8,11 @@ export default function getFragmentOffset (value: Value, node: HTMLElement) {
   if (fragment.dataset == null) return null
 
   const {
-    fragmentStart,
+    start,
     blockKey
   } = fragment.dataset
   const blockOffset = getBlockOffset(value, blockKey)
 
   if (blockOffset == null) return null
-  return blockOffset + parseInt(fragmentStart)
+  return blockOffset + parseInt(start)
 }

@@ -20,9 +20,9 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: Text) => {
   const fragmentProps = props.readOnly ? {} : {
     key,
     'data-block-key': block.blockKey,
-    'data-text-fragment': true,
-    'data-fragment-start': offset,
-    'data-fragment-end': offset + text.length
+    'data-text': true,
+    'data-start': offset,
+    'data-end': offset + text.length
   }
 
   const fragmentText: any = text
@@ -42,7 +42,7 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: Text) => {
   if (RenderText) {
     textFragment = <RenderText
       fragment={fragment}
-      data-text-fragment="true"
+      data-text="true"
       key={`block-${block.blockKey}-${offset}`}
     >{textFragment}</RenderText>
   }
@@ -56,19 +56,18 @@ const reduceFragments = (props: TextProps, _offset: number = 0, fragments: TextO
     ({ offset, rendered }, fragment) => {
       if ('fragments' in fragment && RenderFragment) {
           const reducedFragments = reduceFragments(props, offset + 1, fragment.fragments)
-//          const fragmentProps = props.readOnly ? {} : {
-//            key,
-//            'data-block-key': block.blockKey,
-//            'data-text-fragment': true,
-//            'data-fragment-start': offset,
-//            'data-fragment-end': offset + text.length
-//          }
 
+          const fragmentProps = props.readOnly ? {} : {
+            key: `block-${block.blockKey}-${offset}-container-fragment`,
+            'data-block-key': block.blockKey,
+            'data-fragment': true,
+            'data-start': offset,
+            'data-end': reducedFragments.offset
+          }
           
           const containerFragment = <RenderFragment
             fragment={fragment}
-            data-text-fragment="true"
-            key={`block-${block.blockKey}-${offset}-container-fragment`}
+            {...fragmentProps}
           >
             <>{reducedFragments.rendered}</>
           </RenderFragment>
@@ -109,10 +108,10 @@ export default function EditorText(props: TextProps) {
   } else {
     textFragments = <span
       key={`text-fragments-${block.blockKey}`}
-      data-text-fragment="true"
+      data-text="true"
       data-block-key={block.blockKey}
-      data-fragment-start={0}
-      data-fragment-end={0}
+      data-start={0}
+      data-end={0}
     ><br /></span>
   }
 

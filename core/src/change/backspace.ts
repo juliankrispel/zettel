@@ -30,8 +30,6 @@ export default function backspace(
       return true
     }
   });
-//  console.log(newEditorState.start)
-//  console.log(previousCharIndex)
 
   if (previousCharIndex != null) {
     let _start = previousCharIndex 
@@ -49,8 +47,6 @@ export default function backspace(
       value: [],
     })
   }
-
-//  console.log({ newEditorState })
 
   return newEditorState
 }
