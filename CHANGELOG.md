@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+### Changed
+- Split out `TextFragment`s into `Text` and `Fragment` to draw clear distinction
+
 ### Fixed
 - Rendering container fragments
 
