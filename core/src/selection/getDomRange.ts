@@ -20,6 +20,7 @@ export default function getDomRange(value: Value): SelectionRange | null {
 
   let { startOffset, endOffset } = range
 
+  // if the selected node is a fragment and not a text node, we'll set the selection to the end of the text node.
   if (anchorNode != null && focusNode != null && anchorNode.dataset.fragment === 'true' && focusNode.dataset.fragment === 'true') {
     startOffset = 1
     endOffset = 1

@@ -54,7 +54,6 @@ export default function setDomSelection(
   })
 
   if (anchorFragment == null) {
-    console.log('no anchor frag')
     return 
   }
 

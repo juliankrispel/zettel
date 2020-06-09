@@ -12,12 +12,22 @@ const InlineImg = styled.img`
 `
 
 // @ts-ignore
+const Image = React.memo((props) => {
+  // @ts-ignore
+  const { children, fragment, ...fragmentProps } = props
+
+  return <span {...fragmentProps} >
+    <InlineImg src={fragment.data.img} />
+  </span>
+})
+
+// @ts-ignore
 const RenderFragment = React.memo((props) => {
   // @ts-ignore
   const { children, fragment, ...fragmentProps } = props
 
   if ('img' in fragment.data) {
-    return <InlineImg {...fragmentProps} src={fragment.data.img} />
+    return <Image {...props} />
   }
 
   if ('text' in fragment.data) {
@@ -47,10 +57,10 @@ const value: Value = [
   ...valueFromText('hello'),
   { type: 'fragment-end' },
   ...valueFromText('Three]'),
-  ...valueFromText('[A'),
-  { type: 'fragment-start', data: { img: 'http://placekitten.com/30/30' } },
+  ...valueFromText('['),
+  { type: 'fragment-start', data: { img: 'http://placekitten.com/30/31' } },
   { type: 'fragment-end' },
-  { type: 'fragment-start', data: { img: 'http://placekitten.com/30/30' } },
+  { type: 'fragment-start', data: { img: 'http://placekitten.com/30/32' } },
   { type: 'fragment-end' },
   { type: 'fragment-start', data: { img: 'http://placekitten.com/30/30' } },
   { type: 'fragment-end' },

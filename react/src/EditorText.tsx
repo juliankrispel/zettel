@@ -50,40 +50,45 @@ const mapTextFramgent = (props: TextProps, offset: number, fragment: Text) => {
   return textFragment
 }
 
-const reduceFragments = (props: TextProps, _offset: number = 0, fragments: TextOrFragment[]): { rendered: any[], offset: number } => {
+const reduceNodes = (props: TextProps, _offset: number = 0, fragments: TextOrFragment[]): { rendered: any[], offset: number } => {
   const { block, renderFragment: RenderFragment } = props
+  // @ts-ignore
   return fragments.reduce(
+    // @ts-ignore
     ({ offset, rendered }, fragment) => {
-      if ('fragments' in fragment && RenderFragment) {
-          const reducedFragments = reduceFragments(props, offset + 1, fragment.fragments)
-
-          const fragmentProps = props.readOnly ? {} : {
-            key: `block-${block.blockKey}-${offset}-container-fragment`,
-            'data-block-key': block.blockKey,
-            'data-fragment': true,
-            'data-start': offset,
-            'data-end': reducedFragments.offset
-          }
-          
-          const containerFragment = <RenderFragment
-            fragment={fragment}
-            {...fragmentProps}
-          >
-            <>{reducedFragments.rendered}</>
-          </RenderFragment>
-          return {
-            rendered: rendered.concat([containerFragment]),
-            offset: reducedFragments.offset + 1
-          }
-      } else {
-        const _fragment = fragment as Text
-        const renderedFragment = mapTextFramgent(props, offset, _fragment)
+      if ('text' in fragment) {
+        const renderedFragment = mapTextFramgent(props, offset, fragment)
         return {
-          offset: offset + _fragment.text.length,
+          offset: offset + fragment.text.length,
           rendered: rendered.concat([renderedFragment])
         }
-      }
+      } else if (RenderFragment != null) {
+        const reducedFragments = reduceNodes(props, offset + 1, fragment.fragments)
+
+        const fragmentProps = props.readOnly ? {} : {
+          key: `block-${block.blockKey}-${offset}-container-fragment`,
+          'data-block-key': block.blockKey,
+          'data-fragment': true,
+          'data-start': offset,
+          'data-end': reducedFragments.offset
+        }
+        
+        const containerFragment = <RenderFragment
+          fragment={fragment}
+          {...fragmentProps}
+        >
+          <>{reducedFragments.rendered}</>
+        </RenderFragment>
+
+        return {
+          rendered: rendered.concat([containerFragment]),
+          offset: reducedFragments.offset + 1
+        }
+      } else {
+        return null
+      } 
     },
+    // @ts-ignore
     { offset: _offset, rendered: ([] as any[]) }
   )
 }
@@ -97,15 +102,7 @@ export default function EditorText(props: TextProps) {
 
   let textFragments: React.ReactNode = null
 
-  if (block.value.length > 0) {
-    /*
-    * If the block has content, split it up into fragments and render the fragments
-    */
-    textFragments = reduceFragments(props, 0, block.fragments).rendered
-  /*
-   * Render an empty block
-   */
-  } else {
+  if (block.value.length === 0 && block.fragments.length === 0) {
     textFragments = <span
       key={`text-fragments-${block.blockKey}`}
       data-text="true"
@@ -113,6 +110,16 @@ export default function EditorText(props: TextProps) {
       data-start={0}
       data-end={0}
     ><br /></span>
+
+  } else {
+    /*
+    * If the block has content, split it up into fragments and render the fragments
+    */
+    // @ts-ignore
+    textFragments = reduceNodes(props, 0, block.fragments).rendered
+  /*
+   * Render an empty block
+   */
   }
 
   return <>{textFragments}</>
