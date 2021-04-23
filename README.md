@@ -4,7 +4,7 @@
 
 Disclaimer: Project still in early stages - API subject to frequent change, use at your own risk.
 
-### A radically different approach to building text editors in the browser.
+### Low level text editing library
 
 [Join Zettel on Slack](https://join.slack.com/t/zetteljs/shared_invite/zt-eiih8wis-Hca9bcrvX3V728odwEqiBA)
 
