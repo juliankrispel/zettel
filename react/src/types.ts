@@ -1,8 +1,4 @@
-import { TextFragment, Block } from '@zettel/core'
-
-type FragmentRenderProps = {
-  fragment: TextFragment
-}
+import { Text, Block, Fragment } from '@zettel/core'
 
 /**
  * RenderStyle
@@ -14,9 +10,18 @@ export type RenderStyle = React.FunctionComponent<{
   children: React.ReactElement
 }>
 
-export type RenderTextFragment = React.FunctionComponent<{
+export type RenderText = React.FunctionComponent<{
+  fragment: Text,
+  fragmentProps?: any,
   children: React.ReactElement
 }>
+
+export type RenderFragment = React.FunctionComponent<{
+  fragment: Fragment,
+  fragmentProps?: any,
+  children: React.ReactElement
+}>
+
 
 export type RenderBlock = React.FunctionComponent<{
   block: Block,
@@ -40,5 +45,6 @@ export type RenderProps = {
   renderBlock?: RenderBlock,
   renderChildren?: RenderChildren,
   renderStyle?: RenderStyle,
-  renderTextFragment?: RenderTextFragment,
+  renderText?: RenderText,
+  renderFragment?: RenderFragment,
 }  

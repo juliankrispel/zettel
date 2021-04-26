@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState } from 'react'
-import { EditorState, Fragment, valueToText, TextCharacter, createTextFragments } from '@zettel/core'
+import { EditorState, TextOrFragment, valueToText, TextCharacter, createTextFragments } from '@zettel/core'
 import Editor, { EditorText } from '@zettel/react'
 import prism from 'prismjs'
 import './prism.css'
@@ -52,7 +52,7 @@ const Code = (props: any) => {
   }
 }
 
-const reduceToText = (fragments: Fragment[]): string => {
+const reduceToText = (fragments: TextOrFragment[]): string => {
   return fragments.reduce((currentText, fragment) => {
     if ('fragments' in fragment) {
       return currentText + reduceToText(fragment.fragments)

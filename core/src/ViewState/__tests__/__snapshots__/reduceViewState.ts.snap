@@ -9,6 +9,9 @@ Object {
       "blocks": Array [],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "O",
+          },
           "text": "One",
         },
       ],
@@ -39,6 +42,9 @@ Object {
       "blocks": Array [],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "T",
+          },
           "text": "Two",
         },
       ],
@@ -72,6 +78,9 @@ Object {
           "blocks": Array [],
           "fragments": Array [
             Object {
+              "data": Object {
+                "char": "T",
+              },
               "text": "Two",
             },
           ],
@@ -94,6 +103,9 @@ Object {
           "blocks": Array [],
           "fragments": Array [
             Object {
+              "data": Object {
+                "char": "T",
+              },
               "text": "Three",
             },
           ],
@@ -119,6 +131,9 @@ Object {
       ],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "O",
+          },
           "text": "One",
         },
       ],
@@ -141,6 +156,9 @@ Object {
       "blocks": Array [],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "F",
+          },
           "text": "Four",
         },
       ],
@@ -173,12 +191,18 @@ Object {
       "blocks": Array [],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "H",
+          },
           "text": "Hi",
         },
         Object {
           "data": undefined,
           "fragments": Array [
             Object {
+              "data": Object {
+                "char": "Y",
+              },
               "text": "Yo",
             },
           ],
@@ -206,9 +230,15 @@ Object {
       "blocks": Array [],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "W",
+          },
           "text": "Wh",
         },
         Object {
+          "data": Object {
+            "char": "o",
+          },
           "text": "o",
         },
       ],
@@ -238,12 +268,18 @@ Object {
       "blocks": Array [],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "O",
+          },
           "text": "O",
         },
         Object {
           "data": undefined,
           "fragments": Array [
             Object {
+              "data": Object {
+                "char": "n",
+              },
               "text": "n",
             },
             Object {
@@ -252,11 +288,17 @@ Object {
               },
               "fragments": Array [
                 Object {
+                  "data": Object {
+                    "char": "e",
+                  },
                   "text": "e ",
                 },
               ],
             },
             Object {
+              "data": Object {
+                "char": "T",
+              },
               "text": "TWo",
             },
           ],
@@ -300,6 +342,9 @@ Object {
       "blocks": Array [],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "1",
+          },
           "text": "1",
         },
       ],
@@ -316,6 +361,9 @@ Object {
       "blocks": Array [],
       "fragments": Array [
         Object {
+          "data": Object {
+            "char": "2",
+          },
           "text": "2",
         },
       ],

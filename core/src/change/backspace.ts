@@ -9,7 +9,7 @@ export default function backspace(
 ): EditorState {
   let newEditorState = editorState
 
-  const previousCharIndex = getIndexBefore(editorState.value, start + 1, (ch) => {
+  const previousCharIndex = getIndexBefore(editorState.value, start, (ch, index) => {
     if (ch == null) {
       return false
     }
@@ -18,11 +18,21 @@ export default function backspace(
       return true
     }
 
-    return ch.type === 'block-end';
+    if ('fragment-end' === ch.type) {
+      return true
+    }
+
+    if ('block-start' === ch.type) {
+      return true
+    }
+
+    if (index === 0) {
+      return true
+    }
   });
 
   if (previousCharIndex != null) {
-    let _start = previousCharIndex - 1
+    let _start = previousCharIndex 
 
     newEditorState = editorState.change({
       isBoundary: editorState.lastChangeType !== COMMAND.BACKSPACE,

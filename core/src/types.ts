@@ -87,8 +87,9 @@ export type FragmentEnd = {
   type: 'fragment-end',
 }
 
-export type TextFragment = {
+export type Text = {
   text: string,
+  data: any,
   styles?: string[],
 }
 
@@ -146,19 +147,19 @@ export type ViewState = {
   blocks: Block[]
 }
 
-export type ContainerFragment = {
-  fragments: Fragment[],
+export type Fragment = {
+  fragments: TextOrFragment[],
   data: any
 }
 
-export type Fragment = ContainerFragment | TextFragment
+export type TextOrFragment = Fragment | Text
 
 /**
 * Represents one node in a tree
 * Used for rendering
 */
 export type Block = {
-  fragments: Fragment[],
+  fragments: TextOrFragment[],
   value: TextCharacter[],
   blockKey: string,
   blockLevel: number,

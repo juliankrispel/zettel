@@ -28,8 +28,8 @@ export default function EditorBlock(props: Props) {
   if (!props.readOnly) {
     htmlAttrs = {
       'data-block-key': block.blockKey,
-      'data-fragment-start': 0,
-      'data-fragment-end': block.value.length,
+      'data-start': 0,
+      'data-end': block.value.length,
       style,
     }
   }

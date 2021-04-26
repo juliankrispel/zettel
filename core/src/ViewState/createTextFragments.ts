@@ -1,6 +1,6 @@
 import {
   TextCharacter,
-  TextFragment,
+  Text,
   CharacterData,
   CharacterRange
 } from '../types'
@@ -15,13 +15,14 @@ function hasEqualCharacterData (
   Array.from(left.styles || []).sort().join('') === Array.from(right.styles || []).sort().join('')
 }
 
-export default function createTextFragments(value: TextCharacter[]): TextFragment[] {
-  const start: TextFragment[] = []
+export default function createTextFragments(value: TextCharacter[]): Text[] {
+  const start: Text[] = []
   return value.reduce(
     (acc: any, data, index) => {
       if (acc.length < 1) {
-        const el: TextFragment= {
-          text: value[index].char
+        const el: Text= {
+          text: value[index].char,
+          data
         }
         if (data.styles) el.styles = data.styles
 
@@ -34,8 +35,9 @@ export default function createTextFragments(value: TextCharacter[]): TextFragmen
             text: lastFragment.text + value[index].char
           }])
         } else {
-          const el: TextFragment = {
-            text: value[index].char
+          const el: Text = {
+            text: value[index].char,
+            data
           }
           if (data.styles) el.styles = data.styles
 

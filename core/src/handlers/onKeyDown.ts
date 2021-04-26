@@ -12,13 +12,11 @@ import {
   removeRange,
   splitBlock,
   deleteForward,
-  insertText,
   insertCharacter,
 } from '../change'
-import change from '../change/change';
 
 // @ts-ignore
-const inputEventSupported = (new InputEvent('insertText')).getTargetRanges != null
+const inputEventSupported = window.InputEvent != null && (new InputEvent('insertText')).getTargetRanges != null
 const actionKeys = ['Backspace', 'Delete', 'Meta', 'Alt', 'Enter', 'Control', 'Shift', 'Tab', 'Escape', 'CapsLock']
 
 const isCharacterInsert = (e: KeyboardEvent) =>

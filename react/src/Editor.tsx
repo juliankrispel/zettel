@@ -41,7 +41,8 @@ const Editor = (props: Props): React.ReactElement => {
     onChange: _onChange,
     readOnly,
     htmlAttrs,
-    renderTextFragment,
+    renderText,
+    renderFragment,
     renderStyle,
     renderBlock = DefaultRenderBlock,
     renderChildren,
@@ -126,17 +127,16 @@ const Editor = (props: Props): React.ReactElement => {
     contentEditable: readOnly ? false : true,
   }
 
-  console.log({ editorState })
   const viewState = props.viewState || useMemo(() => createViewState(editorState), [isComposing || editorState])
   const children = <EditorChildren
     readOnly={readOnly}
     blocks={viewState.blocks}
     renderBlock={renderBlock}
-    renderTextFragment={renderTextFragment}
+    renderText={renderText}
+    renderFragment={renderFragment}
     renderStyle={renderStyle}
     renderChildren={renderChildren}
   />
-
 
   return (
     <div
